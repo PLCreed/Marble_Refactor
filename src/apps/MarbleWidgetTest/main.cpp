@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     MarbleWidget *mapWidget = new MarbleWidget(window.get());
 
     // Load the Plain map
-    mapWidget->setMapThemeId(QCoreApplication::applicationDirPath() + QStringLiteral("/data/maps/earth/plain/plain.dgml"));
+    mapWidget->setMapThemeId(QStringLiteral("/earth/plain/plain.dgml"));
 
     // Hide the FloatItems: OverviewMap, ScaleBar and Compass
     mapWidget->setShowOverviewMap(false);

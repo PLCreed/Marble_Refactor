@@ -44,7 +44,7 @@ INCLUDEPATH += $$PWD \
 # MarbleDirs::oldLocalPaths()
 win32: LIBS += -lshell32 # -lws2_32 -limm32 -lwinmm
 
-# zlib
+# 3rdparty
 include ($$PWD/../../3rdparty/3rdparty.pri)
 # astro
 include ($$PWD/../astro/astro.pri)
@@ -1491,4 +1491,8 @@ interactive_libs_debug.path += $$DEBUG_DESDIR/
 interactive_libs_release.files += $$OUT_PWD/release/marble.dll
 interactive_libs_release.path += $$DEBUG_DESDIR/
 
-INSTALLS += interactive_libs_debug interactive_libs_release
+# 3rdparty
+interactive_3rdparty_libs.files += $$SRC_ROOT_PATH/3rdparty/bin/*
+interactive_3rdparty_libs.path += $$DEBUG_DESDIR/
+
+INSTALLS += interactive_libs_debug interactive_libs_release interactive_3rdparty_libs
