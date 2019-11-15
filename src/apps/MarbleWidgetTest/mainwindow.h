@@ -3,6 +3,16 @@
 
 #include <QMainWindow>
 
+#include <QLayout>
+#include <QSlider>
+#include <QLabel>
+#include <QDebug>
+
+#include <marble/MarbleWidget.h>
+
+using namespace Marble;
+
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
