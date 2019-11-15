@@ -16,6 +16,8 @@ CONFIG(release, debug|release) {
     TARGET = marble
 }
 
+#DESTDIR = ../../../bin
+
 INCLUDEPATH += $$PWD \
                $$PWD/blendings \
                $$PWD/cloudsync \
@@ -1476,3 +1478,17 @@ DISTFILES += \
     graphicsview/CMakeLists.txt \
     layers/CMakeLists.txt \
     osm/CMakeLists.txt
+
+
+### 部署
+########################################################################################################################
+target.path += $$DEBUG_DESDIR/
+
+# Debug
+interactive_libs_debug.files += $$OUT_PWD/debug/marbled.dll
+interactive_libs_debug.path += $$DEBUG_DESDIR/
+# Release
+interactive_libs_release.files += $$OUT_PWD/release/marble.dll
+interactive_libs_release.path += $$DEBUG_DESDIR/
+
+INSTALLS += interactive_libs_debug interactive_libs_release

@@ -1,3 +1,5 @@
+### 项目配置
+#######################################################################################################################
 CONFIG -= qt
 
 TEMPLATE = lib
@@ -12,6 +14,10 @@ CONFIG(release, debug|release) {
     TARGET = astro
 }
 
+#DESTDIR = ../../../bin
+
+### 源代码
+#######################################################################################################################
 SOURCES += \
     astr2lib.cpp \
     astrolib.cpp \
@@ -33,3 +39,17 @@ DISTFILES += \
     CMakeLists.txt \
     docs/README \
     docs/SolarSystem.pdf
+
+### 部署
+########################################################################################################################
+target.path += $$DEBUG_DESDIR/
+
+# Debug
+interactive_libs_debug.files += $$OUT_PWD/debug/astrod.dll
+interactive_libs_debug.path += $$DEBUG_DESDIR/
+# Release
+interactive_libs_release.files += $$OUT_PWD/release/astro.dll
+interactive_libs_release.path += $$DEBUG_DESDIR/
+
+INSTALLS += interactive_libs_debug interactive_libs_release
+

@@ -6,3 +6,5 @@ SUBDIRS += 3rdparty \
            plugins \
            apps
 
+OTHER_FILES += .clang-format \
+               .qmake.conf
