@@ -60,7 +60,7 @@ PopupItem::PopupItem( QObject* parent ) :
     connect( m_ui.printButton, SIGNAL(clicked()), this, SLOT(printContent()) );
 #endif
 
-    m_widget->setVisible(true);
+    // m_widget->setVisible(true); // 屏蔽这行代码，解决地图控件无法关闭
     m_widget->setAttribute(Qt::WA_DontShowOnScreen);
     m_widget->setAttribute( Qt::WA_NoSystemBackground, true );
     QPalette palette = m_ui.webView->palette();
