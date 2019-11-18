@@ -13,7 +13,7 @@ CONFIG(release, debug|release) {
     TARGET = MarbleWidgetTest
 }
 
-#DESTDIR = ../../../bin
+DESTDIR = $$DEBUG_DESDIR
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -37,18 +37,18 @@ FORMS += \
     mainwindow.ui
 
 ########################################################################################################################
-target.path += $$DEBUG_DESDIR/
+#target.path += $$DEBUG_DESDIR/
 
-# Debug
-interactive_libs_debug.files += $$OUT_PWD/debug/MarbleWidgetTestd.exe
-interactive_libs_debug.path += $$DEBUG_DESDIR/
-# Release
-interactive_libs_release.files += $$OUT_PWD/release/MarbleWidgetTest.exe
-interactive_libs_release.path += $$DEBUG_DESDIR/
+## Debug
+#interactive_libs_debug.files += $$OUT_PWD/debug/*.exe
+#interactive_libs_debug.path += $$DEBUG_DESDIR/
+## Release
+#interactive_libs_release.files += $$OUT_PWD/release/*.exe
+#interactive_libs_release.path += $$DEBUG_DESDIR/
 
-CONFIG(debug, debug|release) {
-    INSTALLS += interactive_libs_debug
-}
-CONFIG(release, debug|release) {
-    INSTALLS += interactive_libs_release
-}
+#CONFIG(debug, debug|release) {
+#    INSTALLS += interactive_libs_debug
+#}
+#CONFIG(release, debug|release) {
+#    INSTALLS += interactive_libs_release
+#}

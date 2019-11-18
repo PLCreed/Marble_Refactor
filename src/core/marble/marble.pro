@@ -1485,10 +1485,10 @@ DISTFILES += \
 target.path += $$DEBUG_DESDIR/
 
 # Debug
-interactive_libs_debug.files += $$OUT_PWD/debug/marbled.dll
+interactive_libs_debug.files += $$OUT_PWD/debug/*.dll
 interactive_libs_debug.path += $$DEBUG_DESDIR/
 # Release
-interactive_libs_release.files += $$OUT_PWD/release/marble.dll
+interactive_libs_release.files += $$OUT_PWD/release/*.dll
 interactive_libs_release.path += $$DEBUG_DESDIR/
 
 # 3rdparty

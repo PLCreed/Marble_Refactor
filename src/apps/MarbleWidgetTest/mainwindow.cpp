@@ -16,9 +16,16 @@ MainWindow::MainWindow(QWidget *parent)
     mapWidget->setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
     //    mapWidget->setMapThemeId(QStringLiteral("earth/vectorosm/vectorosm.dgml"));
     mapWidget->centerOn(11.19, 47.68);
-    mapWidget->zoomView(2900);
+    //    mapWidget->zoomView(2900);
 
     this->setCentralWidget(mapWidget);
+
+    /*
+       ui->widget->setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
+        //    mapWidget->setMapThemeId(QStringLiteral("earth/vectorosm/vectorosm.dgml"));
+        ui->widget->centerOn(11.19, 47.68);
+        ui->widget->zoomView(2900);
+     */
 }
 
 MainWindow::~MainWindow()

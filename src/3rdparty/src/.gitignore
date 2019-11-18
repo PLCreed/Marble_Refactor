@@ -1,2 +1,13 @@
 shapelib-1.5.0/build_vs2017_64
 shapelib-1.5.0/install_vs2017_64
+
+zlib-1.2.11/build_vs2017_64
+zlib-1.2.11/install_vs2017_64
+zconf.h.included
+
+shapelib-1.5.0/build_mingw_64
+shapelib-1.5.0/install_mingw_64
+
+zlib-1.2.11/build_mingw_64
+zlib-1.2.11/install_mingw_64
+
