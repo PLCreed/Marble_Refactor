@@ -46,5 +46,9 @@ interactive_libs_debug.path += $$DEBUG_DESDIR/
 interactive_libs_release.files += $$OUT_PWD/release/MarbleWidgetTest.exe
 interactive_libs_release.path += $$DEBUG_DESDIR/
 
-INSTALLS += interactive_libs_debug interactive_libs_release
-
+CONFIG(debug, debug|release) {
+    INSTALLS += interactive_libs_debug
+}
+CONFIG(release, debug|release) {
+    INSTALLS += interactive_libs_release
+}

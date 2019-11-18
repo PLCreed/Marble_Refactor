@@ -1495,4 +1495,9 @@ interactive_libs_release.path += $$DEBUG_DESDIR/
 interactive_3rdparty_libs.files += $$SRC_ROOT_PATH/3rdparty/bin/*
 interactive_3rdparty_libs.path += $$DEBUG_DESDIR/
 
-INSTALLS += interactive_libs_debug interactive_libs_release interactive_3rdparty_libs
+CONFIG(debug, debug|release) {
+    INSTALLS += interactive_libs_debug interactive_3rdparty_libs
+}
+CONFIG(release, debug|release) {
+    INSTALLS += interactive_libs_release interactive_3rdparty_libs
+}
