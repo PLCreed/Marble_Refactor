@@ -19,6 +19,9 @@ SOURCES += \
 HEADERS += \
     ElevationProfileMarker.h
 
+RESOURCES += \
+    elevationprofile.qrc
+
 ### 部署
 #######################################################################################################################
 target.path += $$DEBUG_DESDIR/

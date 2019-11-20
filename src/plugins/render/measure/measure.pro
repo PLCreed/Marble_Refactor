@@ -24,6 +24,9 @@ HEADERS += \
 FORMS += \
     MeasureConfigDialog.ui
 
+RESOURCES += \
+    measuretool.qrc
+
 ### 部署
 #######################################################################################################################
 target.path += $$DEBUG_DESDIR/

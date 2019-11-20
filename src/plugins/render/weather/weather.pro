@@ -52,6 +52,9 @@ HEADERS += \
 FORMS += \
     WeatherConfigWidget.ui
 
+RESOURCES += \
+    weather.qrc
+
 ### 部署
 #######################################################################################################################
 target.path += $$DEBUG_DESDIR/

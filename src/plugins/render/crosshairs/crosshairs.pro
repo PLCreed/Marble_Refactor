@@ -22,6 +22,9 @@ HEADERS += \
 FORMS += \
     CrosshairsConfigWidget.ui
 
+RESOURCES += \
+    crosshairs.qrc
+
 ### 部署
 #######################################################################################################################
 target.path += $$DEBUG_DESDIR/

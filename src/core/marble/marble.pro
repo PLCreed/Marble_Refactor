@@ -49,7 +49,8 @@ include ($$PWD/../../3rdparty/3rdparty.pri)
 # astro
 include ($$PWD/../astro/astro.pri)
 
-
+### 源代码
+#######################################################################################################################
 SOURCES += \
     AbstractDataPlugin.cpp \
     AbstractDataPluginItem.cpp \
@@ -1420,9 +1421,6 @@ HEADERS += \
     routing/instructions/RoutingWaypoint.h \
     routing/instructions/WaypointParser.h
 
-RESOURCES += \
-    libmarble.qrc
-
 FORMS += \
     AddLinkDialog.ui \
     BookmarkManagerDialog.ui \
@@ -1469,6 +1467,9 @@ FORMS += \
     routing/RoutingSettingsWidget.ui \
     routing/RoutingWidget.ui
 
+RESOURCES += \
+    libmarble.qrc
+
 DISTFILES += \
     CMakeLists.txt \
     MarbleConfig.cmake.in \
@@ -1478,7 +1479,6 @@ DISTFILES += \
     graphicsview/CMakeLists.txt \
     layers/CMakeLists.txt \
     osm/CMakeLists.txt
-
 
 ### 部署
 ########################################################################################################################

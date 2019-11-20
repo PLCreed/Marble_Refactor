@@ -30,6 +30,9 @@ FORMS += \
     EclipsesConfigDialog.ui \
     EclipsesReminderDialog.ui
 
+RESOURCES += \
+    eclipses.qrc
+
 ### 部署
 #######################################################################################################################
 target.path += $$DEBUG_DESDIR/

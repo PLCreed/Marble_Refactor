@@ -25,6 +25,9 @@ FORMS += \
     RoutingConfigDialog.ui \
     RoutingPlugin.ui
 
+RESOURCES += \
+    routing.qrc
+
 ### 部署
 #######################################################################################################################
 target.path += $$DEBUG_DESDIR/

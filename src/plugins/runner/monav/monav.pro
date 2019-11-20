@@ -31,6 +31,9 @@ HEADERS += \
 FORMS += \
     MonavConfigWidget.ui
 
+RESOURCES += \
+    monav.qrc
+
 ### 部署
 #######################################################################################################################
 target.path += $$DEBUG_DESDIR/

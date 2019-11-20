@@ -26,6 +26,9 @@ HEADERS += \
 FORMS += \
     EarthquakeConfigWidget.ui
 
+RESOURCES += \
+    earthquake.qrc
+
 ### 部署
 #######################################################################################################################
 target.path += $$DEBUG_DESDIR/

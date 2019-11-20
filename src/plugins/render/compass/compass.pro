@@ -22,6 +22,9 @@ HEADERS += \
 FORMS += \
     CompassConfigWidget.ui
 
+RESOURCES += \
+    compass.qrc
+
 ### 部署
 #######################################################################################################################
 target.path += $$DEBUG_DESDIR/
