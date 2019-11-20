@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = gosmore-routingd
+    TARGET = GosmoreRoutingPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = gosmore-routing
+    TARGET = GosmoreRoutingPlugin
 }
 
 ### 源代码\n#######################################################################################################################

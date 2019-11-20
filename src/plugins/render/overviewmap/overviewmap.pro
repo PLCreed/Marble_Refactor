@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = overviewmapd
+    TARGET = OverviewMapPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = overviewmap
+    TARGET = OverviewMapPlugin
 }
 
 ### 源代码\n#######################################################################################################################

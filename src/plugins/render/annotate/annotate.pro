@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = annotated
+    TARGET = AnnotatePlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = annotate
+    TARGET = AnnotatePlugin
 }
 
 ### 源代码\n#######################################################################################################################

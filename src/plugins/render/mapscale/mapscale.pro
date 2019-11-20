@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = mapscaled
+    TARGET = MapScalePlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = mapscale
+    TARGET = MapScalePlugin
 }
 
 ### 源代码\n#######################################################################################################################

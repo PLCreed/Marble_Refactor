@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = osmd
+    TARGET = OsmPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = osm
+    TARGET = OsmPlugin
 }
 
 INCLUDEPATH += $$PWD/writers \

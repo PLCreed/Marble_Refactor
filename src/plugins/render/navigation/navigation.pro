@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = navigationd
+    TARGET = NavigationPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = navigation
+    TARGET = NavigationPlugin
 }
 
 ### 源代码\n#######################################################################################################################

@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = qtpositioningd
+    TARGET = QtPositioningPositionProviderPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = qtpositioning
+    TARGET = QtPositioningPositionProviderPlugin
 }
 
 ### 源代码\n#######################################################################################################################

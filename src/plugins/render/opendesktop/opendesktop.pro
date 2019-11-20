@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = opendesktopd
+    TARGET = OpenDesktopPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = opendesktop
+    TARGET = OpenDesktopPlugin
 }
 
 ### 源代码\n#######################################################################################################################

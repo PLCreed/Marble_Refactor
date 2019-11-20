@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = pn2d
+    TARGET = Pn2Plugind
 }
 CONFIG(release, debug|release) {
-    TARGET = pn2
+    TARGET = Pn2Plugin
 }
 
 ### 源代码\n#######################################################################################################################

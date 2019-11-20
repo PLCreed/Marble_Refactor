@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = satellitesd
+    TARGET = SatellitesPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = satellites
+    TARGET = SatellitesPlugin
 }
 
 INCLUDEPATH += $$SRC_ROOT_PATH/3rdparty/src/sgp4

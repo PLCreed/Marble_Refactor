@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = cached
+    TARGET = cachePlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = cache
+    TARGET = cachePlugin
 }
 
 ### 源代码\n#######################################################################################################################

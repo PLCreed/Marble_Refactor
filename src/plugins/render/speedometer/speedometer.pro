@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = speedometerd
+    TARGET = SpeedometerPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = speedometer
+    TARGET = SpeedometerPlugin
 }
 
 ### 源代码\n#######################################################################################################################

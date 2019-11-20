@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = sund
+    TARGET = SunPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = sun
+    TARGET = SunPlugin
 }
 
 ### 源代码\n#######################################################################################################################

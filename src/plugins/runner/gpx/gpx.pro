@@ -8,10 +8,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = gpxd
+    TARGET = GpxPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = gpx
+    TARGET = GpxPlugin
 }
 
 INCLUDEPATH += $$PWD/handlers

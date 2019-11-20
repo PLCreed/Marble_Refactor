@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = nominatim-reversegeocodingd
+    TARGET = NominatimReverseGeocodingPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = nominatim-reversegeocoding
+    TARGET = NominatimReverseGeocodingPlugin
 }
 
 ### 源代码\n#######################################################################################################################

@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = progressd
+    TARGET = ProgressPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = progress
+    TARGET = ProgressPlugin
 }
 
 ### 源代码\n#######################################################################################################################

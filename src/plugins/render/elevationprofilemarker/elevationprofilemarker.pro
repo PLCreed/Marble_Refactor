@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = elevationprofilemarkerd
+    TARGET = ElevationProfileMarkerPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = elevationprofilemarker
+    TARGET = ElevationProfileMarkerPlugin
 }
 
 ### 源代码\n#######################################################################################################################

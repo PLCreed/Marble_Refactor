@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = flightgeard
+    TARGET = FlightGearPositionProviderPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = flightgear
+    TARGET = FlightGearPositionProviderPlugin
 }
 
 ### 源代码\n#######################################################################################################################

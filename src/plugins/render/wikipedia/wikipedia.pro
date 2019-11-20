@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = wikipediad
+    TARGET = WikipediaPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = wikipedia
+    TARGET = WikipediaPlugin
 }
 
 ### 源代码\n#######################################################################################################################

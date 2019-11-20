@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = geoclued
+    TARGET = GeoCluePositionProviderPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = geoclue
+    TARGET = GeoCluePositionProviderPlugin
 }
 
 ### 源代码\n#######################################################################################################################

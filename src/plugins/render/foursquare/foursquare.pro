@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = foursquared
+    TARGET = FoursquarePlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = foursquare
+    TARGET = FoursquarePlugin
 }
 
 ### 源代码\n#######################################################################################################################

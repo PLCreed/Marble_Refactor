@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = earthquaked
+    TARGET = EarthquakePlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = earthquake
+    TARGET = EarthquakePlugin
 }
 
 ### 源代码\n#######################################################################################################################

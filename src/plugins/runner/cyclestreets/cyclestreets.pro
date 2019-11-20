@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = cyclestreetsd
+    TARGET = cyclestreetsPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = cyclestreets
+    TARGET = cyclestreetsPlugin
 }
 
 ### 源代码\n#######################################################################################################################

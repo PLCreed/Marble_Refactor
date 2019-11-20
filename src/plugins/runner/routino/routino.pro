@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = routinod
+    TARGET = RoutinoPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = routino
+    TARGET = RoutinoPlugin
 }
 
 ### 源代码\n#######################################################################################################################

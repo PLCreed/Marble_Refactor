@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = starsd
+    TARGET = StarsPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = stars
+    TARGET = StarsPlugin
 }
 
 ### 源代码\n#######################################################################################################################

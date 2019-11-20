@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = localdatabased
+    TARGET = LocalDatabasePlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = localdatabase
+    TARGET = LocalDatabasePlugin
 }
 
 ### 源代码\n#######################################################################################################################

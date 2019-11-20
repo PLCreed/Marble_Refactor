@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = crosshairsd
+    TARGET = CrosshairsPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = crosshairs
+    TARGET = CrosshairsPlugin
 }
 
 ### 源代码\n#######################################################################################################################

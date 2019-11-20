@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = hostipd
+    TARGET = HostipPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = hostip
+    TARGET = HostipPlugin
 }
 
 ### 源代码\n#######################################################################################################################

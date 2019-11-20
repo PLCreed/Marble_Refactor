@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = pntd
+    TARGET = PntPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = pnt
+    TARGET = PntPlugin
 }
 
 ### 源代码\n#######################################################################################################################

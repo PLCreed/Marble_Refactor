@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = weatherd
+    TARGET = WeatherPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = weather
+    TARGET = WeatherPlugin
 }
 
 ### 源代码\n#######################################################################################################################

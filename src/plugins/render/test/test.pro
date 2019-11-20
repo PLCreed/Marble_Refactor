@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = testd
+    TARGET = testPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = test
+    TARGET = testPlugin
 }
 
 ### 源代码\n#######################################################################################################################

@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = postalcoded
+    TARGET = PostalCodePlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = postalcode
+    TARGET = PostalCodePlugin
 }
 
 ### 源代码\n#######################################################################################################################

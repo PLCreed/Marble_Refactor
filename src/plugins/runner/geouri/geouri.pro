@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = geourid
+    TARGET = geouriPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = geouri
+    TARGET = geouriPlugin
 }
 
 ### 源代码\n#######################################################################################################################

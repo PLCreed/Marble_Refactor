@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = atmosphered
+    TARGET = AtmospherePlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = atmosphere
+    TARGET = AtmospherePlugin
 }
 
 ### 源代码\n#######################################################################################################################

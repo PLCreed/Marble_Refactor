@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = openrouteserviced
+    TARGET = OpenRouteServicePlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = openrouteservice
+    TARGET = OpenRouteServicePlugin
 }
 
 ### 源代码\n#######################################################################################################################

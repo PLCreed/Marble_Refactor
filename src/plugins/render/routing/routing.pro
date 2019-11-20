@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = routingd
+    TARGET = RoutingPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = routing
+    TARGET = RoutingPlugin
 }
 
 ### 源代码\n#######################################################################################################################

@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = open-source-routing-machined
+    TARGET = OSRMPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = open-source-routing-machine
+    TARGET = OSRMPlugin
 }
 
 ### 源代码\n#######################################################################################################################

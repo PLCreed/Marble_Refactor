@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = graticuled
+    TARGET = GraticulePlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = graticule
+    TARGET = GraticulePlugin
 }
 
 ### 源代码\n#######################################################################################################################

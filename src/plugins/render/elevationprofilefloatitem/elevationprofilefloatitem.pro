@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = elevationprofilefloatitemd
+    TARGET = ElevationProfilePlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = elevationprofilefloatitem
+    TARGET = ElevationProfilePlugin
 }
 
 ### 源代码\n#######################################################################################################################

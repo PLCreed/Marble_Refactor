@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = jsond
+    TARGET = JsonPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = json
+    TARGET = JsonPlugin
 }
 
 ### 源代码\n#######################################################################################################################

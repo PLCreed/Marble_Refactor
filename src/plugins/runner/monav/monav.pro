@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = monavd
+    TARGET = MonavPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = monav
+    TARGET = MonavPlugin
 }
 
 ### 源代码\n#######################################################################################################################

@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = photod
+    TARGET = PhotoPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = photo
+    TARGET = PhotoPlugin
 }
 
 ### 源代码\n#######################################################################################################################

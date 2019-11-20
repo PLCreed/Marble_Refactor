@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = gosmore-reversegeocodingd
+    TARGET = GosmoreReverseGeocodingPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = gosmore-reversegeocoding
+    TARGET = GosmoreReverseGeocodingPlugin
 }
 
 ### 源代码\n#######################################################################################################################

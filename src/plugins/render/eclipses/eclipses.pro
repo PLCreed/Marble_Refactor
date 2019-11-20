@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = eclipsesd
+    TARGET = EclipsesPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = eclipses
+    TARGET = EclipsesPlugin
 }
 
 ### 源代码\n#######################################################################################################################

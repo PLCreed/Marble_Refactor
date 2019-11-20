@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = gpsbabeld
+    TARGET = GpsbabelPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = gpsbabel
+    TARGET = GpsbabelPlugin
 }
 
 ### 源代码\n#######################################################################################################################

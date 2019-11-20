@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = openlocation-code-searchd
+    TARGET = OpenLocationCodeSearchPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = openlocation-code-search
+    TARGET = OpenLocationCodeSearchPlugin
 }
 
 ### 源代码\n#######################################################################################################################

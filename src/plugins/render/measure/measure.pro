@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = measured
+    TARGET = MeasureToolPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = measure
+    TARGET = MeasureToolPlugin
 }
 
 ### 源代码\n#######################################################################################################################

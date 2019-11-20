@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = kmld
+    TARGET = KmlPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = kml
+    TARGET = KmlPlugin
 }
 
 ### 源代码\n#######################################################################################################################

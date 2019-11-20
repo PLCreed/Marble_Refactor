@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = nominatim-searchd
+    TARGET = NominatimSearchPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = nominatim-search
+    TARGET = NominatimSearchPlugin
 }
 
 ### 源代码\n#######################################################################################################################

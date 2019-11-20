@@ -8,10 +8,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = local-osm-searchd
+    TARGET = LocalOsmSearchPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = local-osm-search
+    TARGET = LocalOsmSearchPlugin
 }
 
 ### 源代码\n#######################################################################################################################

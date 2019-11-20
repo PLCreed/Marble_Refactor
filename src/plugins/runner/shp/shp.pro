@@ -7,10 +7,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = shpd
+    TARGET = ShpPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = shp
+    TARGET = ShpPlugin
 }
 
 ### 源代码\n#######################################################################################################################

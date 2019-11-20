@@ -6,10 +6,10 @@ TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = notesd
+    TARGET = NotesPlugind
 }
 CONFIG(release, debug|release) {
-    TARGET = notes
+    TARGET = NotesPlugin
 }
 
 ### 源代码\n#######################################################################################################################
