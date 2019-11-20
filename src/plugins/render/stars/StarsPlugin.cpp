@@ -34,7 +34,7 @@
 #include "SunLocator.h"
 #include "ViewportParams.h"
 
-#include "src/lib/astro/solarsystem.h"
+#include "astro/solarsystem.h"
 
 namespace Marble
 {

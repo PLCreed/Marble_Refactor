@@ -16,8 +16,8 @@
 #define MARBLETWITTERPLUGIN_H
 #define RADIANSTODEGREES 57.2957795
 
-#include "../lib/HttpDownloadManager.h"
-#include "../lib/CacheStoragePolicy.h"
+#include "HttpDownloadManager.h"
+#include "CacheStoragePolicy.h"
 #include "jsonparser.h"
 #include "RenderPlugin.h"
 #include "MarbleDirs.h"

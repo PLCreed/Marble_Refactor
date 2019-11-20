@@ -36,33 +36,33 @@ class FileViewFloatItem: public AbstractFloatItem
  public:
     explicit FileViewFloatItem( const QPointF &point = QPointF( -1, 10 ),
                             const QSizeF &size = QSizeF( 110.0, 250.0 ) );
-    ~FileViewFloatItem();
+    ~FileViewFloatItem() override;
 
-    QStringList backendTypes() const;
+    QStringList backendTypes() const override;
 
-    QString name() const;
+    QString name() const override;
 
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QIcon icon () const;
+    QIcon icon () const override;
 
-    void initialize ();
+    void initialize () override;
 
-    bool isInitialized () const;
+    bool isInitialized () const override;
 
     void changeViewport( ViewportParams *viewport );
 
-    virtual QPainterPath backgroundShape() const;
+    virtual QPainterPath backgroundShape() const override;
 
     void paintContent( GeoPainter *painter, ViewportParams *viewport,
                        const QString& renderPos, GeoSceneLayer *layer = 0 );
 
  protected:
-    bool eventFilter( QObject *object, QEvent *e );
+    bool eventFilter( QObject *object, QEvent *e ) override;
 
  private Q_SLOTS:
     /** Map theme was changed, adjust controls */

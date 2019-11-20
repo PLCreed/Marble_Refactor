@@ -171,7 +171,7 @@ bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
 
     painter->drawPixmap(istanbul, QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/earth_apollo.jpg"))));
 
-    painter->drawImage(brasilia, QImage(MarbleDirs::path(QStringLiteral("bitmaps/earth_apollo.jpg")));
+    painter->drawImage(brasilia, QImage(MarbleDirs::path(QStringLiteral("bitmaps/earth_apollo.jpg"))));
 
     // Example: draw a plain rectangle and a rounded rectangle
 
