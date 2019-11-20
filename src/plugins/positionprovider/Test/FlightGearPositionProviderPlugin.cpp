@@ -102,7 +102,7 @@ bool fixBadGPRMC(QByteArray &line)
         for(int i=1; i < line.size()-3; i++) {
             crc ^= (int) line[i];
         }
-        parts[11] = parts[11][0] + parts[11][1] +  QString::number(crc, 16).toUpper();
+        parts[11] =QString("%1%2%3").arg( parts[11][0]).arg(parts[11][1]).arg(QString::number(crc, 16).toUpper());
 
         line = parts.join(QLatin1Char(',')).toLatin1();
         return true;

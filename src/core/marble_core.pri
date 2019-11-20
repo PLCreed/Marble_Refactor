@@ -1,3 +1,5 @@
+QT += gui widgets quick concurrent network xml svg webenginewidgets dbus
+
 INCLUDEPATH += $$PWD \
                $$PWD/astro \
                $$PWD/marble \
