@@ -1,4 +1,4 @@
 INCLUDEPATH += $$PWD/include
 
 # zlib
-LIBS += -L$$PWD/lib/ -lzlib
+LIBS += -L$$PWD/lib/ -lzlib -lshp
