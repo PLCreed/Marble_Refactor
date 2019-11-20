@@ -15,48 +15,55 @@
 #include "GeoCute/Status.h"
 
 #include "PositionProviderPlugin.h"
-
-
+#include "GeoDataAccuracy.h"
+#include "GeoDataCoordinates.h"
 
 namespace GeoCute
 {
-    class PositionProvider;
+class PositionProvider;
 }
 
 namespace Marble
 {
 
-class GeoCluePositionProviderPlugin: public PositionProviderPlugin
+class GeoCluePositionProviderPlugin : public PositionProviderPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.GeoCluePositionProviderPlugin")
-    Q_INTERFACES( Marble::PositionProviderPluginInterface )
+    Q_INTERFACES(Marble::PositionProviderPluginInterface)
 
- public:
+public:
     GeoCluePositionProviderPlugin();
-    virtual ~GeoCluePositionProviderPlugin();
+    ~GeoCluePositionProviderPlugin() override;
 
-    virtual QString name() const;
-    virtual QString nameId() const;
-    virtual QString guiString() const;
-    virtual QString description() const;
-    virtual QIcon icon() const;
-    virtual void initialize();
-    virtual bool isInitialized() const;
+    QString name() const override;
+    QString nameId() const override;
+    QString guiString() const override;
+    QString version() const override;
+    QString description() const override;
+    QString copyrightYears() const override;
+    QVector<PluginAuthor> pluginAuthors() const override;
+    QIcon icon() const override;
+    void initialize() override;
+    bool isInitialized() const override;
 
-    virtual PositionProviderPlugin * newInstance() const;
+    PositionProviderPlugin *newInstance() const override;
 
-    virtual PositionProviderStatus status() const;
-    virtual GeoDataCoordinates position() const;
-    virtual GeoDataAccuracy accuracy() const;
-    
- private:
-    GeoCute::PositionProvider* m_positionProvider;
+    PositionProviderStatus status() const override;
+    GeoDataCoordinates position() const override;
+    GeoDataAccuracy accuracy() const override;
+    QString error() const override;
+    qreal speed() const override;
+    qreal direction() const override;
+    QDateTime timestamp() const override;
+
+private:
+    GeoCute::PositionProvider *m_positionProvider;
     PositionProviderStatus m_status;
     GeoDataCoordinates m_position;
     GeoDataAccuracy m_accuracy;
-    
- private Q_SLOTS:
+
+private Q_SLOTS:
     void updatePosition(GeoCute::Position newPosition);
     void updateStatus(GeoCute::Status newStatus);
 };

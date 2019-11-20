@@ -1,5 +1,11 @@
 TEMPLATE = subdirs
 CONFIG   += ordered
 
-SUBDIRS += \
-    Test
+SUBDIRS += flightgear \
+           geoclue \
+#           gpsd \
+           qtpositioning \
+#           wlocate
+
+DISTFILES += \
+    CMakeLists.txt

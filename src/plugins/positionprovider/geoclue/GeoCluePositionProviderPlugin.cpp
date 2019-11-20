@@ -12,7 +12,7 @@
 
 #include "GeoCute/PositionProvider.h"
 
-
+#include <QIcon>
 
 using namespace Marble;
 
@@ -31,9 +31,26 @@ QString GeoCluePositionProviderPlugin::guiString() const
     return tr( "GeoClue" );
 }
 
+QString GeoCluePositionProviderPlugin::version() const
+{
+    return QStringLiteral("1.0");
+}
+
 QString GeoCluePositionProviderPlugin::description() const
 {
     return tr( "Reports the position via the GeoClue Location Framework." );
+}
+
+QString GeoCluePositionProviderPlugin::copyrightYears() const
+{
+    return QStringLiteral("2012");
+}
+
+QVector<PluginAuthor> GeoCluePositionProviderPlugin::pluginAuthors() const
+{
+    return QVector<PluginAuthor>()
+            << PluginAuthor(QStringLiteral("Ralf Habacker"), QStringLiteral("ralf.habacker@freenet.de"));
+
 }
 
 QIcon GeoCluePositionProviderPlugin::icon() const
@@ -75,6 +92,26 @@ GeoDataCoordinates GeoCluePositionProviderPlugin::position() const
 GeoDataAccuracy GeoCluePositionProviderPlugin::accuracy() const
 {
     return m_accuracy;
+}
+
+QString GeoCluePositionProviderPlugin::error() const
+{
+    return QString();
+}
+
+qreal GeoCluePositionProviderPlugin::speed() const
+{
+    return 0.0;
+}
+
+qreal GeoCluePositionProviderPlugin::direction() const
+{
+    return 0.0;
+}
+
+QDateTime GeoCluePositionProviderPlugin::timestamp() const
+{
+    return QDateTime();
 }
 
 GeoCluePositionProviderPlugin::GeoCluePositionProviderPlugin() : m_positionProvider(0)

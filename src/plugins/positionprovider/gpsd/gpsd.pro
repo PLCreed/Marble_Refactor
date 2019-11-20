@@ -2,28 +2,29 @@
 #######################################################################################################################
 include ($$SRC_ROOT_PATH/core/marble_core.pri)
 
-QT += widgets network
-
 TEMPLATE = lib
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    TARGET = testd
+    TARGET = gpsdd
 }
 CONFIG(release, debug|release) {
-    TARGET = test
+    TARGET = gpsd
 }
 
-### 源代码
-#######################################################################################################################
+### 源代码\n#######################################################################################################################
 SOURCES += \
-    FlightGearPositionProviderPlugin.cpp
-HEADERS += \
-    FlightGearPositionProviderPlugin.h
+    GpsdConnection.cpp \
+    GpsdPositionProviderPlugin.cpp \
+    GpsdThread.cpp
 
+HEADERS += \
+    GpsdConnection.h \
+    GpsdPositionProviderPlugin.h \
+    GpsdThread.h
 
 ### 部署
-########################################################################################################################
+#######################################################################################################################
 target.path += $$DEBUG_DESDIR/
 
 # Debug
