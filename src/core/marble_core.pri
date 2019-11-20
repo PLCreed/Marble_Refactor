@@ -22,11 +22,12 @@ INCLUDEPATH += $$PWD \
                $$PWD/marble/routing/instructions \
 
 win32:CONFIG(release, debug|release) {
-    LIBS += -L$$OUT_PWD/../../core/astro/release/ -lastro
-    LIBS += -L$$OUT_PWD/../../core/marble/release/ -lmarble
+    LIBS += -L$$BUILD_ROOT_PATH/core/astro/release/ -lastro
+    LIBS += -L$$BUILD_ROOT_PATH/core/marble/release/ -lmarble
 }
 else:win32:CONFIG(debug, debug|release) {
-    LIBS += -L$$OUT_PWD/../../core/astro/debug/ -lastrod
-    LIBS += -L$$OUT_PWD/../../core/marble/debug/ -lmarbled
+    LIBS += -L$$BUILD_ROOT_PATH/core/astro/debug/ -lastrod
+    LIBS += -L$$BUILD_ROOT_PATH/core/marble/debug/ -lmarbled
 }
-else:unix:!macx: LIBS += -L$$OUT_PWD/../astro/ -lastro -lmarble
+else:unix:!macx: LIBS += -L$$BUILD_ROOT_PATH/core/astro/ -lastro \
+                 LIBS += -L$$BUILD_ROOT_PATH/core/marble/ -lmarble

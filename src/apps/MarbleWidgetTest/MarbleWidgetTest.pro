@@ -1,4 +1,4 @@
-include ($$PWD/../../core/marble_core.pri)
+include ($$SRC_ROOT_PATH/core/marble_core.pri)
 
 QT       += core gui
 
