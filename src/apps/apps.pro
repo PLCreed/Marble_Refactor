@@ -2,5 +2,5 @@ TEMPLATE = subdirs
 CONFIG   += ordered
 
 SUBDIRS += \
-    MarbleWidgetTest
-
+    MarbleWidgetTest \
+    marble-ui

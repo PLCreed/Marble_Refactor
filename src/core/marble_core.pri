@@ -22,6 +22,7 @@ INCLUDEPATH += $$PWD \
                $$PWD/marble/projections \
                $$PWD/marble/routing \
                $$PWD/marble/routing/instructions \
+               $$BUILD_ROOT_PATH/core/marble
 
 win32:CONFIG(release, debug|release) {
     LIBS += -L$$BUILD_ROOT_PATH/core/astro/release/ -lastro
