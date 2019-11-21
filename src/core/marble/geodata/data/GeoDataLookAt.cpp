@@ -9,74 +9,89 @@
 // Copyright 2010      Bastian Holst <bastianholst@gmx.de>
 //
 
-//own
+// Qt
+#include <QAtomicInt>
+
 #include "GeoDataLookAt.h"
-#include "GeoDataLookAt_p.h"
-
+#include "GeoDataCoordinates.h"
 #include "GeoDataTypes.h"
-
 #include "MarbleDebug.h"
 
 namespace Marble
 {
 
-GeoDataLookAt::GeoDataLookAt() :
-    GeoDataAbstractView(),
-    d( new GeoDataLookAtPrivate )
+class GeoDataLookAtPrivate
 {
-}
+public:
+    GeoDataCoordinates m_coordinates;
+    qreal m_range;
 
-GeoDataLookAt::GeoDataLookAt( const GeoDataLookAt& other ) :
+    QAtomicInt ref;
+
+public:
+    GeoDataLookAtPrivate() :
+        m_coordinates(),
+        m_range(0.0),
+        ref(1)
+    {}
+
+};
+
+GeoDataLookAt::GeoDataLookAt() : GeoDataAbstractView(),
+    d(new GeoDataLookAtPrivate)
+{}
+
+GeoDataLookAt::GeoDataLookAt(const GeoDataLookAt &other) :
     GeoDataAbstractView(),
-    d( other.d )
+    d(other.d)
 {
     d->ref.ref();
 }
 
-GeoDataLookAt& GeoDataLookAt::operator=( const GeoDataLookAt &other )                                   
+GeoDataLookAt &GeoDataLookAt::operator=(const GeoDataLookAt &other)
 {
-    GeoDataAbstractView::operator=( other );
-    qAtomicAssign( d, other.d );
+    GeoDataAbstractView::operator=(other);
+    qAtomicAssign(d, other.d);
     return *this;
 }
 
 bool GeoDataLookAt::operator==(const GeoDataLookAt &other) const
 {
-    return equals(other) &&
-           d->m_coordinates == other.d->m_coordinates &&
-           d->m_range == other.d->m_range;
+    return equals(other)
+           && d->m_coordinates == other.d->m_coordinates
+           && d->m_range == other.d->m_range;
 }
 
 bool GeoDataLookAt::operator!=(const GeoDataLookAt &other) const
 {
-    return !this->operator==( other );
+    return !this->operator==(other);
 }
 
 GeoDataLookAt::~GeoDataLookAt()
 {
-    if( !d->ref.deref() )
+    if (!d->ref.deref())
         delete d;
 }
 
 GeoDataAbstractView *GeoDataLookAt::copy() const
 {
-    return new GeoDataLookAt( *this );
+    return new GeoDataLookAt(*this);
 }
 
-void GeoDataLookAt::setCoordinates( const GeoDataCoordinates& coordinates )
-{
-    d->m_coordinates = coordinates;
-}
-
-const char* GeoDataLookAt::nodeType() const
+const char *GeoDataLookAt::nodeType() const
 {
     return GeoDataTypes::GeoDataLookAtType;
 }
 
-void GeoDataLookAt::setAltitude( qreal altitude )
+void GeoDataLookAt::setCoordinates(const GeoDataCoordinates &coordinates)
+{
+    d->m_coordinates = coordinates;
+}
+
+void GeoDataLookAt::setAltitude(qreal altitude)
 {
     detach();
-    d->m_coordinates.setAltitude( altitude );
+    d->m_coordinates.setAltitude(altitude);
 }
 
 qreal GeoDataLookAt::altitude() const
@@ -84,26 +99,26 @@ qreal GeoDataLookAt::altitude() const
     return d->m_coordinates.altitude();
 }
 
-void GeoDataLookAt::setLatitude( qreal latitude, GeoDataCoordinates::Unit unit )
+void GeoDataLookAt::setLatitude(qreal latitude, GeoDataCoordinates::Unit unit)
 {
     detach();
-    d->m_coordinates.setLatitude( latitude,unit );
+    d->m_coordinates.setLatitude(latitude, unit);
 }
 
-qreal GeoDataLookAt::latitude( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLookAt::latitude(GeoDataCoordinates::Unit unit) const
 {
-    return d->m_coordinates.latitude( unit );
+    return d->m_coordinates.latitude(unit);
 }
 
-void GeoDataLookAt::setLongitude( qreal longitude, GeoDataCoordinates::Unit unit )
+void GeoDataLookAt::setLongitude(qreal longitude, GeoDataCoordinates::Unit unit)
 {
     detach();
-    d->m_coordinates.setLongitude( longitude, unit );
+    d->m_coordinates.setLongitude(longitude, unit);
 }
 
-qreal GeoDataLookAt::longitude( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLookAt::longitude(GeoDataCoordinates::Unit unit) const
 {
-    return d->m_coordinates.longitude( unit );
+    return d->m_coordinates.longitude(unit);
 }
 
 GeoDataCoordinates GeoDataLookAt::coordinates() const
@@ -111,7 +126,7 @@ GeoDataCoordinates GeoDataLookAt::coordinates() const
     return d->m_coordinates;
 }
 
-void GeoDataLookAt::setRange( qreal range )
+void GeoDataLookAt::setRange(qreal range)
 {
     detach();
     d->m_range = range;
@@ -124,7 +139,7 @@ qreal GeoDataLookAt::range() const
 
 void GeoDataLookAt::detach()
 {
-    qAtomicDetach( d );
+    qAtomicDetach(d);
 }
 
 }

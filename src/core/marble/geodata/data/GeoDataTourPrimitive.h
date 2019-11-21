@@ -11,19 +11,17 @@
 #ifndef GEODATATOURPRIMITIVE_H
 #define GEODATATOURPRIMITIVE_H
 
-#include "GeoDataObject.h"
 #include "geodata_export.h"
+#include "GeoDataObject.h"
 
 namespace Marble
 {
 
-/**
- */
 class GEODATA_EXPORT GeoDataTourPrimitive : public GeoDataObject
 {
 public:
     bool operator==(const GeoDataTourPrimitive &other) const;
-    inline bool operator!=(const GeoDataTourPrimitive &other) const { return !(*this == other); }
+    bool operator!=(const GeoDataTourPrimitive &other) const;
 };
 
 } // namespace Marble

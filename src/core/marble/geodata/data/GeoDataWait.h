@@ -11,13 +11,12 @@
 #ifndef GEODATAWAIT_H
 #define GEODATAWAIT_H
 
+#include "geodata_export.h"
 #include "GeoDataTourPrimitive.h"
 
 namespace Marble
 {
 
-/**
- */
 class GEODATA_EXPORT GeoDataWait : public GeoDataTourPrimitive
 {
 public:

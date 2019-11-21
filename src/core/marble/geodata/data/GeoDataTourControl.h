@@ -11,26 +11,27 @@
 #ifndef GEODATATOURCONTROL_H
 #define GEODATATOURCONTROL_H
 
+#include "geodata_export.h"
 #include "GeoDataTourPrimitive.h"
 
 namespace Marble
 {
 
-/**
- */
 class GEODATA_EXPORT GeoDataTourControl : public GeoDataTourPrimitive
 {
 public:
-    enum PlayMode {
+    enum PlayMode
+    {
         Play,
         Pause
     };
 
+public:
     GeoDataTourControl();
     ~GeoDataTourControl() override;
 
-    bool operator==( const GeoDataTourControl &other ) const;
-    bool operator!=( const GeoDataTourControl &other ) const;
+    bool operator==(const GeoDataTourControl &other) const;
+    bool operator!=(const GeoDataTourControl &other) const;
     const char *nodeType() const override;
 
     PlayMode playMode() const;

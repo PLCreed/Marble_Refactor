@@ -9,13 +9,11 @@
 // Copyright 2007      Inge Wallin   <ingwa@kde.org>
 //
 
-
 #ifndef MARBLE_GEODATALABELSTYLE_H
 #define MARBLE_GEODATALABELSTYLE_H
 
-#include "GeoDataColorStyle.h"
-
 #include "geodata_export.h"
+#include "GeoDataColorStyle.h"
 
 class QFont;
 
@@ -34,31 +32,33 @@ class GeoDataLabelStylePrivate;
  */
 class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
 {
-  public:
-    enum Alignment{Corner, Center, Right /*, Left, Below  */};
+public:
+    enum Alignment
+    {
+        Corner, Center, Right /*, Left, Below  */
+    };
 
-    /// Construct a new GeoDataLabelStyle
+public:
     GeoDataLabelStyle();
-    GeoDataLabelStyle( const GeoDataLabelStyle& other );
+    GeoDataLabelStyle(const GeoDataLabelStyle &other);
     /**
      * @brief Construct a new GeoDataLabelStyle
-     * @param  font   the font to use when showing the name
-     * @param  color  the color to use when showing the name @see GeoDataColorStyle
+     * @param font the font to use when showing the name
+     * @param color the color to use when showing the name @see GeoDataColorStyle
      */
-    GeoDataLabelStyle( const QFont &font, const QColor &color );
-
+    GeoDataLabelStyle(const QFont &font, const QColor &color);
     ~GeoDataLabelStyle() override;
-    
-    /**
-    * @brief assignment operator
-    */
-    GeoDataLabelStyle& operator=( const GeoDataLabelStyle& other );
 
-    bool operator==( const GeoDataLabelStyle &other ) const;
-    bool operator!=( const GeoDataLabelStyle &other ) const;
+    /**
+     * @brief assignment operator
+     */
+    GeoDataLabelStyle &operator=(const GeoDataLabelStyle &other);
+
+    bool operator==(const GeoDataLabelStyle &other) const;
+    bool operator!=(const GeoDataLabelStyle &other) const;
 
     /// Provides type information for downcasting a GeoData
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
     /**
      * @brief Set the scale of the label
@@ -70,21 +70,23 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
      * @return  the current scale
      */
     float scale() const;
+
     /**
      * @brief Set the alignment of the label
      * @param alignment the alignment
      */
-    void setAlignment ( GeoDataLabelStyle::Alignment alignment );
+    void setAlignment(GeoDataLabelStyle::Alignment alignment);
     /**
      * @brief Return the alignment of the label
      * @return  the current alignment
      */
     GeoDataLabelStyle::Alignment alignment() const;
+
     /**
      * @brief Set the font of the label
      * @param  font  the new font
      */
-    void setFont( const QFont &font );
+    void setFont(const QFont &font);
     /**
      * @brief Return the current font of the label
      * @return  the current font
@@ -102,7 +104,6 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
      * @see setGlow
      */
     bool glow() const;
-
     /**
      * @brief Enable or disable a glow effect around the text of the label.
      *
@@ -110,21 +111,21 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
      *
      * Note that this is not a KML property.
      */
-    void setGlow( bool on );
+    void setGlow(bool on);
 
     /**
      * @brief  Serialize the style to a stream.
      * @param  stream  the stream
      */
-    void pack( QDataStream& stream ) const override;
+    void pack(QDataStream &stream) const override;
     /**
      * @brief  Unserialize the style from a stream
      * @param  stream  the stream
      */
-    void unpack( QDataStream& stream ) override;
+    void unpack(QDataStream &stream) override;
 
-  private:
-    GeoDataLabelStylePrivate * const d;
+private:
+    GeoDataLabelStylePrivate *const d;
 };
 
 }

@@ -925,23 +925,17 @@ HEADERS += \
     geodata/data/GeoDataAnimatedUpdate.h \
     geodata/data/GeoDataBalloonStyle.h \
     geodata/data/GeoDataBuilding.h \
-    geodata/data/GeoDataBuilding_p.h \
     geodata/data/GeoDataCamera.h \
-    geodata/data/GeoDataCamera_p.h \
     geodata/data/GeoDataChange.h \
     geodata/data/GeoDataColorStyle.h \
     geodata/data/GeoDataContainer.h \
     geodata/data/GeoDataContainer_p.h \
     geodata/data/GeoDataCoordinates.h \
-    geodata/data/GeoDataCoordinates_p.h \
     geodata/data/GeoDataCreate.h \
     geodata/data/GeoDataData.h \
-    geodata/data/GeoDataData_p.h \
     geodata/data/GeoDataDelete.h \
     geodata/data/GeoDataDocument.h \
-    geodata/data/GeoDataDocument_p.h \
     geodata/data/GeoDataExtendedData.h \
-    geodata/data/GeoDataExtendedData_p.h \
     geodata/data/GeoDataFeature.h \
     geodata/data/GeoDataFeature_p.h \
     geodata/data/GeoDataFlyTo.h \
@@ -949,7 +943,6 @@ HEADERS += \
     geodata/data/GeoDataGeometry.h \
     geodata/data/GeoDataGeometry_p.h \
     geodata/data/GeoDataGroundOverlay.h \
-    geodata/data/GeoDataGroundOverlay_p.h \
     geodata/data/GeoDataHotSpot.h \
     geodata/data/GeoDataIconStyle.h \
     geodata/data/GeoDataImagePyramid.h \
@@ -962,45 +955,33 @@ HEADERS += \
     geodata/data/GeoDataLineString_p.h \
     geodata/data/GeoDataLineStyle.h \
     geodata/data/GeoDataLinearRing.h \
-    geodata/data/GeoDataLinearRing_p.h \
     geodata/data/GeoDataLink.h \
     geodata/data/GeoDataListStyle.h \
     geodata/data/GeoDataLocation.h \
     geodata/data/GeoDataLod.h \
-    geodata/data/GeoDataLod_p.h \
     geodata/data/GeoDataLookAt.h \
-    geodata/data/GeoDataLookAt_p.h \
     geodata/data/GeoDataModel.h \
     geodata/data/GeoDataMultiGeometry.h \
-    geodata/data/GeoDataMultiGeometry_p.h \
     geodata/data/GeoDataMultiTrack.h \
-    geodata/data/GeoDataMultiTrack_p.h \
     geodata/data/GeoDataNetworkLink.h \
     geodata/data/GeoDataNetworkLinkControl.h \
-    geodata/data/GeoDataNetworkLinkControl_p.h \
     geodata/data/GeoDataObject.h \
     geodata/data/GeoDataOrientation.h \
     geodata/data/GeoDataOverlay.h \
     geodata/data/GeoDataOverlay_p.h \
     geodata/data/GeoDataPhotoOverlay.h \
-    geodata/data/GeoDataPhotoOverlay_p.h \
     geodata/data/GeoDataPlacemark.h \
-    geodata/data/GeoDataPlacemark_p.h \
     geodata/data/GeoDataPlaylist.h \
     geodata/data/GeoDataPoint.h \
-    geodata/data/GeoDataPoint_p.h \
     geodata/data/GeoDataPolyStyle.h \
     geodata/data/GeoDataPolygon.h \
-    geodata/data/GeoDataPolygon_p.h \
     geodata/data/GeoDataRegion.h \
-    geodata/data/GeoDataRegion_p.h \
     geodata/data/GeoDataRelation.h \
     geodata/data/GeoDataResourceMap.h \
     geodata/data/GeoDataScale.h \
     geodata/data/GeoDataSchema.h \
     geodata/data/GeoDataSchemaData.h \
     geodata/data/GeoDataScreenOverlay.h \
-    geodata/data/GeoDataScreenOverlay_p.h \
     geodata/data/GeoDataSimpleArrayData.h \
     geodata/data/GeoDataSimpleData.h \
     geodata/data/GeoDataSimpleField.h \
@@ -1010,21 +991,17 @@ HEADERS += \
     geodata/data/GeoDataStyleMap.h \
     geodata/data/GeoDataStyleSelector.h \
     geodata/data/GeoDataTimePrimitive.h \
-    geodata/data/GeoDataTimePrimitive_p.h \
     geodata/data/GeoDataTimeSpan.h \
-    geodata/data/GeoDataTimeSpan_p.h \
     geodata/data/GeoDataTimeStamp.h \
-    geodata/data/GeoDataTimeStamp_p.h \
     geodata/data/GeoDataTour.h \
     geodata/data/GeoDataTourControl.h \
     geodata/data/GeoDataTourPrimitive.h \
-    geodata/data/GeoDataTour_p.h \
     geodata/data/GeoDataTrack.h \
     geodata/data/GeoDataUpdate.h \
     geodata/data/GeoDataVec2.h \
     geodata/data/GeoDataViewVolume.h \
     geodata/data/GeoDataWait.h \
-    geodata/data/LonLatParser_p.h \
+    geodata/data/LonLatParser.h \
     geodata/data/Serializable.h \
     geodata/geodata_export.h \
     geodata/graphicsitem/AbstractGeoPolygonGraphicsItem.h \

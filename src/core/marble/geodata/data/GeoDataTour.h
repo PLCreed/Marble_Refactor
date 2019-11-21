@@ -11,39 +11,39 @@
 #ifndef GEODATATOUR_H
 #define GEODATATOUR_H
 
-#include "GeoDataFeature.h"
 #include "geodata_export.h"
+#include "GeoDataFeature.h"
 
 namespace Marble
 {
 
-class GeoDataTourPrivate;
 class GeoDataPlaylist;
 class GeoDataSoundCue;
 
-/**
- */
+class GeoDataTourPrivate;
+
 class GEODATA_EXPORT GeoDataTour : public GeoDataFeature
 {
 public:
+    static const GeoDataTour null;
+
+public:
     GeoDataTour();
-    GeoDataTour(const GeoDataTour& other);
+    GeoDataTour(const GeoDataTour &other);
     ~GeoDataTour() override;
 
-    GeoDataTour& operator=(const GeoDataTour& other);
+    GeoDataTour &operator=(const GeoDataTour &other);
 
     bool operator==(const GeoDataTour &other) const;
     bool operator!=(const GeoDataTour &other) const;
 
-    GeoDataFeature * clone() const override;
+    GeoDataFeature *clone() const override;
 
-    GeoDataPlaylist* playlist();
-    const GeoDataPlaylist* playlist() const;
-    void setPlaylist(GeoDataPlaylist* playlist);
+    GeoDataPlaylist *playlist();
+    const GeoDataPlaylist *playlist() const;
+    void setPlaylist(GeoDataPlaylist *playlist);
 
-    const char* nodeType() const override;
-
-    static const GeoDataTour null;
+    const char *nodeType() const override;
 
 private:
     Q_DECLARE_PRIVATE(GeoDataTour)

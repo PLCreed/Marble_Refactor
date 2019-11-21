@@ -16,22 +16,20 @@ namespace Marble
 
 GeoDataSoundCue::GeoDataSoundCue() :
     m_delayedStart(0)
-{
-}
+{}
 
-bool GeoDataSoundCue::operator==(const GeoDataSoundCue& other) const
+bool GeoDataSoundCue::operator==(const GeoDataSoundCue &other) const
 {
     return this->m_delayedStart == other.m_delayedStart && this->m_href == other.m_href;
 }
 
-bool GeoDataSoundCue::operator!=(const GeoDataSoundCue& other) const
+bool GeoDataSoundCue::operator!=(const GeoDataSoundCue &other) const
 {
     return !this->operator==(other);
 }
 
 GeoDataSoundCue::~GeoDataSoundCue()
-{
-}
+{}
 
 const char *GeoDataSoundCue::nodeType() const
 {

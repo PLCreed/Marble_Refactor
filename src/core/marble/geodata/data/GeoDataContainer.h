@@ -10,24 +10,22 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
 #ifndef MARBLE_GEODATACONTAINER_H
 #define MARBLE_GEODATACONTAINER_H
 
 #include <QVector>
 
 #include "geodata_export.h"
-
 #include "GeoDataFeature.h"
 
 namespace Marble
 {
 
-class GeoDataContainerPrivate;
-
 class GeoDataFolder;
 class GeoDataPlacemark;
 class GeoDataLatLonAltBox;
+
+class GeoDataContainerPrivate;
 
 /**
  * @short  A base class that can hold GeoDataFeatures
@@ -46,14 +44,12 @@ class GeoDataLatLonAltBox;
  */
 class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
 {
- public:
-    /// Default constructor
+public:
     GeoDataContainer();
-    GeoDataContainer( const GeoDataContainer& other );
-    /// Destruct the GeoDataContainer
+    GeoDataContainer(const GeoDataContainer &other);
     ~GeoDataContainer() override;
 
-    GeoDataContainer& operator=(const GeoDataContainer& other);
+    GeoDataContainer &operator=(const GeoDataContainer &other);
 
     /**
      * @brief A convenience function that returns the LatLonAltBox of all
@@ -70,7 +66,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      *
      * @see GeoDataFolder
      */
-    QVector<GeoDataFolder*> folderList() const;
+    QVector<GeoDataFolder *> folderList() const;
 
     /**
      * @brief A convenience function that returns all features in this container.
@@ -78,7 +74,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      *
      * @see GeoDataFeature
      */
-    QVector<GeoDataFeature*> featureList() const;
+    QVector<GeoDataFeature *> featureList() const;
 
     /**
      * @brief A convenience function that returns all placemarks in this container.
@@ -86,52 +82,42 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      *
      * @see GeoDataPlacemark
      */
-    QVector<GeoDataPlacemark*> placemarkList() const;
-    
-    /**
-     * @brief  returns the requested child item
-     */
-    GeoDataFeature* child( int );
+    QVector<GeoDataPlacemark *> placemarkList() const;
 
     /**
      * @brief  returns the requested child item
      */
-    const GeoDataFeature* child( int ) const;
+    GeoDataFeature *child(int);
+
+    /**
+     * @brief  returns the requested child item
+     */
+    const GeoDataFeature *child(int) const;
 
     /**
      * @brief returns the position of an item in the list
      */
-    int childPosition( const GeoDataFeature *child) const;
+    int childPosition(const GeoDataFeature *child) const;
 
     /**
      * @brief inserts @p feature at position @p index in the container
      */
-    void insert( int index, GeoDataFeature *feature );
+    void insert(int index, GeoDataFeature *feature);
 
     GEODATA_DEPRECATED void insert(GeoDataFeature *other, int index);
 
-    /**
-    * @brief add an element
-    */
-    void append( GeoDataFeature *other );
-
-    void remove( int index );
-
+    void append(GeoDataFeature *other);
+    void remove(int index);
     void remove(int index, int count);
-
-    int	removeAll(GeoDataFeature* feature);
-
+    int removeAll(GeoDataFeature *feature);
     void removeAt(int index);
-
     void removeFirst();
-
     void removeLast();
-
-    bool removeOne( GeoDataFeature *feature );
+    bool removeOne(GeoDataFeature *feature);
 
     /**
-    * @brief size of the container
-    */
+     * @brief size of the container
+     */
     int size() const;
 
     /**
@@ -140,47 +126,47 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     bool isEmpty() const;
 
     /**
-    * @brief return the reference of the element at a specific position
-    */
-    GeoDataFeature& at( int pos );
-    const GeoDataFeature& at( int pos ) const;
+     * @brief return the reference of the element at a specific position
+     */
+    GeoDataFeature &at(int pos);
+    const GeoDataFeature &at(int pos) const;
 
     /**
-    * @brief return the reference of the last element for convenience
-    */
-    GeoDataFeature& last();
-    const GeoDataFeature& last() const;
+     * @brief return the reference of the last element for convenience
+     */
+    GeoDataFeature &last();
+    const GeoDataFeature &last() const;
     /**
-    * @brief return the reference of the last element for convenience
-    */
-    GeoDataFeature& first();
-    const GeoDataFeature& first() const;
+     * @brief return the reference of the last element for convenience
+     */
+    GeoDataFeature &first();
+    const GeoDataFeature &first() const;
 
-    QVector<GeoDataFeature*>::Iterator begin();
-    QVector<GeoDataFeature*>::Iterator end();
-    QVector<GeoDataFeature*>::ConstIterator constBegin() const;
-    QVector<GeoDataFeature*>::ConstIterator constEnd() const;
+    QVector<GeoDataFeature *>::Iterator begin();
+    QVector<GeoDataFeature *>::Iterator end();
+    QVector<GeoDataFeature *>::ConstIterator constBegin() const;
+    QVector<GeoDataFeature *>::ConstIterator constEnd() const;
     void clear();
 
     /**
      * @brief  Serialize the container to a stream.
      * @param  stream  the stream
      */
-    void pack( QDataStream& stream ) const override;
+    void pack(QDataStream &stream) const override;
     /**
      * @brief  Unserialize the container from a stream
      * @param  stream  the stream
      */
-    void unpack( QDataStream& stream ) override;
+    void unpack(QDataStream &stream) override;
 
- protected:
+protected:
     explicit GeoDataContainer(GeoDataContainerPrivate *priv);
-    GeoDataContainer(const GeoDataContainer& other, GeoDataContainerPrivate *priv);
+    GeoDataContainer(const GeoDataContainer &other, GeoDataContainerPrivate *priv);
 
-    bool equals( const GeoDataContainer &other ) const;
+    bool equals(const GeoDataContainer &other) const;
     using GeoDataFeature::equals;
 
- private:
+private:
     Q_DECLARE_PRIVATE(GeoDataContainer)
 };
 

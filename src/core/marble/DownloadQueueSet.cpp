@@ -2,7 +2,7 @@
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either 
+// License as published by the Free Software Foundation; either
 // version 2.1 of the License, or (at your option) any later version.
 //
 // This library is distributed in the hope that it will be useful,
@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // Lesser General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public 
+// You should have received a copy of the GNU Lesser General Public
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "DownloadQueueSet.h"
@@ -22,20 +22,18 @@
 namespace Marble
 {
 
-DownloadQueueSet::DownloadQueueSet( QObject * const parent )
-    : QObject( parent )
-{
-}
+DownloadQueueSet::DownloadQueueSet(QObject *const parent) : QObject(parent)
+{}
 
-DownloadQueueSet::DownloadQueueSet( DownloadPolicy const & policy, QObject * const parent )
-    : QObject( parent ),
-      m_downloadPolicy( policy )
-{
-}
+DownloadQueueSet::DownloadQueueSet(DownloadPolicy const &policy, QObject *const parent)
+    : QObject(parent),
+    m_downloadPolicy(policy)
+{}
 
 DownloadQueueSet::~DownloadQueueSet()
 {
-    // todo: delete HttpJobs
+    // TODO: delete HttpJobs
+    purgeJobs();
 }
 
 DownloadPolicy DownloadQueueSet::downloadPolicy() const
@@ -43,147 +41,152 @@ DownloadPolicy DownloadQueueSet::downloadPolicy() const
     return m_downloadPolicy;
 }
 
-void DownloadQueueSet::setDownloadPolicy( DownloadPolicy const & policy )
+void DownloadQueueSet::setDownloadPolicy(DownloadPolicy const &policy)
 {
     m_downloadPolicy = policy;
 }
 
-bool DownloadQueueSet::canAcceptJob( const QUrl& sourceUrl,
-                                     const QString& destinationFileName ) const
+bool DownloadQueueSet::canAcceptJob(const QUrl &sourceUrl,
+                                    const QString &destinationFileName) const
 {
-    if ( jobIsQueued( destinationFileName )) {
+    if (jobIsQueued(destinationFileName))
+    {
         mDebug() << "Download rejected: It's in the queue already:"
                  << destinationFileName;
         return false;
     }
-    if ( jobIsWaitingForRetry( destinationFileName )) {
+    if (jobIsWaitingForRetry(destinationFileName))
+    {
         mDebug() << "Download rejected: Will try to download again in some time:"
                  << destinationFileName;
         return false;
     }
-    if ( jobIsActive( destinationFileName )) {
+    if (jobIsActive(destinationFileName))
+    {
         mDebug() << "Download rejected: It's being downloaded already:"
                  << destinationFileName;
         return false;
     }
-    if ( jobIsBlackListed( sourceUrl )) {
+    if (jobIsBlackListed(sourceUrl))
+    {
         mDebug() << "Download rejected: Blacklisted.";
         return false;
     }
     return true;
 }
 
-void DownloadQueueSet::addJob( HttpJob * const job )
+void DownloadQueueSet::addJob(HttpJob *const job)
 {
-    m_jobs.push( job );
+    m_jobs.push(job);
     mDebug() << "addJob: new job queue size:" << m_jobs.count();
     emit jobAdded();
-    emit progressChanged( m_activeJobs.size(), m_jobs.count() );
+    emit progressChanged(m_activeJobs.size(), m_jobs.count());
     activateJobs();
 }
 
 void DownloadQueueSet::activateJobs()
 {
-    while ( !m_jobs.isEmpty()
-            && m_activeJobs.count() < m_downloadPolicy.maximumConnections() )
+    while (!m_jobs.isEmpty() && m_activeJobs.count() < m_downloadPolicy.maximumConnections())
     {
-        HttpJob * const job = m_jobs.pop();
-        activateJob( job );
+        HttpJob *const job = m_jobs.pop();
+        activateJob(job);
     }
 }
 
 void DownloadQueueSet::retryJobs()
 {
-    while ( !m_retryQueue.isEmpty() ) {
-        HttpJob * const job = m_retryQueue.dequeue();
+    while (!m_retryQueue.isEmpty())
+    {
+        HttpJob *const job = m_retryQueue.dequeue();
         mDebug() << "Requeuing" << job->destinationFileName();
         // FIXME: addJob calls activateJobs every time
-        addJob( job );
+        addJob(job);
     }
 }
 
 void DownloadQueueSet::purgeJobs()
 {
     // purge all waiting jobs
-    while( !m_jobs.isEmpty() ) {
-        HttpJob * const job = m_jobs.pop();
+    while (!m_jobs.isEmpty())
+    {
+        HttpJob *const job = m_jobs.pop();
         job->deleteLater();
     }
 
     // purge all retry jobs
-    qDeleteAll( m_retryQueue );
+    qDeleteAll(m_retryQueue);
     m_retryQueue.clear();
 
     // cancel all current jobs
-    while( !m_activeJobs.isEmpty() ) {
-        deactivateJob( m_activeJobs.first() );
+    while (!m_activeJobs.isEmpty())
+    {
+        deactivateJob(m_activeJobs.first());
     }
 
-    emit progressChanged( m_activeJobs.size(), m_jobs.count() );
+    emit progressChanged(m_activeJobs.size(), m_jobs.count());
 }
 
-void DownloadQueueSet::finishJob( HttpJob * job, const QByteArray& data )
+void DownloadQueueSet::finishJob(HttpJob *job, const QByteArray &data)
 {
     mDebug() << "finishJob: " << job->sourceUrl() << job->destinationFileName();
 
-    deactivateJob( job );
+    deactivateJob(job);
     emit jobRemoved();
-    emit jobFinished( data, job->destinationFileName(), job->initiatorId() );
+    emit jobFinished(data, job->destinationFileName(), job->initiatorId());
     job->deleteLater();
     activateJobs();
 }
 
-void DownloadQueueSet::redirectJob( HttpJob * job, const QUrl& newSourceUrl )
+void DownloadQueueSet::redirectJob(HttpJob *job, const QUrl &newSourceUrl)
 {
     mDebug() << "jobRedirected:" << job->sourceUrl() << " -> " << newSourceUrl;
 
-    deactivateJob( job );
+    deactivateJob(job);
     emit jobRemoved();
-    emit jobRedirected( newSourceUrl, job->destinationFileName(), job->initiatorId(),
-                        job->downloadUsage() );
+    emit jobRedirected(newSourceUrl, job->destinationFileName(), job->initiatorId(),
+                       job->downloadUsage());
     job->deleteLater();
 }
 
-void DownloadQueueSet::retryOrBlacklistJob( HttpJob * job, const int errorCode )
+void DownloadQueueSet::retryOrBlacklistJob(HttpJob *job, const int errorCode)
 {
-    Q_ASSERT( errorCode != 0 );
-    Q_ASSERT( !m_retryQueue.contains( job ));
+    Q_ASSERT(errorCode != 0);
+    Q_ASSERT(!m_retryQueue.contains(job));
 
-    deactivateJob( job );
+    deactivateJob(job);
     emit jobRemoved();
 
-    if ( job->tryAgain() ) {
-        mDebug() << QString( "Download of %1 to %2 failed, but trying again soon" )
-            .arg( job->sourceUrl().toString(), job->destinationFileName() );
-        m_retryQueue.enqueue( job );
+    if (job->tryAgain())
+    {
+        mDebug() << QString("Download of %1 to %2 failed, but trying again soon")
+            .arg(job->sourceUrl().toString(), job->destinationFileName());
+        m_retryQueue.enqueue(job);
         emit jobRetry();
     }
-    else {
+    else
+    {
         mDebug() << "JOB-address: " << job
                  << "Blacklist-size:" << m_jobBlackList.size()
                  << "err:" << errorCode;
-        m_jobBlackList.insert( job->sourceUrl().toString() );
-        mDebug() << QString( "Download of %1 Blacklisted. "
-                             "Number of blacklist items: %2" )
-            .arg( job->destinationFileName() )
-            .arg( m_jobBlackList.size() );
+        m_jobBlackList.insert(job->sourceUrl().toString());
+        mDebug() << QString("Download of %1 Blacklisted. "
+                            "Number of blacklist items: %2")
+            .arg(job->destinationFileName())
+            .arg(m_jobBlackList.size());
 
         job->deleteLater();
     }
     activateJobs();
 }
 
-void DownloadQueueSet::activateJob( HttpJob * const job )
+void DownloadQueueSet::activateJob(HttpJob *const job)
 {
-    m_activeJobs.push_back( job );
-    emit progressChanged( m_activeJobs.size(), m_jobs.count() );
+    m_activeJobs.push_back(job);
+    emit progressChanged(m_activeJobs.size(), m_jobs.count());
 
-    connect( job, SIGNAL(jobDone(HttpJob*,int)),
-             SLOT(retryOrBlacklistJob(HttpJob*,int)));
-    connect( job, SIGNAL(redirected(HttpJob*,QUrl)),
-             SLOT(redirectJob(HttpJob*,QUrl)));
-    connect( job, SIGNAL(dataReceived(HttpJob*,QByteArray)),
-             SLOT(finishJob(HttpJob*,QByteArray)));
+    connect(job, SIGNAL(jobDone(HttpJob*,int)), SLOT(retryOrBlacklistJob(HttpJob*,int)));
+    connect(job, SIGNAL(redirected(HttpJob*,QUrl)), SLOT(redirectJob(HttpJob*,QUrl)));
+    connect(job, SIGNAL(dataReceived(HttpJob*,QByteArray)), SLOT(finishJob(HttpJob*,QByteArray)));
 
     job->execute();
 }
@@ -195,57 +198,61 @@ void DownloadQueueSet::activateJob( HttpJob * const job )
                      in any other queue)
                    - job's signals are disconnected from our slots
  */
-void DownloadQueueSet::deactivateJob( HttpJob * const job )
+void DownloadQueueSet::deactivateJob(HttpJob *const job)
 {
     const bool disconnected = job->disconnect();
-    Q_ASSERT( disconnected );
-    Q_UNUSED( disconnected ); // for Q_ASSERT in release mode
-    const bool removed = m_activeJobs.removeOne( job );
-    Q_ASSERT( removed );
-    Q_UNUSED( removed ); // for Q_ASSERT in release mode
-    emit progressChanged( m_activeJobs.size(), m_jobs.count() );
+    Q_ASSERT(disconnected);
+    Q_UNUSED(disconnected)   // for Q_ASSERT in release mode
+    const bool removed = m_activeJobs.removeOne(job);
+    Q_ASSERT(removed);
+    Q_UNUSED(removed)   // for Q_ASSERT in release mode
+    emit progressChanged(m_activeJobs.size(), m_jobs.count());
 }
 
-bool DownloadQueueSet::jobIsActive( QString const & destinationFileName ) const
+bool DownloadQueueSet::jobIsActive(QString const &destinationFileName) const
 {
-    QList<HttpJob*>::const_iterator pos = m_activeJobs.constBegin();
-    QList<HttpJob*>::const_iterator const end = m_activeJobs.constEnd();
-    for (; pos != end; ++pos) {
-        if ( (*pos)->destinationFileName() == destinationFileName ) {
+    QList<HttpJob *>::const_iterator pos = m_activeJobs.constBegin();
+    QList<HttpJob *>::const_iterator const end = m_activeJobs.constEnd();
+    for (; pos != end; ++pos)
+    {
+        if ((*pos)->destinationFileName() == destinationFileName)
+        {
             return true;
         }
     }
     return false;
 }
 
-inline bool DownloadQueueSet::jobIsQueued( QString const & destinationFileName ) const
+inline bool DownloadQueueSet::jobIsQueued(QString const &destinationFileName) const
 {
-    return m_jobs.contains( destinationFileName );
+    return m_jobs.contains(destinationFileName);
 }
 
-bool DownloadQueueSet::jobIsWaitingForRetry( QString const & destinationFileName ) const
+bool DownloadQueueSet::jobIsWaitingForRetry(QString const &destinationFileName) const
 {
-    QList<HttpJob*>::const_iterator pos = m_retryQueue.constBegin();
-    QList<HttpJob*>::const_iterator const end = m_retryQueue.constEnd();
-    for (; pos != end; ++pos) {
-        if ( (*pos)->destinationFileName() == destinationFileName ) {
+    QList<HttpJob *>::const_iterator pos = m_retryQueue.constBegin();
+    QList<HttpJob *>::const_iterator const end = m_retryQueue.constEnd();
+    for (; pos != end; ++pos)
+    {
+        if ((*pos)->destinationFileName() == destinationFileName)
+        {
             return true;
         }
     }
     return false;
 }
 
-bool DownloadQueueSet::jobIsBlackListed( const QUrl& sourceUrl ) const
+bool DownloadQueueSet::jobIsBlackListed(const QUrl &sourceUrl) const
 {
     QSet<QString>::const_iterator const pos =
-        m_jobBlackList.constFind( sourceUrl.toString() );
+        m_jobBlackList.constFind(sourceUrl.toString());
     return pos != m_jobBlackList.constEnd();
 }
 
 
-inline bool DownloadQueueSet::JobStack::contains( const QString& destinationFileName ) const
+inline bool DownloadQueueSet::JobStack::contains(const QString &destinationFileName) const
 {
-    return m_jobsContent.contains( destinationFileName );
+    return m_jobsContent.contains(destinationFileName);
 }
 
 inline int DownloadQueueSet::JobStack::count() const
@@ -258,21 +265,20 @@ inline bool DownloadQueueSet::JobStack::isEmpty() const
     return m_jobs.isEmpty();
 }
 
-inline HttpJob * DownloadQueueSet::JobStack::pop()
+inline HttpJob *DownloadQueueSet::JobStack::pop()
 {
-    HttpJob * const job = m_jobs.pop();
-    bool const removed = m_jobsContent.remove( job->destinationFileName() );
-    Q_UNUSED( removed ); // for Q_ASSERT in release mode
-    Q_ASSERT( removed );
+    HttpJob *const job = m_jobs.pop();
+    bool const removed = m_jobsContent.remove(job->destinationFileName());
+    Q_UNUSED(removed)   // for Q_ASSERT in release mode
+    Q_ASSERT(removed);
     return job;
 }
 
-inline void DownloadQueueSet::JobStack::push( HttpJob * const job )
+inline void DownloadQueueSet::JobStack::push(HttpJob *const job)
 {
-    m_jobs.push( job );
-    m_jobsContent.insert( job->destinationFileName() );
+    m_jobs.push(job);
+    m_jobsContent.insert(job->destinationFileName());
 }
-
 
 }
 

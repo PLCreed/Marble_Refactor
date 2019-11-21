@@ -12,19 +12,18 @@
 #ifndef MARBLE_GEODATAACCURACY_H
 #define MARBLE_GEODATAACCURACY_H
 
-#include "geodata_export.h"
-
 #include <QtGlobal>
+
+#include "geodata_export.h"
 
 namespace Marble
 {
 
-/**
- */
 class GEODATA_EXPORT GeoDataAccuracy
 {
- public:
-    enum Level {
+public:
+    enum Level
+    {
         none = 0,
         Country,
         Region,
@@ -34,11 +33,11 @@ class GEODATA_EXPORT GeoDataAccuracy
         Detailed
     };
 
-    explicit GeoDataAccuracy( Level level = none, qreal horizontal = 0.0, qreal vertical = 0.0 );
+public:
+    explicit GeoDataAccuracy(Level level = none, qreal horizontal = 0.0, qreal vertical = 0.0);
 
-    bool operator==( const GeoDataAccuracy &other ) const;
-
-    bool operator!=( const GeoDataAccuracy &other ) const;
+    bool operator==(const GeoDataAccuracy &other) const;
+    bool operator!=(const GeoDataAccuracy &other) const;
 
     /**
      * @brief Approximate descriptive accuracy.

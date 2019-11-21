@@ -9,11 +9,11 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
+#include <QDataStream>
 
 // Own
 #include "GeoDataContainer.h"
 #include "GeoDataContainer_p.h"
-
 // Marble
 #include "MarbleDebug.h"
 #include "GeoDataFeature.h"
@@ -29,15 +29,11 @@
 #include "GeoDataScreenOverlay.h"
 #include "GeoDataTour.h"
 
-#include <QDataStream>
-
 namespace Marble
 {
 
-GeoDataContainer::GeoDataContainer()
-    : GeoDataFeature( new GeoDataContainerPrivate )
-{
-}
+GeoDataContainer::GeoDataContainer() : GeoDataFeature(new GeoDataContainerPrivate)
+{}
 
 GeoDataContainer::GeoDataContainer(GeoDataContainerPrivate *priv)
     : GeoDataFeature(priv)
@@ -46,14 +42,14 @@ GeoDataContainer::GeoDataContainer(GeoDataContainerPrivate *priv)
     d->setParent(this);
 }
 
-GeoDataContainer::GeoDataContainer(const GeoDataContainer& other, GeoDataContainerPrivate *priv)
+GeoDataContainer::GeoDataContainer(const GeoDataContainer &other, GeoDataContainerPrivate *priv)
     : GeoDataFeature(other, priv)
 {
     Q_D(GeoDataContainer);
     d->setParent(this);
 }
 
-GeoDataContainer::GeoDataContainer( const GeoDataContainer& other )
+GeoDataContainer::GeoDataContainer(const GeoDataContainer &other)
     : GeoDataFeature(other, new GeoDataContainerPrivate(*other.d_func()))
 {
     Q_D(GeoDataContainer);
@@ -61,12 +57,12 @@ GeoDataContainer::GeoDataContainer( const GeoDataContainer& other )
 }
 
 GeoDataContainer::~GeoDataContainer()
-{
-}
+{}
 
-GeoDataContainer& GeoDataContainer::operator=(const GeoDataContainer& other)
+GeoDataContainer &GeoDataContainer::operator=(const GeoDataContainer &other)
 {
-    if (this != &other) {
+    if (this != &other)
+    {
         Q_D(GeoDataContainer);
         *d = *other.d_func();
     }
@@ -74,21 +70,24 @@ GeoDataContainer& GeoDataContainer::operator=(const GeoDataContainer& other)
     return *this;
 }
 
-bool GeoDataContainer::equals( const GeoDataContainer &other ) const
+bool GeoDataContainer::equals(const GeoDataContainer &other) const
 {
-    if ( !GeoDataFeature::equals(other) ) {
+    if (!GeoDataFeature::equals(other))
+    {
         return false;
     }
 
     Q_D(const GeoDataContainer);
-    const GeoDataContainerPrivate* const other_d = other.d_func();
-    QVector<GeoDataFeature*>::const_iterator thisBegin = d->m_vector.constBegin();
-    QVector<GeoDataFeature*>::const_iterator thisEnd = d->m_vector.constEnd();
-    QVector<GeoDataFeature*>::const_iterator otherBegin = other_d->m_vector.constBegin();
-    QVector<GeoDataFeature*>::const_iterator otherEnd = other_d->m_vector.constEnd();
+    const GeoDataContainerPrivate *const other_d = other.d_func();
+    QVector<GeoDataFeature *>::const_iterator thisBegin = d->m_vector.constBegin();
+    QVector<GeoDataFeature *>::const_iterator thisEnd = d->m_vector.constEnd();
+    QVector<GeoDataFeature *>::const_iterator otherBegin = other_d->m_vector.constBegin();
+    QVector<GeoDataFeature *>::const_iterator otherEnd = other_d->m_vector.constEnd();
 
-    for (; thisBegin != thisEnd && otherBegin != otherEnd; ++thisBegin, ++otherBegin) {
-        if (**thisBegin != **otherBegin) {
+    for (; thisBegin != thisEnd && otherBegin != otherEnd; ++thisBegin, ++otherBegin)
+    {
+        if (**thisBegin != **otherBegin)
+        {
             return false;
         }
     }
@@ -101,28 +100,37 @@ GeoDataLatLonAltBox GeoDataContainer::latLonAltBox() const
     Q_D(const GeoDataContainer);
     GeoDataLatLonAltBox result;
 
-    QVector<GeoDataFeature*>::const_iterator it = d->m_vector.constBegin();
-    QVector<GeoDataFeature*>::const_iterator end = d->m_vector.constEnd();
-    for (; it != end; ++it) {
+    QVector<GeoDataFeature *>::const_iterator it  = d->m_vector.constBegin();
+    QVector<GeoDataFeature *>::const_iterator end = d->m_vector.constEnd();
+    for (; it != end; ++it)
+    {
 
         // Get all the placemarks from GeoDataContainer
-        if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(*it)) {
+        if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(*it))
+        {
             // Only use visible placemarks for extracting their latLonAltBox and
             // making an union with the global latLonAltBox Marble will fit its
             // zoom to
             if (placemark->isVisible())
             {
-                if (result.isEmpty()) {
+                if (result.isEmpty())
+                {
                     result = placemark->geometry()->latLonAltBox();
-                } else {
+                }
+                else
+                {
                     result |= placemark->geometry()->latLonAltBox();
                 }
             }
         }
-        else if (const GeoDataContainer *container = dynamic_cast<GeoDataContainer *>(*it)) {
-            if (result.isEmpty()) {
+        else if (const GeoDataContainer *container = dynamic_cast<GeoDataContainer *>(*it))
+        {
+            if (result.isEmpty())
+            {
                 result = container->latLonAltBox();
-            } else {
+            }
+            else
+            {
                 result |= container->latLonAltBox();
             }
         }
@@ -130,37 +138,41 @@ GeoDataLatLonAltBox GeoDataContainer::latLonAltBox() const
     return result;
 }
 
-QVector<GeoDataFolder*> GeoDataContainer::folderList() const
+QVector<GeoDataFolder *> GeoDataContainer::folderList() const
 {
     Q_D(const GeoDataContainer);
-    QVector<GeoDataFolder*> results;
+    QVector<GeoDataFolder *> results;
 
-    QVector<GeoDataFeature*>::const_iterator it = d->m_vector.constBegin();
-    QVector<GeoDataFeature*>::const_iterator end = d->m_vector.constEnd();
+    QVector<GeoDataFeature *>::const_iterator it  = d->m_vector.constBegin();
+    QVector<GeoDataFeature *>::const_iterator end = d->m_vector.constEnd();
 
-    for (; it != end; ++it) {
-        GeoDataFolder *folder = dynamic_cast<GeoDataFolder*>(*it);
-        if ( folder ) {
-            results.append( folder );
+    for (; it != end; ++it)
+    {
+        GeoDataFolder *folder = dynamic_cast<GeoDataFolder *>(*it);
+        if (folder)
+        {
+            results.append(folder);
         }
     }
 
     return results;
 }
 
-QVector<GeoDataPlacemark*> GeoDataContainer::placemarkList() const
+QVector<GeoDataPlacemark *> GeoDataContainer::placemarkList() const
 {
     Q_D(const GeoDataContainer);
-    QVector<GeoDataPlacemark*> results;
-    for (auto it = d->m_vector.constBegin(), end = d->m_vector.constEnd(); it != end; ++it) {
-        if (GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(*it)) {
+    QVector<GeoDataPlacemark *> results;
+    for (auto it = d->m_vector.constBegin(), end = d->m_vector.constEnd(); it != end; ++it)
+    {
+        if (GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(*it))
+        {
             results.append(placemark);
         }
     }
     return results;
 }
 
-QVector<GeoDataFeature*> GeoDataContainer::featureList() const
+QVector<GeoDataFeature *> GeoDataContainer::featureList() const
 {
     Q_D(const GeoDataContainer);
     return d->m_vector;
@@ -169,13 +181,13 @@ QVector<GeoDataFeature*> GeoDataContainer::featureList() const
 /**
  * @brief  returns the requested child item
  */
-GeoDataFeature* GeoDataContainer::child( int i )
+GeoDataFeature *GeoDataContainer::child(int i)
 {
     Q_D(GeoDataContainer);
     return d->m_vector.at(i);
 }
 
-const GeoDataFeature* GeoDataContainer::child( int i ) const
+const GeoDataFeature *GeoDataContainer::child(int i) const
 {
     Q_D(const GeoDataContainer);
     return d->m_vector.at(i);
@@ -184,51 +196,52 @@ const GeoDataFeature* GeoDataContainer::child( int i ) const
 /**
  * @brief returns the position of an item in the list
  */
-int GeoDataContainer::childPosition( const GeoDataFeature* object ) const
+int GeoDataContainer::childPosition(const GeoDataFeature *object) const
 {
     Q_D(const GeoDataContainer);
-    for (int i = 0; i < d->m_vector.size(); ++i) {
-        if (d->m_vector.at(i) == object) {
+    for (int i = 0; i < d->m_vector.size(); ++i)
+    {
+        if (d->m_vector.at(i) == object)
+        {
             return i;
         }
     }
     return -1;
 }
 
-
-void GeoDataContainer::insert( GeoDataFeature *other, int index )
+void GeoDataContainer::insert(GeoDataFeature *other, int index)
 {
-    insert( index, other );
+    insert(index, other);
 }
 
-void GeoDataContainer::insert( int index, GeoDataFeature *feature )
+void GeoDataContainer::insert(int index, GeoDataFeature *feature)
 {
     Q_D(GeoDataContainer);
     feature->setParent(this);
-    d->m_vector.insert( index, feature );
+    d->m_vector.insert(index, feature);
 }
 
-void GeoDataContainer::append( GeoDataFeature *other )
+void GeoDataContainer::append(GeoDataFeature *other)
 {
     Q_D(GeoDataContainer);
     other->setParent(this);
-    d->m_vector.append( other );
+    d->m_vector.append(other);
 }
 
 
-void GeoDataContainer::remove( int index )
+void GeoDataContainer::remove(int index)
 {
     Q_D(GeoDataContainer);
-    d->m_vector.remove( index );
+    d->m_vector.remove(index);
 }
 
 void GeoDataContainer::remove(int index, int count)
 {
     Q_D(GeoDataContainer);
-    d->m_vector.remove( index, count );
+    d->m_vector.remove(index, count);
 }
 
-int	GeoDataContainer::removeAll(GeoDataFeature *feature)
+int GeoDataContainer::removeAll(GeoDataFeature *feature)
 {
     Q_D(GeoDataContainer);
 #if QT_VERSION >= 0x050400
@@ -236,14 +249,18 @@ int	GeoDataContainer::removeAll(GeoDataFeature *feature)
 #else
     int count = 0;
 
-    QVector<GeoDataFeature*> &vector = d->m_vector;
-    QVector<GeoDataFeature*>::iterator it = vector.begin();
+    QVector<GeoDataFeature *> &vector = d->m_vector;
+    QVector<GeoDataFeature *>::iterator it = vector.begin();
 
-    while(it != vector.end()) {
-        if (*it == feature) {
+    while (it != vector.end())
+    {
+        if (*it == feature)
+        {
             it = vector.erase(it);
             ++count;
-        } else {
+        }
+        else
+        {
             ++it;
         }
     }
@@ -255,7 +272,7 @@ int	GeoDataContainer::removeAll(GeoDataFeature *feature)
 void GeoDataContainer::removeAt(int index)
 {
     Q_D(GeoDataContainer);
-    d->m_vector.removeAt( index );
+    d->m_vector.removeAt(index);
 }
 
 void GeoDataContainer::removeFirst()
@@ -270,16 +287,17 @@ void GeoDataContainer::removeLast()
     d->m_vector.removeLast();
 }
 
-bool GeoDataContainer::removeOne( GeoDataFeature *feature )
+bool GeoDataContainer::removeOne(GeoDataFeature *feature)
 {
     Q_D(GeoDataContainer);
 #if QT_VERSION >= 0x050400
-    return d->m_vector.removeOne( feature );
+    return d->m_vector.removeOne(feature);
 #else
-    QVector<GeoDataFeature*> &vector = d->m_vector;
+    QVector<GeoDataFeature *> &vector = d->m_vector;
 
     const int i = vector.indexOf(feature);
-    if (i < 0) {
+    if (i < 0)
+    {
         return false;
     }
 
@@ -300,37 +318,37 @@ bool GeoDataContainer::isEmpty() const
     return size() == 0;
 }
 
-GeoDataFeature& GeoDataContainer::at( int pos )
+GeoDataFeature &GeoDataContainer::at(int pos)
 {
     Q_D(GeoDataContainer);
     return *(d->m_vector[pos]);
 }
 
-const GeoDataFeature& GeoDataContainer::at( int pos ) const
+const GeoDataFeature &GeoDataContainer::at(int pos) const
 {
     Q_D(const GeoDataContainer);
     return *(d->m_vector.at(pos));
 }
 
-GeoDataFeature& GeoDataContainer::last()
+GeoDataFeature &GeoDataContainer::last()
 {
     Q_D(GeoDataContainer);
     return *(d->m_vector.last());
 }
 
-const GeoDataFeature& GeoDataContainer::last() const
+const GeoDataFeature &GeoDataContainer::last() const
 {
     Q_D(const GeoDataContainer);
     return *(d->m_vector.last());
 }
 
-GeoDataFeature& GeoDataContainer::first()
+GeoDataFeature &GeoDataContainer::first()
 {
     Q_D(GeoDataContainer);
     return *(d->m_vector.first());
 }
 
-const GeoDataFeature& GeoDataContainer::first() const
+const GeoDataFeature &GeoDataContainer::first() const
 {
     Q_D(const GeoDataContainer);
     return *(d->m_vector.first());
@@ -343,83 +361,86 @@ void GeoDataContainer::clear()
     d->m_vector.clear();
 }
 
-QVector<GeoDataFeature*>::Iterator GeoDataContainer::begin()
+QVector<GeoDataFeature *>::Iterator GeoDataContainer::begin()
 {
     Q_D(GeoDataContainer);
     return d->m_vector.begin();
 }
 
-QVector<GeoDataFeature*>::Iterator GeoDataContainer::end()
+QVector<GeoDataFeature *>::Iterator GeoDataContainer::end()
 {
     Q_D(GeoDataContainer);
     return d->m_vector.end();
 }
 
-QVector<GeoDataFeature*>::ConstIterator GeoDataContainer::constBegin() const
+QVector<GeoDataFeature *>::ConstIterator GeoDataContainer::constBegin() const
 {
     Q_D(const GeoDataContainer);
     return d->m_vector.constBegin();
 }
 
-QVector<GeoDataFeature*>::ConstIterator GeoDataContainer::constEnd() const
+QVector<GeoDataFeature *>::ConstIterator GeoDataContainer::constEnd() const
 {
     Q_D(const GeoDataContainer);
     return d->m_vector.constEnd();
 }
 
-void GeoDataContainer::pack( QDataStream& stream ) const
+void GeoDataContainer::pack(QDataStream &stream) const
 {
     Q_D(const GeoDataContainer);
-    GeoDataFeature::pack( stream );
+    GeoDataFeature::pack(stream);
 
     stream << d->m_vector.count();
 
-    for (QVector<GeoDataFeature*>::const_iterator iterator = d->m_vector.constBegin();
+    for (QVector<GeoDataFeature *>::const_iterator iterator = d->m_vector.constBegin();
          iterator != d->m_vector.constEnd();
-          ++iterator )
+         ++iterator)
     {
         const GeoDataFeature *feature = *iterator;
         stream << feature->featureId();
-        feature->pack( stream );
+        feature->pack(stream);
     }
 }
 
-void GeoDataContainer::unpack( QDataStream& stream )
+void GeoDataContainer::unpack(QDataStream &stream)
 {
     Q_D(GeoDataContainer);
-    GeoDataFeature::unpack( stream );
+    GeoDataFeature::unpack(stream);
 
     int count;
     stream >> count;
 
-    for ( int i = 0; i < count; ++i ) {
+    for (int i = 0; i < count; ++i)
+    {
         int featureId;
         stream >> featureId;
-        switch( featureId ) {
+        switch (featureId)
+        {
             case GeoDataDocumentId:
                 /* not usable!!!! */ break;
             case GeoDataFolderId:
-                {
+            {
                 GeoDataFolder *folder = new GeoDataFolder;
-                folder->unpack( stream );
-                d->m_vector.append( folder );
-                }
-                break;
+                folder->unpack(stream);
+                d->m_vector.append(folder);
+            }
+            break;
             case GeoDataPlacemarkId:
-                {
+            {
                 GeoDataPlacemark *placemark = new GeoDataPlacemark;
-                placemark->unpack( stream );
-                d->m_vector.append( placemark );
-                }
-                break;
+                placemark->unpack(stream);
+                d->m_vector.append(placemark);
+            }
+            break;
             case GeoDataNetworkLinkId:
                 break;
             case GeoDataScreenOverlayId:
                 break;
             case GeoDataGroundOverlayId:
                 break;
-            default: break;
-        };
+            default:
+                break;
+        }
     }
 }
 

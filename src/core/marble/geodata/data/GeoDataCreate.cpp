@@ -17,23 +17,21 @@ namespace Marble
 {
 
 class GeoDataCreatePrivate : public GeoDataContainerPrivate
-{
-};
+{};
 
 
 GeoDataCreate::GeoDataCreate()
-  : GeoDataContainer(new GeoDataCreatePrivate)
-{
-}
+    : GeoDataContainer(new GeoDataCreatePrivate)
+{}
 
 GeoDataCreate::GeoDataCreate(const GeoDataCreate &other)
-  : GeoDataContainer(other, new GeoDataCreatePrivate(*other.d_func()))
-{
-}
+    : GeoDataContainer(other, new GeoDataCreatePrivate(*other.d_func()))
+{}
 
-GeoDataCreate &GeoDataCreate::operator=( const GeoDataCreate &other )
+GeoDataCreate &GeoDataCreate::operator=(const GeoDataCreate &other)
 {
-    if (this != &other) {
+    if (this != &other)
+    {
         Q_D(GeoDataCreate);
         *d = *other.d_func();
     }
@@ -41,21 +39,20 @@ GeoDataCreate &GeoDataCreate::operator=( const GeoDataCreate &other )
     return *this;
 }
 
-bool GeoDataCreate::operator==( const GeoDataCreate &other ) const
+bool GeoDataCreate::operator==(const GeoDataCreate &other) const
 {
     return GeoDataContainer::equals(other);
 }
 
-bool GeoDataCreate::operator!=( const GeoDataCreate &other ) const
+bool GeoDataCreate::operator!=(const GeoDataCreate &other) const
 {
-    return !this->operator==( other );
+    return !this->operator==(other);
 }
 
 GeoDataCreate::~GeoDataCreate()
-{
-}
+{}
 
-GeoDataFeature * GeoDataCreate::clone() const
+GeoDataFeature *GeoDataCreate::clone() const
 {
     return new GeoDataCreate(*this);
 }

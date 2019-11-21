@@ -17,19 +17,17 @@ namespace Marble
 
 GeoDataWait::GeoDataWait() :
     m_duration(0.0)
-{
-}
+{}
 
 GeoDataWait::~GeoDataWait()
-{
-}
+{}
 
-bool GeoDataWait::operator==(const GeoDataWait& other) const
+bool GeoDataWait::operator==(const GeoDataWait &other) const
 {
     return this->m_duration == other.m_duration;
 }
 
-bool GeoDataWait::operator!=(const GeoDataWait& other) const
+bool GeoDataWait::operator!=(const GeoDataWait &other) const
 {
     return !this->operator==(other);
 }

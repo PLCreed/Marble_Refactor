@@ -9,87 +9,80 @@
 // Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
-#include "GeoDataColorStyle.h"
-
-#include "GeoDataTypes.h"
-
-#include <cstdlib>
 #include <QDataStream>
 #include <QColor>
+
+#include "GeoDataColorStyle.h"
+#include "GeoDataTypes.h"
 
 namespace Marble
 {
 
 class GeoDataColorStylePrivate
 {
-  public:
-    GeoDataColorStylePrivate()
-      : m_color( Qt::white ),
-        m_colorMode( GeoDataColorStyle::Normal )
-    {
-    }
-
+public:
     /// stores the current color
-    QColor     m_color;
-
+    QColor m_color;
     /// stores random color
-    QColor     m_randomColor;
-
+    QColor m_randomColor;
     /// stores the current color mode
-    GeoDataColorStyle::ColorMode  m_colorMode;
+    GeoDataColorStyle::ColorMode m_colorMode;
+
+public:
+    GeoDataColorStylePrivate() :
+        m_color(Qt::white),
+        m_colorMode(GeoDataColorStyle::Normal)
+    {}
 };
 
-GeoDataColorStyle::GeoDataColorStyle()
-      : d( new GeoDataColorStylePrivate )
-{
-}
+GeoDataColorStyle::GeoDataColorStyle() : d(new GeoDataColorStylePrivate)
+{}
 
-GeoDataColorStyle::GeoDataColorStyle( const GeoDataColorStyle& other )
-      : GeoDataObject( other ),
-        d( new GeoDataColorStylePrivate( *other.d ) )
-{
-}
+GeoDataColorStyle::GeoDataColorStyle(const GeoDataColorStyle &other) :
+    GeoDataObject(other),
+    d(new GeoDataColorStylePrivate(*other.d))
+{}
 
 GeoDataColorStyle::~GeoDataColorStyle()
 {
     delete d;
 }
 
-GeoDataColorStyle& GeoDataColorStyle::operator=( const GeoDataColorStyle& other )
+GeoDataColorStyle &GeoDataColorStyle::operator=(const GeoDataColorStyle &other)
 {
-    GeoDataObject::operator=( other );
+    GeoDataObject::operator=(other);
     *d = *other.d;
     return *this;
 }
 
-bool GeoDataColorStyle::operator==( const GeoDataColorStyle &other ) const
+bool GeoDataColorStyle::operator==(const GeoDataColorStyle &other) const
 {
-    return equals(other) && d->m_color == other.d->m_color &&
-           d->m_colorMode == other.d->m_colorMode;
+    return equals(other) && d->m_color == other.d->m_color
+           && d->m_colorMode == other.d->m_colorMode;
 }
 
-bool GeoDataColorStyle::operator!=( const GeoDataColorStyle &other ) const
+bool GeoDataColorStyle::operator!=(const GeoDataColorStyle &other) const
 {
     return !this->operator==(other);
 }
 
-const char* GeoDataColorStyle::nodeType() const
+const char *GeoDataColorStyle::nodeType() const
 {
     return GeoDataTypes::GeoDataColorStyleType;
 }
 
-void GeoDataColorStyle::setColor( const QColor &value )
+void GeoDataColorStyle::setColor(const QColor &value)
 {
     d->m_color = value;
 
     qreal red = d->m_color.redF();
     qreal green = d->m_color.greenF();
-    qreal blue = d->m_color.blueF();
+    qreal blue  = d->m_color.blueF();
     d->m_randomColor = d->m_color;
     qreal const randMax = RAND_MAX;
-    d->m_randomColor.setRedF(red*(qrand()/randMax));
-    d->m_randomColor.setGreenF(green*(qrand()/randMax));
-    d->m_randomColor.setBlueF(blue*(qrand()/randMax));
+    d->m_randomColor.setRedF(red * (qrand() / randMax));
+    d->m_randomColor.setGreenF(green * (qrand() / randMax));
+    d->m_randomColor.setBlueF(blue * (qrand() / randMax));
 }
 
 QColor GeoDataColorStyle::color() const
@@ -112,18 +105,18 @@ GeoDataColorStyle::ColorMode GeoDataColorStyle::colorMode() const
     return d->m_colorMode;
 }
 
-void GeoDataColorStyle::pack( QDataStream& stream ) const
+void GeoDataColorStyle::pack(QDataStream &stream) const
 {
-    GeoDataObject::pack( stream );
+    GeoDataObject::pack(stream);
 
     stream << d->m_color;
     // FIXME: Why is not colorMode saved?
-//    stream << m_colorMode;
+    //    stream << m_colorMode;
 }
 
-void GeoDataColorStyle::unpack( QDataStream& stream )
+void GeoDataColorStyle::unpack(QDataStream &stream)
 {
-    GeoDataObject::unpack( stream );
+    GeoDataObject::unpack(stream);
 
     stream >> d->m_color;
     // FIXME: Why is not colorMode saved?

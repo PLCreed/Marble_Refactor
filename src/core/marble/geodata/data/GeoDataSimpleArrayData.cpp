@@ -9,7 +9,6 @@
 //
 
 #include "GeoDataSimpleArrayData.h"
-
 #include "GeoDataTypes.h"
 #include "MarbleDebug.h"
 
@@ -18,29 +17,25 @@ namespace Marble {
 class GeoDataSimpleArrayDataPrivate
 {
 public:
-    GeoDataSimpleArrayDataPrivate()
-    {
-    }
+    GeoDataSimpleArrayDataPrivate() {}
 
-    QList< QVariant > m_values;
+    QList<QVariant> m_values;
 };
 
 GeoDataSimpleArrayData::GeoDataSimpleArrayData()
-    : d( new GeoDataSimpleArrayDataPrivate() )
-{
-}
+    : d(new GeoDataSimpleArrayDataPrivate())
+{}
 
-GeoDataSimpleArrayData::GeoDataSimpleArrayData( const GeoDataSimpleArrayData& other )
-    : GeoDataObject( other ), d( new GeoDataSimpleArrayDataPrivate( *other.d ) )
-{
-}
+GeoDataSimpleArrayData::GeoDataSimpleArrayData(const GeoDataSimpleArrayData &other)
+    : GeoDataObject(other), d(new GeoDataSimpleArrayDataPrivate(*other.d))
+{}
 
-bool GeoDataSimpleArrayData::operator==( const GeoDataSimpleArrayData &other ) const
+bool GeoDataSimpleArrayData::operator==(const GeoDataSimpleArrayData &other) const
 {
     return equals(other) && d->m_values == other.d->m_values;
 }
 
-bool GeoDataSimpleArrayData::operator!=( const GeoDataSimpleArrayData &other ) const
+bool GeoDataSimpleArrayData::operator!=(const GeoDataSimpleArrayData &other) const
 {
     return !this->operator==(other);
 }
@@ -57,33 +52,32 @@ int GeoDataSimpleArrayData::size() const
 
 QVariant GeoDataSimpleArrayData::valueAt(int index) const
 {
-    return d->m_values.at( index );
+    return d->m_values.at(index);
 }
 
-QList< QVariant > GeoDataSimpleArrayData::valuesList() const
+QList<QVariant> GeoDataSimpleArrayData::valuesList() const
 {
     return d->m_values;
 }
 
-void GeoDataSimpleArrayData::append( const QVariant& value )
+void GeoDataSimpleArrayData::append(const QVariant &value)
 {
-    d->m_values.append( value );
+    d->m_values.append(value);
 }
 
-
-const char* GeoDataSimpleArrayData::nodeType() const
+const char *GeoDataSimpleArrayData::nodeType() const
 {
     return GeoDataTypes::GeoDataSimpleArrayDataType;
 }
 
-void GeoDataSimpleArrayData::pack( QDataStream& stream ) const
+void GeoDataSimpleArrayData::pack(QDataStream &stream) const
 {
-    GeoDataObject::pack( stream );
+    GeoDataObject::pack(stream);
 }
 
-void GeoDataSimpleArrayData::unpack( QDataStream& stream )
+void GeoDataSimpleArrayData::unpack(QDataStream &stream)
 {
-    GeoDataObject::unpack( stream );
+    GeoDataObject::unpack(stream);
 }
 
 }

@@ -19,8 +19,8 @@ namespace Marble
 {
 
 /**
-  * a class which takes all the settings and exposes them
-  */
+ * a class which takes all the settings and exposes them
+ */
 class MARBLE_EXPORT MarbleDebug
 {
 public:
@@ -41,8 +41,8 @@ private:
 };
 
 /**
-  * a function to replace qDebug() in Marble library code
-  */
+ * a function to replace qDebug() in Marble library code
+ */
 MARBLE_EXPORT QDebug mDebug();
 
 } // namespace Marble

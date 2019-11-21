@@ -8,13 +8,11 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de
 //
 
-// Own
 #include "StoragePolicy.h"
 
 using namespace Marble;
 
-StoragePolicy::StoragePolicy( QObject *parent )
-    : QObject( parent )
+StoragePolicy::StoragePolicy(QObject *parent) : QObject(parent)
 {}
 
 #include "moc_StoragePolicy.cpp"

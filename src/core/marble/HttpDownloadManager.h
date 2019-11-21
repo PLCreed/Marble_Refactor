@@ -19,8 +19,8 @@
 
 #include <QObject>
 
-#include "MarbleGlobal.h"
 #include "marble_export.h"
+#include "MarbleGlobal.h"
 
 class QUrl;
 
@@ -34,25 +34,24 @@ class StoragePolicy;
  * @short This class manages scheduled downloads.
  *
  * The downloadmanager offers a maximum number of active jobs and a
- * limit for pending jobs.  it also takes care that the job queue
+ * limit for pending jobs. it also takes care that the job queue
  * won't be polluted by jobs that timed out already.
  *
  * @author Torsten Rahn
  */
 
-class MARBLE_EXPORT HttpDownloadManager : public QObject 
+class MARBLE_EXPORT HttpDownloadManager : public QObject
 {
     Q_OBJECT
-
- public:
+public:
     /**
      * Creates a new http download manager.
      *
-     * @note HttpDownloadManager doesn't take ownership of @p policy.
+     * @note HttpDownloadManager doesn't take ownership of @param policy.
      *
      * @param policy The storage policy for this manager.
      */
-    explicit HttpDownloadManager( StoragePolicy *policy );
+    explicit HttpDownloadManager(StoragePolicy *policy);
 
     /**
      * Destroys the http download manager.
@@ -62,29 +61,27 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     /**
      * Switches loading on/off, useful for offline mode.
      */
-    void setDownloadEnabled( const bool enable );
-    void addDownloadPolicy( const DownloadPolicy& );
+    void setDownloadEnabled(const bool enable);
+    void addDownloadPolicy(const DownloadPolicy &);
 
     static QByteArray userAgent(const QString &platform, const QString &plugin);
 
- public Q_SLOTS:
-
+public slots:
     /**
      * Adds a new job with a sourceUrl, destination file name and given id.
      */
-    void addJob( const QUrl& sourceUrl, const QString& destFilename, const QString &id,
-                 const DownloadUsage usage );
+    void addJob(const QUrl &sourceUrl, const QString &destFilename, const QString &id,
+                const DownloadUsage usage);
 
-
- Q_SIGNALS:
-    void downloadComplete( const QString&, const QString& );
+signals:
+    void downloadComplete(const QString &, const QString &);
 
     /**
      * This signal is emitted if a file is downloaded and the data argument
      * contains the files content. The HttpDownloadManager takes care to save
      * it using the given storage policy.
      */
-    void downloadComplete( const QByteArray &data, const QString& initiatorId );
+    void downloadComplete(const QByteArray &data, const QString &initiatorId);
 
     /**
      * Signal is emitted when a new job is added to the queue.
@@ -98,19 +95,19 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     void jobRemoved();
 
     /**
-      * A job was queued, activated or removed (finished, failed)
-      */
-    void progressChanged( int active, int queued );
+     * A job was queued, activated or removed (finished, failed)
+     */
+    void progressChanged(int active, int queued);
 
- private:
-    Q_DISABLE_COPY( HttpDownloadManager )
+private:
+    Q_DISABLE_COPY(HttpDownloadManager)
 
     class Private;
-    Private * const d;
+    Private *const d;
 
-    Q_PRIVATE_SLOT( d, void finishJob( const QByteArray&, const QString&, const QString& id ) )
-    Q_PRIVATE_SLOT( d, void requeue() )
-    Q_PRIVATE_SLOT( d, void startRetryTimer() )
+    Q_PRIVATE_SLOT(d, void finishJob(const QByteArray &, const QString &, const QString &id))
+    Q_PRIVATE_SLOT(d, void requeue())
+    Q_PRIVATE_SLOT(d, void startRetryTimer())
 };
 
 }

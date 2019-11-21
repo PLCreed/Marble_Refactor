@@ -18,7 +18,7 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #ifndef MARBLE_GEODOCUMENT_H
 #define MARBLE_GEODOCUMENT_H
@@ -53,7 +53,7 @@ public:
     virtual ~GeoNode();
 
     /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const = 0;
+    virtual const char *nodeType() const = 0;
 };
 
 }

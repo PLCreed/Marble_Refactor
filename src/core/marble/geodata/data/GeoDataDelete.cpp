@@ -9,7 +9,6 @@
 //
 
 #include "GeoDataDelete.h"
-
 #include "GeoDataContainer_p.h"
 #include "GeoDataTypes.h"
 
@@ -17,23 +16,21 @@ namespace Marble
 {
 
 class GeoDataDeletePrivate : public GeoDataContainerPrivate
-{
-};
+{};
 
 
 GeoDataDelete::GeoDataDelete()
-  : GeoDataContainer(new GeoDataDeletePrivate)
-{
-}
+    : GeoDataContainer(new GeoDataDeletePrivate)
+{}
 
 GeoDataDelete::GeoDataDelete(const GeoDataDelete &other)
-  : GeoDataContainer(other, new GeoDataDeletePrivate(*other.d_func()))
-{
-}
+    : GeoDataContainer(other, new GeoDataDeletePrivate(*other.d_func()))
+{}
 
-GeoDataDelete &GeoDataDelete::operator=( const GeoDataDelete &other )
+GeoDataDelete &GeoDataDelete::operator=(const GeoDataDelete &other)
 {
-    if (this != &other) {
+    if (this != &other)
+    {
         Q_D(GeoDataDelete);
         *d = *other.d_func();
     }
@@ -41,21 +38,20 @@ GeoDataDelete &GeoDataDelete::operator=( const GeoDataDelete &other )
     return *this;
 }
 
-bool GeoDataDelete::operator==( const GeoDataDelete &other ) const
+bool GeoDataDelete::operator==(const GeoDataDelete &other) const
 {
     return GeoDataContainer::equals(other);
 }
 
-bool GeoDataDelete::operator!=( const GeoDataDelete &other ) const
+bool GeoDataDelete::operator!=(const GeoDataDelete &other) const
 {
-    return !this->operator==( other );
+    return !this->operator==(other);
 }
 
 GeoDataDelete::~GeoDataDelete()
-{
-}
+{}
 
-GeoDataFeature * GeoDataDelete::clone() const
+GeoDataFeature *GeoDataDelete::clone() const
 {
     return new GeoDataDelete(*this);
 }

@@ -2,7 +2,7 @@ include ($$SRC_ROOT_PATH/core/marble_core.pri)
 
 QT += gui
 
-CONFIG += c++11 console
+CONFIG += c++11
 
 CONFIG(debug, debug|release) {
     TARGET = MarbleQtd

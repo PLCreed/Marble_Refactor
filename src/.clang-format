@@ -26,7 +26,7 @@ AlignEscapedNewlines: Left
 # 如果为true,水平对齐二元和三元运算表达式
 AlignOperands: true
 # 如果为真,对连续多行代码尾部注释对齐
-AlignTrailingComments: false
+AlignTrailingComments: true
 # 如果函数声明不适合一行,允许将函数声明的所有参数放到下一行
 AllowAllParametersOfDeclarationOnNextLine: false
 # 允许将简单的语句块放到一个单行

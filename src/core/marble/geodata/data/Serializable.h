@@ -18,17 +18,18 @@ namespace Marble {
 
 class Serializable
 {
- public:
+public:
     virtual ~Serializable(){}
-    virtual void pack( QDataStream& stream ) const = 0;
-    virtual void unpack( QDataStream& stream ) = 0;
+    virtual void pack(QDataStream &stream) const = 0;
+    virtual void unpack(QDataStream &stream) = 0;
 };
 
 /* the next two id's are needed to get unpacking working - this cannot be
  * achieved without a special Id
  */
-enum EnumFeatureId {
-    InvalidFeatureId = -1,
+enum EnumFeatureId
+{
+    InvalidFeatureId  = -1,
     GeoDataDocumentId = 1,
     GeoDataFolderId,
     GeoDataPlacemarkId,
@@ -37,7 +38,8 @@ enum EnumFeatureId {
     GeoDataGroundOverlayId
 };
 
-enum EnumGeometryId {
+enum EnumGeometryId
+{
     InvalidGeometryId = -1,
     GeoDataPointId = 1,
     GeoDataLineStringId,

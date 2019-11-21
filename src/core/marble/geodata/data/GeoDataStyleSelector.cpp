@@ -8,60 +8,54 @@
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
 //
 
-
-#include "GeoDataStyleSelector.h"
 #include <QDataStream>
 
+#include "GeoDataStyleSelector.h"
 #include "GeoDataTypes.h"
 
 namespace Marble
 {
 
 class GeoDataStyleSelectorPrivate
-{
-};
+{};
 
-GeoDataStyleSelector::GeoDataStyleSelector() :
-    GeoDataObject(),
-    d( nullptr )
-{
-}
+GeoDataStyleSelector::GeoDataStyleSelector() : GeoDataObject(),
+    d(nullptr)
+{}
 
-GeoDataStyleSelector::GeoDataStyleSelector( const GeoDataStyleSelector& other ) :
-    GeoDataObject( other ),
-    d( nullptr )
-{
-}
+GeoDataStyleSelector::GeoDataStyleSelector(const GeoDataStyleSelector &other) : GeoDataObject(other),
+    d(nullptr)
+{}
 
 GeoDataStyleSelector::~GeoDataStyleSelector()
 {
     delete d;
 }
 
-GeoDataStyleSelector& GeoDataStyleSelector::operator=( const GeoDataStyleSelector& other )
+GeoDataStyleSelector &GeoDataStyleSelector::operator=(const GeoDataStyleSelector &other)
 {
-    GeoDataObject::operator=( other );
+    GeoDataObject::operator=(other);
     return *this;
 }
 
-bool GeoDataStyleSelector::operator==( const GeoDataStyleSelector &other ) const
+bool GeoDataStyleSelector::operator==(const GeoDataStyleSelector &other) const
 {
-    return GeoDataObject::equals( other );
+    return GeoDataObject::equals(other);
 }
 
-bool GeoDataStyleSelector::operator!=( const GeoDataStyleSelector &other ) const
+bool GeoDataStyleSelector::operator!=(const GeoDataStyleSelector &other) const
 {
-    return !this->operator==( other );
+    return !this->operator==(other);
 }
 
-void GeoDataStyleSelector::pack( QDataStream& stream ) const
+void GeoDataStyleSelector::pack(QDataStream &stream) const
 {
-    GeoDataObject::pack( stream );
+    GeoDataObject::pack(stream);
 }
 
-void GeoDataStyleSelector::unpack( QDataStream& stream )
+void GeoDataStyleSelector::unpack(QDataStream &stream)
 {
-    GeoDataObject::unpack( stream );
+    GeoDataObject::unpack(stream);
 }
 
 }

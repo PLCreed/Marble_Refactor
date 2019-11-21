@@ -19,15 +19,15 @@ class NullDevice : public QIODevice
 public:
     NullDevice()
     {
-        open( QIODevice::WriteOnly );
+        open(QIODevice::WriteOnly);
     }
 
-    qint64 readData( char * /*data*/, qint64 /*maxSize*/ ) override
+    qint64 readData(char * /*data*/, qint64 /*maxSize*/) override
     {
         return -1;
     }
 
-    qint64 writeData( const char * /*data*/, qint64 maxSize ) override
+    qint64 writeData(const char * /*data*/, qint64 maxSize) override
     {
         return maxSize;
     }
@@ -35,12 +35,14 @@ public:
 
 QDebug mDebug()
 {
-    if ( MarbleDebug::isEnabled() ) {
-        return QDebug( QtDebugMsg );
+    if (MarbleDebug::isEnabled())
+    {
+        return QDebug(QtDebugMsg);
     }
-    else {
-        static QIODevice *device = new NullDevice;
-        return QDebug( device );
+    else
+    {
+        static std::shared_ptr<QIODevice> device(new NullDevice);
+        return QDebug(device.get());
     }
 }
 

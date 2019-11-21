@@ -14,7 +14,6 @@
 #include <QAtomicInt>
 
 #include "GeoDataGeometry.h"
-
 #include "GeoDataLatLonAltBox.h"
 
 namespace Marble
@@ -22,27 +21,31 @@ namespace Marble
 
 class GeoDataGeometryPrivate
 {
-  public:
-    GeoDataGeometryPrivate()
-        : m_extrude( false ),
-          m_altitudeMode( ClampToGround ),
-          ref( 0 )
-    {
-    }
+public:
+    bool m_extrude;
+    AltitudeMode m_altitudeMode;
+    mutable GeoDataLatLonAltBox m_latLonAltBox;
 
-    GeoDataGeometryPrivate( const GeoDataGeometryPrivate& other )
-        : m_extrude( other.m_extrude ),
-          m_altitudeMode( other.m_altitudeMode ),
-          m_latLonAltBox(),
-          ref( 0 )
-    {
-    }
+    QAtomicInt ref;
+
+public:
+    GeoDataGeometryPrivate() :
+        m_extrude(false),
+        m_altitudeMode(ClampToGround),
+        ref(0)
+    {}
+
+    GeoDataGeometryPrivate(const GeoDataGeometryPrivate &other) :
+        m_extrude(other.m_extrude),
+        m_altitudeMode(other.m_altitudeMode),
+        m_latLonAltBox(),
+        ref(0)
+    {}
 
     virtual ~GeoDataGeometryPrivate()
-    {
-    }
+    {}
 
-    GeoDataGeometryPrivate& operator=( const GeoDataGeometryPrivate &other )
+    GeoDataGeometryPrivate &operator=(const GeoDataGeometryPrivate &other)
     {
         m_extrude = other.m_extrude;
         m_altitudeMode = other.m_altitudeMode;
@@ -51,12 +54,6 @@ class GeoDataGeometryPrivate
     }
 
     virtual GeoDataGeometryPrivate *copy() const = 0;
-
-    bool         m_extrude;
-    AltitudeMode m_altitudeMode;
-    mutable GeoDataLatLonAltBox m_latLonAltBox;
-
-    QAtomicInt  ref;
 };
 
 } // namespace Marble

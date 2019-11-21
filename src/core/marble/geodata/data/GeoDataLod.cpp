@@ -8,46 +8,64 @@
 // Copyright 2009      Torsten Rahn   <rahn@kde.org>
 //
 
+#include <QDataStream>
 
 #include "GeoDataLod.h"
-#include "GeoDataLod_p.h"
-
-#include <QDataStream>
+#include "GeoDataTypes.h"
 
 namespace Marble
 {
-GeoDataLod::GeoDataLod()
-    : GeoDataObject(),
-      d( new GeoDataLodPrivate )
-{
-}
 
-GeoDataLod::GeoDataLod( const GeoDataLod& other )
-    : GeoDataObject( other ),
-      d( new GeoDataLodPrivate( *other.d ) )
+class GeoDataLodPrivate
 {
-}
+public:
+    GeoDataLodPrivate() :
+        m_minLodPixels(0),
+        m_maxLodPixels(-1),
+        m_minFadeExtent(0),
+        m_maxFadeExtent(0)
+    {}
+
+    qreal m_minLodPixels;
+    qreal m_maxLodPixels;
+    qreal m_minFadeExtent;
+    qreal m_maxFadeExtent;
+};
+
+GeoDataLod::GeoDataLod() : GeoDataObject(),
+    d(new GeoDataLodPrivate)
+{}
+
+GeoDataLod::GeoDataLod(const GeoDataLod &other) : GeoDataObject(other),
+    d(new GeoDataLodPrivate(*other.d))
+{}
 
 GeoDataLod::~GeoDataLod()
 {
     delete d;
 }
 
-bool GeoDataLod::operator==(const GeoDataLod& other) const
+GeoDataLod &GeoDataLod::operator=(const GeoDataLod &other)
 {
-    return equals( other )
-           &&d->m_maxFadeExtent == other.d->m_maxFadeExtent
+    *d = *other.d;
+    return *this;
+}
+
+bool GeoDataLod::operator==(const GeoDataLod &other) const
+{
+    return equals(other)
+           && d->m_maxFadeExtent == other.d->m_maxFadeExtent
            && d->m_maxLodPixels == other.d->m_maxLodPixels
            && d->m_minFadeExtent == other.d->m_minFadeExtent
            && d->m_minLodPixels == other.d->m_minLodPixels;
 }
 
-bool GeoDataLod::operator!=(const GeoDataLod& other) const
+bool GeoDataLod::operator!=(const GeoDataLod &other) const
 {
-    return !this->operator==( other );
+    return !this->operator==(other);
 }
 
-const char* GeoDataLod::nodeType() const
+const char *GeoDataLod::nodeType() const
 {
     return GeoDataTypes::GeoDataLodType;
 }
@@ -59,7 +77,7 @@ qreal GeoDataLod::minLodPixels() const
 }
 
 
-void GeoDataLod::setMinLodPixels( qreal pixels )
+void GeoDataLod::setMinLodPixels(qreal pixels)
 {
     d->m_minLodPixels = pixels;
 }
@@ -71,7 +89,7 @@ qreal GeoDataLod::maxLodPixels() const
 }
 
 
-void GeoDataLod::setMaxLodPixels( qreal pixels )
+void GeoDataLod::setMaxLodPixels(qreal pixels)
 {
     d->m_maxLodPixels = pixels;
 }
@@ -83,7 +101,7 @@ qreal GeoDataLod::minFadeExtent() const
 }
 
 
-void GeoDataLod::setMinFadeExtent( qreal pixels )
+void GeoDataLod::setMinFadeExtent(qreal pixels)
 {
     d->m_minFadeExtent = pixels;
 }
@@ -95,33 +113,27 @@ qreal GeoDataLod::maxFadeExtent() const
 }
 
 
-void GeoDataLod::setMaxFadeExtent( qreal pixels )
+void GeoDataLod::setMaxFadeExtent(qreal pixels)
 {
     d->m_maxFadeExtent = pixels;
 }
 
-
-void GeoDataLod::pack( QDataStream& stream ) const
+void GeoDataLod::pack(QDataStream &stream) const
 {
-    GeoDataObject::pack( stream );
+    GeoDataObject::pack(stream);
 
     stream << d->m_minLodPixels << d->m_maxLodPixels;
     stream << d->m_minFadeExtent << d->m_maxFadeExtent;
 }
 
-void GeoDataLod::unpack( QDataStream& stream )
+void GeoDataLod::unpack(QDataStream &stream)
 {
-    GeoDataObject::unpack( stream );
+    GeoDataObject::unpack(stream);
 
     stream >> d->m_minLodPixels >> d->m_maxLodPixels;
     stream >> d->m_minFadeExtent >> d->m_maxFadeExtent;
 }
 
-GeoDataLod &GeoDataLod::operator=( const GeoDataLod& other )
-{
-    *d = *other.d;
-    return *this;
-}
+
 
 }
-

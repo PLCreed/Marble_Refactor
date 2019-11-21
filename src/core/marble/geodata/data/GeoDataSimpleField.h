@@ -22,21 +22,14 @@ namespace Marble
 
 class GeoDataSimpleFieldPrivate;
 
-/**
- */
 class GEODATA_EXPORT GeoDataSimpleField : public GeoNode
 {
 public:
-    GeoDataSimpleField();
-    GeoDataSimpleField( const GeoDataSimpleField& other );
-    bool operator==( const GeoDataSimpleField& other ) const;
-    bool operator!=( const GeoDataSimpleField& other ) const;
-    ~GeoDataSimpleField() override;
-
-    /*
+    /**
      * @brief Enum for different values of type attribute of SimpleField
      */
-    enum SimpleFieldType {
+    enum SimpleFieldType
+    {
         String,
         Int,
         UInt,
@@ -47,65 +40,63 @@ public:
         Bool
     };
 
-    /*
+public:
+    GeoDataSimpleField();
+    GeoDataSimpleField(const GeoDataSimpleField &other);
+    bool operator==(const GeoDataSimpleField &other) const;
+    bool operator!=(const GeoDataSimpleField &other) const;
+    ~GeoDataSimpleField() override;
+
+    GeoDataSimpleField &operator=(const GeoDataSimpleField &other);
+
+    /**
      * @brief Return the value of type attribute of simple field
      */
     SimpleFieldType type() const;
-
-    /*
+    /**
      * @brief Sets the value of type attribute
      * @param type  The of type attribute
      */
     void setType(SimpleFieldType type);
 
-    /*
+    /**
      * @brief Returns the value of name attribute of simple field
      */
     QString name() const;
-
-    /*
+    /**
      * @brief Set the value of name attribute of SimpleField
      * @param value  The value to be set as name attribute
      */
-    void setName( const QString& value );
+    void setName(const QString &value);
 
-    /*
+    /**
      * @brief Returns the value of displayField child element of SimpleField tag
      */
     QString displayName() const;
-
-    /*
+    /**
      * @brief Set the value for displayName tag
      * @param displayName  The value to be set for displayName tag
      */
-    void setDisplayName( const QString& displayName );
+    void setDisplayName(const QString &displayName);
 
-    /*
-     * @brief The assignment operator
-     * @param rhs  The object to be duplicated
-     */
-    GeoDataSimpleField& operator=( const GeoDataSimpleField& rhs );
-
-    /*
+    /**
      * @brief Provides information for downcasting a GeoNode
      */
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
-    /*
+    /**
      * @brief Serialize SimpleField to a stream
      * @param stream  The stream
      */
-    virtual void pack( QDataStream& stream ) const;
-
-    /*
+    virtual void pack(QDataStream &stream) const;
+    /**
      * @brief Unserialize SimpleField from a stream
      * @param stream  The stream
      */
-    virtual void unpack( QDataStream& stream );
+    virtual void unpack(QDataStream &stream);
 
 private:
-    GeoDataSimpleFieldPrivate * const d;
-
+    GeoDataSimpleFieldPrivate *const d;
 };
 
 }

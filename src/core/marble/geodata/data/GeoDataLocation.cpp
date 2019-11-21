@@ -17,46 +17,44 @@ namespace Marble {
 class GeoDataLocationPrivate
 {
 public:
-
     GeoDataCoordinates m_coordinates;
 
-    GeoDataLocationPrivate();
+public:
+    GeoDataLocationPrivate() :
+        m_coordinates()
+    {
+        // nothing to do
+    }
 };
 
-GeoDataLocationPrivate::GeoDataLocationPrivate() :
-    m_coordinates()
+GeoDataLocation::GeoDataLocation() : d(new GeoDataLocationPrivate)
 {
     // nothing to do
 }
 
-GeoDataLocation::GeoDataLocation() : d( new GeoDataLocationPrivate )
+GeoDataLocation::GeoDataLocation(const Marble::GeoDataLocation &other) :
+    GeoDataObject(other), d(new GeoDataLocationPrivate(*other.d))
 {
     // nothing to do
 }
 
-GeoDataLocation::GeoDataLocation( const Marble::GeoDataLocation &other ) :
-    GeoDataObject( other ), d( new GeoDataLocationPrivate( *other.d ) )
+GeoDataLocation &GeoDataLocation::operator=(const GeoDataLocation &other)
 {
-    // nothing to do
-}
-
-GeoDataLocation &GeoDataLocation::operator=( const GeoDataLocation &other )
-{
-    GeoDataObject::operator=( other );
+    GeoDataObject::operator=(other);
     *d = *other.d;
     return *this;
 }
 
 
-bool GeoDataLocation::operator==( const GeoDataLocation &other ) const
+bool GeoDataLocation::operator==(const GeoDataLocation &other) const
 {
-    return equals(other) &&
-           d->m_coordinates == other.d->m_coordinates;
+    return equals(other)
+           && d->m_coordinates == other.d->m_coordinates;
 }
 
-bool GeoDataLocation::operator!=( const GeoDataLocation &other ) const
+bool GeoDataLocation::operator!=(const GeoDataLocation &other) const
 {
-    return !this->operator==( other );
+    return !this->operator==(other);
 }
 
 GeoDataLocation::~GeoDataLocation()
@@ -69,15 +67,14 @@ const char *GeoDataLocation::nodeType() const
     return GeoDataTypes::GeoDataLocationType;
 }
 
-qreal GeoDataLocation::altitude() const
+qreal GeoDataLocation::longitude(GeoDataCoordinates::Unit unit) const
 {
-    return d->m_coordinates.altitude();
+    return d->m_coordinates.longitude(unit);
 }
 
-void GeoDataLocation::setAltitude(qreal altitude)
+void GeoDataLocation::setLongitude(qreal longitude, GeoDataCoordinates::Unit unit)
 {
-
-    d->m_coordinates.setAltitude(altitude);
+    d->m_coordinates.setLongitude(longitude, unit);
 }
 
 qreal GeoDataLocation::latitude(GeoDataCoordinates::Unit unit) const
@@ -90,15 +87,15 @@ void GeoDataLocation::setLatitude(qreal latitude, GeoDataCoordinates::Unit unit)
     d->m_coordinates.setLatitude(latitude, unit);
 }
 
-qreal GeoDataLocation::longitude( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLocation::altitude() const
 {
-    return d->m_coordinates.longitude(unit);
+    return d->m_coordinates.altitude();
 }
 
-void GeoDataLocation::setLongitude(qreal longitude, GeoDataCoordinates::Unit unit)
+void GeoDataLocation::setAltitude(qreal altitude)
 {
-    d->m_coordinates.setLongitude(longitude, unit);
-}
 
+    d->m_coordinates.setAltitude(altitude);
+}
 
 }

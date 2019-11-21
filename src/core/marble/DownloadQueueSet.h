@@ -2,7 +2,7 @@
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either 
+// License as published by the Free Software Foundation; either
 // version 2.1 of the License, or (at your option) any later version.
 //
 // This library is distributed in the hope that it will be useful,
@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // Lesser General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public 
+// You should have received a copy of the GNU Lesser General Public
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifndef MARBLE_DOWNLOADQUEUESET_H
@@ -70,49 +70,47 @@ class HttpJob;
 
  */
 
-class DownloadQueueSet: public QObject
+class DownloadQueueSet : public QObject
 {
     Q_OBJECT
-
- public:
-    explicit DownloadQueueSet( QObject * const parent = nullptr );
-    explicit DownloadQueueSet( const DownloadPolicy& policy, QObject * const parent = nullptr );
+public:
+    explicit DownloadQueueSet(QObject *const parent = nullptr);
+    explicit DownloadQueueSet(const DownloadPolicy &policy, QObject *const parent = nullptr);
     ~DownloadQueueSet() override;
 
     DownloadPolicy downloadPolicy() const;
-    void setDownloadPolicy( const DownloadPolicy& );
+    void setDownloadPolicy(const DownloadPolicy &);
 
-    bool canAcceptJob( const QUrl& sourceUrl,
-                       const QString& destinationFileName ) const;
-    void addJob( HttpJob * const job );
-
+    bool canAcceptJob(const QUrl &sourceUrl, const QString &destinationFileName) const;
+    void addJob(HttpJob *const job);
     void activateJobs();
     void retryJobs();
     void purgeJobs();
 
- Q_SIGNALS:
+signals:
     void jobAdded();
     void jobRemoved();
     void jobRetry();
-    void jobFinished( const QByteArray& data, const QString& destinationFileName,
-                      const QString& id );
-    void jobRedirected( const QUrl& newSourceUrl, const QString& destinationFileName,
-                        const QString& id, DownloadUsage );
-    void progressChanged( int active, int queued );
+    void jobFinished(const QByteArray &data, const QString &destinationFileName,
+                     const QString &id);
+    void jobRedirected(const QUrl & newSourceUrl, const QString & destinationFileName,
+                       const QString & id, DownloadUsage);
+    void progressChanged(int active, int queued);
 
- private Q_SLOTS:
-    void finishJob( HttpJob * job, const QByteArray& data );
-    void redirectJob( HttpJob * job, const QUrl& newSourceUrl );
-    void retryOrBlacklistJob( HttpJob * job, const int errorCode );
+private slots:
+    void finishJob(HttpJob *job, const QByteArray &data);
+    void redirectJob(HttpJob *job, const QUrl &newSourceUrl);
+    void retryOrBlacklistJob(HttpJob *job, const int errorCode);
 
- private:
-    void activateJob( HttpJob * const job );
-    void deactivateJob( HttpJob * const job );
-    bool jobIsActive( const QString& destinationFileName ) const;
-    bool jobIsQueued( const QString& destinationFileName ) const;
-    bool jobIsWaitingForRetry( const QString& destinationFileName ) const;
-    bool jobIsBlackListed( const QUrl& sourceUrl ) const;
+private:
+    void activateJob(HttpJob *const job);
+    void deactivateJob(HttpJob *const job);
+    bool jobIsActive(const QString &destinationFileName) const;
+    bool jobIsQueued(const QString &destinationFileName) const;
+    bool jobIsWaitingForRetry(const QString &destinationFileName) const;
+    bool jobIsBlackListed(const QUrl &sourceUrl) const;
 
+private:
     DownloadPolicy m_downloadPolicy;
 
     /** This is the first stage a job enters, from this queue it will get
@@ -121,24 +119,24 @@ class DownloadQueueSet: public QObject
     class JobStack
     {
     public:
-        bool contains( const QString& destinationFileName ) const;
-        int count() const;
-        bool isEmpty() const;
-        HttpJob * pop();
-        void push( HttpJob * const );
+            bool contains(const QString &destinationFileName) const;
+            int count() const;
+            bool isEmpty() const;
+            HttpJob *pop();
+            void push(HttpJob *const);
     private:
-        QStack<HttpJob*> m_jobs;
-        QSet<QString> m_jobsContent;
+            QStack<HttpJob *> m_jobs;
+            QSet<QString> m_jobsContent;
     };
     JobStack m_jobs;
 
     /// Contains the jobs which are currently being downloaded.
-    QList<HttpJob*> m_activeJobs;
+    QList<HttpJob *> m_activeJobs;
 
     /** Contains jobs which failed to download and which are scheduled for
      *  retry according to retry settings.
      */
-    QQueue<HttpJob*> m_retryQueue;
+    QQueue<HttpJob *> m_retryQueue;
 
     /// Contains the blacklisted source urls
     QSet<QString> m_jobBlackList;

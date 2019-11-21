@@ -11,18 +11,20 @@
 #ifndef MARBLE_GEODATATRACK_H
 #define MARBLE_GEODATATRACK_H
 
-#include "GeoDataGeometry.h"
-
 #include <QList>
+
+#include "geodata_export.h"
+#include "GeoDataGeometry.h"
 
 class QDateTime;
 
 namespace Marble {
 
-class GeoDataTrackPrivate;
 class GeoDataExtendedData;
 class GeoDataLineString;
 class GeoDataCoordinates;
+
+class GeoDataTrackPrivate;
 
 /**
  * @class GeoDataTrack
@@ -54,12 +56,17 @@ class GeoDataCoordinates;
  */
 class GEODATA_EXPORT GeoDataTrack : public GeoDataGeometry
 {
-
 public:
     GeoDataTrack();
-    explicit GeoDataTrack( const GeoDataTrack &other );
+    explicit GeoDataTrack(const GeoDataTrack &other);
 
-    GeoDataTrack &operator=( const GeoDataTrack &other );
+    GeoDataTrack &operator=(const GeoDataTrack &other);
+
+    /**
+     * @brief: Equality operators.
+     */
+    bool operator==(const GeoDataTrack &other) const;
+    bool operator!=(const GeoDataTrack &other) const;
 
     const char *nodeType() const override;
 
@@ -67,16 +74,12 @@ public:
 
     GeoDataGeometry *copy() const override;
 
+    const GeoDataLatLonAltBox &latLonAltBox() const override;
+
     /**
      * Returns the number of points in the track
      */
     int size() const;
-
-    /**
-     * @brief: Equality operators.
-     */
-    bool operator==( const GeoDataTrack& other ) const;
-    bool operator!=( const GeoDataTrack& other ) const;
 
     /**
      * Returns true if coordinatesAt() should use interpolation, false otherwise.
@@ -85,7 +88,6 @@ public:
      * @see setInterpolate, coordinatesAt
      */
     bool interpolate() const;
-
     /**
      * Set whether coordinatesAt() should use interpolation.
      *
@@ -98,7 +100,6 @@ public:
      * an invalid QDateTime if the track is empty.
      */
     QDateTime firstWhen() const;
-
     /**
      * Return the time value of the last point in the track, or
      * an invalid QDateTime if the track is empty.
@@ -125,38 +126,37 @@ public:
      *
      * @see interpolate
      */
-    GeoDataCoordinates coordinatesAt( const QDateTime &when ) const;
-
+    GeoDataCoordinates coordinatesAt(const QDateTime &when) const;
     /**
      * Return coordinates at specified index. This is useful when the track contains
      * coordinates without time information.
      */
-    GeoDataCoordinates coordinatesAt( int index ) const;
+    GeoDataCoordinates coordinatesAt(int index) const;
 
     /**
      * Add a new point with coordinates @p coord associated with the
      * time value @p when
      */
-    void addPoint( const QDateTime &when, const GeoDataCoordinates &coord );
-
-    /**
-     * Add the coordinates part for a new point. See this class description
-     * for more information.
-     * @see appendWhen
-     */
-    void appendCoordinates( const GeoDataCoordinates &coord );
-
-    /**
-     * Add altitude information to the last appended coordinates
-     */
-    void appendAltitude( qreal altitude );
+    void addPoint(const QDateTime &when, const GeoDataCoordinates &coord);
 
     /**
      * Add the time value part for a new point. See this class description
      * for more information.
      * @see appendCoordinates
      */
-    void appendWhen( const QDateTime &when );
+    void appendWhen(const QDateTime &when);
+
+    /**
+     * Add the coordinates part for a new point. See this class description
+     * for more information.
+     * @see appendWhen
+     */
+    void appendCoordinates(const GeoDataCoordinates &coord);
+
+    /**
+     * Add altitude information to the last appended coordinates
+     */
+    void appendAltitude(qreal altitude);
 
     /**
      * Remove all the points contained in the track.
@@ -166,12 +166,12 @@ public:
     /**
      * Remove all points from the track whose time value is less than @p when.
      */
-    void removeBefore( const QDateTime &when );
+    void removeBefore(const QDateTime &when);
 
     /**
      * Remove all points from the track whose time value is greater than @p when.
      */
-    void removeAfter( const QDateTime &when );
+    void removeAfter(const QDateTime &when);
 
     /**
      * Return the GeoDataLineString representing the current track
@@ -181,18 +181,16 @@ public:
     /**
      * Return the ExtendedData assigned to the feature.
      */
-    const GeoDataExtendedData& extendedData() const;
-    GeoDataExtendedData& extendedData();
-
+    const GeoDataExtendedData &extendedData() const;
+    GeoDataExtendedData &extendedData();
     /**
      * Sets the ExtendedData of the feature.
      * @param  extendedData  the new ExtendedData to be used.
      */
-    void setExtendedData( const GeoDataExtendedData& extendedData );
+    void setExtendedData(const GeoDataExtendedData &extendedData);
 
-    const GeoDataLatLonAltBox& latLonAltBox() const override;
-    void pack( QDataStream& stream ) const override;
-    void unpack( QDataStream& stream ) override;
+    void pack(QDataStream &stream) const override;
+    void unpack(QDataStream &stream) override;
 
 private:
     Q_DECLARE_PRIVATE(GeoDataTrack)
@@ -200,6 +198,6 @@ private:
 
 }
 
-Q_DECLARE_METATYPE( Marble::GeoDataTrack* )
+Q_DECLARE_METATYPE(Marble::GeoDataTrack *)
 
 #endif // MARBLE_GEODATATRACK_H

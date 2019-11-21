@@ -11,10 +11,10 @@
 #ifndef MARBLE_GEODATAOVERLAY_P_H
 #define MARBLE_GEODATAOVERLAY_P_H
 
-#include "GeoDataFeature_p.h"
-
 #include <QImage>
 #include <QColor>
+
+#include "GeoDataFeature_p.h"
 
 namespace Marble {
 
@@ -22,25 +22,21 @@ class GeoDataOverlayPrivate : public GeoDataFeaturePrivate
 {
 public:
     QColor m_color;
-
     int m_drawOrder;
-
     mutable QImage m_image;
-
     QString m_iconPath;
 
-    GeoDataOverlayPrivate()
-        : m_color(Qt::white),
-          m_drawOrder(0)
-    {
-    }
-
-    GeoDataOverlayPrivate(const GeoDataOverlayPrivate& other)
-      : GeoDataFeaturePrivate(other),
+public:
+    GeoDataOverlayPrivate() :
         m_color(Qt::white),
         m_drawOrder(0)
-    {
-    }
+    {}
+
+    GeoDataOverlayPrivate(const GeoDataOverlayPrivate &other) :
+        GeoDataFeaturePrivate(other),
+        m_color(Qt::white),
+        m_drawOrder(0)
+    {}
 };
 
 }

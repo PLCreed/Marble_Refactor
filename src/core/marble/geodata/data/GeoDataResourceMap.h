@@ -11,49 +11,43 @@
 #ifndef GEODATARESOURCEMAP_H
 #define GEODATARESOURCEMAP_H
 
+#include "geodata_export.h"
 #include "GeoDocument.h"
-#include "MarbleGlobal.h"
+
+class QString;
 
 namespace Marble {
 
 class GeoDataAlias;
 class GeoDataResourceMapPrivate;
 
-/**
- */
-class GEODATA_EXPORT GeoDataResourceMap: public GeoNode
+class GEODATA_EXPORT GeoDataResourceMap : public GeoNode
 {
 public:
     GeoDataResourceMap();
+    GeoDataResourceMap(const GeoDataResourceMap &other);
 
-    GeoDataResourceMap( const GeoDataResourceMap &other );
-
-    GeoDataResourceMap& operator=( const GeoDataResourceMap &other );
-
-    bool operator==( const GeoDataResourceMap &other ) const;
-    bool operator!=( const GeoDataResourceMap &other ) const;
+    GeoDataResourceMap &operator=(const GeoDataResourceMap &other);
+    bool operator==(const GeoDataResourceMap &other) const;
+    bool operator!=(const GeoDataResourceMap &other) const;
 
     ~GeoDataResourceMap() override;
 
     /** Provides type information for downcasting a GeoNode */
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
-    const GeoDataAlias& alias() const;
-
-    GeoDataAlias& alias();
-
-    void setAlias( const GeoDataAlias &alias);
+    const GeoDataAlias &alias() const;
+    GeoDataAlias &alias();
+    void setAlias(const GeoDataAlias &alias);
 
     QString sourceHref() const;
-
-    void setSourceHref( const QString& sourceHref );
+    void setSourceHref(const QString &sourceHref);
 
     QString targetHref() const;
-
-    void setTargetHref( const QString& targetHref );
+    void setTargetHref(const QString &targetHref);
 
 private:
-    GeoDataResourceMapPrivate* const d;
+    GeoDataResourceMapPrivate *const d;
 };
 
 }

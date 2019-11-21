@@ -17,22 +17,18 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #include "GeoDocument.h"
-#include <cstdio>
-#include "GeoSceneTypes.h"
 
 namespace Marble
 {
 
 GeoDocument::GeoDocument()
-{
-}
+{}
 
 GeoDocument::~GeoDocument()
-{
-}
+{}
 
 bool GeoDocument::isGeoDataDocument() const
 {
@@ -46,11 +42,9 @@ bool GeoDocument::isGeoSceneDocument() const
 
 
 GeoNode::GeoNode()
-{
-}
+{}
 
 GeoNode::~GeoNode()
-{
-}
+{}
 
 }

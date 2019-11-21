@@ -11,23 +11,22 @@
 #ifndef GEODATASOUNDCUE_H
 #define GEODATASOUNDCUE_H
 
-#include "GeoDataTourPrimitive.h"
-
 #include <QString>
+
+#include "geodata_export.h"
+#include "GeoDataTourPrimitive.h"
 
 namespace Marble
 {
 
-/**
- */
 class GEODATA_EXPORT GeoDataSoundCue : public GeoDataTourPrimitive
 {
 public:
     GeoDataSoundCue();
     ~GeoDataSoundCue() override;
 
-    bool operator==( const GeoDataSoundCue &other ) const;
-    bool operator!=( const GeoDataSoundCue &other ) const;
+    bool operator==(const GeoDataSoundCue &other) const;
+    bool operator!=(const GeoDataSoundCue &other) const;
     const char *nodeType() const override;
 
     QString href() const;

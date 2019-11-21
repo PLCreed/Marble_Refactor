@@ -9,7 +9,6 @@
 //
 
 #include "GeoDataImagePyramid.h"
-
 #include "GeoDataTypes.h"
 
 namespace Marble
@@ -18,51 +17,51 @@ namespace Marble
 class GeoDataImagePyramidPrivate
 {
 public:
-    GeoDataImagePyramidPrivate();
-
     int m_tileSize;
     int m_maxWidth;
     int m_maxHeight;
     GeoDataImagePyramid::GridOrigin m_gridOrigin;
+
+public:
+    GeoDataImagePyramidPrivate() :
+        m_tileSize(256),
+        m_maxWidth(),
+        m_maxHeight(),
+        m_gridOrigin()
+    {
+        // nothing to do
+    }
 };
 
-GeoDataImagePyramidPrivate::GeoDataImagePyramidPrivate() :
-    m_tileSize( 256 ),
-    m_maxWidth(),
-    m_maxHeight(),
-    m_gridOrigin()
+
+GeoDataImagePyramid::GeoDataImagePyramid() : d(new GeoDataImagePyramidPrivate)
 {
     // nothing to do
 }
 
-GeoDataImagePyramid::GeoDataImagePyramid() : d( new GeoDataImagePyramidPrivate )
+GeoDataImagePyramid::GeoDataImagePyramid(const Marble::GeoDataImagePyramid &other) :
+    GeoDataObject(), d(new GeoDataImagePyramidPrivate(*other.d))
 {
     // nothing to do
 }
 
-GeoDataImagePyramid::GeoDataImagePyramid( const Marble::GeoDataImagePyramid &other ) :
-    GeoDataObject(), d( new GeoDataImagePyramidPrivate( *other.d ) )
+GeoDataImagePyramid &GeoDataImagePyramid::operator=(const GeoDataImagePyramid &other)
 {
-    // nothing to do
-}
-
-GeoDataImagePyramid &GeoDataImagePyramid::operator=( const GeoDataImagePyramid &other )
-{
-    GeoDataObject::operator=( other );
+    GeoDataObject::operator=(other);
     *d = *other.d;
     return *this;
 }
 
-bool GeoDataImagePyramid::operator==( const GeoDataImagePyramid& other ) const
+bool GeoDataImagePyramid::operator==(const GeoDataImagePyramid &other) const
 {
-    return equals(other) &&
-           d->m_tileSize == other.d->m_tileSize &&
-           d->m_maxWidth == other.d->m_maxWidth &&
-           d->m_maxHeight == other.d->m_maxHeight &&
-           d->m_gridOrigin == other.d->m_gridOrigin;
+    return equals(other)
+           && d->m_tileSize == other.d->m_tileSize
+           && d->m_maxWidth == other.d->m_maxWidth
+           && d->m_maxHeight == other.d->m_maxHeight
+           && d->m_gridOrigin == other.d->m_gridOrigin;
 }
 
-bool GeoDataImagePyramid::operator!=( const GeoDataImagePyramid& other ) const
+bool GeoDataImagePyramid::operator!=(const GeoDataImagePyramid &other) const
 {
     return !this->operator==(other);
 }

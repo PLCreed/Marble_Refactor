@@ -23,51 +23,42 @@ namespace Marble
 
 class GeoDataOverlayPrivate;
 
-/**
- */
-class GEODATA_EXPORT GeoDataOverlay: public GeoDataFeature
+class GEODATA_EXPORT GeoDataOverlay : public GeoDataFeature
 {
- public:
-    /** Constructor */
+public:
     GeoDataOverlay();
-
+    GeoDataOverlay(const GeoDataOverlay &other);
     ~GeoDataOverlay() override;
 
-    GeoDataOverlay( const GeoDataOverlay &other );
-
-    GeoDataOverlay& operator=( const GeoDataOverlay &other );
+    GeoDataOverlay &operator=(const GeoDataOverlay &other);
 
     QColor color() const;
-
-    void setColor( const QColor &color );
+    void setColor(const QColor &color);
 
     int drawOrder() const;
-
-    void setDrawOrder( int order );
+    void setDrawOrder(int order);
 
     QImage icon() const;
+    void setIcon(const QImage &icon);
 
-    void setIcon( const QImage &icon );
-
-    void setIconFile( const QString &path );
-
+    void setIconFile(const QString &path);
     QString iconFile() const;
 
     /**
-      * Returns the #iconFile as an absolute filename. Relative files are
-      * resolved relative to the directory of the GeoDataDocument this overlay
-      * is part of (@see fileName of GeoDataDocument)
-      */
+     * Returns the #iconFile as an absolute filename. Relative files are
+     * resolved relative to the directory of the GeoDataDocument this overlay
+     * is part of (@see fileName of GeoDataDocument)
+     */
     QString absoluteIconFile() const;
 
 protected:
     explicit GeoDataOverlay(GeoDataOverlayPrivate *priv);
-    GeoDataOverlay(const GeoDataOverlay& other, GeoDataOverlayPrivate *priv);
+    GeoDataOverlay(const GeoDataOverlay &other, GeoDataOverlayPrivate *priv);
 
     bool equals(const GeoDataOverlay &other) const;
     using GeoDataFeature::equals;
 
- private:
+private:
     Q_DECLARE_PRIVATE(GeoDataOverlay)
 };
 
