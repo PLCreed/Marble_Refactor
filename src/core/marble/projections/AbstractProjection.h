@@ -9,22 +9,13 @@
 // Copyright 2007-2012 Torsten Rahn  <rahn@kde.org>
 //
 
-
 #ifndef MARBLE_ABSTRACTPROJECTION_H
 #define MARBLE_ABSTRACTPROJECTION_H
 
-
-/** @file
- * This file contains the headers for AbstractProjection.
- *
- * @author Inge Wallin  <inge@lysator.liu.se>
- * @author Torsten Rahn <rahn@kde.org>
- */
-
 #include <QVector>
 
-#include "GeoDataCoordinates.h"
 #include "marble_export.h"
+#include "GeoDataCoordinates.h"
 
 class QIcon;
 class QPainterPath;
@@ -42,37 +33,35 @@ static const int latLonAltBoxSamplingRate = 4;
 class GeoDataLineString;
 class GeoDataLatLonAltBox;
 class ViewportParams;
-class AbstractProjectionPrivate;
 
+class AbstractProjectionPrivate;
 
 /**
  * @short A base class for all projections in Marble.
  */
-
 class MARBLE_EXPORT AbstractProjection
 {
     // Not a QObject so far because we don't need to send signals.
- public:
-    enum SurfaceType {
-        Cylindrical,
-        Pseudocylindrical,
-        Hybrid,
-        Conical,
-        Pseudoconical,
-        Azimuthal
+public:
+    enum SurfaceType
+    {
+        Cylindrical,        // 圆柱投影
+        Pseudocylindrical,  // 伪圆柱投影
+        Hybrid,             // 混合投影
+        Conical,            // 圆锥投影
+        Pseudoconical,      // 伪圆锥投影
+        Azimuthal           // 方位投影
     };
 
-    enum PreservationType {
-        NoPreservation,
-        Conformal,
-        EqualArea
+    enum PreservationType
+    {
+        NoPreservation, //
+        Conformal,      // 等角
+        EqualArea       // 等面积
     };
 
-    /**
-     * @brief Construct a new AbstractProjection.
-     */
+public:
     AbstractProjection();
-
     virtual ~AbstractProjection();
 
     /**
@@ -99,15 +88,15 @@ class MARBLE_EXPORT AbstractProjection
      * Example: For many projections the value will represent +90 degrees in Radian.
      * In the case of Mercator this value will equal +85.05113 degrees in Radian.
      */
-    virtual qreal  maxValidLat() const;
+    virtual qreal maxValidLat() const;
 
     /**
      * @brief Returns the arbitrarily chosen maximum (northern) latitude.
      * By default this value is equal to the value defined inside maxValidLat().
      * In general this value can only be smaller or equal to maxValidLat().
      */
-    qreal  maxLat()  const;
-    void setMaxLat( qreal maxLat );
+    qreal maxLat()  const;
+    void setMaxLat(qreal maxLat);
 
     /**
      * @brief Returns the minimum (southern) latitude that is mathematically defined and reasonable.
@@ -115,32 +104,33 @@ class MARBLE_EXPORT AbstractProjection
      * Example: For many projections the value will represent -90 degrees in Radian.
      * In the case of Mercator this value will equal -85.05113 degrees in Radian.
      */
-    virtual qreal  minValidLat() const;
+    virtual qreal minValidLat() const;
 
     /**
      * @brief Returns the arbitrarily chosen minimum (southern) latitude.
      * By default this value is equal to the value defined inside minValidLat().
      * In general this value can only be larger or equal to minValidLat().
      */
-    qreal  minLat()  const;
-    void setMinLat( qreal minLat );
+    qreal minLat()  const;
+    void setMinLat(qreal minLat);
 
     /**
      * @brief Returns whether the projection allows for wrapping in x direction (along the longitude scale).
      *
      * Example: Cylindrical projections allow for repeating.
      */
-    virtual bool   repeatableX() const;
+    virtual bool repeatableX() const;
 
     /**
      * @brief Returns whether the projection allows to navigate seamlessly "over" the pole.
      *
      * Example: Azimuthal projections.
      */
-    virtual bool   traversablePoles()  const;
-    virtual bool   traversableDateLine()  const;
+    virtual bool traversablePoles()  const;
 
-    virtual SurfaceType surfaceType() const = 0; 
+    virtual bool traversableDateLine()  const;
+
+    virtual SurfaceType surfaceType() const = 0;
 
     virtual PreservationType preservationType() const;
 
@@ -173,9 +163,12 @@ class MARBLE_EXPORT AbstractProjection
      *
      * @see ViewportParams
      */
-    bool screenCoordinates( const qreal lon, const qreal lat,
-                            const ViewportParams *viewport,
-                            qreal& x, qreal& y ) const;
+    bool screenCoordinates(const qreal lon, const qreal lat, const ViewportParams *viewport,
+                           qreal &x, qreal &y) const;
+
+    // Will just call the virtual version with a dummy globeHidesPoint.
+    bool screenCoordinates(const GeoDataCoordinates &geopoint, const ViewportParams *viewport,
+                           qreal &x, qreal &y) const;
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
@@ -191,15 +184,8 @@ class MARBLE_EXPORT AbstractProjection
      *
      * @see ViewportParams
      */
-    virtual bool screenCoordinates( const GeoDataCoordinates &geopoint, 
-                                    const ViewportParams *viewport,
-                                    qreal &x, qreal &y, 
-                                    bool &globeHidesPoint ) const = 0;
-
-    // Will just call the virtual version with a dummy globeHidesPoint.
-    bool screenCoordinates( const GeoDataCoordinates &geopoint, 
-                            const ViewportParams *viewport,
-                            qreal &x, qreal &y ) const;
+    virtual bool screenCoordinates(const GeoDataCoordinates &geopoint, const ViewportParams *viewport,
+                                   qreal &x, qreal &y, bool &globeHidesPoint) const = 0;
 
     /**
      * @brief Get the coordinates of screen points for geographical coordinates in the map.
@@ -218,15 +204,12 @@ class MARBLE_EXPORT AbstractProjection
      *
      * @see ViewportParams
      */
-    virtual bool screenCoordinates( const GeoDataCoordinates &coordinates,
-                                    const ViewportParams *viewport,
-                                    qreal *x, qreal &y, int &pointRepeatNum,
-                                    const QSizeF& size,
-                                    bool &globeHidesPoint ) const = 0;
+    virtual bool screenCoordinates(const GeoDataCoordinates &coordinates, const ViewportParams *viewport,
+                                   qreal *x, qreal &y, int &pointRepeatNum,
+                                   const QSizeF &size, bool &globeHidesPoint) const = 0;
 
-    virtual bool screenCoordinates( const GeoDataLineString &lineString,
-                            const ViewportParams *viewport,
-                            QVector<QPolygonF*> &polygons ) const = 0;
+    virtual bool screenCoordinates(const GeoDataLineString &lineString, const ViewportParams *viewport,
+                                   QVector<QPolygonF *> &polygons) const = 0;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -239,24 +222,22 @@ class MARBLE_EXPORT AbstractProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    virtual bool geoCoordinates( const int x, const int y,
-                                 const ViewportParams *viewport,
-                                 qreal& lon, qreal& lat,
-                                 GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const = 0;
-
+    virtual bool geoCoordinates(const int x, const int y, const ViewportParams *viewport,
+                                qreal &lon, qreal &lat,
+                                GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree) const = 0;
 
     /**
      * @brief Returns a GeoDataLatLonAltBox bounding box of the given screenrect inside the given viewport.
      */
-    virtual GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
-                                              const ViewportParams *viewport ) const;
+    virtual GeoDataLatLonAltBox latLonAltBox(const QRect &screenRect,
+                                             const ViewportParams *viewport) const;
 
     /**
      * @brief Returns whether the projected data fully obstructs the current viewport.
      * In this case there are no black areas visible around the actual map.
      * This case allows for performance optimizations.
      */
-    virtual bool mapCoversViewport( const ViewportParams *viewport ) const = 0;
+    virtual bool mapCoversViewport(const ViewportParams *viewport) const = 0;
 
     /**
      * @brief Returns the shape/outline of a map projection.
@@ -264,17 +245,17 @@ class MARBLE_EXPORT AbstractProjection
      *
      * Example: For an azimuthal projection a circle is returned at low zoom values.
      */
-    virtual QPainterPath mapShape( const ViewportParams *viewport ) const = 0;
+    virtual QPainterPath mapShape(const ViewportParams *viewport) const = 0;
 
-    QRegion mapRegion( const ViewportParams *viewport ) const;
+    QRegion mapRegion(const ViewportParams *viewport) const;
 
- protected:
-     const QScopedPointer<AbstractProjectionPrivate> d_ptr;
-     explicit AbstractProjection( AbstractProjectionPrivate* dd );
+protected:
+    const QScopedPointer<AbstractProjectionPrivate> d_ptr;
+    explicit AbstractProjection(AbstractProjectionPrivate *dd);
 
- private:
-     Q_DECLARE_PRIVATE(AbstractProjection)
-     Q_DISABLE_COPY( AbstractProjection )
+private:
+    Q_DECLARE_PRIVATE(AbstractProjection)
+    Q_DISABLE_COPY(AbstractProjection)
 };
 
 }

@@ -12,8 +12,7 @@
 #ifndef MARBLE_GNOMONICPROJECTION_H
 #define MARBLE_GNOMONICPROJECTION_H
 
-
-#include "AbstractProjection.h"
+#include "marble_export.h"
 #include "AzimuthalProjection.h"
 
 namespace Marble
@@ -23,18 +22,13 @@ class GnomonicProjectionPrivate;
 
 /**
  * @short A class to implement the spherical projection used by the "Globe" view.
+ *        心射切面投影
  */
-
 class GnomonicProjection : public AzimuthalProjection
 {
     // Not a QObject so far because we don't need to send signals.
- public:
-
-    /**
-     * @brief Construct a new GnomonicProjection.
-     */
+public:
     GnomonicProjection();
-
     ~GnomonicProjection() override;
 
     /**
@@ -55,6 +49,8 @@ class GnomonicProjection : public AzimuthalProjection
 
     qreal clippingRadius() const override;
 
+    using AbstractProjection::screenCoordinates;
+
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
      * @param coordinates  the coordinates of the requested pixel position
@@ -65,17 +61,15 @@ class GnomonicProjection : public AzimuthalProjection
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    bool screenCoordinates( const GeoDataCoordinates &coordinates,
-                            const ViewportParams *params,
-                            qreal &x, qreal &y, bool &globeHidesPoint ) const override;
+    bool screenCoordinates(const GeoDataCoordinates &coordinates,
+                           const ViewportParams *params,
+                           qreal &x, qreal &y, bool &globeHidesPoint) const override;
 
-    bool screenCoordinates( const GeoDataCoordinates &coordinates,
-                            const ViewportParams * viewport,
-                            qreal *x, qreal &y, int &pointRepeatNum,
-                            const QSizeF& size,
-                            bool &globeHidesPoint ) const override;
-
-    using AbstractProjection::screenCoordinates;
+    bool screenCoordinates(const GeoDataCoordinates &coordinates,
+                           const ViewportParams *viewport,
+                           qreal *x, qreal &y, int &pointRepeatNum,
+                           const QSizeF &size,
+                           bool &globeHidesPoint) const override;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -88,17 +82,17 @@ class GnomonicProjection : public AzimuthalProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool geoCoordinates( const int x, const int y,
-                         const ViewportParams *params,
-                         qreal& lon, qreal& lat,
-                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const override;
+    bool geoCoordinates(const int x, const int y,
+                        const ViewportParams *params,
+                        qreal &lon, qreal &lat,
+                        GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree) const override;
 
- protected:
-    explicit GnomonicProjection(GnomonicProjectionPrivate *dd );
+protected:
+    explicit GnomonicProjection(GnomonicProjectionPrivate *dd);
 
- private:
+private:
     Q_DECLARE_PRIVATE(GnomonicProjection)
-    Q_DISABLE_COPY( GnomonicProjection )
+    Q_DISABLE_COPY(GnomonicProjection)
 };
 
 }

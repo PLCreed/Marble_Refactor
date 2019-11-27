@@ -12,18 +12,29 @@
 #ifndef MARBLE_CYLINDRICALPROJECTIONPRIVATE_H
 #define MARBLE_CYLINDRICALPROJECTIONPRIVATE_H
 
-#include "AbstractProjection_p.h"
+#include <QPolygonF>
 
+#include "AbstractProjection_p.h"
+#include "MarbleGlobal.h"
 
 namespace Marble
 {
+
+class GeoDataCoordinates;
+class GeoDataLineString;
+class ViewportParams;
 
 class CylindricalProjection;
 
 class CylindricalProjectionPrivate : public AbstractProjectionPrivate
 {
-  public:
-    explicit CylindricalProjectionPrivate( CylindricalProjection * parent );
+public:
+    CylindricalProjection *const q_ptr;
+    Q_DECLARE_PUBLIC(CylindricalProjection)
+
+public:
+    explicit CylindricalProjectionPrivate(CylindricalProjection *parent);
+    ~CylindricalProjectionPrivate() override;
 
     // This method tessellates a line segment in a way that the line segment
     // follows great circles. The count parameter specifies the
@@ -31,48 +42,46 @@ class CylindricalProjectionPrivate : public AbstractProjectionPrivate
     // clampToGround flag is added the polygon contains count + 2
     // nodes as the clamped down start and end node get added.
 
-    int tessellateLineSegment(  const GeoDataCoordinates &aCoords,
-                                qreal ax, qreal ay,
-                                const GeoDataCoordinates &bCoords,
-                                qreal bx, qreal by,
-                                QVector<QPolygonF*> &polygons,
-                                const ViewportParams *viewport,
-                                TessellationFlags f = nullptr,
-                                int mirrorCount = 0,
-                                qreal repeatDistance = 0 ) const;
-
-    int processTessellation(   const GeoDataCoordinates &previousCoords,
-                               const GeoDataCoordinates &currentCoords,
-                               int count,
-                               QVector<QPolygonF*> &polygons,
-                               const ViewportParams *viewport,
-                               TessellationFlags f = nullptr,
-                               int mirrorCount = 0,
-                               qreal repeatDistance = 0 ) const;
-
-    static int crossDateLine( const GeoDataCoordinates & aCoord,
-                              const GeoDataCoordinates & bCoord,
-                              qreal bx,
-                              qreal by,
-                              QVector<QPolygonF*> &polygons,
-                              int mirrorCount = 0,
-                              qreal repeatDistance = 0 );
-
-    bool lineStringToPolygon( const GeoDataLineString &lineString,
+    int tessellateLineSegment(const GeoDataCoordinates &aCoords,
+                              qreal ax, qreal ay,
+                              const GeoDataCoordinates &bCoords,
+                              qreal bx, qreal by,
+                              QVector<QPolygonF *> &polygons,
                               const ViewportParams *viewport,
-                              QVector<QPolygonF*> &polygons ) const;
+                              TessellationFlags f = nullptr,
+                              int mirrorCount = 0,
+                              qreal repeatDistance = 0) const;
 
-    static void translatePolygons( const QVector<QPolygonF *> &polygons,
-                                   QVector<QPolygonF *> &translatedPolygons,
-                                   qreal xOffset );
+    int processTessellation(const GeoDataCoordinates &previousCoords,
+                            const GeoDataCoordinates &currentCoords,
+                            int count,
+                            QVector<QPolygonF *> &polygons,
+                            const ViewportParams *viewport,
+                            TessellationFlags f = nullptr,
+                            int mirrorCount = 0,
+                            qreal repeatDistance = 0) const;
 
-    void repeatPolygons( const ViewportParams *viewport,
-                         QVector<QPolygonF *> &polygons ) const;
+    static int crossDateLine(const GeoDataCoordinates &aCoord,
+                             const GeoDataCoordinates &bCoord,
+                             qreal bx,
+                             qreal by,
+                             QVector<QPolygonF *> &polygons,
+                             int mirrorCount = 0,
+                             qreal repeatDistance = 0);
 
-    qreal repeatDistance( const ViewportParams *viewport ) const;
+    bool lineStringToPolygon(const GeoDataLineString &lineString,
+                             const ViewportParams *viewport,
+                             QVector<QPolygonF *> &polygons) const;
 
-    CylindricalProjection * const q_ptr;
-    Q_DECLARE_PUBLIC( CylindricalProjection )
+    static void translatePolygons(const QVector<QPolygonF *> &polygons,
+                                  QVector<QPolygonF *> &translatedPolygons,
+                                  qreal xOffset);
+
+    void repeatPolygons(const ViewportParams *viewport,
+                        QVector<QPolygonF *> &polygons) const;
+
+    qreal repeatDistance(const ViewportParams *viewport) const;
+
 };
 
 } // namespace Marble

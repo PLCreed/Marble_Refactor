@@ -13,9 +13,7 @@
 using namespace Marble;
 
 AbstractMarbleGraphicsLayout::AbstractMarbleGraphicsLayout()
-{
-}
+{}
 
 AbstractMarbleGraphicsLayout::~AbstractMarbleGraphicsLayout()
-{
-}
+{}

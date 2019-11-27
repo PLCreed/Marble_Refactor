@@ -13,56 +13,47 @@
 #ifndef MARBLE_CYLINDRICALPROJECTION_H
 #define MARBLE_CYLINDRICALPROJECTION_H
 
-/** @file
- * This file contains the headers for CylindricalProjection.
- *
- */
-
+#include "marble_export.h"
 #include "AbstractProjection.h"
 
-namespace Marble 
+namespace Marble
 {
 
 class CylindricalProjectionPrivate;
-class AbstractProjectionPrivate;
 
 /**
  * @short A base class for the Equirectangular and Mercator projections in Marble
  */
-
 class CylindricalProjection : public AbstractProjection
 {
-    // Not a QObject so far because we don't need to send signals.	
-  public:
-	
+    // Not a QObject so far because we don't need to send signals.
+public:
     CylindricalProjection();
-
     ~CylindricalProjection() override;
 
-    bool repeatableX() const override { return true; };
+    bool repeatableX() const override { return true; }
 
     bool traversablePoles()  const override { return false; }
     bool traversableDateLine()  const override { return false; }
 
     SurfaceType surfaceType() const override { return Cylindrical; }
 
-    bool screenCoordinates( const GeoDataLineString &lineString,
-                            const ViewportParams *viewport,
-                            QVector<QPolygonF*> &polygons ) const override;
-
     using AbstractProjection::screenCoordinates;
 
-    QPainterPath mapShape( const ViewportParams *viewport ) const override;
+    bool screenCoordinates(const GeoDataLineString &lineString,
+                           const ViewportParams *viewport,
+                           QVector<QPolygonF *> &polygons) const override;
 
- protected: 
-    explicit CylindricalProjection( CylindricalProjectionPrivate* dd );
+    QPainterPath mapShape(const ViewportParams *viewport) const override;
 
- private:
-    Q_DECLARE_PRIVATE( CylindricalProjection )
-    Q_DISABLE_COPY( CylindricalProjection )
+protected:
+    explicit CylindricalProjection(CylindricalProjectionPrivate *dd);
+
+private:
+    Q_DECLARE_PRIVATE(CylindricalProjection)
+    Q_DISABLE_COPY(CylindricalProjection)
 };
 
 }
 
 #endif
-
