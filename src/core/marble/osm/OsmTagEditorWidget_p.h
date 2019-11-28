@@ -32,7 +32,6 @@ public:
     void populateCurrentTagsList();
 
 private:
-    friend class OsmTagEditorWidget;
     static QTreeWidgetItem *tagWidgetItem(const OsmTag &tag);
 
     /**
@@ -63,6 +62,9 @@ private:
      * @brief returns a list of useful, popular osm tags that currently don't have a visual category associated with them
      */
     static QVector<OsmTag> createAdditionalOsmTags();
+
+private:
+    friend class OsmTagEditorWidget;
 
     GeoDataPlacemark *m_placemark;
     static const QString m_customTagAdderText;

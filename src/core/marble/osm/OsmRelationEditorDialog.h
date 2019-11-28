@@ -6,14 +6,14 @@
 // the source code.
 //
 // Copyright 2015      Stanciu Marius-Valeriu <stanciumarius94@gmail.com>
-//
+// ss
 
 #ifndef MARBLE_OSMRELATIONEDITORDIALOG_H
 #define MARBLE_OSMRELATIONEDITORDIALOG_H
 
-#include "marble_export.h"
-
 #include <QDialog>
+
+#include "marble_export.h"
 
 class QLineEdit;
 class QDialogButtonBox;
@@ -32,16 +32,17 @@ class GeoDataPlacemark;
 class MARBLE_EXPORT OsmRelationEditorDialog : public QDialog
 {
     Q_OBJECT
-
 public:
-    explicit OsmRelationEditorDialog( OsmPlacemarkData *relationData, QWidget *parent = nullptr );
+    explicit OsmRelationEditorDialog(OsmPlacemarkData *relationData, QWidget *parent = nullptr);
     ~OsmRelationEditorDialog() override;
 
-private Q_SLOTS:
+private slots:
     void checkFields();
 
 private:
     void finish();
+
+private:
     friend class OsmRelationEditorDialogPrivate;
     QDialogButtonBox *m_buttonBox;
     QLineEdit *m_nameLineEdit;
