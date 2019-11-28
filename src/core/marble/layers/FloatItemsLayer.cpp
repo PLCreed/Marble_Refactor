@@ -17,11 +17,9 @@
 namespace Marble
 {
 
-FloatItemsLayer::FloatItemsLayer(QObject *parent) :
-    QObject(parent),
+FloatItemsLayer::FloatItemsLayer(QObject *parent) : QObject(parent),
     m_floatItems()
-{
-}
+{}
 
 QStringList FloatItemsLayer::renderPosition() const
 {
@@ -36,17 +34,21 @@ bool FloatItemsLayer::render(GeoPainter *painter,
     Q_UNUSED(renderPos)
     Q_UNUSED(layer)
 
-    for (AbstractFloatItem *item: m_floatItems) {
-        if (!item->enabled()) {
+    for (AbstractFloatItem *item: m_floatItems)
+    {
+        if (!item->enabled())
+        {
             continue;
         }
 
-        if (!item->isInitialized()) {
+        if (!item->isInitialized())
+        {
             item->initialize();
             emit renderPluginInitialized(item);
         }
 
-        if (item->visible()) {
+        if (item->visible())
+        {
             item->paintEvent(painter, viewport);
         }
     }
@@ -59,13 +61,13 @@ void FloatItemsLayer::addFloatItem(AbstractFloatItem *floatItem)
     Q_ASSERT(floatItem && "must not add a null float item to FloatItemsLayer");
 
     connect(floatItem, SIGNAL(settingsChanged(QString)),
-            this,      SIGNAL(pluginSettingsChanged()));
+            this, SIGNAL(pluginSettingsChanged()));
     connect(floatItem, SIGNAL(repaintNeeded(QRegion)),
-            this,      SIGNAL(repaintNeeded(QRegion)));
+            this, SIGNAL(repaintNeeded(QRegion)));
     connect(floatItem, SIGNAL(visibilityChanged(bool,QString)),
-            this,      SLOT(updateVisibility(bool,QString)));
+            this, SLOT(updateVisibility(bool,QString)));
 
-    m_floatItems.append( floatItem );
+    m_floatItems.append(floatItem);
 }
 
 QList<AbstractFloatItem *> FloatItemsLayer::floatItems() const

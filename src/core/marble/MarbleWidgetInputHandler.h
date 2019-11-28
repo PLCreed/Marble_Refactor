@@ -33,7 +33,7 @@ public:
 
     void setDebugModeEnabled(bool enabled);
 
-private Q_SLOTS:
+private slots:
     void installPluginEventFilter(RenderPlugin *renderPlugin) override;
     void showLmbMenu(int x, int y) override;
     void showRmbMenu(int x, int y) override;

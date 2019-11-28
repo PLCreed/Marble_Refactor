@@ -46,15 +46,15 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
     void setMarbleModel( MarbleModel *marbleModel );
     QSize sizeHint() const override;
 
- Q_SIGNALS:
+ signals:
     void toggledShowProperty( const QString&, bool );
     void tourLinkClicked( const QString &url );
 
- public Q_SLOTS:
+ public slots:
     void setCheckedProperty( const QString& name, bool checked );
     void setRadioCheckedProperty( const QString& value,const QString& name, bool checked );
 
- private Q_SLOTS:
+ private slots:
     void initTheme();
     void loadLegend();
     void openLinkExternally( const QUrl &url );
@@ -79,7 +79,7 @@ class MarbleJsWrapper : public QObject
 public:
     explicit MarbleJsWrapper( MarbleLegendBrowser* parent ) : m_parent(parent) {}
 
-public Q_SLOTS:
+public slots:
     void setCheckedProperty( const QString& name, bool checked )
     {
         m_parent->setCheckedProperty(name, checked);

@@ -51,7 +51,7 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
 
     QString lastSavePath() const;
 
- public Q_SLOTS:
+ public slots:
      /// Slot that decides whether recentering should be done
     void setRecenterMode( int recenterMode );
 

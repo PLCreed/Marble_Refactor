@@ -12,11 +12,11 @@
 #ifndef SCREENOVERLAYGRAPHICSITEM_H
 #define SCREENOVERLAYGRAPHICSITEM_H
 
-#include "GeoDataVec2.h"
-#include "ScreenGraphicsItem.h"
-#include "marble_export.h"
-
 #include <QPixmap>
+
+#include "marble_export.h"
+#include "ScreenGraphicsItem.h"
+#include "GeoDataVec2.h"
 
 namespace Marble {
 
@@ -25,17 +25,17 @@ class GeoDataScreenOverlay;
 class MARBLE_EXPORT ScreenOverlayGraphicsItem : public ScreenGraphicsItem
 {
 public:
-    explicit ScreenOverlayGraphicsItem( const GeoDataScreenOverlay *screenOverlay );
+    explicit ScreenOverlayGraphicsItem(const GeoDataScreenOverlay *screenOverlay);
 
-    const GeoDataScreenOverlay* screenOverlay() const;
+    const GeoDataScreenOverlay *screenOverlay() const;
 
-    void setProjection( const ViewportParams *viewport ) override;
+    void setProjection(const ViewportParams *viewport) override;
 
 protected:
-    void paint( QPainter* painter ) override;
+    void paint(QPainter *painter) override;
 
 private:
-    static qreal pixelValue( GeoDataVec2::Unit unit, qreal screenSize, qreal imageSize, qreal value );
+    static qreal pixelValue(GeoDataVec2::Unit unit, qreal screenSize, qreal imageSize, qreal value);
 
     const GeoDataScreenOverlay *m_screenOverlay;
 

@@ -32,7 +32,7 @@ class ViewportParams;
     {
     Q_OBJECT
 
-    Q_SIGNALS:
+    signals:
         void zoomChanged(int zoom);
         void distanceChanged(const QString& distanceString);
 
@@ -114,7 +114,7 @@ class ViewportParams;
         ViewportParams *viewport();
         const ViewportParams* viewport() const;
 
-    public Q_SLOTS:
+    public slots:
         void rotateBy(const qreal deltaLon, const qreal deltaLat, FlyToMode mode = Instant);
         void flyTo(const GeoDataLookAt &newLookAt, FlyToMode mode = Automatic);
         void goHome(FlyToMode mode = Automatic);

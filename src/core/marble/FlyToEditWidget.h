@@ -36,16 +36,16 @@ public:
     FlyToEditWidget( const QModelIndex& index, MarbleWidget* widget, QWidget* parent=nullptr );
     bool editable() const;
 
-Q_SIGNALS:
+signals:
     void editingDone( const QModelIndex& index );
 
-public Q_SLOTS:
+public slots:
     void setEditable( bool editable );
 
     /** We disable editing of wait duration for first flyto in playlist. */
     void setFirstFlyTo(const QPersistentModelIndex &index );
 
-private Q_SLOTS:
+private slots:
     void save();
     void updateCoordinates();
 

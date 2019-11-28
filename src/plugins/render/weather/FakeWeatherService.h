@@ -24,7 +24,7 @@ class FakeWeatherService : public AbstractWeatherService
     explicit FakeWeatherService( const MarbleModel *model, QObject *parent );
     ~FakeWeatherService() override;
     
- public Q_SLOTS:
+ public slots:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
                              qint32 number = 10 ) override;
     void getItem( const QString &id ) override;

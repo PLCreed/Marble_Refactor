@@ -11,14 +11,14 @@
 #ifndef MARBLE_DECLARATIVE_PLUGIN_H
 #define MARBLE_DECLARATIVE_PLUGIN_H
 
-#include "marble_declarative_export.h"
-
 #include <QQmlExtensionPlugin>
 
+#include "marble_declarative_export.h"
+
 /**
-  * Registers MarbleQuickItem, MarbleRunnerManager and MarbleThemeManager
-  * as QQml extensions for use in QML.
-  */
+ * Registers MarbleQuickItem, MarbleRunnerManager and MarbleThemeManager
+ * as QQml extensions for use in QML.
+ */
 class MARBLE_DECLARATIVE_EXPORT MarbleDeclarativePlugin : public QQmlExtensionPlugin
 {
     // Disabled for now while libmarbledeclarative is used as shared library
@@ -26,9 +26,9 @@ class MARBLE_DECLARATIVE_EXPORT MarbleDeclarativePlugin : public QQmlExtensionPl
     Q_OBJECT
 public:
     /** Overriding QQmlExtensionPlugin to register types */
-    void registerTypes( const char *uri ) override;
+    void registerTypes(const char *uri) override;
 
-    void initializeEngine( QQmlEngine *engine, const char *) override;
+    void initializeEngine(QQmlEngine *engine, const char *) override;
 };
 
 #endif

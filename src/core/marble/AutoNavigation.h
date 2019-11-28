@@ -66,7 +66,7 @@ public:
 
      bool autoZoom() const;
 
-public Q_SLOTS:
+public slots:
 
     /**
      * @brief For adjusting the gps location (recentering) or map(autozooming)
@@ -80,7 +80,7 @@ public Q_SLOTS:
      */
     void inhibitAutoAdjustments();
 
-Q_SIGNALS:
+signals:
     /**
      * signal emitted when auto center is turned on (Always re-center, re-center when required ) or off(Disabled)
      * @param recenterMode the mode for re-centering selected

@@ -11,31 +11,31 @@
 #ifndef MARBLE_RENDERSTATE_H
 #define MARBLE_RENDERSTATE_H
 
+#include <QDebug>
+
 #include "marble_export.h"
 #include "MarbleGlobal.h"
-
-#include <QDebug>
 
 namespace Marble {
 
 class MARBLE_EXPORT RenderState
 {
 public:
-    explicit RenderState( const QString &name = QString(), RenderStatus status=Complete );
-    RenderState( const RenderState &other );
-    RenderState& operator=( const RenderState &other );
+    explicit RenderState(const QString &name = QString(), RenderStatus status = Complete);
+    RenderState(const RenderState &other);
+    RenderState &operator=(const RenderState &other);
     ~RenderState();
 
     RenderStatus status() const;
     QString name() const;
     int children() const;
-    RenderState childAt( int index ) const;
-    void addChild( const RenderState& child );
+    RenderState childAt(int index) const;
+    void addChild(const RenderState &child);
     operator QString() const;
 
 private:
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 } // namespace Marble

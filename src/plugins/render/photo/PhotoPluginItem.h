@@ -67,7 +67,7 @@ class PhotoPluginItem : public AbstractDataPluginItem
     
     QAction *action() override;
     
- public Q_SLOTS:
+ public slots:
     void openBrowser();
     
  private:

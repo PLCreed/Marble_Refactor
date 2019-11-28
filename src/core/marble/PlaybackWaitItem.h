@@ -31,7 +31,7 @@ public:
     void seek( double position ) override;
     void stop() override;
 
-private Q_SLOTS:
+private slots:
     void playNext();
 
 private:

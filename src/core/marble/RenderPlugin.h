@@ -202,7 +202,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 
     QString runtimeTrace() const override;
 
- public Q_SLOTS:
+ public slots:
     /**
      * @brief setting enabled
      *
@@ -286,7 +286,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      */
     QAction *action() const;
 
- Q_SIGNALS:
+ signals:
     /**
      * This signal is emitted if the visibility is changed with @see setVisible
      */

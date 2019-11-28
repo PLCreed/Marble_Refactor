@@ -38,7 +38,7 @@ class FileLoader : public QThread
         GeoDataDocument *document();
         QString error() const;
 
-    Q_SIGNALS:
+    signals:
         void loaderFinished( FileLoader* );
         void newGeoDataDocumentAdded( GeoDataDocument* );
 

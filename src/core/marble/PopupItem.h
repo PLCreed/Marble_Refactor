@@ -123,7 +123,7 @@ public:
 
     void clearHistory();
 
-private Q_SLOTS:
+private slots:
     /**
      * @brief Marks cache as dirty and tells the world its need for repainting.
      */
@@ -173,7 +173,7 @@ private Q_SLOTS:
 protected:
     void paint( QPainter *painter ) override;
 
-Q_SIGNALS:
+signals:
     void repaintNeeded();
     void hide();
 

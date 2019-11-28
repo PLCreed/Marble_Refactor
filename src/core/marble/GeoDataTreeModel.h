@@ -76,7 +76,7 @@ class MARBLE_EXPORT GeoDataTreeModel : public QAbstractItemModel
 
     GeoDataDocument *rootDocument();
 
-public Q_SLOTS:
+public slots:
 
     /**
       * Sets the root document to use. This replaces previously loaded data, if any.
@@ -103,7 +103,7 @@ public Q_SLOTS:
     bool removeTourPrimitive( const QModelIndex &parent, int index );
     bool swapTourPrimitives( const QModelIndex &parent, int indexA, int indexB );
 
-Q_SIGNALS:
+signals:
     /// insert and remove row don't trigger any signal that proxies forward
     /// this signal will refresh geometry layer and placemark layout
     void removed( GeoDataObject *object );

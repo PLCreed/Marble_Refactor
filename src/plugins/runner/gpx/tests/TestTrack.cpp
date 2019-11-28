@@ -29,7 +29,7 @@ using namespace Marble;
 class TestTrack : public QObject
 {
     Q_OBJECT
-private Q_SLOTS:
+private slots:
     void initTestCase();
     void simpleParseTest();
     void withoutTimeTest();

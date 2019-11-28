@@ -11,11 +11,12 @@
 #ifndef MARBLE_ROUTESEGMENT_H
 #define MARBLE_ROUTESEGMENT_H
 
+#include <QtGlobal>
+
+#include "marble_export.h"
 #include "Maneuver.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLatLonBox.h"
-
-#include <QtGlobal>
 
 namespace Marble
 {
@@ -29,38 +30,41 @@ public:
 
     qreal distance() const;
 
-    const Maneuver & maneuver() const;
+    const Maneuver &maneuver() const;
 
-    void setManeuver( const Maneuver &maneuver );
+    void setManeuver(const Maneuver &maneuver);
 
-    const GeoDataLineString & path() const;
+    const GeoDataLineString &path() const;
 
-    void setPath( const GeoDataLineString &path );
+    void setPath(const GeoDataLineString &path);
 
     int travelTime() const;
 
-    void setTravelTime( int seconds );
+    void setTravelTime(int seconds);
 
     GeoDataLatLonBox bounds() const;
 
-    const RouteSegment & nextRouteSegment() const;
+    const RouteSegment &nextRouteSegment() const;
 
-    void setNextRouteSegment( const RouteSegment* segment );
+    void setNextRouteSegment(const RouteSegment *segment);
 
-    qreal distanceTo( const GeoDataCoordinates &point, GeoDataCoordinates &closest, GeoDataCoordinates &interpolated ) const;
+    qreal distanceTo(const GeoDataCoordinates &point, GeoDataCoordinates &closest,
+                     GeoDataCoordinates &interpolated) const;
 
-    qreal minimalDistanceTo( const GeoDataCoordinates &point ) const;
+    qreal minimalDistanceTo(const GeoDataCoordinates &point) const;
 
     qreal projectedDirection(const GeoDataCoordinates &point) const;
 
-    bool operator==( const RouteSegment &other ) const;
+    bool operator==(const RouteSegment &other) const;
 
-    bool operator!=( const RouteSegment &other ) const;
+    bool operator!=(const RouteSegment &other) const;
 
 private:
-    static qreal distancePointToLine(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b);
+    static qreal distancePointToLine(const GeoDataCoordinates &p, const GeoDataCoordinates &a,
+                                     const GeoDataCoordinates &b);
 
-    static GeoDataCoordinates projected(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b);
+    static GeoDataCoordinates projected(const GeoDataCoordinates &p, const GeoDataCoordinates &a,
+                                        const GeoDataCoordinates &b);
 
     bool m_valid;
 

@@ -35,14 +35,14 @@ public:
     PlaybackItem* at( int i );
     double currentPosition();
 
-Q_SIGNALS:
+signals:
     void centerOn( const GeoDataCoordinates &coordinates );
     void progressChanged( double );
     void finished();
     void paused();
     void itemFinished( int index );
 
-public Q_SLOTS:
+public slots:
     void handleFinishedItem();
     void changeProgress( double );
     void pause();

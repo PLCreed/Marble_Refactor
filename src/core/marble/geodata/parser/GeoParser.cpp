@@ -17,18 +17,18 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 
 // Own
 #include "GeoParser.h"
 
-// Marble
-#include "MarbleDebug.h"
-
 // Geodata
 #include "GeoDocument.h"
 #include "GeoTagHandler.h"
+
+// Marble
+#include "MarbleDebug.h"
 
 namespace Marble
 {
@@ -36,12 +36,10 @@ namespace Marble
 // Set to a value greater than 0, to dump parent node chain while parsing
 #define DUMP_PARENT_STACK 0
 
-GeoParser::GeoParser( GeoDataGenericSourceType source )
-    : QXmlStreamReader(),
-      m_document( nullptr ),
-      m_source( source )
-{
-}
+GeoParser::GeoParser(GeoDataGenericSourceType source) : QXmlStreamReader(),
+    m_document(nullptr),
+    m_source(source)
+{}
 
 GeoParser::~GeoParser()
 {
@@ -49,65 +47,73 @@ GeoParser::~GeoParser()
 }
 
 #if DUMP_PARENT_STACK > 0
-static void dumpParentStack( const QString& name, int size, bool close )
+static void dumpParentStack(const QString &name, int size, bool close)
 {
     static int depth = 0;
 
-    if ( !close )
+    if (!close)
         depth++;
 
     QString result;
-    for ( int i = 0; i < depth; ++i )
+    for (int i = 0; i < depth; ++i)
         result += QLatin1Char(' ');
 
-    if ( close ) {
+    if (close)
+    {
         depth--;
         result += QLatin1String("</");
-    } else
+    }
+    else
         result += QLatin1Char('<');
 
     result += name + QLatin1String("> stack size ") + QString::number(size);
-    fprintf( stderr, "%s\n", qPrintable( result ));
+    fprintf(stderr, "%s\n", qPrintable(result));
 }
 #endif
 
-bool GeoParser::read( QIODevice* device )
+bool GeoParser::read(QIODevice *device)
 {
     // Assert previous document got released.
-    Q_ASSERT( !m_document );
+    Q_ASSERT(!m_document);
     m_document = createDocument();
-    Q_ASSERT( m_document );
+    Q_ASSERT(m_document);
 
     // Set data source
-    setDevice( device );
+    setDevice(device);
 
     // Start parsing
-    while ( !atEnd() ) {
+    while (!atEnd())
+    {
         readNext();
 
-        if ( isStartElement() ) {
-            if ( isValidRootElement() ) {
+        if (isStartElement())
+        {
+            if (isValidRootElement())
+            {
 #if DUMP_PARENT_STACK > 0
-                dumpParentStack( name().toString(), m_nodeStack.size(), false );
+                dumpParentStack(name().toString(), m_nodeStack.size(), false);
 #endif
- 
+
                 parseDocument();
 
-                if ( !m_nodeStack.isEmpty() )
+                if (!m_nodeStack.isEmpty())
                     raiseError(
                         // Keep trailing space in both strings, to match translated string
                         // TODO: check if that space is kept through the tool pipeline
-                        //~ singular Parsing failed line %1. Still %n unclosed tag after document end. 
-                        //~ plural Parsing failed line %1. Still %n unclosed tags after document end. 
+                        // ~ singular Parsing failed line %1. Still %n unclosed tag after document end.
+                        // ~ plural Parsing failed line %1. Still %n unclosed tags after document end.
                         QObject::tr("Parsing failed line %1. Still %n unclosed tag(s) after document end. ", "",
-                                     m_nodeStack.size() ).arg( lineNumber() ) + errorString());
-            } else
+                                    m_nodeStack.size()).arg(lineNumber()) + errorString());
+            }
+            else
                 return false;
         }
     }
 
-    if ( error() ) {
-        if ( lineNumber() == 1) {
+    if (error())
+    {
+        if (lineNumber() == 1)
+        {
             raiseError(QString());
         }
         // Defer the deletion to the dtor
@@ -118,16 +124,16 @@ bool GeoParser::read( QIODevice* device )
     return !error();
 }
 
-bool GeoParser::isValidElement( const QString& tagName ) const
+bool GeoParser::isValidElement(const QString &tagName) const
 {
     return name() == tagName;
 }
 
-GeoStackItem GeoParser::parentElement( unsigned int depth ) const
+GeoStackItem GeoParser::parentElement(unsigned int depth) const
 {
     QStack<GeoStackItem>::const_iterator it = m_nodeStack.constEnd() - 1;
 
-    if ( it - depth < m_nodeStack.constBegin() )
+    if (it - depth < m_nodeStack.constBegin())
         return GeoStackItem();
 
     return *(it - depth);
@@ -135,23 +141,25 @@ GeoStackItem GeoParser::parentElement( unsigned int depth ) const
 
 void GeoParser::parseDocument()
 {
-    if( !isStartElement() ) {
-        raiseError( QObject::tr("Error parsing file at line: %1 and column %2 . ")
-                    .arg( lineNumber() ).arg( columnNumber() )
-                    +  QObject::tr("This is an Invalid File") );
+    if (!isStartElement())
+    {
+        raiseError(QObject::tr("Error parsing file at line: %1 and column %2 . ")
+                   .arg(lineNumber()).arg(columnNumber())
+                   + QObject::tr("This is an Invalid File"));
         return;
     }
 
     bool processChildren = true;
-    QualifiedName qName( name().toString(), namespaceUri().toString() );
+    QualifiedName qName(name().toString(), namespaceUri().toString());
 
-    if( tokenType() == QXmlStreamReader::Invalid )
-        raiseWarning( QString( "%1: %2" ).arg( error() ).arg( errorString() ) );
+    if (tokenType() == QXmlStreamReader::Invalid)
+        raiseWarning(QString("%1: %2").arg(error()).arg(errorString()));
 
-    GeoStackItem stackItem( qName, nullptr );
+    GeoStackItem stackItem(qName, nullptr);
 
-    if ( const GeoTagHandler* handler = GeoTagHandler::recognizes( qName )) {
-        stackItem.assignNode( handler->parse( *this ));
+    if (const GeoTagHandler *handler = GeoTagHandler::recognizes(qName))
+    {
+        stackItem.assignNode(handler->parse(*this));
         processChildren = !isEndElement();
     }
     // Only add GeoStackItem to the parent chain, if the tag handler
@@ -162,30 +170,35 @@ void GeoParser::parseDocument()
     // readElementText(). This implicates that tags like <name>
     // don't contain any children that would need to be processed using
     // this parseDocument() function.
-    if ( processChildren ) {
-        m_nodeStack.push( stackItem );
+    if (processChildren)
+    {
+        m_nodeStack.push(stackItem);
 #if DUMP_PARENT_STACK > 0
-        dumpParentStack( name().toString(), m_nodeStack.size(), false );
+        dumpParentStack(name().toString(), m_nodeStack.size(), false);
 #endif
-        while ( !atEnd() ) {
+        while (!atEnd())
+        {
             readNext();
-            if ( isEndElement() ) {
+            if (isEndElement())
+            {
                 m_nodeStack.pop();
 #if DUMP_PARENT_STACK > 0
-                dumpParentStack( name().toString(), m_nodeStack.size(), true );
+                dumpParentStack(name().toString(), m_nodeStack.size(), true);
 #endif
                 break;
             }
 
-            if ( isStartElement() ) {
+            if (isStartElement())
+            {
                 parseDocument();
             }
         }
     }
 #if DUMP_PARENT_STACK > 0
-    else {
+    else
+    {
         // This is only used for debugging purposes.
-        m_nodeStack.push( stackItem );
+        m_nodeStack.push(stackItem);
         dumpParentStack(name().toString() + QLatin1String("-discarded"), m_nodeStack.size(), false);
 
         m_nodeStack.pop();
@@ -194,21 +207,21 @@ void GeoParser::parseDocument()
 #endif
 }
 
-void GeoParser::raiseWarning( const QString& warning )
+void GeoParser::raiseWarning(const QString &warning)
 {
     // TODO: Maybe introduce a strict parsing mode where we feed the warning to
     // raiseError() (which stops parsing).
     mDebug() << "[GeoParser::raiseWarning] -> " << warning;
 }
 
-QString GeoParser::attribute( const char* attributeName ) const
+QString GeoParser::attribute(const char *attributeName) const
 {
     return attributes().value(QLatin1String(attributeName)).toString();
 }
 
-GeoDocument* GeoParser::releaseDocument()
+GeoDocument *GeoParser::releaseDocument()
 {
-    GeoDocument* document = m_document;
+    GeoDocument *document = m_document;
     m_document = nullptr;
     return document;
 }

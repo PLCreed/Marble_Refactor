@@ -38,7 +38,7 @@ public:
     // Overriding MarbleAbstractRunner
     void reverseGeocoding( const GeoDataCoordinates &coordinates ) override;
 
-private Q_SLOTS:
+private slots:
     // Forward a result to the search or reverse geocoding handler
     void handleResult( QNetworkReply* );
 

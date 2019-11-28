@@ -24,7 +24,7 @@ public:
     explicit NavigationSlider( QWidget *parent = nullptr );
     ~NavigationSlider() override;
 
-Q_SIGNALS:
+signals:
     void repaintNeeded();
 
 protected:

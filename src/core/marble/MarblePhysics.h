@@ -45,7 +45,7 @@ class MarblePhysics : public QObject
       */
     void flyTo( const GeoDataLookAt &target, FlyToMode mode = Instant );
 
-private Q_SLOTS:
+private slots:
     void updateProgress(qreal progress);
 
     /**

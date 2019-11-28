@@ -25,18 +25,19 @@ namespace Marble
 
 class SunLocator;
 
-class SunLightBlending: public Blending
+class SunLightBlending : public Blending
 {
- public:
-    explicit SunLightBlending( const SunLocator * sunLocator );
+public:
+    explicit SunLightBlending(const SunLocator *sunLocator);
     ~SunLightBlending() override;
-    void blend( QImage * const bottom, TextureTile const * const top ) const override;
 
-    void setLevelZeroLayout( int levelZeroColumns, int levelZeroRows );
+    void blend(QImage *const bottom, TextureTile const *const top) const override;
 
- private:
-    static int maxDivisor( int maximum, int fullLength );
-    const SunLocator * const m_sunLocator;
+    void setLevelZeroLayout(int levelZeroColumns, int levelZeroRows);
+
+private:
+    static int maxDivisor(int maximum, int fullLength);
+    const SunLocator *const m_sunLocator;
     int m_levelZeroColumns;
     int m_levelZeroRows;
 };

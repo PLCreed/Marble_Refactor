@@ -41,7 +41,7 @@ public:
     qreal height( qreal lon, qreal lat ) const;
     QVector<GeoDataCoordinates> heightProfile( qreal fromLon, qreal fromLat, qreal toLon, qreal toLat ) const;
 
-Q_SIGNALS:
+signals:
     /**
      * Elevation tiles loaded. You will get more accurate results when querying height
      * for at least one that was queried before.

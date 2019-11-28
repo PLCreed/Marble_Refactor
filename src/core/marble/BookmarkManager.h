@@ -112,10 +112,10 @@ class MARBLE_EXPORT BookmarkManager : public QObject
      */
     void setStyleBuilder(const StyleBuilder* styleBuilder);
 
-public Q_SLOTS:
+public slots:
     void setShowBookmarks( bool visible );
 
-Q_SIGNALS:
+signals:
     /** One or more bookmarks were added or removed */
     void bookmarksChanged();
 

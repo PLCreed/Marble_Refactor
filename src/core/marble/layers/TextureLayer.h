@@ -11,9 +11,9 @@
 #ifndef MARBLE_MARBLETEXTURELAYER_H
 #define MARBLE_MARBLETEXTURELAYER_H
 
-#include "LayerInterface.h"
 #include <QObject>
 
+#include "LayerInterface.h"
 #include "MarbleGlobal.h"
 
 class QAbstractItemModel;
@@ -38,19 +38,17 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 
- public:
-    TextureLayer( HttpDownloadManager *downloadManager,
-                  PluginManager* pluginManager,
-                  const SunLocator *sunLocator,
-                  QAbstractItemModel *groundOverlayModel );
+public:
+    TextureLayer(HttpDownloadManager *downloadManager, PluginManager *pluginManager,
+                 const SunLocator *sunLocator, QAbstractItemModel *groundOverlayModel);
 
     ~TextureLayer() override;
 
     QStringList renderPosition() const override;
 
-    void addSeaDocument( const GeoDataDocument *seaDocument );
+    void addSeaDocument(const GeoDataDocument *seaDocument);
 
-    void addLandDocument( const GeoDataDocument *landDocument );
+    void addLandDocument(const GeoDataDocument *landDocument);
 
     int textureLayerCount() const;
 
@@ -82,62 +80,63 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
 
     const GeoSceneAbstractTileProjection *tileProjection() const;
 
-    int tileColumnCount( int level ) const;
-    int tileRowCount( int level ) const;
+    int tileColumnCount(int level) const;
+    int tileRowCount(int level) const;
 
     quint64 volatileCacheLimit() const;
 
-    int preferredRadiusCeil( int radius ) const;
-    int preferredRadiusFloor( int radius ) const;
+    int preferredRadiusCeil(int radius) const;
+    int preferredRadiusFloor(int radius) const;
 
     RenderState renderState() const override;
 
     QString runtimeTrace() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString &renderPos = QLatin1String("NONE"),
-                         GeoSceneLayer *layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport,
+                const QString &renderPos = QLatin1String("NONE"),
+                GeoSceneLayer *layer = nullptr) override;
 
-public Q_SLOTS:
-    void setShowRelief( bool show );
+public slots:
+    void setShowRelief(bool show);
 
-    void setShowSunShading( bool show );
+    void setShowSunShading(bool show);
 
-    void setShowCityLights( bool show );
+    void setShowCityLights(bool show);
 
-    void setShowTileId( bool show );
+    void setShowTileId(bool show);
 
     /**
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
-    void setProjection( Projection projection );
+    void setProjection(Projection projection);
 
     void setNeedsUpdate();
 
-    void setMapTheme( const QVector<const GeoSceneTextureTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
+    void setMapTheme(const QVector<const GeoSceneTextureTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile,
+                     const QString &landFile);
 
-    void setVolatileCacheLimit( quint64 kilobytes );
+    void setVolatileCacheLimit(quint64 kilobytes);
 
     void reset();
 
     void reload();
 
-    void downloadStackedTile( const TileId &stackedTileId );
+    void downloadStackedTile(const TileId &stackedTileId);
 
- Q_SIGNALS:
-    void tileLevelChanged( int );
+signals:
+    void tileLevelChanged(int);
     void repaintNeeded();
 
- private:
-    Q_PRIVATE_SLOT( d, void requestDelayedRepaint() )
-    Q_PRIVATE_SLOT( d, void updateTextureLayers() )
-    Q_PRIVATE_SLOT( d, void updateTile( const TileId &tileId, const QImage &tileImage ) )
-    Q_PRIVATE_SLOT( d, void addGroundOverlays( const QModelIndex& parent, int first, int last ) )
-    Q_PRIVATE_SLOT( d, void removeGroundOverlays( const QModelIndex& parent, int first, int last ) )
-    Q_PRIVATE_SLOT( d, void resetGroundOverlaysCache() )
+private:
+    Q_PRIVATE_SLOT(d, void requestDelayedRepaint())
+    Q_PRIVATE_SLOT(d, void updateTextureLayers())
+    Q_PRIVATE_SLOT(d, void updateTile(const TileId &tileId, const QImage &tileImage))
+    Q_PRIVATE_SLOT(d, void addGroundOverlays(const QModelIndex &parent, int first, int last))
+    Q_PRIVATE_SLOT(d, void removeGroundOverlays(const QModelIndex &parent, int first, int last))
+    Q_PRIVATE_SLOT(d, void resetGroundOverlaysCache())
 
- private:
+private:
     class Private;
     Private *const d;
 };

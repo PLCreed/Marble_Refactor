@@ -40,7 +40,7 @@ class PluginItemDelegate : public QAbstractItemDelegate
     void setAboutIcon( const QIcon& icon );
     void setConfigIcon( const QIcon& icon );
     
- Q_SIGNALS:
+ signals:
     /**
      * This signal is emitted if the user clicks on a "about"-button of an item in the view
      * passed to the constructor.

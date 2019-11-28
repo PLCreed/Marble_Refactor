@@ -118,7 +118,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
                            int start,
                            int length );
 
-Q_SIGNALS:
+signals:
     void countChanged();
 
  private:

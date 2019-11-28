@@ -17,7 +17,7 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #include "GeoSceneIcon.h"
 
@@ -26,21 +26,19 @@
 namespace Marble
 {
 
-GeoSceneIcon::GeoSceneIcon()
-    : m_color()
-{
-}
+GeoSceneIcon::GeoSceneIcon() :
+    m_color()
+{}
 
 GeoSceneIcon::~GeoSceneIcon()
-{
-}
+{}
 
 QString GeoSceneIcon::pixmap() const
 {
     return m_pixmap;
 }
 
-void GeoSceneIcon::setPixmap( const QString& pixmap )
+void GeoSceneIcon::setPixmap(const QString &pixmap)
 {
     m_pixmap = pixmap;
 }
@@ -50,7 +48,7 @@ QColor GeoSceneIcon::color() const
     return m_color;
 }
 
-void GeoSceneIcon::setColor( const QColor& color )
+void GeoSceneIcon::setColor(const QColor &color)
 {
     m_color = color;
 }

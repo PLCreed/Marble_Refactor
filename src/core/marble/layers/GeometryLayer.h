@@ -14,6 +14,7 @@
 #define MARBLE_GEOMETRYLAYER_H
 
 #include <QObject>
+
 #include "LayerInterface.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataRelation.h"
@@ -42,17 +43,17 @@ public:
 
     QStringList renderPosition() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString& renderPos = QLatin1String("NONE"),
-                         GeoSceneLayer * layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport,
+                const QString &renderPos = QLatin1String("NONE"),
+                GeoSceneLayer *layer = nullptr) override;
 
     RenderState renderState() const override;
 
     QString runtimeTrace() const override;
 
-    bool hasFeatureAt(const QPoint& curpos, const ViewportParams * viewport);
+    bool hasFeatureAt(const QPoint &curpos, const ViewportParams *viewport);
 
-    QVector<const GeoDataFeature*> whichFeatureAt( const QPoint& curpos, const ViewportParams * viewport );
+    QVector<const GeoDataFeature *> whichFeatureAt(const QPoint &curpos, const ViewportParams *viewport);
 
     void highlightRouteRelation(qint64 osmId, bool enabled);
 
@@ -66,9 +67,9 @@ public:
 
     int debugLevelTag() const;
 
-public Q_SLOTS:
-    void addPlacemarks( const QModelIndex& index, int first, int last );
-    void removePlacemarks( const QModelIndex& index, int first, int last );
+public slots:
+    void addPlacemarks(const QModelIndex &index, int first, int last);
+    void removePlacemarks(const QModelIndex &index, int first, int last);
     void resetCacheData();
     void setTileLevel(int tileLevel);
 
@@ -81,9 +82,9 @@ public Q_SLOTS:
      * placemarks will be fletered out in GeoGraphicsScene
      * and will not be highlighted.
      */
-    void handleHighlight( qreal lon, qreal lat, GeoDataCoordinates::Unit unit );
+    void handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Unit unit);
 
-Q_SIGNALS:
+signals:
     void repaintNeeded();
 
     /**
@@ -93,7 +94,7 @@ Q_SIGNALS:
      * in GeoGraphicsScene which will query for placemark->styleUrl()
      * to decide whether the placemark should be highlighted ot not.
      */
-    void highlightedPlacemarksChanged( const QVector<GeoDataPlacemark*>& clickedPlacemarks );
+    void highlightedPlacemarksChanged(const QVector<GeoDataPlacemark *> &clickedPlacemarks);
 
 private:
     GeometryLayerPrivate *d;

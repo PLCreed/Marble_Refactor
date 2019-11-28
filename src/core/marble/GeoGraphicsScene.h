@@ -77,10 +77,10 @@ public:
 
     void resetStyle();
 
-public Q_SLOTS:
+public slots:
     void applyHighlight( const QVector<GeoDataPlacemark*>& );
 
-Q_SIGNALS:
+signals:
     void repaintNeeded();
 
 private:

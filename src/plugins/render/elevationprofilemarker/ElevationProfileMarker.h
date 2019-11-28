@@ -68,7 +68,7 @@ class ElevationProfileMarker : public RenderPlugin
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos, GeoSceneLayer *layer = nullptr ) override;
 
- private Q_SLOTS:
+ private slots:
     void onGeoObjectAdded( GeoDataObject *object );
     void onGeoObjectRemoved( GeoDataObject *object );
 

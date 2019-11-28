@@ -52,7 +52,7 @@ public:
     int updateInterval() const;
     bool hasVelocity() const;
 
-public Q_SLOTS:
+public slots:
     void setDuration(int ms);
     void setPosition(const QPointF& position);
     void setPosition(qreal posX, qreal posY);
@@ -63,12 +63,12 @@ public Q_SLOTS:
     void stop();
     void start();
 
-Q_SIGNALS:
+signals:
     void positionChanged( qreal lon, qreal lat );
     void headingChanged( qreal heading );
     void finished();
 
-private Q_SLOTS:
+private slots:
     void update();
 
 private:

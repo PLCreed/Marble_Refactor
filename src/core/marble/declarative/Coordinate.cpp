@@ -9,19 +9,18 @@
 //
 
 #include "Coordinate.h"
-
 #include "MarbleGlobal.h"
 
 using Marble::GeoDataCoordinates;
 using Marble::EARTH_RADIUS;
 using Marble::DEG2RAD;
 
-Coordinate::Coordinate( qreal lon, qreal lat, qreal alt, QObject *parent ) :
-    QObject( parent )
+Coordinate::Coordinate(qreal lon, qreal lat, qreal alt, QObject *parent) :
+    QObject(parent)
 {
-    setLongitude( lon );
-    setLatitude( lat );
-    setAltitude( alt );
+    setLongitude(lon);
+    setLatitude(lat);
+    setAltitude(alt);
 }
 
 Coordinate::Coordinate(const Marble::GeoDataCoordinates &coordinates)
@@ -31,23 +30,23 @@ Coordinate::Coordinate(const Marble::GeoDataCoordinates &coordinates)
 
 qreal Coordinate::longitude() const
 {
-    return m_coordinate.longitude( GeoDataCoordinates::Degree );
+    return m_coordinate.longitude(GeoDataCoordinates::Degree);
 }
 
-void Coordinate::setLongitude( qreal lon )
+void Coordinate::setLongitude(qreal lon)
 {
-    m_coordinate.setLongitude( lon, GeoDataCoordinates::Degree );
+    m_coordinate.setLongitude(lon, GeoDataCoordinates::Degree);
     emit longitudeChanged();
 }
 
 qreal Coordinate::latitude() const
 {
-    return m_coordinate.latitude( GeoDataCoordinates::Degree );
+    return m_coordinate.latitude(GeoDataCoordinates::Degree);
 }
 
-void Coordinate::setLatitude( qreal lat )
+void Coordinate::setLatitude(qreal lat)
 {
-    m_coordinate.setLatitude( lat, GeoDataCoordinates::Degree );
+    m_coordinate.setLatitude(lat, GeoDataCoordinates::Degree);
     emit latitudeChanged();
 }
 
@@ -56,9 +55,9 @@ qreal Coordinate::altitude() const
     return m_coordinate.altitude();
 }
 
-void Coordinate::setAltitude( qreal alt )
+void Coordinate::setAltitude(qreal alt)
 {
-    m_coordinate.setAltitude( alt );
+    m_coordinate.setAltitude(alt);
     emit altitudeChanged();
 }
 
@@ -67,35 +66,35 @@ GeoDataCoordinates Coordinate::coordinates() const
     return m_coordinate;
 }
 
-void Coordinate::setCoordinates( const GeoDataCoordinates &coordinates )
+void Coordinate::setCoordinates(const GeoDataCoordinates &coordinates)
 {
     m_coordinate = coordinates;
 }
 
-qreal Coordinate::distance( qreal longitude, qreal latitude ) const
+qreal Coordinate::distance(qreal longitude, qreal latitude) const
 {
     GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
-    GeoDataCoordinates other( longitude, latitude, 0, deg );
+    GeoDataCoordinates other(longitude, latitude, 0, deg);
     return EARTH_RADIUS * coordinates().sphericalDistanceTo(other);
 }
 
-qreal Coordinate::bearing( qreal longitude, qreal latitude ) const
+qreal Coordinate::bearing(qreal longitude, qreal latitude) const
 {
     qreal deltaLon = longitude * DEG2RAD - m_coordinate.longitude();
-    qreal y = sin( deltaLon ) * cos( latitude * DEG2RAD );
-    qreal x = cos( m_coordinate.latitude() ) * sin( latitude * DEG2RAD ) -
-              sin( m_coordinate.latitude() ) * cos( latitude * DEG2RAD ) * cos( deltaLon );
-    return Marble::RAD2DEG * atan2( y, x );
+    qreal y = sin(deltaLon) * cos(latitude * DEG2RAD);
+    qreal x = cos(m_coordinate.latitude()) * sin(latitude * DEG2RAD) -
+              sin(m_coordinate.latitude()) * cos(latitude * DEG2RAD) * cos(deltaLon);
+    return Marble::RAD2DEG *atan2(y, x);
 }
 
-bool Coordinate::operator == ( const Coordinate &other ) const
+bool Coordinate::operator ==(const Coordinate &other) const
 {
     return m_coordinate == other.m_coordinate;
 }
 
-bool Coordinate::operator != ( const Coordinate &other ) const
+bool Coordinate::operator !=(const Coordinate &other) const
 {
-    return !operator == ( other );
+    return !operator ==(other);
 }
 
 #include "moc_Coordinate.cpp"

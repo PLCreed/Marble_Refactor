@@ -78,7 +78,7 @@ class WikipediaItem : public AbstractDataPluginItem
 
     double rank() const;
     
- public Q_SLOTS:
+ public slots:
     void openBrowser();
     
  private:

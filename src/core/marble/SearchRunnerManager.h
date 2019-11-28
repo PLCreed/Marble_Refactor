@@ -54,7 +54,7 @@ public:
     void findPlacemarks( const QString &searchTerm, const GeoDataLatLonBox &preferred = GeoDataLatLonBox() );
     QVector<GeoDataPlacemark *> searchPlacemarks( const QString &searchTerm, const GeoDataLatLonBox &preferred = GeoDataLatLonBox(), int timeout = 30000 );
 
-Q_SIGNALS:
+signals:
     /**
      * Placemarks were added to or removed from the model
      * @todo FIXME: this sounds like a duplication of QAbstractItemModel signals

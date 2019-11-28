@@ -44,7 +44,7 @@ public:
      */
     virtual void search( const QString &searchTerm, const GeoDataLatLonBox &preferred ) = 0;
 
-Q_SIGNALS:
+signals:
     /**
      * This is emitted to indicate that the runner has finished the placemark search.
      * @param result the result of the search.

@@ -22,7 +22,7 @@
 #ifndef MARBLE_DGML_ELEMENTDICTIONARY_H
 #define MARBLE_DGML_ELEMENTDICTIONARY_H
 
-#include <geodata_export.h>
+#include "geodata_export.h"
 
 namespace Marble
 {

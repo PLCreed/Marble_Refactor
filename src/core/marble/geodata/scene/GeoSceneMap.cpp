@@ -17,7 +17,7 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #include "GeoSceneMap.h"
 
@@ -32,27 +32,16 @@ namespace Marble
 {
 
 // FIXME: Filters are a Dataset.
-
 class GeoSceneMapPrivate
 {
-  public:
-    GeoSceneMapPrivate()
-    {
-    }
-
-    ~GeoSceneMapPrivate()
-    {
-        qDeleteAll( m_layers );
-        qDeleteAll( m_filters );
-    }
-
+public:
     /// The vector holding all the sections in the legend.
-    /// (We want to preserve the order and don't care 
+    /// (We want to preserve the order and don't care
     /// much about speed here), so we don't use a hash
-    QVector<GeoSceneLayer*> m_layers;
+    QVector<GeoSceneLayer *> m_layers;
 
     /// The vector holding all the filters in the map.
-    QVector<GeoSceneFilter*> m_filters;
+    QVector<GeoSceneFilter *> m_filters;
 
     QColor m_backgroundColor;
     QColor m_labelColor;
@@ -61,74 +50,91 @@ class GeoSceneMapPrivate
     /// a region when it's clicked on.
     QColor m_highlightBrushColor;
     QColor m_highlightPenColor;
+
+public:
+    GeoSceneMapPrivate()
+    {}
+
+    ~GeoSceneMapPrivate()
+    {
+        qDeleteAll(m_layers);
+        qDeleteAll(m_filters);
+    }
 };
 
 
-GeoSceneMap::GeoSceneMap()
-    : d ( new GeoSceneMapPrivate )
-{
-}
+GeoSceneMap::GeoSceneMap() : d(new GeoSceneMapPrivate)
+{}
 
 GeoSceneMap::~GeoSceneMap()
 {
     delete d;
 }
 
-const char* GeoSceneMap::nodeType() const
+const char *GeoSceneMap::nodeType() const
 {
     return GeoSceneTypes::GeoSceneMapType;
 }
 
-void GeoSceneMap::addLayer( GeoSceneLayer* layer )
+void GeoSceneMap::addLayer(GeoSceneLayer *layer)
 {
     // Remove any layer that has the same name
-    QVector<GeoSceneLayer*>::iterator it = d->m_layers.begin();
-    while (it != d->m_layers.end()) {
-        GeoSceneLayer* currentLayer = *it;
-        if ( currentLayer->name() == layer->name() ) {
+    QVector<GeoSceneLayer *>::iterator it = d->m_layers.begin();
+    while (it != d->m_layers.end())
+    {
+        GeoSceneLayer *currentLayer = *it;
+        if (currentLayer->name() == layer->name())
+        {
             delete currentLayer;
             d->m_layers.erase(it);
             break;
         }
-        else {
+        else
+        {
             ++it;
         }
-     }
+    }
 
-    if ( layer ) {
-        d->m_layers.append( layer );
+    if (layer)
+    {
+        d->m_layers.append(layer);
     }
 }
 
-GeoSceneLayer* GeoSceneMap::layer( const QString& name )
+GeoSceneLayer *GeoSceneMap::layer(const QString &name)
 {
-    GeoSceneLayer* layer = nullptr;
+    GeoSceneLayer *layer = nullptr;
 
-    QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
-    QVector<GeoSceneLayer*>::const_iterator end = d->m_layers.constEnd();
-    for (; it != end; ++it) {
-        if ( (*it)->name() == name ) {
+    QVector<GeoSceneLayer *>::const_iterator it  = d->m_layers.constBegin();
+    QVector<GeoSceneLayer *>::const_iterator end = d->m_layers.constEnd();
+    for (; it != end; ++it)
+    {
+        if ((*it)->name() == name)
+        {
             layer = *it;
             break;
         }
     }
 
-    if ( !layer ) {
-        layer = new GeoSceneLayer( name );
-        addLayer( layer );
+    if (!layer)
+    {
+        layer = new GeoSceneLayer(name);
+        addLayer(layer);
     }
 
     return layer;
 }
 
-const GeoSceneLayer* GeoSceneMap::layer( const QString& name ) const
+const GeoSceneLayer *GeoSceneMap::layer(const QString &name) const
 {
-    const GeoSceneLayer* layer = nullptr;
+    const GeoSceneLayer *layer = nullptr;
 
-    QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
-    QVector<GeoSceneLayer*>::const_iterator end = d->m_layers.constEnd();
-    for (; it != end; ++it) {
-        if ( (*it)->name() == name ) {
+    QVector<GeoSceneLayer *>::const_iterator it  = d->m_layers.constBegin();
+    QVector<GeoSceneLayer *>::const_iterator end = d->m_layers.constEnd();
+    for (; it != end; ++it)
+    {
+        if ((*it)->name() == name)
+        {
             layer = *it;
             break;
         }
@@ -136,65 +142,73 @@ const GeoSceneLayer* GeoSceneMap::layer( const QString& name ) const
     return layer;
 }
 
-QVector<GeoSceneLayer*> GeoSceneMap::layers() const
+QVector<GeoSceneLayer *> GeoSceneMap::layers() const
 {
     return d->m_layers;
 }
 
-void GeoSceneMap::addFilter( GeoSceneFilter* filter )
+void GeoSceneMap::addFilter(GeoSceneFilter *filter)
 {
     // Remove any filter that has the same name
-    QVector<GeoSceneFilter*>::iterator it = d->m_filters.begin();
-    while (it != d->m_filters.end()) {
-        GeoSceneFilter* currentFilter = *it;
-        if ( currentFilter->name() == filter->name() ) {
+    QVector<GeoSceneFilter *>::iterator it = d->m_filters.begin();
+    while (it != d->m_filters.end())
+    {
+        GeoSceneFilter *currentFilter = *it;
+        if (currentFilter->name() == filter->name())
+        {
             delete currentFilter;
             d->m_filters.erase(it);
             break;
         }
-        else {
+        else
+        {
             ++it;
         }
-     }
+    }
 
-    if ( filter ) {
-        d->m_filters.append( filter );
+    if (filter)
+    {
+        d->m_filters.append(filter);
     }
 }
 
-GeoSceneFilter* GeoSceneMap::filter( const QString& name )
+GeoSceneFilter *GeoSceneMap::filter(const QString &name)
 {
-    GeoSceneFilter* filter = nullptr;
+    GeoSceneFilter *filter = nullptr;
 
-    QVector<GeoSceneFilter*>::const_iterator it = d->m_filters.constBegin();
-    QVector<GeoSceneFilter*>::const_iterator end = d->m_filters.constEnd();
-    for (; it != end; ++it) {
-        if ( (*it)->name() == name ) {
+    QVector<GeoSceneFilter *>::const_iterator it  = d->m_filters.constBegin();
+    QVector<GeoSceneFilter *>::const_iterator end = d->m_filters.constEnd();
+    for (; it != end; ++it)
+    {
+        if ((*it)->name() == name)
+        {
             filter = *it;
             break;
         }
     }
 
-    if ( !filter ) {
-        filter = new GeoSceneFilter( name );
-        addFilter( filter );
+    if (!filter)
+    {
+        filter = new GeoSceneFilter(name);
+        addFilter(filter);
     }
 
     return filter;
 }
 
-QVector<GeoSceneFilter*> GeoSceneMap::filters() const
+QVector<GeoSceneFilter *> GeoSceneMap::filters() const
 {
     return d->m_filters;
 }
 
 bool GeoSceneMap::hasTextureLayers() const
 {
-    QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
-    QVector<GeoSceneLayer*>::const_iterator end = d->m_layers.constEnd();
-    for (; it != end; ++it) {
-        if (((*it)->backend() == QLatin1String(dgml::dgmlValue_texture) ||
-             (*it)->backend() == QLatin1String(dgml::dgmlValue_vectortile)) && (*it)->datasets().count() > 0)
+    QVector<GeoSceneLayer *>::const_iterator it  = d->m_layers.constBegin();
+    QVector<GeoSceneLayer *>::const_iterator end = d->m_layers.constEnd();
+    for (; it != end; ++it)
+    {
+        if ((((*it)->backend() == QLatin1String(dgml::dgmlValue_texture))
+             || ((*it)->backend() == QLatin1String(dgml::dgmlValue_vectortile))) && ((*it)->datasets().count() > 0))
             return true;
     }
 
@@ -203,10 +217,11 @@ bool GeoSceneMap::hasTextureLayers() const
 
 bool GeoSceneMap::hasVectorLayers() const
 {
-    QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
-    QVector<GeoSceneLayer*>::const_iterator end = d->m_layers.constEnd();
-    for (; it != end; ++it) {
-        if (((*it)->backend() == QLatin1String(dgml::dgmlValue_vector)) && (*it)->datasets().count() > 0)
+    QVector<GeoSceneLayer *>::const_iterator it  = d->m_layers.constBegin();
+    QVector<GeoSceneLayer *>::const_iterator end = d->m_layers.constEnd();
+    for (; it != end; ++it)
+    {
+        if (((*it)->backend() == QLatin1String(dgml::dgmlValue_vector)) && ((*it)->datasets().count() > 0))
             return true;
     }
 
@@ -218,7 +233,7 @@ QColor GeoSceneMap::backgroundColor() const
     return d->m_backgroundColor;
 }
 
-void GeoSceneMap::setBackgroundColor( const QColor& backgroundColor )
+void GeoSceneMap::setBackgroundColor(const QColor &backgroundColor)
 {
     d->m_backgroundColor = backgroundColor;
 }
@@ -229,7 +244,7 @@ QColor GeoSceneMap::labelColor() const
     return d->m_labelColor;
 }
 
-void GeoSceneMap::setLabelColor( const QColor& backgroundColor )
+void GeoSceneMap::setLabelColor(const QColor &backgroundColor)
 {
     d->m_labelColor = backgroundColor;
 }
@@ -239,7 +254,7 @@ QColor GeoSceneMap::highlightBrushColor() const
     return d->m_highlightBrushColor;
 }
 
-void GeoSceneMap::setHighlightBrushColor( const QColor & highlightBrushColor )
+void GeoSceneMap::setHighlightBrushColor(const QColor &highlightBrushColor)
 {
     d->m_highlightBrushColor = highlightBrushColor;
 }
@@ -249,7 +264,7 @@ QColor GeoSceneMap::highlightPenColor() const
     return d->m_highlightPenColor;
 }
 
-void GeoSceneMap::setHighlightPenColor( const QColor &highlightPenColor )
+void GeoSceneMap::setHighlightPenColor(const QColor &highlightPenColor)
 {
     d->m_highlightPenColor = highlightPenColor;
 }

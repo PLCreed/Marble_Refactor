@@ -134,7 +134,7 @@ class StackedTileLoader : public QObject
 
         RenderState renderState() const;
 
-    Q_SIGNALS:
+    signals:
         void tileLoaded( TileId const &tileId );
         void cleared();
 

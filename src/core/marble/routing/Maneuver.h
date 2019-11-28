@@ -20,10 +20,10 @@ namespace Marble
 
 class MARBLE_EXPORT Maneuver
 {
-
 public:
-    enum Direction {
-        Unknown = 0,
+    enum Direction
+    {
+        Unknown  = 0,
         Continue = 13,
         Merge = 14,
         Straight = 1,
@@ -31,48 +31,49 @@ public:
         Right = 3,
         SharpRight = 4,
         TurnAround = 5,
-        SharpLeft = 6,
+        SharpLeft  = 6,
         Left = 7,
         SlightLeft = 8,
-        RoundaboutFirstExit = 9,
+        RoundaboutFirstExit  = 9,
         RoundaboutSecondExit = 10,
-        RoundaboutThirdExit = 11,
+        RoundaboutThirdExit  = 11,
         RoundaboutExit = 12,
-        ExitLeft = 15,
+        ExitLeft  = 15,
         ExitRight = 16
     };
 
+public:
     Maneuver();
 
     Direction direction() const;
 
-    void setDirection( Direction direction );
+    void setDirection(Direction direction);
 
     GeoDataCoordinates position() const;
 
-    void setPosition( const GeoDataCoordinates &position );
+    void setPosition(const GeoDataCoordinates &position);
 
     GeoDataCoordinates waypoint() const;
 
     bool hasWaypoint() const;
 
-    void setWaypoint( const GeoDataCoordinates &waypoint, int index );
+    void setWaypoint(const GeoDataCoordinates &waypoint, int index);
 
     int waypointIndex() const;
 
     QString instructionText() const;
 
-    void setInstructionText( const QString &text );
+    void setInstructionText(const QString &text);
 
     QString roadName() const;
 
-    void setRoadName( const QString &roadName );
+    void setRoadName(const QString &roadName);
 
     QString directionPixmap() const;
 
-    bool operator==( const Maneuver &other ) const;
+    bool operator==(const Maneuver &other) const;
 
-    bool operator!=( const Maneuver &other ) const;
+    bool operator!=(const Maneuver &other) const;
 
 private:
     Direction m_direction;

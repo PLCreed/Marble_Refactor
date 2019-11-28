@@ -22,31 +22,31 @@ class MARBLE_EXPORT Route
 public:
     Route();
 
-    void addRouteSegment( const RouteSegment &segment );
+    void addRouteSegment(const RouteSegment &segment);
 
     GeoDataLatLonBox bounds() const;
 
     qreal distance() const;
 
-    const RouteSegment & at( int index ) const;
+    const RouteSegment &at(int index) const;
 
     int indexOf(const RouteSegment &segment) const;
 
     int size() const;
 
-    const GeoDataLineString & path() const;
+    const GeoDataLineString &path() const;
 
     int travelTime() const;
 
-    const GeoDataLineString & turnPoints() const;
+    const GeoDataLineString &turnPoints() const;
 
-    const GeoDataLineString & waypoints() const;
+    const GeoDataLineString &waypoints() const;
 
-    void setPosition( const GeoDataCoordinates &position );
+    void setPosition(const GeoDataCoordinates &position);
 
     GeoDataCoordinates position() const;
 
-    const RouteSegment & currentSegment() const;
+    const RouteSegment &currentSegment() const;
 
     GeoDataCoordinates currentWaypoint() const;
 

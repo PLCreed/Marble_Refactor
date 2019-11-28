@@ -29,7 +29,7 @@ public:
 
     void setMarbleWidget( MarbleWidget *marbleWidget );
 
-Q_SIGNALS:
+signals:
     void repaintNeeded();
 
 protected:
@@ -40,7 +40,7 @@ protected:
     void leaveEvent( QEvent *event ) override;
     void repaint();
 
-private Q_SLOTS:
+private slots:
     void startPressRepeat();
     void repeatPress();
 

@@ -70,7 +70,7 @@ public:
      */
     bool withLunarEclipses() const;
 
-Q_SIGNALS:
+signals:
     /**
      * @brief This signal is emitted when the use clicks the "show" button
      * @param year the year of the selected eclipse event
@@ -83,7 +83,7 @@ Q_SIGNALS:
      */
     void buttonSettingsClicked();
 
-protected Q_SLOTS:
+protected slots:
     /**
      * @brief Accept the dialog
      *

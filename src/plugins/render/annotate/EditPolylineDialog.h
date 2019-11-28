@@ -30,12 +30,12 @@ public:
                         QWidget *parent = nullptr );
     ~EditPolylineDialog() override;
 
-public Q_SLOTS:
+public slots:
     void handleAddingNode( const GeoDataCoordinates &node );
     void handleItemMoving( GeoDataPlacemark *item );
     void handleChangingStyle();
 
-Q_SIGNALS:
+signals:
     void polylineUpdated( GeoDataFeature *feature );
 
     /**
@@ -45,7 +45,7 @@ Q_SIGNALS:
      */
     void relationCreated( const OsmPlacemarkData &relation );
 
-private Q_SLOTS:
+private slots:
     void updatePolyline();
     void updateLinesDialog( const QColor &color );
     void restoreInitial( int result );

@@ -41,7 +41,7 @@ public:
 
     bool eventFilter( QObject *watched, QEvent *event ) override;
 
-public Q_SLOTS:
+public slots:
     void startPlaying();
     void pausePlaying();
     void togglePlaying();
@@ -52,12 +52,12 @@ public Q_SLOTS:
      */
     void setHighlightedItemIndex( int index );
 
-Q_SIGNALS:
+signals:
     void featureUpdated( GeoDataFeature *feature );
     void featureAdded( GeoDataContainer *parent, GeoDataFeature *feature, int row );
     void featureRemoved( const GeoDataFeature *feature  );
 
-private Q_SLOTS:
+private slots:
     void moveUp();
     void moveDown();
     void addFlyTo();

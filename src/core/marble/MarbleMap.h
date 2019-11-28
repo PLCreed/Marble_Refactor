@@ -433,7 +433,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     const StyleBuilder* styleBuilder() const;
 
- public Q_SLOTS:
+ public slots:
 
     /**
      * @brief Paint the map using a give painter.
@@ -723,7 +723,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void highlightRouteRelation(qint64 osmId, bool enabled);
 
- Q_SIGNALS:
+ signals:
     void tileLevelChanged( int level );
 
     /**

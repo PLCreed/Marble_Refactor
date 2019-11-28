@@ -48,7 +48,7 @@ public:
     void parseFile( const QString &fileName, DocumentRole role = UserDocument );
     GeoDataDocument *openFile( const QString &fileName, DocumentRole role = UserDocument, int timeout = 30000 );
 
-Q_SIGNALS:
+signals:
     /**
      * The file was parsed and potential error message
      */

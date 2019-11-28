@@ -96,10 +96,10 @@ class WeatherItem : public AbstractDataPluginItem
 
     double temperature() const;
 
- public Q_SLOTS:
+ public slots:
     void openBrowser();
 
-Q_SIGNALS:
+signals:
     void stationNameChanged();
 
     void descriptionChanged();

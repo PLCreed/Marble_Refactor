@@ -36,14 +36,14 @@ public:
     void stop();
     void setPaused( bool );
 
-Q_SIGNALS:
+signals:
     void balloonHidden();
     void balloonShown( GeoDataPlacemark* );
     void updated( GeoDataFeature* );
     void added( GeoDataContainer *parent, GeoDataFeature *feature, int row );
     void removed( const GeoDataFeature *feature  );
 
-public Q_SLOTS:
+public slots:
     void playSlot();
 
 private:

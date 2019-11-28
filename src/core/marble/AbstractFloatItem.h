@@ -130,7 +130,7 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
      */
     bool positionLocked() const;
 
- public Q_SLOTS:
+ public slots:
     /**
      * @brief Set is position locked
      * @param lock is locked?

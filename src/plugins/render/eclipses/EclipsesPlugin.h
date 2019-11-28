@@ -84,7 +84,7 @@ public:
 protected:
     bool eventFilter( QObject *object, QEvent *e ) override;
 
-private Q_SLOTS:
+private slots:
     void readSettings();
     void writeSettings();
     void updateSettings();

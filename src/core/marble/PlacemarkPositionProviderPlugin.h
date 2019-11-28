@@ -65,7 +65,7 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     GeoDataAccuracy m_accuracy;
     bool m_isInitialized;
 
- private Q_SLOTS:
+ private slots:
     void setPlacemark( const GeoDataPlacemark *placemark );
 
     void updatePosition();

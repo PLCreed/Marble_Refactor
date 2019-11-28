@@ -36,7 +36,7 @@ class MARBLE_EXPORT TimeControlWidget : public QDialog
     explicit TimeControlWidget( MarbleClock* clock, QWidget* parent = nullptr );
     ~TimeControlWidget() override;
 
- private Q_SLOTS:
+ private slots:
     /**
     * @brief  apply the settings to internal clock
     */

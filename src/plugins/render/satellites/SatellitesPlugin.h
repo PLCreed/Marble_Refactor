@@ -69,7 +69,7 @@ public:
 
     SatellitesConfigDialog *configDialog() override;
 
-private Q_SLOTS:
+private slots:
     void activate();
     void enableModel( bool enabled );
     void visibleModel( bool visible );

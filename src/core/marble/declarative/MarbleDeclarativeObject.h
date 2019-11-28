@@ -16,24 +16,23 @@
 class MarbleDeclarativeObjectPrivate;
 
 /**
-  * Provides access to global Marble related properties and methods
-  * to QML (intended to be registered as a global QML object)
-  */
+ * Provides access to global Marble related properties and methods
+ * to QML (intended to be registered as a global QML object)
+ */
 class MarbleDeclarativeObject : public QObject
 {
     Q_OBJECT
-
     Q_PROPERTY(QString version READ version CONSTANT)
 
 public:
-    explicit MarbleDeclarativeObject( QObject* parent = nullptr );
+    explicit MarbleDeclarativeObject(QObject *parent = nullptr);
 
     ~MarbleDeclarativeObject() override;
 
     /** Returns the Marble library version */
     QString version() const;
 
-public Q_SLOTS:
+public slots:
     /**
      * @brief resolvePath Resolves files in the marble data path
      * @param path Relative path to a file installed in Marble's data path
@@ -41,7 +40,7 @@ public Q_SLOTS:
      * relative path cannot be resolved
      * @see MarbleDirs
      */
-    QString resolvePath( const QString &path ) const;
+    QString resolvePath(const QString &path) const;
 
     /**
      * @brief canExecute Check whether a given program is found in the path
@@ -50,10 +49,10 @@ public Q_SLOTS:
      * directories defined by the PATH environment variable (as reported by
      * QProcessEnvironment) and has the executable bit set
      */
-    bool canExecute( const QString &program ) const;
+    bool canExecute(const QString &program) const;
 
 private:
-    MarbleDeclarativeObjectPrivate* const d;
+    MarbleDeclarativeObjectPrivate *const d;
 };
 
 #endif

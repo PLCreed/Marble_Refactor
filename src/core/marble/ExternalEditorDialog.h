@@ -35,7 +35,7 @@ public:
 
     bool saveDefault() const;
 
-private Q_SLOTS:
+private slots:
     void updateDefaultEditor( int index );
 
 private:

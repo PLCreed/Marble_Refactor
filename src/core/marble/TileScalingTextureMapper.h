@@ -39,7 +39,7 @@ class TileScalingTextureMapper : public QObject, public TextureMapperInterface
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer ) override;
 
- private Q_SLOTS:
+ private slots:
     void removePixmap( const TileId &tileId );
     void clearPixmaps();
 

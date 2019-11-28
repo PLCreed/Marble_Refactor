@@ -72,11 +72,11 @@ public:
      */
     PlaybackItem* mainTrackItemAt( int i );
 
-public Q_SLOTS:
+public slots:
     void updateTracks();
     void clearTracks();
 
-Q_SIGNALS:
+signals:
     void finished();
     void paused();
     void stopped();
@@ -86,7 +86,7 @@ Q_SIGNALS:
     void removed(GeoDataFeature *feature);
     void itemFinished( int index );
 
-private Q_SLOTS:
+private slots:
     void stopTour();
     void showBalloon( GeoDataPlacemark* );
     void hideBalloon();

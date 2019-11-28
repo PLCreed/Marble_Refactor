@@ -8,26 +8,29 @@ class QListView;
 namespace Marble {
 class CloudRouteModel;
 
-class RouteItemDelegate : public QStyledItemDelegate {
+class RouteItemDelegate : public QStyledItemDelegate
+{
     Q_OBJECT
-    
 public:
-    RouteItemDelegate( QListView *view, CloudRouteModel *model );
+    RouteItemDelegate(QListView *view, CloudRouteModel *model);
 
-    void paint( QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const override;
-    QSize sizeHint( const QStyleOptionViewItem& option, const QModelIndex& index ) const override;
-    bool editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index) override;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
-Q_SIGNALS:
-    void downloadButtonClicked( const QString& timestamp );
-    void openButtonClicked( const QString& timestamp );
-    void deleteButtonClicked( const QString& timestamp );
-    void removeFromCacheButtonClicked( const QString& timestamp );
-    void uploadToCloudButtonClicked( const QString& timestamp );
+    bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option,
+                     const QModelIndex &index) override;
+
+signals:
+    void downloadButtonClicked(const QString &timestamp);
+    void openButtonClicked(const QString &timestamp);
+    void deleteButtonClicked(const QString &timestamp);
+    void removeFromCacheButtonClicked(const QString &timestamp);
+    void uploadToCloudButtonClicked(const QString &timestamp);
 
 private:
-    enum Element {
+    enum Element
+    {
         Text,
         OpenButton,
         DownloadButton,
@@ -38,11 +41,12 @@ private:
         UploadToCloudButton
     };
 
-    int buttonWidth( const QStyleOptionViewItem &option ) const;
-    QStyleOptionButton button( Element element, const QStyleOptionViewItem &option ) const;
-    static QString text( const QModelIndex &index );
-    QRect position( Element element, const QStyleOptionViewItem &option ) const;
+    int buttonWidth(const QStyleOptionViewItem &option) const;
+    QStyleOptionButton button(Element element, const QStyleOptionViewItem &option) const;
+    static QString text(const QModelIndex &index);
+    QRect position(Element element, const QStyleOptionViewItem &option) const;
 
+private:
     QListView *m_view;
     CloudRouteModel *m_model;
     mutable int m_buttonWidth;

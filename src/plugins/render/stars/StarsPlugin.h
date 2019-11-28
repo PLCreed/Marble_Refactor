@@ -178,7 +178,7 @@ public:
 protected:
     bool eventFilter( QObject *object, QEvent *e ) override;
 
-private Q_SLOTS:
+private slots:
     void requestRepaint();
     void toggleSunMoon(bool on);
     void togglePlanets(bool on);
@@ -186,7 +186,7 @@ private Q_SLOTS:
     void toggleConstellations(bool on);
     void executeConfigDialog();
 
-public Q_SLOTS:
+public slots:
     void readSettings();
     void writeSettings();
     void constellationGetColor();

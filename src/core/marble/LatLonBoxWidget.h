@@ -28,10 +28,10 @@ class MARBLE_EXPORT LatLonBoxWidget: public QWidget
     GeoDataLatLonBox latLonBox() const;
     void setLatLonBox( GeoDataLatLonBox const & );
 
- Q_SIGNALS:
+ signals:
     void valueChanged();
 
- private Q_SLOTS:
+ private slots:
     void updateLatSingleStep();
     void updateLonSingleStep();
 

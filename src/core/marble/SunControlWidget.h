@@ -35,10 +35,10 @@ class MARBLE_EXPORT SunControlWidget : public QDialog
     ~SunControlWidget() override;
     void setSunShading( bool );
 
- private Q_SLOTS:
+ private slots:
     void apply();
 	
- Q_SIGNALS:
+ signals:
     void showSun( bool show );
     void isLockedToSubSolarPoint( bool show );
     void isSubSolarPointIconVisible( bool show );

@@ -72,7 +72,7 @@ class PhotoPlugin : public AbstractDataPlugin, public DialogConfigurationInterfa
  protected:
     bool eventFilter( QObject *object, QEvent *event ) override;
 
- private Q_SLOTS:
+ private slots:
    void readSettings();
    void writeSettings();
 

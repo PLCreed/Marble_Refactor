@@ -44,7 +44,7 @@ public:
 
     void setBusy( bool busy );
 
-Q_SIGNALS:
+signals:
     /** The clear button was clicked with the left mouse button */
     void clearButtonClicked();
 
@@ -55,7 +55,7 @@ protected:
 
     void resizeEvent( QResizeEvent* event ) override;
 
-private Q_SLOTS:
+private slots:
     void updateClearButtonIcon( const QString& text );
 
     void updateClearButton();

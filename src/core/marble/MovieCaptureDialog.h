@@ -32,14 +32,14 @@ public:
     explicit MovieCaptureDialog(MarbleWidget *widget, QWidget *parent = nullptr);
     ~MovieCaptureDialog() override;
 
-public Q_SLOTS:
+public slots:
     void startRecording();
     void stopRecording();
 
-private Q_SLOTS:
+private slots:
     void loadDestinationFile();
 
-Q_SIGNALS:
+signals:
     void started();
 
 private:

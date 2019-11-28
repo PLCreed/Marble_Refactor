@@ -63,7 +63,7 @@ private:
     GeoDataCoordinates m_position;
     GeoDataAccuracy m_accuracy;
 
-private Q_SLOTS:
+private slots:
     void updatePosition(GeoCute::Position newPosition);
     void updateStatus(GeoCute::Status newStatus);
 };

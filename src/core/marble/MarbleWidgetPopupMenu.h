@@ -51,17 +51,17 @@ class MARBLE_EXPORT MarbleWidgetPopupMenu  : public QObject
      */
     QPoint mousePosition() const;
 
- public Q_SLOTS:
+ public slots:
     void  showLmbMenu( int, int );
     void  showRmbMenu( int, int );
 
-private Q_SLOTS:
+private slots:
     void resetMenu();
     void slotInfoDialog();
     void slotCopyCoordinates();
     void slotAboutDialog();
 
-private Q_SLOTS:
+private slots:
     void directionsFromHere();
     void directionsToHere();
     void startReverseGeocoding();

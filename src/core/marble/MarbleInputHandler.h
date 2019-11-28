@@ -79,7 +79,7 @@ class MARBLE_EXPORT MarbleInputHandler  : public QObject
     /// should the map do kinetic scrolling, this would stop the operation
     virtual void stopInertialEarthRotation();
 
- Q_SIGNALS:
+ signals:
     // Mouse button menus
     void lmbRequest( int, int );
     void rmbRequest( int, int );
@@ -94,14 +94,14 @@ class MARBLE_EXPORT MarbleInputHandler  : public QObject
      */
     void mouseClickGeoPosition( qreal, qreal, GeoDataCoordinates::Unit );
 
- protected Q_SLOTS:
+ protected slots:
     void restoreViewContext();
 
  protected:
     class Protected;
     Protected * const d;
 
- private Q_SLOTS:
+ private slots:
     virtual void installPluginEventFilter( RenderPlugin *renderPlugin ) = 0;
 
  private:
@@ -142,7 +142,7 @@ class MARBLE_EXPORT MarbleDefaultInputHandler  : public MarbleInputHandler
     virtual bool handleKeyPress(QKeyEvent *e);
     virtual void handleMouseButtonPressAndHold(const QPoint &position);
 
- private Q_SLOTS:
+ private slots:
     void installPluginEventFilter( RenderPlugin *renderPlugin ) override = 0;
     virtual void showLmbMenu( int, int ) = 0;
     virtual void showRmbMenu( int, int ) = 0;

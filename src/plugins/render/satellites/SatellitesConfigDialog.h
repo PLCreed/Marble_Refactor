@@ -52,14 +52,14 @@ public:
 
     Ui::SatellitesConfigDialog* configWidget();
 
-Q_SIGNALS:
+signals:
     void dataSourcesReloadRequested();
     void userDataSourceAdded( const QString &source );
     void userDataSourceRemoved( const QString &source );
     void userDataSourcesChanged();
     void activatePluginClicked();
 
-public Q_SLOTS:
+public slots:
     void setDialogActive( bool active );
 
 protected:
@@ -74,7 +74,7 @@ protected:
         bool create = false );
     void expandTreeView();
 
-protected Q_SLOTS:
+protected slots:
     void reloadDataSources();
     void addDataSource();
     void openDataSource();

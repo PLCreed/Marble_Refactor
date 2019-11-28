@@ -35,7 +35,7 @@ public:
     explicit DownloadOsmDialog(MarbleWidget *parent = nullptr,AnnotatePlugin *annotatePlugin = nullptr);
     ~DownloadOsmDialog() override;
 
-Q_SIGNALS:
+signals:
     void openFile(const QString &filename);
 
 private:
@@ -48,7 +48,7 @@ private:
     LatLonBoxWidget *m_latLonBoxWidget;
     bool m_isDownloadSuccess;
 
-private Q_SLOTS:
+private slots:
     void downloadFile();
     void updateCoordinates(const GeoDataLatLonAltBox&);
     void httpReadyRead();

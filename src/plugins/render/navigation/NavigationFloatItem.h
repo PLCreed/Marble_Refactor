@@ -81,7 +81,7 @@ MARBLE_PLUGIN( NavigationFloatItem )
     void paintContent( QPainter *painter ) override;
     void contextMenuEvent( QWidget *w, QContextMenuEvent *e ) override;
 
- private Q_SLOTS:
+ private slots:
     /** Map theme was changed, adjust controls */
     void selectTheme( const QString& theme );
 

@@ -51,7 +51,7 @@ public:
     void reverseGeocoding( const GeoDataCoordinates &coordinates );
     QString searchReverseGeocoding( const GeoDataCoordinates &coordinates, int timeout = 30000 );
 
-Q_SIGNALS:
+signals:
     /**
      * The reverse geocoding request is finished, the result is stored
      * in the given placemark. This signal is emitted when the first

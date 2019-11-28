@@ -52,7 +52,7 @@ class FlightGearPositionProviderPlugin : public PositionProviderPlugin
     qreal direction() const override;
     QDateTime timestamp() const override;
 
-private Q_SLOTS:
+private slots:
    void readPendingDatagrams();
 
  private:

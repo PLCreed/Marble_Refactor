@@ -27,7 +27,7 @@ class GeoNamesWeatherService : public AbstractWeatherService
     explicit GeoNamesWeatherService( const MarbleModel *model, QObject *parent );
     ~GeoNamesWeatherService() override;
 
- public Q_SLOTS:
+ public slots:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
                              qint32 number = 10 ) override;
     void getItem( const QString &id ) override;

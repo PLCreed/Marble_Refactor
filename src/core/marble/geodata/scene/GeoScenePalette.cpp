@@ -17,7 +17,7 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #include "GeoScenePalette.h"
 
@@ -26,19 +26,17 @@
 namespace Marble
 {
 
-GeoScenePalette::GeoScenePalette( const QString& type,
-                                  const QString& file )
-    : m_type( type ),
-      m_file( file )
-{
-}
+GeoScenePalette::GeoScenePalette(const QString &type, const QString &file) :
+    m_type(type),
+    m_file(file)
+{}
 
 QString GeoScenePalette::type() const
 {
     return m_type;
 }
 
-void GeoScenePalette::setType( const QString& type )
+void GeoScenePalette::setType(const QString &type)
 {
     m_type = type;
 }
@@ -48,12 +46,12 @@ QString GeoScenePalette::file() const
     return m_file;
 }
 
-void GeoScenePalette::setFile( const QString& file )
+void GeoScenePalette::setFile(const QString &file)
 {
     m_file = file;
 }
 
-bool GeoScenePalette::operator==( const GeoScenePalette& rhs ) const
+bool GeoScenePalette::operator==(const GeoScenePalette &rhs) const
 {
     return m_file == rhs.m_file && m_type == rhs.m_type;
 }

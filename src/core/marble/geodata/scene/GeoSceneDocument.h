@@ -18,15 +18,15 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #ifndef MARBLE_GEOSCENEDOCUMENT_H
 #define MARBLE_GEOSCENEDOCUMENT_H
 
 #include <QObject>
-#include "GeoDocument.h"
 
-#include <geodata_export.h>
+#include "geodata_export.h"
+#include "GeoDocument.h"
 
 namespace Marble
 {
@@ -41,38 +41,35 @@ class GeoSceneDocumentPrivate;
 /**
  * @short A container for features parsed from the DGML file.
  */
-class GEODATA_EXPORT GeoSceneDocument : public QObject, 
-                                        public GeoDocument,
-                                        public GeoNode
+class GEODATA_EXPORT GeoSceneDocument : public QObject, public GeoDocument, public GeoNode
 {
     Q_OBJECT
-
- public:
+public:
     GeoSceneDocument();
     ~GeoSceneDocument() override;
-    
-    const char* nodeType() const override;
+
+    const char *nodeType() const override;
 
     bool isGeoSceneDocument() const override { return true; }
 
-    const GeoSceneHead* head() const;
-    GeoSceneHead* head();
+    const GeoSceneHead *head() const;
+    GeoSceneHead *head();
 
-    const GeoSceneMap* map() const;
-    GeoSceneMap* map();
+    const GeoSceneMap *map() const;
+    GeoSceneMap *map();
 
-    const GeoSceneSettings* settings() const;
-    GeoSceneSettings* settings();
+    const GeoSceneSettings *settings() const;
+    GeoSceneSettings *settings();
 
-    const GeoSceneLegend* legend() const;
-    GeoSceneLegend* legend();
+    const GeoSceneLegend *legend() const;
+    GeoSceneLegend *legend();
 
- Q_SIGNALS:
-    void valueChanged( const QString&, bool );
+signals:
+    void valueChanged(const QString &, bool);
 
- private:
-    Q_DISABLE_COPY( GeoSceneDocument )
-    GeoSceneDocumentPrivate * const d;
+private:
+    Q_DISABLE_COPY(GeoSceneDocument)
+    GeoSceneDocumentPrivate *const d;
 };
 
 }

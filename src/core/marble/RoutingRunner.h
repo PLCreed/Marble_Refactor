@@ -39,7 +39,7 @@ public:
      */
     virtual void retrieveRoute( const RouteRequest *request ) = 0;
 
-Q_SIGNALS:
+signals:
     /**
      * Route download/calculation is finished, result in the given route object.
      * To be emitted by runners after a @see retrieveRoute call.

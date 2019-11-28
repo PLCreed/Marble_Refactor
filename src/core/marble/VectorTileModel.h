@@ -39,7 +39,7 @@ public:
     TileRunner( TileLoader *loader, const GeoSceneVectorTileDataset *texture, const TileId &id );
     void run() override;
 
-Q_SIGNALS:
+signals:
     void documentLoaded( const TileId &id, GeoDataDocument *document );
 
 private:
@@ -67,17 +67,17 @@ public:
 
     void reload();
 
-public Q_SLOTS:
+public slots:
     void updateTile( const TileId &id, GeoDataDocument *document );
 
     void clear();
 
-Q_SIGNALS:
+signals:
     void tileCompleted( const TileId &tileId );
     void tileAdded(GeoDataDocument *document);
     void tileRemoved(GeoDataDocument *document);
 
-private Q_SLOTS:
+private slots:
     void cleanupTile(GeoDataObject* feature);
 
 private:

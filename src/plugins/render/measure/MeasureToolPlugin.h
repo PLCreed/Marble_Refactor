@@ -75,10 +75,10 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
     QHash<QString,QVariant> settings() const override;
     void setSettings( const QHash<QString,QVariant> &settings ) override;
 
- Q_SIGNALS:
+ signals:
     void  numberOfMeasurePointsChanged( int newNumber );
 
- public Q_SLOTS:
+ public slots:
     bool  eventFilter( QObject *object, QEvent *event ) override;
 
  private:
@@ -88,7 +88,7 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
     void  addContextItems();
     void  removeContextItems();
 
- private Q_SLOTS:
+ private slots:
     void  setNumberOfMeasurePoints( int number );
     void  addMeasurePointEvent();
 

@@ -17,7 +17,7 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #include "GeoSceneAbstractTileProjection.h"
 
@@ -30,27 +30,22 @@ namespace Marble
 class GeoSceneAbstractTileProjectionPrivate
 {
 public:
-    GeoSceneAbstractTileProjectionPrivate();
+    GeoSceneAbstractTileProjectionPrivate() :
+        levelZeroColumns(1),
+        levelZeroRows(1)
+    {}
 
 public:
     int levelZeroColumns;
     int levelZeroRows;
 };
 
-GeoSceneAbstractTileProjectionPrivate::GeoSceneAbstractTileProjectionPrivate()
-    : levelZeroColumns(1)
-    , levelZeroRows(1)
-{
-}
-    
 GeoSceneAbstractTileProjection::GeoSceneAbstractTileProjection()
     : d_ptr(new GeoSceneAbstractTileProjectionPrivate())
-{
-}
+{}
 
 GeoSceneAbstractTileProjection::~GeoSceneAbstractTileProjection()
-{
-}
+{}
 
 int GeoSceneAbstractTileProjection::levelZeroColumns() const
 {

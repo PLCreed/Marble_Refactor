@@ -47,23 +47,23 @@ public:
     int zoom() const;
     QPointF center() const;
 
-public Q_SLOTS:
+public slots:
     void setMapTheme( const QString & mapTheme );
     void setZoom( int zoom );
     QStringList properties() const;
     void setCenter( const QPointF &center ) const;
 
-public Q_SLOTS:
+public slots:
     Q_INVOKABLE void setPropertyEnabled( const QString &key, bool enabled );
     Q_INVOKABLE bool isPropertyEnabled( const QString &key ) const;
 
-Q_SIGNALS:
+signals:
     void mapThemeChanged( const QString &mapTheme );
     void tileLevelChanged( int tileLevel );
     void zoomChanged( int zoom );
     void centerChanged( const QPointF &center );
 
-private Q_SLOTS:
+private slots:
     void handleVisibleLatLonAltBoxChange();
 
 private:

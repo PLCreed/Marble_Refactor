@@ -22,34 +22,38 @@ namespace Marble
 
 GeoWriter::GeoWriter()
 {
-    //FIXME: work out a standard way to do this.
+    // FIXME: work out a standard way to do this.
     m_documentType = kml::kmlTag_nameSpaceOgc22;
 }
 
-bool GeoWriter::write(QIODevice* device, const GeoNode *feature)
+bool GeoWriter::write(QIODevice *device, const GeoNode *feature)
 {
-    setDevice( device );
-    setAutoFormatting( true );
+    setDevice(device);
+    setAutoFormatting(true);
     writeStartDocument();
 
-    //FIXME: write the starting tags. Possibly register a tag handler to do this
+    // FIXME: write the starting tags. Possibly register a tag handler to do this
     // with a null string as the object name?
-    
-    GeoTagWriter::QualifiedName name( "", m_documentType );
-    const GeoTagWriter* writer = GeoTagWriter::recognizes(name);
-    if( writer ) {
-        //FIXME is this too much of a hack?
+
+    GeoTagWriter::QualifiedName name("", m_documentType);
+    const GeoTagWriter *writer = GeoTagWriter::recognizes(name);
+    if (writer)
+    {
+        // FIXME is this too much of a hack?
         writer->write(/* node = */ nullptr, *this); // node is never used in write()
-    } else {
+    }
+    else
+    {
         mDebug() << "There is no GeoWriter registered for: " << name;
         return false;
     }
-    
-    if( ! writeElement( feature ) ) {
+
+    if (!writeElement(feature))
+    {
         return false;
     }
-    
-    //close the document
+
+    // close the document
     writeEndElement();
     return true;
 }
@@ -58,16 +62,20 @@ bool GeoWriter::writeElement(const GeoNode *object)
 {
     // Add checks to see that everything is ok here
 
-    GeoTagWriter::QualifiedName name( object->nodeType(), m_documentType );
-    const GeoTagWriter* writer = GeoTagWriter::recognizes( name );
+    GeoTagWriter::QualifiedName name(object->nodeType(), m_documentType);
+    const GeoTagWriter *writer = GeoTagWriter::recognizes(name);
 
-    if( writer ) {
-        if( ! writer->write( object, *this ) ) {
+    if (writer)
+    {
+        if (!writer->write(object, *this))
+        {
             mDebug() << "An error has been reported by the GeoWriter for: "
-                    << name;
+                     << name;
             return false;
         }
-    } else {
+    }
+    else
+    {
         mDebug() << "There is no GeoWriter registered for: " << name;
         return true;
     }
@@ -75,36 +83,38 @@ bool GeoWriter::writeElement(const GeoNode *object)
 }
 
 
-void GeoWriter::setDocumentType( const QString &documentType )
+void GeoWriter::setDocumentType(const QString &documentType)
 {
     m_documentType = documentType;
 }
 
-void GeoWriter::writeElement( const QString &namespaceUri, const QString &key, const QString &value )
+void GeoWriter::writeElement(const QString &namespaceUri, const QString &key, const QString &value)
 {
-    writeStartElement( namespaceUri, key );
-    writeCharacters( value );
+    writeStartElement(namespaceUri, key);
+    writeCharacters(value);
     writeEndElement();
 }
 
-void GeoWriter::writeElement( const QString &key, const QString &value )
+void GeoWriter::writeElement(const QString &key, const QString &value)
 {
-    writeStartElement( key );
-    writeCharacters( value );
+    writeStartElement(key);
+    writeCharacters(value);
     writeEndElement();
 }
 
-void GeoWriter::writeOptionalElement( const QString &key, const QString &value, const QString &defaultValue )
+void GeoWriter::writeOptionalElement(const QString &key, const QString &value, const QString &defaultValue)
 {
-    if( value != defaultValue ) {
-        writeElement( key, value );
+    if (value != defaultValue)
+    {
+        writeElement(key, value);
     }
 }
 
-void GeoWriter::writeOptionalAttribute( const QString &key, const QString &value, const QString &defaultValue )
+void GeoWriter::writeOptionalAttribute(const QString &key, const QString &value, const QString &defaultValue)
 {
-    if( value != defaultValue ) {
-        writeAttribute( key, value );
+    if (value != defaultValue)
+    {
+        writeAttribute(key, value);
     }
 }
 

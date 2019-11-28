@@ -17,7 +17,7 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #ifndef MARBLE_GEOSCENEPALETTE_H
 #define MARBLE_GEOSCENEPALETTE_H
@@ -32,23 +32,22 @@ namespace Marble
 /**
  * @short Palette of a GeoScene document.
  */
-
 class GeoScenePalette : public GeoNode
 {
- public:
-    GeoScenePalette( const QString& type, const QString& file );
+public:
+    GeoScenePalette(const QString &type, const QString &file);
 
     QString type() const;
-    void    setType( const QString& type );
+    void setType(const QString &type);
 
     QString file() const;
-    void    setFile( const QString& file );
+    void setFile(const QString &file);
 
-    bool operator==( const GeoScenePalette& rhs ) const;
+    bool operator==(const GeoScenePalette &rhs) const;
 
     const char *nodeType() const override;
 
- private:
+private:
     QString m_type;
     QString m_file;
 };

@@ -10,22 +10,20 @@
 
 #include "RoutingWaypoint.h"
 
-#include <QDebug>
-
 namespace Marble
 {
 
-RoutingWaypoint::RoutingWaypoint() : m_secondsRemaining( 0 )
+RoutingWaypoint::RoutingWaypoint() : m_secondsRemaining(0)
 {
     // nothing to do
 }
 
-RoutingWaypoint::RoutingWaypoint( const RoutingPoint &point, JunctionType junctionType,
-                                  const QString &junctionTypeRaw, const QString &roadType,
-                                  int secondsRemaining, const QString &roadName )
-        : m_point( point ), m_junctionType( junctionType ),
-        m_junctionTypeRaw(junctionTypeRaw), m_roadType( roadType ),
-        m_secondsRemaining( secondsRemaining ), m_roadName( roadName.trimmed() )
+RoutingWaypoint::RoutingWaypoint(const RoutingPoint &point, JunctionType junctionType,
+                                 const QString &junctionTypeRaw, const QString &roadType,
+                                 int secondsRemaining, const QString &roadName)
+    : m_point(point), m_junctionType(junctionType),
+    m_junctionTypeRaw(junctionTypeRaw), m_roadType(roadType),
+    m_secondsRemaining(secondsRemaining), m_roadName(roadName.trimmed())
 {
     // nothing to do
 }

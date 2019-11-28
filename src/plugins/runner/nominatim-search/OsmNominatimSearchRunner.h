@@ -35,7 +35,7 @@ public:
 
     void search( const QString &searchTerm, const GeoDataLatLonBox &preferred ) override;
 
-private Q_SLOTS:
+private slots:
     // Forward a result to the search or reverse geocoding handler
     void handleResult( QNetworkReply* );
 

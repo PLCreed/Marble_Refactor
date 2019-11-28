@@ -12,10 +12,10 @@
 #define MARBLE_FLOATITEMSLAYER_H
 
 #include <QObject>
-#include "LayerInterface.h"
-
 #include <QList>
 #include <QRegion>
+
+#include "LayerInterface.h"
 
 namespace Marble
 {
@@ -29,14 +29,13 @@ class RenderPlugin;
 class FloatItemsLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
-
- public:
+public:
     explicit FloatItemsLayer(QObject *parent = nullptr);
 
     QStringList renderPosition() const override;
 
     bool render(GeoPainter *painter, ViewportParams *viewport,
-       const QString &renderPos = "NONE", GeoSceneLayer *layer = nullptr) override;
+                const QString &renderPos = "NONE", GeoSceneLayer *layer = nullptr) override;
 
     void addFloatItem(AbstractFloatItem *floatItem);
 
@@ -48,7 +47,7 @@ class FloatItemsLayer : public QObject, public LayerInterface
 
     QString runtimeTrace() const override;
 
- Q_SIGNALS:
+signals:
     /**
      * @brief Signal that a render item has been initialized
      */
@@ -65,10 +64,10 @@ class FloatItemsLayer : public QObject, public LayerInterface
 
     void pluginSettingsChanged();
 
- private Q_SLOTS:
+private slots:
     void updateVisibility(bool visible, const QString &nameId);
 
- private:
+private:
     QList<AbstractFloatItem *> m_floatItems;
 };
 

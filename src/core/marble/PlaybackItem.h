@@ -32,7 +32,7 @@ public:
     virtual void stop() = 0;
     virtual double duration() const = 0;
 
-Q_SIGNALS:
+signals:
     void finished();
     void centerOn( const GeoDataCoordinates &coordinates );
     void paused();

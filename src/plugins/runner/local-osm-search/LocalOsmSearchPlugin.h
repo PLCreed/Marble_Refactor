@@ -46,7 +46,7 @@ public:
 
     SearchRunner* newRunner() const override;
 
-private Q_SLOTS:
+private slots:
     void updateDirectory( const QString &directory );
 
     void updateFile( const QString &directory );

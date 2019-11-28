@@ -11,35 +11,36 @@
 #ifndef MARBLE_ROUTINGWAYPOINT_H
 #define MARBLE_ROUTINGWAYPOINT_H
 
-#include "RoutingPoint.h"
-#include "marble_export.h"
-
 #include <QVector>
 #include <QString>
+
+#include "marble_export.h"
+#include "RoutingPoint.h"
 
 namespace Marble
 {
 
 /**
-  * Stores one line of gosmore/routino output
-  */
+ * Stores one line of gosmore/routino output
+ */
 class MARBLE_EXPORT RoutingWaypoint
 {
 public:
     /** Junction types that affect instructions */
     enum JunctionType
     {
-      Roundabout,
-      Other,
-      None
+        Roundabout,
+        Other,
+        None
     };
 
+public:
     /** Constructor */
     RoutingWaypoint();
 
     /** Convenience constructor to initialize members */
-    RoutingWaypoint( const RoutingPoint &point, JunctionType junctionType, const QString &junctionTypeRaw,
-                     const QString &roadType, int secondsRemaining, const QString &roadName );
+    RoutingWaypoint(const RoutingPoint &point, JunctionType junctionType, const QString &junctionTypeRaw,
+                    const QString &roadType, int secondsRemaining, const QString &roadName);
 
     /** Associated geo point */
     RoutingPoint point() const;

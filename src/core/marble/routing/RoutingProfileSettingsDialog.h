@@ -29,12 +29,13 @@ class RoutingProfileSettingsDialog : public QDialog
 {
     Q_OBJECT
 public:
-    RoutingProfileSettingsDialog( const PluginManager *pluginManager, RoutingProfilesModel *profilesModel, QWidget *parent = nullptr );
+    RoutingProfileSettingsDialog(const PluginManager *pluginManager, RoutingProfilesModel *profilesModel,
+                                 QWidget *parent = nullptr);
     ~RoutingProfileSettingsDialog() override;
 
-    void editProfile( int profileIndex );
+    void editProfile(int profileIndex);
 
-private Q_SLOTS:
+private slots:
     void updateConfigWidget();
 
     void openConfigDialog();
@@ -42,14 +43,14 @@ private Q_SLOTS:
 private:
     RoutingProfilesModel *m_profilesModel;
 
-    QList<RoutingRunnerPlugin*> m_plugins;
-    QHash<RoutingRunnerPlugin*, RoutingRunnerPlugin::ConfigWidget*> m_configWidgets;
+    QList<RoutingRunnerPlugin *> m_plugins;
+    QHash<RoutingRunnerPlugin *, RoutingRunnerPlugin::ConfigWidget *> m_configWidgets;
 
     Ui_RoutingProfileSettingsDialog *m_ui;
     QStandardItemModel *m_servicesModel;
 
-    QDialog* m_dialog;
-    QHBoxLayout* m_dialogLayout;
+    QDialog *m_dialog;
+    QHBoxLayout *m_dialogLayout;
 };
 
 }

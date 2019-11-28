@@ -56,7 +56,7 @@ public:
     MovieCapture::SnapshotMethod snapshotMethod() const;
     bool checkToolsAvailability();
 
-public Q_SLOTS:
+public slots:
     void setFps(int fps);
     void setFilename(const QString &path);
     void setSnapshotMethod(MovieCapture::SnapshotMethod method);
@@ -65,10 +65,10 @@ public Q_SLOTS:
     void stopRecording();
     void cancelRecording();
 
-private Q_SLOTS:
+private slots:
     void processWrittenMovie(int exitCode);
 
-Q_SIGNALS:
+signals:
     void rateCalculated( double );
     void errorOccured();
 

@@ -17,15 +17,15 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #ifndef MARBLE_GEOSCENEABSTRACTTILEPROJECTION_H
 #define MARBLE_GEOSCENEABSTRACTTILEPROJECTION_H
 
-#include "geodata_export.h"
-
 #include <QRect>
 #include <QScopedPointer>
+
+#include "geodata_export.h"
 
 namespace Marble
 {
@@ -44,8 +44,13 @@ class TileId;
 class GEODATA_EXPORT GeoSceneAbstractTileProjection
 {
 public:
-    enum Type { Equirectangular, Mercator };
+    enum Type
+    {
+        Equirectangular,
+        Mercator
+    };
 
+public:
     /**
      * @brief Construct a new GeoSceneAbstractTileProjection.
      */
@@ -53,7 +58,6 @@ public:
 
     virtual ~GeoSceneAbstractTileProjection();
 
-public:
     virtual GeoSceneAbstractTileProjection::Type type() const = 0;
 
     /**
@@ -91,7 +95,7 @@ public:
      *
      * @return range of tile indexes covering given geographical box at given zoom level
      */
-     virtual QRect tileIndexes(const GeoDataLatLonBox &latLonBox, int zoomLevel) const = 0;
+    virtual QRect tileIndexes(const GeoDataLatLonBox &latLonBox, int zoomLevel) const = 0;
 
     /**
      * @brief Get the boundary geo coordinates corresponding to a tile.
@@ -115,9 +119,9 @@ public:
      */
     GeoDataLatLonBox geoCoordinates(const TileId &tileId) const;
 
- private:
-     Q_DISABLE_COPY(GeoSceneAbstractTileProjection)
-     const QScopedPointer<GeoSceneAbstractTileProjectionPrivate> d_ptr;
+private:
+    Q_DISABLE_COPY(GeoSceneAbstractTileProjection)
+    const QScopedPointer<GeoSceneAbstractTileProjectionPrivate> d_ptr;
 };
 
 }

@@ -102,7 +102,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     QString owncloudUsername() const;
     QString owncloudPassword() const;
 
-    Q_SIGNALS:
+    signals:
     /**
      * This signal is emitted when the loaded settings were changed.
      * Either by the user or by loading them initially from disk.
@@ -124,7 +124,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
      */
     void syncNowClicked();
 
-    public Q_SLOTS:
+    public slots:
     /**
      * Disable "Sync Now" button while sync or for 30 sec of timout
      */
@@ -151,7 +151,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
      */
     void writeSettings();
     
-    private Q_SLOTS:
+    private slots:
     /**
      * Synchronize the loaded settings with the file on hard disk.
      */

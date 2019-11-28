@@ -88,7 +88,7 @@ class CrosshairsPlugin : public RenderPlugin, public DialogConfigurationInterfac
 
     void setSettings( const QHash<QString,QVariant> &settings ) override;
 
-private Q_SLOTS:
+private slots:
    void readSettings();
 
    void writeSettings();

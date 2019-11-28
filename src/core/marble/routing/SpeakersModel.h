@@ -11,9 +11,9 @@
 #ifndef MARBLE_SPEAKERSMODEL_H
 #define MARBLE_SPEAKERSMODEL_H
 
-#include "marble_export.h"
-
 #include <QAbstractListModel>
+
+#include "marble_export.h"
 
 namespace Marble
 {
@@ -27,24 +27,26 @@ class MARBLE_EXPORT SpeakersModel : public QAbstractListModel
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
-    enum SpeakersModelRoles {
+    enum SpeakersModelRoles
+    {
         Name = Qt::UserRole + 1,
         Path,
         IsLocal,
         IsRemote
     };
 
+public:
     /** Constructor */
-    explicit SpeakersModel( QObject *parent = nullptr );
+    explicit SpeakersModel(QObject *parent = nullptr);
 
     /** Destructor */
     ~SpeakersModel() override;
 
     /** Overload of QAbstractListModel */
-    int rowCount ( const QModelIndex &parent = QModelIndex() ) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
     /** Overload of QAbstractListModel */
-    QVariant data ( const QModelIndex &index, int role = Qt::DisplayRole ) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     /** Overload of QAbstractListModel */
     QHash<int, QByteArray> roleNames() const override;
@@ -52,33 +54,33 @@ public:
     /** @todo FIXME https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206 */
     int count() const;
 
-public Q_SLOTS:
-    int indexOf( const QString &name );
+public slots:
+    int indexOf(const QString &name);
 
-    QString path( int index );
+    QString path(int index);
 
-    void install( int index );
+    void install(int index);
 
-    bool isLocal( int index ) const;
+    bool isLocal(int index) const;
 
-    bool isRemote( int index ) const;
+    bool isRemote(int index) const;
 
-Q_SIGNALS:
+signals:
     void countChanged();
 
-    void installationProgressed( int newstuffindex, qreal progress );
+    void installationProgressed(int newstuffindex, qreal progress);
 
-    void installationFinished( int index );
+    void installationFinished(int index);
 
 private:
-    SpeakersModelPrivate* const d;
+    SpeakersModelPrivate *const d;
     friend class SpeakersModelPrivate;
 
-    Q_PRIVATE_SLOT( d, void fillModel() )
+    Q_PRIVATE_SLOT(d, void fillModel())
 
-    Q_PRIVATE_SLOT( d, void handleInstallationProgress( int row, qreal progress ) )
+    Q_PRIVATE_SLOT(d, void handleInstallationProgress(int row, qreal progress))
 
-    Q_PRIVATE_SLOT( d, void handleInstallation( int row ) )
+    Q_PRIVATE_SLOT(d, void handleInstallation(int row))
 };
 
 }

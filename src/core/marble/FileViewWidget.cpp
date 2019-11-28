@@ -48,7 +48,7 @@ class FileViewWidgetPrivate
     void setFileManager( FileManager *manager );
 
 
- public Q_SLOTS:
+ public slots:
     void saveFile();
     void closeFile();
     void enableFileViewActions();

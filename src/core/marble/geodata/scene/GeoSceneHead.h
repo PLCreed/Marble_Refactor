@@ -17,16 +17,15 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #ifndef MARBLE_GEOSCENEHEAD_H
 #define MARBLE_GEOSCENEHEAD_H
 
-#include "GeoDocument.h"
-
-#include <geodata_export.h>
-
 #include <QtGlobal>
+
+#include "geodata_export.h"
+#include "GeoDocument.h"
 
 class QString;
 
@@ -44,44 +43,43 @@ class GeoSceneHeadPrivate;
  */
 class GEODATA_EXPORT GeoSceneHead : public GeoNode
 {
- public:
+public:
     GeoSceneHead();
     ~GeoSceneHead() override;
-    
-    const char* nodeType() const override;
+
+    const char *nodeType() const override;
 
     QString name() const;
-    void setName( const QString& name );
+    void setName(const QString &name);
     QString target() const;
-    void setTarget( const QString& target );
+    void setTarget(const QString &target);
     QString theme() const;
-    void setTheme( const QString& theme );
+    void setTheme(const QString &theme);
 
     /** Planet radius, 0.0 if unknown */
     qreal radius() const;
-    void setRadius( qreal radius );
+    void setRadius(qreal radius);
 
     QString mapThemeId() const;
 
     QString description() const;
-    void setDescription( const QString& );
+    void setDescription(const QString &);
 
     bool visible() const;
-    void setVisible( bool visible );
+    void setVisible(bool visible);
 
-    const GeoSceneZoom* zoom() const;
-    GeoSceneZoom* zoom();
+    const GeoSceneZoom *zoom() const;
+    GeoSceneZoom *zoom();
 
-    const GeoSceneIcon* icon() const;
-    GeoSceneIcon* icon();
+    const GeoSceneIcon *icon() const;
+    GeoSceneIcon *icon();
 
-    const GeoSceneLicense* license() const;
-    GeoSceneLicense* license();
+    const GeoSceneLicense *license() const;
+    GeoSceneLicense *license();
 
-
- private:
-    Q_DISABLE_COPY( GeoSceneHead )
-    GeoSceneHeadPrivate * const d;
+private:
+    Q_DISABLE_COPY(GeoSceneHead)
+    GeoSceneHeadPrivate *const d;
 };
 
 }

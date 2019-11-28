@@ -93,7 +93,7 @@ public:
      */
     virtual void parseFile( const QString &id, const QByteArray &file );
 
-Q_SIGNALS:
+signals:
     void itemUpdateStarted();
     void itemUpdateEnded();
     void fileParsed( const QString &id );

@@ -64,7 +64,7 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
      */
     int  minimumZoom() const;
 	
- Q_SIGNALS:
+ signals:
     /**
      * @brief Signal emitted when the Home button has been pressed.
      */
@@ -101,7 +101,7 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
     void moveDown();
     //void centerOn(const QModelIndex&);
 
- public Q_SLOTS:
+ public slots:
     /**
      * @brief Sets the value of the slider.
      * @param zoom The new zoom value.

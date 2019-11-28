@@ -76,13 +76,13 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public BillboardGra
 
     virtual QList<QAction*> actions();
 
- Q_SIGNALS:
+ signals:
     void updated();
     void idChanged();
     void favoriteChanged( const QString& id, bool favorite );
     void stickyChanged();
 
- public Q_SLOTS:
+ public slots:
    void toggleFavorite();
 
  private:

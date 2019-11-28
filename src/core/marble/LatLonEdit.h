@@ -44,13 +44,13 @@ public:
     qreal value() const;
     Dimension dimension() const;
     GeoDataCoordinates::Notation notation() const;
-public Q_SLOTS:
+public slots:
     void setValue(qreal newvalue);
     void setDimension( Dimension dimension );
     void setNotation(GeoDataCoordinates::Notation notation);
-Q_SIGNALS:
+signals:
     void valueChanged( qreal value );
-private Q_SLOTS:
+private slots:
     void checkIntValueOverflow();
     void checkUIntValueOverflow();
     void checkFloatValueOverflow();

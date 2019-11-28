@@ -17,7 +17,7 @@
     along with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #ifndef MARBLE_GEOPARSER_H
 #define MARBLE_GEOPARSER_H
@@ -39,10 +39,11 @@ class GeoStackItem;
 
 class GEODATA_EXPORT GeoParser : public QXmlStreamReader
 {
- public:
+public:
     typedef QPair<QString, QString> QualifiedName; // Tag Name & Namespace pair
 
-    explicit GeoParser( GeoDataGenericSourceType sourceType );
+public:
+    explicit GeoParser(GeoDataGenericSourceType sourceType);
     virtual ~GeoParser();
 
     /**
@@ -51,27 +52,27 @@ class GEODATA_EXPORT GeoParser : public QXmlStreamReader
      * To retrieve the resulting data see @see releaseDocument() and
      * @see releaseModel()
      */
-    bool read( QIODevice* );
+    bool read(QIODevice *);
 
     /**
      * @brief retrieve the parsed document and reset the parser
      * If parsing was successful, retrieve the resulting document
      * and set the contained m_document pointer to 0.
      */
-    GeoDocument* releaseDocument();
-    GeoDocument* activeDocument() { return m_document; }
+    GeoDocument *releaseDocument();
+    GeoDocument *activeDocument() { return m_document; }
 
     // Used by tag handlers, to be overridden by GeoDataParser/GeoSceneParser
-    virtual bool isValidElement( const QString& tagName ) const;
+    virtual bool isValidElement(const QString &tagName) const;
 
     // Used by tag handlers, to access a parent element's associated GeoStackItem
-    GeoStackItem parentElement( unsigned int depth = 0 ) const;
+    GeoStackItem parentElement(unsigned int depth = 0) const;
 
     // Used by tag handlers, to emit a warning while parsing
-    void raiseWarning( const QString& );
+    void raiseWarning(const QString &);
 
     // Used by tag handlers, to retrieve the value for an attribute of the currently parsed element
-    QString attribute( const char* attributeName ) const;
+    QString attribute(const char *attributeName) const;
 
 protected:
     /**
@@ -83,10 +84,10 @@ protected:
      */
     virtual bool isValidRootElement() = 0;
 
-    virtual GeoDocument* createDocument() const = 0;
+    virtual GeoDocument *createDocument() const = 0;
 
 protected:
-    GeoDocument* m_document;
+    GeoDocument *m_document;
     GeoDataGenericSourceType m_source;
 
 private:
@@ -96,47 +97,45 @@ private:
 
 class GeoStackItem
 {
- public:
-    GeoStackItem()
-        : m_qualifiedName(),
-          m_node( nullptr )
-    {
-    }
+public:
+    GeoStackItem() :
+        m_qualifiedName(),
+        m_node(nullptr)
+    {}
 
-    GeoStackItem( const GeoParser::QualifiedName& qualifiedName, GeoNode* node )
-        : m_qualifiedName( qualifiedName ),
-          m_node( node )
-    {
-    }
+    GeoStackItem(const GeoParser::QualifiedName &qualifiedName, GeoNode *node) :
+        m_qualifiedName(qualifiedName),
+        m_node(node)
+    {}
 
     // Fast path for tag handlers
-    bool represents( const char* tagName ) const
+    bool represents(const char *tagName) const
     {
         return m_node && tagName == m_qualifiedName.first;
     }
 
     // Helper for tag handlers. Does NOT guard against miscasting. Use with care.
     template<class T>
-    T* nodeAs()
+    T *nodeAs()
     {
-        Q_ASSERT( dynamic_cast<T*>( m_node ) != nullptr );
-        return static_cast<T*>(m_node);
+        Q_ASSERT(dynamic_cast<T *>(m_node) != nullptr);
+        return static_cast<T *>(m_node);
     }
-    
+
     template<class T>
     bool is() const
     {
-        return nullptr != dynamic_cast<T*>(m_node);
+        return nullptr != dynamic_cast<T *>(m_node);
     }
 
     GeoParser::QualifiedName qualifiedName() const { return m_qualifiedName; }
-    GeoNode* associatedNode() const { return m_node; }
+    GeoNode *associatedNode() const { return m_node; }
 
 private:
     friend class GeoParser;
-    void assignNode( GeoNode* node ) { m_node = node; }
+    void assignNode(GeoNode *node) { m_node = node; }
     GeoParser::QualifiedName m_qualifiedName;
-    GeoNode* m_node;
+    GeoNode *m_node;
 };
 
 }

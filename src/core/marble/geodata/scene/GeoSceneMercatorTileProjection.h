@@ -17,11 +17,12 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #ifndef MARBLE_GEOSCENEMERCATORTILEPROJECTION_H
 #define MARBLE_GEOSCENEMERCATORTILEPROJECTION_H
 
+#include "geodata_export.h"
 #include "GeoSceneAbstractTileProjection.h"
 
 namespace Marble

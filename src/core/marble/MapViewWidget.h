@@ -43,11 +43,11 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
 protected:
     void resizeEvent(QResizeEvent *event) override;
 
- public Q_SLOTS:
+ public slots:
     void setMapThemeId( const QString & );
     void setProjection( Projection projection );
 
-private Q_SLOTS:
+private slots:
     void globeViewRequested();
     void mercatorViewRequested();
     void flatViewRequested();
@@ -70,7 +70,7 @@ private Q_SLOTS:
     Q_PRIVATE_SLOT( d, void toggleFavorite() )
     Q_PRIVATE_SLOT( d, void toggleIconSize() )
 
- Q_SIGNALS:
+ signals:
     void celestialBodyChanged( const QString& );
     void mapThemeIdChanged( const QString& );
     void projectionChanged( Projection );

@@ -64,7 +64,7 @@ public:
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = nullptr ) override;
     void repaintPixmap(const ViewportParams *viewParams);
 
-public Q_SLOTS:
+public slots:
     void updateTheme();
 
 private:

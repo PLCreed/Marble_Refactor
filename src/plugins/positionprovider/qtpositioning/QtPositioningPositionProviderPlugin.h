@@ -54,7 +54,7 @@ public:
     GeoDataCoordinates position() const override;
     GeoDataAccuracy accuracy() const override;
 
-private Q_SLOTS:
+private slots:
     /** Regular (each second) position and status update */
     void update();
     void update(const QGeoPositionInfo& position);

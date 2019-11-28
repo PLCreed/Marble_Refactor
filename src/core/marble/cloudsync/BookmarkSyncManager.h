@@ -11,10 +11,10 @@
 #ifndef BOOKMARKSYNCMANAGER_H
 #define BOOKMARKSYNCMANAGER_H
 
-#include "MergeItem.h"
-#include "marble_export.h"
-
 #include <QObject>
+
+#include "marble_export.h"
+#include "MergeItem.h"
 
 namespace Marble {
 
@@ -24,11 +24,10 @@ class BookmarkManager;
 class MARBLE_EXPORT BookmarkSyncManager : public QObject
 {
     Q_OBJECT
-
-    Q_PROPERTY( bool bookmarkSyncEnabled READ isBookmarkSyncEnabled WRITE setBookmarkSyncEnabled NOTIFY bookmarkSyncEnabledChanged )
+    Q_PROPERTY(bool bookmarkSyncEnabled READ isBookmarkSyncEnabled WRITE setBookmarkSyncEnabled NOTIFY bookmarkSyncEnabledChanged)
 
 public:
-    explicit BookmarkSyncManager( CloudSyncManager *cloudSyncManager );
+    explicit BookmarkSyncManager(CloudSyncManager *cloudSyncManager);
     ~BookmarkSyncManager() override;
 
     /**
@@ -46,18 +45,18 @@ public:
      * Setter for enabling/disabling bookmark synchronization.
      * @param enabled Status of bookmark synchronization
      */
-    void setBookmarkSyncEnabled( bool enabled );
+    void setBookmarkSyncEnabled(bool enabled);
 
     void setBookmarkManager(BookmarkManager *manager);
 
-Q_SIGNALS:
+signals:
     void bookmarkSyncEnabledChanged(bool enabled);
-    void uploadProgress( qint64 sent, qint64 total );
-    void downloadProgress( qint64 received, qint64 total );
-    void mergeConflict( MergeItem *item );
+    void uploadProgress(qint64 sent, qint64 total);
+    void downloadProgress(qint64 received, qint64 total);
+    void mergeConflict(MergeItem *item);
     void syncComplete();
 
-public Q_SLOTS:
+public slots:
     /**
      * Initiates running of synchronization "method chain".
      */
@@ -67,17 +66,17 @@ public Q_SLOTS:
      *
      * @param item
      */
-    void resolveConflict( MergeItem *item );
+    void resolveConflict(MergeItem *item);
 
 private:
-    Q_PRIVATE_SLOT(d, void saveDownloadedToCache( const QByteArray &kml ) )
-    Q_PRIVATE_SLOT(d, void parseTimestamp() )
-    Q_PRIVATE_SLOT(d, void copyLocalToCache() )
+    Q_PRIVATE_SLOT(d, void saveDownloadedToCache(const QByteArray &kml))
+    Q_PRIVATE_SLOT(d, void parseTimestamp())
+    Q_PRIVATE_SLOT(d, void copyLocalToCache())
 
-    Q_PRIVATE_SLOT(d, void continueSynchronization() )
-    Q_PRIVATE_SLOT(d, void completeSynchronization() )
-    Q_PRIVATE_SLOT(d, void completeMerge() )
-    Q_PRIVATE_SLOT(d, void completeUpload() )
+    Q_PRIVATE_SLOT(d, void continueSynchronization())
+    Q_PRIVATE_SLOT(d, void completeSynchronization())
+    Q_PRIVATE_SLOT(d, void completeMerge())
+    Q_PRIVATE_SLOT(d, void completeUpload())
 
 private:
     class Private;

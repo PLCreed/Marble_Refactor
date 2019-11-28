@@ -67,7 +67,7 @@ public:
 
     QDialog *configDialog() override;
 
-private Q_SLOTS:
+private slots:
     /** Write settings */
     void writeSettings();
 

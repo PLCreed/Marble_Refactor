@@ -33,7 +33,7 @@ class AbstractWeatherService : public QObject
     ~AbstractWeatherService() override;
     void setMarbleWidget( MarbleWidget* widget );
     
- public Q_SLOTS:
+ public slots:
     virtual void setFavoriteItems( const QStringList& favorite );
     QStringList favoriteItems() const;
 
@@ -42,7 +42,7 @@ class AbstractWeatherService : public QObject
     virtual void getItem( const QString &id ) = 0;
     virtual void parseFile( const QByteArray& file );
     
- Q_SIGNALS:
+ signals:
     void requestedDownload( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
     void createdItems( const QList<AbstractDataPluginItem*>& items );
     void downloadDescriptionFileRequested( const QUrl& );

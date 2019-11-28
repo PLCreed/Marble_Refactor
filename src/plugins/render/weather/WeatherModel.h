@@ -40,7 +40,7 @@ class WeatherModel : public AbstractDataPluginModel
 
     void setFavoriteItems( const QStringList& list ) override;
     
- public Q_SLOTS:
+ public slots:
     /**
      * Downloads the file from @p url. @p item -> addDownloadedFile() will be called when the
      * download is finished. Additionally initialized() items will be added to the item list
@@ -55,7 +55,7 @@ class WeatherModel : public AbstractDataPluginModel
 
     void setMarbleWidget(MarbleWidget *widget);
 
- Q_SIGNALS:
+ signals:
     void favoriteItemChanged( const QString& id, bool isFavorite );
 
  protected:

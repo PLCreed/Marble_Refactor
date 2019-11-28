@@ -28,7 +28,7 @@ public:
     QVariant headerData( int section, Qt::Orientation orientation, int role ) const override;
     void clear();
     Qt::ItemFlags flags(const QModelIndex & index) const override ;
-public Q_SLOTS:
+public slots:
     int addNode( const GeoDataCoordinates &node );
 private:
     QVector<GeoDataCoordinates> m_nodes;

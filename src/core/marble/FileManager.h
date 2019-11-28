@@ -77,7 +77,7 @@ class FileManager : public QObject
     /** Returns the number of files being opened at the moment */
     int pendingFiles() const;
 
- Q_SIGNALS:
+ signals:
     void fileAdded( const QString &key );
     void fileRemoved( const QString &key );
     void centeredDocument( const GeoDataLatLonBox& );

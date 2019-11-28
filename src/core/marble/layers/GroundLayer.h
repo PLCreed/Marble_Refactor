@@ -11,16 +11,16 @@
 #ifndef MARBLE_GROUNDLAYER_H
 #define MARBLE_GROUNDLAYER_H
 
-#include "LayerInterface.h"
-
 #include <QColor>
+
+#include "LayerInterface.h"
 
 namespace Marble
 {
 
 class GroundLayer : public LayerInterface
 {
- public:
+public:
 
     GroundLayer();
 
@@ -28,13 +28,13 @@ class GroundLayer : public LayerInterface
 
     QStringList renderPosition() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString& renderPos = QLatin1String("NONE"),
-                         GeoSceneLayer * layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport,
+                const QString &renderPos = QLatin1String("NONE"),
+                GeoSceneLayer *layer = nullptr) override;
 
     qreal zValue() const override;
 
-    void setColor( const QColor &color );
+    void setColor(const QColor &color);
 
     QColor color() const;
 
@@ -42,9 +42,9 @@ class GroundLayer : public LayerInterface
 
     QString runtimeTrace() const override { return QStringLiteral("GroundLayer"); }
 
- private:
+private:
     QColor m_color;  // Gets the color specified via DGML's <map bgcolor="">
-    
+
 };
 
 }

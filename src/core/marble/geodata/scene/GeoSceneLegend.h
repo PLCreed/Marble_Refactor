@@ -17,15 +17,15 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #ifndef MARBLE_GEOSCENELEGEND_H
 #define MARBLE_GEOSCENELEGEND_H
 
 #include <QVector>
-#include "GeoDocument.h"
 
-#include <geodata_export.h>
+#include "geodata_export.h"
+#include "GeoDocument.h"
 
 namespace Marble
 {
@@ -37,25 +37,24 @@ class GeoSceneLegendPrivate;
 /**
  * @short Legend of a GeoScene document.
  */
-
 class GEODATA_EXPORT GeoSceneLegend : public GeoNode
 {
- public:
+public:
     GeoSceneLegend();
     ~GeoSceneLegend() override;
-    
-    const char* nodeType() const override;
+
+    const char *nodeType() const override;
 
     /**
      * @brief  Add a section to the legend
      * @param  section  the new section
      */
-    void addSection( const GeoSceneSection* );
-    QVector<const GeoSceneSection*> sections() const;
+    void addSection(const GeoSceneSection *);
+    QVector<const GeoSceneSection *> sections() const;
 
- private:
-    Q_DISABLE_COPY( GeoSceneLegend )
-    GeoSceneLegendPrivate * const d;
+private:
+    Q_DISABLE_COPY(GeoSceneLegend)
+    GeoSceneLegendPrivate *const d;
 };
 
 }

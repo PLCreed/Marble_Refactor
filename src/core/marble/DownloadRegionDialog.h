@@ -42,12 +42,12 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
 
     QVector<TileCoordsPyramid> region() const;
 
- public Q_SLOTS:
+ public slots:
     void setSpecifiedLatLonAltBox( GeoDataLatLonAltBox const & );
     void setVisibleLatLonAltBox( GeoDataLatLonAltBox const & );
     void updateTextureLayer();
 
- Q_SIGNALS:
+ signals:
     /// This signal is emitted when the "Apply" button is pressed.
     void applied();
     /// This signal is emitted when the dialog receives a QHideEvent.
@@ -59,7 +59,7 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
     void hideEvent( QHideEvent * event ) override;
     void showEvent( QShowEvent * event ) override;
 
- private Q_SLOTS:
+ private slots:
     void toggleSelectionMethod();
     void updateTilesCount();
 

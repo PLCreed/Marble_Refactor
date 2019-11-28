@@ -17,7 +17,7 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #include "GeoSceneProperty.h"
 
@@ -27,15 +27,14 @@
 namespace Marble
 {
 
-GeoSceneProperty::GeoSceneProperty( const QString& name )
-    : m_name( name ),
-      m_available( false ),
-      m_defaultValue( false ),
-      m_value( false )
-{
-}
- 
-const char* GeoSceneProperty::nodeType() const
+GeoSceneProperty::GeoSceneProperty(const QString &name) :
+    m_name(name),
+    m_available(false),
+    m_defaultValue(false),
+    m_value(false)
+{}
+
+const char *GeoSceneProperty::nodeType() const
 {
     return GeoSceneTypes::GeoScenePropertyType;
 }
@@ -50,7 +49,7 @@ bool GeoSceneProperty::available() const
     return m_available;
 }
 
-void GeoSceneProperty::setAvailable( bool available )
+void GeoSceneProperty::setAvailable(bool available)
 {
     m_available = available;
 }
@@ -60,10 +59,10 @@ bool GeoSceneProperty::defaultValue() const
     return m_defaultValue;
 }
 
-void GeoSceneProperty::setDefaultValue( bool defaultValue )
+void GeoSceneProperty::setDefaultValue(bool defaultValue)
 {
     m_defaultValue = defaultValue;
-    setValue( defaultValue );
+    setValue(defaultValue);
 }
 
 bool GeoSceneProperty::value() const
@@ -71,14 +70,14 @@ bool GeoSceneProperty::value() const
     return m_value;
 }
 
-void GeoSceneProperty::setValue( bool value )
+void GeoSceneProperty::setValue(bool value)
 {
-    if ( m_value == value ) 
+    if (m_value == value)
         return;
 
     m_value = value;
-//    mDebug() << "GeoSceneProperty: Setting " << m_name << "to" << m_value; 
-    emit valueChanged( m_name, m_value );
+    //    mDebug() << "GeoSceneProperty: Setting " << m_name << "to" << m_value;
+    emit valueChanged(m_name, m_value);
 }
 
 }

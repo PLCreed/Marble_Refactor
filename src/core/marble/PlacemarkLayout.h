@@ -86,7 +86,7 @@ class PlacemarkLayout : public QObject
 
     bool hasPlacemarkAt(const QPoint &pos);
 
- public Q_SLOTS:
+ public slots:
     // earth
     void setShowPlaces( bool show );
     void setShowCities( bool show );
@@ -103,7 +103,7 @@ class PlacemarkLayout : public QObject
     void removePlacemarks( const QModelIndex& index, int first, int last );
     void resetCacheData();
 
- Q_SIGNALS:
+ signals:
     void repaintNeeded();
 
  private:

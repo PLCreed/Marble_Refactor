@@ -90,7 +90,7 @@ protected:
     bool eventFilter( QObject *object, QEvent *e ) override;
     void contextMenuEvent( QWidget *w, QContextMenuEvent *e ) override;
 
- private Q_SLOTS:
+ private slots:
     void handleDataUpdate(const GeoDataLineString &points, const QVector<QPointF> &eleData);
     void updateVisiblePoints();
     void forceRepaint();
@@ -103,7 +103,7 @@ protected:
     void switchDataSource(ElevationProfileDataSource *source);
 
 
-Q_SIGNALS:
+signals:
     void dataUpdated();
 
  private:

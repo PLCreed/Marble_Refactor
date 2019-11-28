@@ -27,12 +27,12 @@ public:
     EditGroundOverlayDialog( GeoDataGroundOverlay *overlay, TextureLayer *textureLayer, QWidget *parent = nullptr );
     ~EditGroundOverlayDialog() override;
 
-private Q_SLOTS:
+private slots:
     void updateGroundOverlay();
     void setGroundOverlayUpdated();
     void checkFields();
 
-Q_SIGNALS:
+signals:
     void groundOverlayUpdated( GeoDataGroundOverlay* );
 
 private:

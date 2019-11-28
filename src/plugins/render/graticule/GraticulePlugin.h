@@ -97,7 +97,7 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
 
 
 
- public Q_SLOTS:
+ public slots:
     void readSettings();
     void writeSettings();
 

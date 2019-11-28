@@ -11,9 +11,9 @@
 #ifndef MARBLE_ROUTINGPOINT_H
 #define MARBLE_ROUTINGPOINT_H
 
-#include "marble_export.h"
-
 #include <QtGlobal>
+
+#include "marble_export.h"
 
 class QTextStream;
 
@@ -21,12 +21,12 @@ namespace Marble
 {
 
 /**
-  * There are many Point classes, but this is mine.
-  */
+ * There are many Point classes, but this is mine.
+ */
 class MARBLE_EXPORT RoutingPoint
 {
 public:
-    explicit RoutingPoint( qreal lon = 0.0, qreal lat = 0.0 );
+    explicit RoutingPoint(qreal lon = 0.0, qreal lat = 0.0);
 
     /** Longitude of the point */
     qreal lon() const;
@@ -35,18 +35,18 @@ public:
     qreal lat() const;
 
     /**
-      * Calculates the bearing of the line defined by this point
-      * and the given other point.
-      * Code based on http://www.movable-type.co.uk/scripts/latlong.html
-      */
-    qreal bearing( const RoutingPoint &other ) const;
+     * Calculates the bearing of the line defined by this point
+     * and the given other point.
+     * Code based on http://www.movable-type.co.uk/scripts/latlong.html
+     */
+    qreal bearing(const RoutingPoint &other) const;
 
     /**
-      * Calculates the distance in meter between this point and the
-      * given other point.
-      * Code based on http://www.movable-type.co.uk/scripts/latlong.html
-      */
-    qreal distance( const RoutingPoint &other ) const;
+     * Calculates the distance in meter between this point and the
+     * given other point.
+     * Code based on http://www.movable-type.co.uk/scripts/latlong.html
+     */
+    qreal distance(const RoutingPoint &other) const;
 
 private:
     qreal m_lon;
@@ -58,7 +58,7 @@ private:
     qreal m_latRad;
 };
 
-QTextStream& operator<<( QTextStream& stream, const RoutingPoint &i );
+QTextStream &operator<<(QTextStream &stream, const RoutingPoint &i);
 
 } // namespace Marble
 

@@ -30,7 +30,7 @@ public:
 
     ~HostipRunner() override;
 
-private Q_SLOTS:
+private slots:
     void get();
 
     // Http request with hostip.info done

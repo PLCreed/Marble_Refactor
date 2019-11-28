@@ -34,12 +34,12 @@ class BBCWeatherService : public AbstractWeatherService
 
     void setFavoriteItems( const QStringList& favorite ) override;
     
- public Q_SLOTS:
+ public slots:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
                              qint32 number = 10 ) override;
     void getItem( const QString &id ) override;
 
- private Q_SLOTS:
+ private slots:
     void fetchStationList();
     void createItem( const BBCStation& station );
 

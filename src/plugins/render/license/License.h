@@ -48,7 +48,7 @@ public:
     void initialize () override;
     bool isInitialized () const override;
 
-private Q_SLOTS:
+private slots:
     void updateLicenseText();
     void toggleLicenseSize();
     void showAboutDialog();

@@ -11,9 +11,9 @@
 #ifndef MARBLE_GEOWRITERBACKEND_H
 #define MARBLE_GEOWRITERBACKEND_H
 
-#include "marble_export.h"
-
 #include <QString>
+
+#include "marble_export.h"
 
 class QIODevice;
 
@@ -33,7 +33,7 @@ public:
      * @param document A GeoDataDocument with content to write
      * @return True if the content is successfully written to the device, false otherwise
      */
-    virtual bool write(QIODevice* device, const GeoDataDocument &document) = 0;
+    virtual bool write(QIODevice *device, const GeoDataDocument &document) = 0;
 };
 
 /**
@@ -42,16 +42,16 @@ public:
 class MARBLE_EXPORT GeoWriterBackendRegistrar
 {
 public:
-    GeoWriterBackendRegistrar(GeoWriterBackend* writer, const QString &fileExtension);
+    GeoWriterBackendRegistrar(GeoWriterBackend *writer, const QString &fileExtension);
     ~GeoWriterBackendRegistrar();
 
 private:
-    GeoWriterBackend* m_writer;
+    GeoWriterBackend *m_writer;
     QString m_fileExtension;
 };
 
 #define MARBLE_ADD_WRITER(Class, fileExtension) \
-    static GeoWriterBackendRegistrar s_##Class##Registrar(new Class, fileExtension);
+    static GeoWriterBackendRegistrar s_ ## Class ## Registrar(new Class, fileExtension);
 
 }
 

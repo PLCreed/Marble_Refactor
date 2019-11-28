@@ -63,7 +63,7 @@ class ProgressFloatItem  : public AbstractFloatItem
 
     void paintContent( QPainter *painter ) override;
 
-private Q_SLOTS:
+private slots:
     void removeProgressItem();
 
     void handleProgress( int active, int queued );

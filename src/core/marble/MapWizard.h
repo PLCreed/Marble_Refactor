@@ -51,7 +51,7 @@ public:
     bool validateCurrentPage() override;
     int nextId() const override;
 
-public Q_SLOTS:
+public slots:
     // WMS protocol
     void queryServerCapabilities();
     void parseServerCapabilities( QNetworkReply* reply );

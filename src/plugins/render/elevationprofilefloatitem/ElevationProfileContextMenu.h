@@ -27,7 +27,7 @@ class ElevationProfileContextMenu : public QObject {
 public:
     explicit ElevationProfileContextMenu(ElevationProfileFloatItem* floatItem);
     QMenu* getMenu();
-public Q_SLOTS:
+public slots:
     void updateContextMenuEntries();
 
 private:

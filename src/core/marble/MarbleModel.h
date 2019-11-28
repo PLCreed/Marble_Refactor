@@ -281,7 +281,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     const GeoDataPlacemark *trackedPlacemark() const;
 
- public Q_SLOTS:
+ public slots:
     void clearPersistentTileCache();
 
     /**
@@ -298,7 +298,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     void updateProperty( const QString &property, bool value );
 
- Q_SIGNALS:
+ signals:
 
     /**
      * @brief Signal that the MarbleModel has started to create a new set of tiles.

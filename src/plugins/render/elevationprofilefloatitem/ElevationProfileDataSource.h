@@ -44,10 +44,10 @@ public:
      */
     virtual bool isDataAvailable() const = 0;
 
-public Q_SLOTS:
+public slots:
     virtual void requestUpdate() = 0;
 
-Q_SIGNALS:
+signals:
     void sourceCountChanged();
     void dataUpdated(const GeoDataLineString &points, const QVector<QPointF> &elevationData);
 
@@ -74,13 +74,13 @@ public:
 
     int currentSourceIndex() const;
 
-public Q_SLOTS:
+public slots:
     void requestUpdate() override;
 
 protected:
     qreal getElevation(const GeoDataCoordinates &coordinates) const override;
 
-private Q_SLOTS:
+private slots:
     void handleObjectAdded( GeoDataObject *object );
     void handleObjectRemoved( GeoDataObject *object );
 
@@ -103,7 +103,7 @@ public:
 
     bool isDataAvailable() const override;
 
-public Q_SLOTS:
+public slots:
     void requestUpdate() override;
 
 protected:

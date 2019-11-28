@@ -73,7 +73,7 @@ class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInt
  protected:
     bool eventFilter( QObject *object, QEvent *event ) override;
 
- private Q_SLOTS:
+ private slots:
     void readSettings();
     void writeSettings();
 

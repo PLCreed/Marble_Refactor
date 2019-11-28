@@ -37,11 +37,11 @@ class MARBLE_EXPORT TileCreatorDialog : public QDialog
     explicit TileCreatorDialog( TileCreator *creator, QWidget *parent = nullptr );
     ~TileCreatorDialog() override;
 
- public Q_SLOTS:
+ public slots:
     void setProgress( int progress );
     void setSummary( const QString& name, const QString& description );
 
-private Q_SLOTS:
+private slots:
     void cancelTileCreation();
 
  private:

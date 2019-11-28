@@ -39,7 +39,7 @@ public:
 public Q_SLOTS:
     void disableSearchAnimation();
 
-Q_SIGNALS:
+signals:
     void search( const QString &searchTerm, SearchMode searchMode );
 
     void centerOn( const GeoDataCoordinates &coordinates );

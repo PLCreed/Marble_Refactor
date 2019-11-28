@@ -8,6 +8,10 @@
 // Copyright 2011      Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
 //
 
+#include <QtMath>
+#include <QImageReader>
+#include <QPixmapCache>
+
 #include "AbstractGeoPolygonGraphicsItem.h"
 
 #include "GeoDataLinearRing.h"
@@ -24,103 +28,115 @@
 #include "MarbleDebug.h"
 #include "ViewportParams.h"
 
-#include <QtMath>
-#include <QImageReader>
-#include <QPixmapCache>
-
 namespace Marble
 {
 
 const void *AbstractGeoPolygonGraphicsItem::s_previousStyle = nullptr;
 
-AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon) :
+AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark,
+                                                               const GeoDataPolygon *polygon) :
     GeoGraphicsItem(placemark),
     m_polygon(polygon),
     m_ring(nullptr),
     m_building(nullptr)
-{
-}
+{}
 
-AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring) :
+AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark,
+                                                               const GeoDataLinearRing *ring) :
     GeoGraphicsItem(placemark),
     m_polygon(nullptr),
     m_ring(ring),
     m_building(nullptr)
-{
-}
+{}
 
-AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataBuilding *building) :
+AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark,
+                                                               const GeoDataBuilding *building) :
     GeoGraphicsItem(placemark),
     m_polygon(nullptr),
     m_ring(nullptr),
     m_building(building)
-{
-}
+{}
 
 AbstractGeoPolygonGraphicsItem::~AbstractGeoPolygonGraphicsItem()
-{
-}
+{}
 
-const GeoDataLatLonAltBox& AbstractGeoPolygonGraphicsItem::latLonAltBox() const
+const GeoDataLatLonAltBox &AbstractGeoPolygonGraphicsItem::latLonAltBox() const
 {
-    if(m_polygon) {
+    if (m_polygon)
+    {
         return m_polygon->latLonAltBox();
-    } else if (m_ring) {
+    }
+    else if (m_ring)
+    {
         return m_ring->latLonAltBox();
     }
 
     return m_building->latLonAltBox();
 }
 
-void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport, const QString &layer, int tileZoomLevel)
+void AbstractGeoPolygonGraphicsItem::paint(GeoPainter *painter, const ViewportParams *viewport,
+                                           const QString &layer, int tileZoomLevel)
 {
-    Q_UNUSED(layer);
-    Q_UNUSED(tileZoomLevel);
+    Q_UNUSED(layer)
+    Q_UNUSED(tileZoomLevel)
 
     bool isValid = true;
-    if (s_previousStyle != style().data()) {
+    if (s_previousStyle != style().data())
+    {
         isValid = configurePainter(painter, *viewport);
     }
     s_previousStyle = style().data();
 
-    if (!isValid) return;
+    if (!isValid)
+        return;
 
-    if ( m_polygon ) {
+    if (m_polygon)
+    {
         bool innerResolved = false;
 
-        for(auto const & ring : m_polygon->innerBoundaries()) {
-            if (viewport->resolves(ring.latLonAltBox(), 4)) {
-               innerResolved = true;
-               break;
+        for (auto const &ring : m_polygon->innerBoundaries())
+        {
+            if (viewport->resolves(ring.latLonAltBox(), 4))
+            {
+                innerResolved = true;
+                break;
             }
         }
 
-        if (innerResolved) {
+        if (innerResolved)
+        {
             painter->drawPolygon(*m_polygon);
         }
-        else {
+        else
+        {
             painter->drawPolygon(m_polygon->outerBoundary());
         }
-    } else if ( m_ring ) {
-        painter->drawPolygon( *m_ring );
+    }
+    else if (m_ring)
+    {
+        painter->drawPolygon(*m_ring);
     }
 }
 
 bool AbstractGeoPolygonGraphicsItem::contains(const QPoint &screenPosition, const ViewportParams *viewport) const
 {
-    auto const visualCategory = static_cast<const GeoDataPlacemark*>(feature())->visualCategory();
-    if (visualCategory == GeoDataPlacemark::Landmass ||
-            visualCategory == GeoDataPlacemark::UrbanArea ||
-            (visualCategory >= GeoDataPlacemark::LanduseAllotments && visualCategory <= GeoDataPlacemark::LanduseVineyard)) {
+    auto const visualCategory = static_cast<const GeoDataPlacemark *>(feature())->visualCategory();
+    if ((visualCategory == GeoDataPlacemark::Landmass) || (visualCategory == GeoDataPlacemark::UrbanArea)
+        || ((visualCategory >= GeoDataPlacemark::LanduseAllotments)
+            && (visualCategory <= GeoDataPlacemark::LanduseVineyard)))
+    {
         return false;
     }
 
     double lon, lat;
     viewport->geoCoordinates(screenPosition.x(), screenPosition.y(), lon, lat, GeoDataCoordinates::Radian);
     auto const coordinates = GeoDataCoordinates(lon, lat);
-    if (m_polygon) {
+    if (m_polygon)
+    {
         return m_polygon->contains(coordinates);
-    } else if (m_ring) {
+    }
+    else if (m_ring)
+    {
         return m_ring->contains(coordinates);
     }
     return false;
@@ -130,14 +146,17 @@ bool AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const
 {
     QPen currentPen = painter->pen();
     GeoDataStyle::ConstPtr style = this->style();
-    if (!style) {
-        painter->setPen( QPen() ); // "style-less" polygons: a 1px black solid line
+    if (!style)
+    {
+        painter->setPen(QPen());   // "style-less" polygons: a 1px black solid line
     }
-    else {
-        const GeoDataPolyStyle& polyStyle = style->polyStyle();
+    else
+    {
+        const GeoDataPolyStyle &polyStyle = style->polyStyle();
 
-        if (polyStyle.outline()) {
-            const GeoDataLineStyle& lineStyle = style->lineStyle();
+        if (polyStyle.outline())
+        {
+            const GeoDataLineStyle &lineStyle = style->lineStyle();
 
             // To save performance we avoid making changes to the painter's pen.
             // So we first take a copy of the actual painter pen, make changes to it
@@ -151,33 +170,41 @@ bool AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const
             currentPen.setCapStyle(lineStyle.capStyle());
             currentPen.setStyle(lineStyle.penStyle());
 
-            if (painter->pen().color() != currentPen.color()) {
+            if (painter->pen().color() != currentPen.color())
+            {
                 painter->setPen(currentPen);
             }
         }
-        else {
+        else
+        {
             // polygons without outline: Qt::NoPen (not drawn)
-            if (currentPen.style() != Qt::NoPen) {
+            if (currentPen.style() != Qt::NoPen)
+            {
                 painter->setPen(Qt::NoPen);
             }
         }
 
-        if (!polyStyle.fill()) {            
+        if (!polyStyle.fill())
+        {
             painter->setBrush(Qt::transparent);
         }
-        else {
+        else
+        {
             const QColor paintedColor = polyStyle.paintedColor();
-            if (painter->brush().color() != paintedColor ||
-                painter->brush().style() != polyStyle.brushStyle()) {
-                if (!polyStyle.texturePath().isEmpty() || !polyStyle.textureImage().isNull()) {
+            if ((painter->brush().color() != paintedColor)
+                || (painter->brush().style() != polyStyle.brushStyle()))
+            {
+                if (!polyStyle.texturePath().isEmpty() || !polyStyle.textureImage().isNull())
+                {
                     GeoDataCoordinates coords = latLonAltBox().center();
                     qreal x, y;
                     viewport.screenCoordinates(coords, x, y);
                     QBrush brush(texture(polyStyle.texturePath(), paintedColor));
                     painter->setBrush(brush);
-                    painter->setBrushOrigin(QPoint(x,y));
+                    painter->setBrushOrigin(QPoint(x, y));
                 }
-                else {
+                else
+                {
                     painter->setBrush(QBrush(paintedColor, polyStyle.brushStyle()));
                 }
             }
@@ -194,7 +221,8 @@ int AbstractGeoPolygonGraphicsItem::extractElevation(const GeoDataPlacemark &pla
     const OsmPlacemarkData &osmData = placemark.osmData();
 
     const auto tagIter = osmData.findTag(QStringLiteral("ele"));
-    if (tagIter != osmData.tagsEnd()) {
+    if (tagIter != osmData.tagsEnd())
+    {
         elevation = tagIter.value().toInt();
     }
 
@@ -205,12 +233,14 @@ QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, cons
 {
     QString const key = QString::number(color.rgba()) + '/' + texturePath;
     QPixmap texture;
-    if (!QPixmapCache::find(key, texture)) {
+    if (!QPixmapCache::find(key, texture))
+    {
         QImageReader imageReader(style()->polyStyle().resolvePath(texturePath));
         texture = QPixmap::fromImageReader(&imageReader);
 
-        if (texture.hasAlphaChannel()) {
-            QPixmap pixmap (texture.size());
+        if (texture.hasAlphaChannel())
+        {
+            QPixmap pixmap(texture.size());
             pixmap.fill(color);
             QPainter imagePainter(&pixmap);
             imagePainter.drawPixmap(0, 0, texture);

@@ -17,15 +17,14 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #ifndef MARBLE_GEOSCENEABSTRACTDATASET_H
 #define MARBLE_GEOSCENEABSTRACTDATASET_H
 
 #include <QString>
 
-#include <geodata_export.h>
-
+#include "geodata_export.h"
 #include "GeoDocument.h"
 
 namespace Marble
@@ -36,24 +35,24 @@ namespace Marble
  */
 class GEODATA_EXPORT GeoSceneAbstractDataset : public GeoNode
 {
- public:
-    ~GeoSceneAbstractDataset() override {};
+public:
+    ~GeoSceneAbstractDataset() override {}
 
     QString name() const;
 
     QString fileFormat() const;
-    void setFileFormat( const QString& fileFormat );
+    void setFileFormat(const QString &fileFormat);
 
     int expire() const;
-    void setExpire( int expire );
+    void setExpire(int expire);
 
- protected:
-    explicit GeoSceneAbstractDataset( const QString& name );
+protected:
+    explicit GeoSceneAbstractDataset(const QString &name);
 
- private:
+private:
     QString m_name;
     QString m_fileFormat;
-    int     m_expire;
+    int m_expire;
 };
 
 }

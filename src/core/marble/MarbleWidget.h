@@ -612,7 +612,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void setHighlightEnabled( bool enabled );
 
- public Q_SLOTS:
+ public slots:
 
     /// @name Position management slots
     //@{
@@ -1069,7 +1069,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     //@}
 
- Q_SIGNALS:
+ signals:
     /**
      * @brief Signal that the zoom has changed, and to what.
      * @param zoom  The new zoom value.

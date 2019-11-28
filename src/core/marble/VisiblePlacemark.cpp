@@ -9,6 +9,11 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
+#include <QApplication>
+#include <QPainter>
+#include <QPalette>
+#include <QPixmapCache>
+
 #include "VisiblePlacemark.h"
 
 #include "MarbleDebug.h"
@@ -20,44 +25,42 @@
 #include "GeoDataLabelStyle.h"
 #include "PlacemarkLayer.h"
 
-#include <QApplication>
-#include <QPainter>
-#include <QPalette>
-#include <QPixmapCache>
-
 using namespace Marble;
 
-VisiblePlacemark::VisiblePlacemark( const GeoDataPlacemark *placemark, const GeoDataCoordinates &coordinates, const GeoDataStyle::ConstPtr &style )
-    : m_placemark( placemark ),
-      m_selected( false ),
-      m_labelDirty(true),
-      m_style(style),
-      m_coordinates(coordinates)
+VisiblePlacemark::VisiblePlacemark(const GeoDataPlacemark *placemark, const GeoDataCoordinates &coordinates,
+                                   const GeoDataStyle::ConstPtr &style) :
+    m_placemark(placemark),
+    m_selected(false),
+    m_labelDirty(true),
+    m_style(style),
+    m_coordinates(coordinates)
 {
     const RemoteIconLoader *remoteLoader = style->iconStyle().remoteIconLoader();
-    QObject::connect( remoteLoader, SIGNAL(iconReady()),
-                     this, SLOT(setSymbolPixmap()) );
+    QObject::connect(remoteLoader, SIGNAL(iconReady()),
+                     this, SLOT(setSymbolPixmap()));
 
     setSymbolPixmap();
 }
 
-const GeoDataPlacemark* VisiblePlacemark::placemark() const
+const GeoDataPlacemark *VisiblePlacemark::placemark() const
 {
     return m_placemark;
 }
 
-const QPixmap& VisiblePlacemark::symbolPixmap() const
+const QPixmap &VisiblePlacemark::symbolPixmap() const
 {
-    if (!m_symbolId.isEmpty() && m_symbolPixmap.isNull()) {
-        if ( !QPixmapCache::find( m_symbolId, &m_symbolPixmap ) ) {
+    if (!m_symbolId.isEmpty() && m_symbolPixmap.isNull())
+    {
+        if (!QPixmapCache::find(m_symbolId, &m_symbolPixmap))
+        {
             m_symbolPixmap = QPixmap::fromImage(m_style->iconStyle().scaledIcon());
-            QPixmapCache::insert( m_symbolId, m_symbolPixmap);
+            QPixmapCache::insert(m_symbolId, m_symbolPixmap);
         }
     }
     return m_symbolPixmap;
 }
 
-const QString& VisiblePlacemark::symbolId() const
+const QString &VisiblePlacemark::symbolId() const
 {
     return m_symbolId;
 }
@@ -67,15 +70,16 @@ bool VisiblePlacemark::selected() const
     return m_selected;
 }
 
-void VisiblePlacemark::setSelected( bool selected )
+void VisiblePlacemark::setSelected(bool selected)
 {
-    if (selected != m_selected) {
+    if (selected != m_selected)
+    {
         m_selected = selected;
         m_labelDirty = true;
     }
 }
 
-const QPointF& VisiblePlacemark::symbolPosition() const
+const QPointF &VisiblePlacemark::symbolPosition() const
 {
     return m_symbolPosition;
 }
@@ -86,43 +90,46 @@ const QPointF VisiblePlacemark::hotSpot() const
 
     GeoDataHotSpot::Units xunits;
     GeoDataHotSpot::Units yunits;
-    QPointF pixelHotSpot = m_style->iconStyle().hotSpot( xunits, yunits );
+    QPointF pixelHotSpot = m_style->iconStyle().hotSpot(xunits, yunits);
 
-    switch ( xunits ) {
-    case GeoDataHotSpot::Fraction:
-        pixelHotSpot.setX( iconSize.width() * pixelHotSpot.x() );
-        break;
-    case GeoDataHotSpot::Pixels:
-        /* nothing to do */
-        break;
-    case GeoDataHotSpot::InsetPixels:
-        pixelHotSpot.setX( iconSize.width() - pixelHotSpot.x() );
-        break;
+    switch (xunits)
+    {
+        case GeoDataHotSpot::Fraction:
+            pixelHotSpot.setX(iconSize.width() * pixelHotSpot.x());
+            break;
+        case GeoDataHotSpot::Pixels:
+            /* nothing to do */
+            break;
+        case GeoDataHotSpot::InsetPixels:
+            pixelHotSpot.setX(iconSize.width() - pixelHotSpot.x());
+            break;
     }
 
-    switch ( yunits ) {
-    case GeoDataHotSpot::Fraction:
-        pixelHotSpot.setY( iconSize.height() * ( 1.0 - pixelHotSpot.y() ) );
-        break;
-    case GeoDataHotSpot::Pixels:
-        /* nothing to do */
-        break;
-    case GeoDataHotSpot::InsetPixels:
-        pixelHotSpot.setY( iconSize.height() - pixelHotSpot.y() );
-        break;
+    switch (yunits)
+    {
+        case GeoDataHotSpot::Fraction:
+            pixelHotSpot.setY(iconSize.height() * (1.0 - pixelHotSpot.y()));
+            break;
+        case GeoDataHotSpot::Pixels:
+            /* nothing to do */
+            break;
+        case GeoDataHotSpot::InsetPixels:
+            pixelHotSpot.setY(iconSize.height() - pixelHotSpot.y());
+            break;
     }
 
     return pixelHotSpot;
 }
 
-void VisiblePlacemark::setSymbolPosition( const QPointF& position )
+void VisiblePlacemark::setSymbolPosition(const QPointF &position)
 {
     m_symbolPosition = position;
 }
 
-const QPixmap& VisiblePlacemark::labelPixmap()
+const QPixmap &VisiblePlacemark::labelPixmap()
 {
-    if (m_labelDirty) {
+    if (m_labelDirty)
+    {
         drawLabelPixmap();
     }
 
@@ -131,25 +138,28 @@ const QPixmap& VisiblePlacemark::labelPixmap()
 
 void VisiblePlacemark::setSymbolPixmap()
 {
-    if (m_style) {
+    if (m_style)
+    {
         m_symbolId = m_style->iconStyle().iconPath() + QString::number(m_style->iconStyle().scale());
-        if (m_style->iconStyle().iconPath().isEmpty()) {
+        if (m_style->iconStyle().iconPath().isEmpty())
+        {
             m_symbolId.clear();
             m_symbolPixmap = QPixmap::fromImage(m_style->iconStyle().scaledIcon());
         }
         emit updateNeeded();
     }
-    else {
+    else
+    {
         mDebug() << "Style pointer is Null";
     }
 }
 
-const QRectF& VisiblePlacemark::labelRect() const
+const QRectF &VisiblePlacemark::labelRect() const
 {
     return m_labelRect;
 }
 
-void VisiblePlacemark::setLabelRect( const QRectF& labelRect )
+void VisiblePlacemark::setLabelRect(const QRectF &labelRect)
 {
     m_labelRect = labelRect;
 }
@@ -185,100 +195,114 @@ void VisiblePlacemark::drawLabelPixmap()
 {
     m_labelDirty = false;
     QString labelName = m_placemark->displayName();
-    if ( labelName.isEmpty() || m_style->labelStyle().color() == QColor(Qt::transparent) ) {
+    if (labelName.isEmpty() || (m_style->labelStyle().color() == QColor(Qt::transparent)))
+    {
         m_labelPixmap = QPixmap();
         return;
     }
 
-    QFont  labelFont  = m_style->labelStyle().scaledFont();
+    QFont labelFont = m_style->labelStyle().scaledFont();
     QColor labelColor = m_style->labelStyle().color();
 
     LabelStyle labelStyle = Normal;
-    if ( m_selected ) {
+    if (m_selected)
+    {
         labelStyle = Selected;
-    } else if ( m_style->labelStyle().glow() ) {
+    }
+    else if (m_style->labelStyle().glow())
+    {
         labelStyle = Glow;
     }
 
-    int textHeight = QFontMetrics( labelFont ).height();
+    int textHeight = QFontMetrics(labelFont).height();
 
     int textWidth;
-    if ( m_style->labelStyle().glow() ) {
-        labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size;
-        textWidth = ( QFontMetrics( labelFont ).width( labelName )
-            + qRound( 2 * s_labelOutlineWidth ) );
-    } else {
-        textWidth = ( QFontMetrics( labelFont ).width( labelName ) );
+    if (m_style->labelStyle().glow())
+    {
+        labelFont.setWeight(75);   // Needed to calculate the correct pixmap size;
+        textWidth = (QFontMetrics(labelFont).width(labelName)
+                     + qRound(2 * s_labelOutlineWidth));
+    }
+    else
+    {
+        textWidth = (QFontMetrics(labelFont).width(labelName));
     }
 
 
     // Due to some XOrg bug this requires a workaround via
     // QImage in some cases (at least with Qt 4.2).
-    if ( !PlacemarkLayer::m_useXWorkaround ) {
-        m_labelPixmap = QPixmap( QSize( textWidth, textHeight ) );
-        m_labelPixmap.fill( Qt::transparent );
+    if (!PlacemarkLayer::m_useXWorkaround)
+    {
+        m_labelPixmap = QPixmap(QSize(textWidth, textHeight));
+        m_labelPixmap.fill(Qt::transparent);
 
-        QPainter labelPainter( &m_labelPixmap );
+        QPainter labelPainter(&m_labelPixmap);
 
-        drawLabelText( labelPainter, labelName, labelFont, labelStyle, labelColor );
-    } else {
-        QImage image( QSize( textWidth, textHeight ),
-                      QImage::Format_ARGB32_Premultiplied );
-        image.fill( 0 );
+        drawLabelText(labelPainter, labelName, labelFont, labelStyle, labelColor);
+    }
+    else
+    {
+        QImage image(QSize(textWidth, textHeight),
+                     QImage::Format_ARGB32_Premultiplied);
+        image.fill(0);
 
-        QPainter labelPainter( &image );
+        QPainter labelPainter(&image);
 
-        drawLabelText( labelPainter, labelName, labelFont, labelStyle, labelColor );
+        drawLabelText(labelPainter, labelName, labelFont, labelStyle, labelColor);
 
         labelPainter.end();
 
-        m_labelPixmap = QPixmap::fromImage( image );
+        m_labelPixmap = QPixmap::fromImage(image);
     }
 }
 
 void VisiblePlacemark::drawLabelText(QPainter &labelPainter, const QString &text,
-                                            const QFont &labelFont, LabelStyle labelStyle, const QColor &color )
+                                     const QFont &labelFont, LabelStyle labelStyle, const QColor &color)
 {
     QFont font = labelFont;
-    QFontMetrics metrics = QFontMetrics( font );
+    QFontMetrics metrics = QFontMetrics(font);
     int fontAscent = metrics.ascent();
 
-    switch ( labelStyle ) {
-    case Selected: {
-        labelPainter.setPen( color );
-        labelPainter.setFont( font );
-        QRect textRect( 0, 0, metrics.width( text ), metrics.height() );
-        labelPainter.fillRect( textRect, QApplication::palette().highlight() );
-        labelPainter.setPen( QPen( QApplication::palette().highlightedText(), 1 ) );
-        labelPainter.drawText( 0, fontAscent, text );
-        break;
-    }
-    case Glow: {
-        font.setWeight( 75 );
-        fontAscent = QFontMetrics( font ).ascent();
+    switch (labelStyle)
+    {
+        case Selected:
+        {
+            labelPainter.setPen(color);
+            labelPainter.setFont(font);
+            QRect textRect(0, 0, metrics.width(text), metrics.height());
+            labelPainter.fillRect(textRect, QApplication::palette().highlight());
+            labelPainter.setPen(QPen(QApplication::palette().highlightedText(), 1));
+            labelPainter.drawText(0, fontAscent, text);
+            break;
+        }
+        case Glow:
+        {
+            font.setWeight(75);
+            fontAscent = QFontMetrics(font).ascent();
 
-        QPen outlinepen( color == QColor( Qt::white ) ? Qt::black : Qt::white );
-        outlinepen.setWidthF( s_labelOutlineWidth );
-        QBrush  outlinebrush( color );
+            QPen outlinepen(color == QColor(Qt::white) ? Qt::black : Qt::white);
+            outlinepen.setWidthF(s_labelOutlineWidth);
+            QBrush outlinebrush(color);
 
-        QPainterPath outlinepath;
+            QPainterPath outlinepath;
 
-        const QPointF  baseline( s_labelOutlineWidth / 2.0, fontAscent );
-        outlinepath.addText( baseline, font, text );
-        labelPainter.setRenderHint( QPainter::Antialiasing, true );
-        labelPainter.setPen( outlinepen );
-        labelPainter.setBrush( outlinebrush );
-        labelPainter.drawPath( outlinepath );
-        labelPainter.setPen( Qt::NoPen );
-        labelPainter.drawPath( outlinepath );
-        labelPainter.setRenderHint( QPainter::Antialiasing, false );
-        break;
-    }
-    default: {
-        labelPainter.setPen( color );
-        labelPainter.setFont( font );
-        labelPainter.drawText( 0, fontAscent, text );
-    }
+            const QPointF baseline(s_labelOutlineWidth / 2.0, fontAscent);
+            outlinepath.addText(baseline, font, text);
+            labelPainter.setRenderHint(QPainter::Antialiasing, true);
+            labelPainter.setPen(outlinepen);
+            labelPainter.setBrush(outlinebrush);
+            labelPainter.drawPath(outlinepath);
+            labelPainter.setPen(Qt::NoPen);
+            labelPainter.drawPath(outlinepath);
+            labelPainter.setRenderHint(QPainter::Antialiasing, false);
+            break;
+        }
+        default:
+        {
+            labelPainter.setPen(color);
+            labelPainter.setFont(font);
+            labelPainter.drawText(0, fontAscent, text);
+        }
     }
 }
 

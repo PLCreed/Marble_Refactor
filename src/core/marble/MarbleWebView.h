@@ -23,7 +23,7 @@ class MARBLE_EXPORT MarbleWebPage : public QWebEnginePage
 public:
     explicit MarbleWebPage(QObject *parent = nullptr)  : QWebEnginePage(parent){}
 
-Q_SIGNALS:
+signals:
     void linkClicked(const QUrl & url);
 protected:
     bool acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType type, bool isMainFrame) override {
@@ -46,7 +46,7 @@ protected:
     void contextMenuEvent(QContextMenuEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
 
-private Q_SLOTS:
+private slots:
     void copySelectedText();
 
 private:

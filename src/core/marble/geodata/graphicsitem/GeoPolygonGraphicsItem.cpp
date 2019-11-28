@@ -17,17 +17,20 @@
 namespace Marble
 {
 
-AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon)
+AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataPlacemark *placemark,
+                                                                           const GeoDataPolygon *polygon)
 {
     return new GeoPolygonGraphicsItem(placemark, polygon);
 }
 
-AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring)
+AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataPlacemark *placemark,
+                                                                           const GeoDataLinearRing *ring)
 {
     return new GeoPolygonGraphicsItem(placemark, ring);
 }
 
-AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataBuilding *building)
+AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataPlacemark *placemark,
+                                                                           const GeoDataBuilding *building)
 {
     return new BuildingGraphicsItem(placemark, building);
 }

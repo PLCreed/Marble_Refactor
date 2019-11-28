@@ -94,7 +94,7 @@ public:
 
     void writeSettings();
 
-public Q_SLOTS:
+public slots:
     /**
       * Toggles the visibility of the Position Tracking document
       */
@@ -110,7 +110,7 @@ public Q_SLOTS:
       */
     void clearTrack();
 
-Q_SIGNALS:
+signals:
     void  gpsLocation( const GeoDataCoordinates&, qreal );
 
     void statusChanged( PositionProviderStatus status );

@@ -17,8 +17,7 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
-
+ */
 
 // Own
 #include "GeoSceneParser.h"
@@ -39,8 +38,7 @@ namespace Marble
 
 GeoSceneParser::GeoSceneParser(GeoSceneSourceType source)
     : GeoParser(source)
-{
-}
+{}
 
 GeoSceneParser::~GeoSceneParser()
 {
@@ -49,25 +47,25 @@ GeoSceneParser::~GeoSceneParser()
 
 bool GeoSceneParser::isValidRootElement()
 {
-    switch ((GeoSceneSourceType) m_source) {
-    case GeoScene_DGML:
-        return isValidElement(dgml::dgmlTag_Dgml);
-    default:
-        Q_ASSERT(false);
-        return false;
+    switch (GeoSceneSourceType(m_source))
+    {
+        case GeoScene_DGML:
+            return isValidElement(dgml::dgmlTag_Dgml);
     }
+
+    Q_ASSERT(false);
+    return false;
 }
 
-bool GeoSceneParser::isValidElement(const QString& tagName) const
+bool GeoSceneParser::isValidElement(const QString &tagName) const
 {
     if (!GeoParser::isValidElement(tagName))
         return false;
 
-    switch ((GeoSceneSourceType) m_source) {
-    case GeoScene_DGML:
-        return (namespaceUri() == QLatin1String(dgml::dgmlTag_nameSpace20));
-    default:
-        break;
+    switch (GeoSceneSourceType(m_source))
+    {
+        case GeoScene_DGML:
+            return (namespaceUri() == QLatin1String(dgml::dgmlTag_nameSpace20));
     }
 
     // Should never be reached.
@@ -75,17 +73,17 @@ bool GeoSceneParser::isValidElement(const QString& tagName) const
     return false;
 }
 
-GeoDocument* GeoSceneParser::createDocument() const
+GeoDocument *GeoSceneParser::createDocument() const
 {
     return new GeoSceneDocument;
 }
 
 // Global helper function for the tag handlers
-GeoSceneDocument* geoSceneDoc(GeoParser& parser)
+GeoSceneDocument *geoSceneDoc(GeoParser &parser)
 {
-    GeoDocument* document = parser.activeDocument();
+    GeoDocument *document = parser.activeDocument();
     Q_ASSERT(document->isGeoSceneDocument());
-    return static_cast<GeoSceneDocument*>(document);
+    return static_cast<GeoSceneDocument *>(document);
 }
 
 }

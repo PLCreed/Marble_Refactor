@@ -71,7 +71,7 @@ class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationIn
     void contextMenuEvent( QWidget *w, QContextMenuEvent *e ) override;
     void toolTipEvent( QHelpEvent *e ) override;
 
- private Q_SLOTS:
+ private slots:
     void readSettings();
     void writeSettings();
     void toggleRatioScaleVisibility();

@@ -32,13 +32,13 @@ public:
     explicit TourControlEditWidget( const QModelIndex& index, QWidget* parent=nullptr );
     bool editable() const;
 
-Q_SIGNALS:
+signals:
     void editingDone( const QModelIndex& index );
 
-public Q_SLOTS:
+public slots:
     void setEditable( bool editable );
 
-private Q_SLOTS:
+private slots:
     void save();
 
 private:

@@ -11,9 +11,9 @@
 #ifndef MARBLE_MARBLESPLASHLAYER_H
 #define MARBLE_MARBLESPLASHLAYER_H
 
-#include "LayerInterface.h"
-
 #include <QString>
+
+#include "LayerInterface.h"
 
 namespace Marble
 {
@@ -25,9 +25,9 @@ public:
 
     QStringList renderPosition() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString &renderPos = QLatin1String("SURFACE"),
-                         GeoSceneLayer *layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport,
+                const QString &renderPos = QLatin1String("SURFACE"),
+                GeoSceneLayer *layer = nullptr) override;
 
     RenderState renderState() const override;
 

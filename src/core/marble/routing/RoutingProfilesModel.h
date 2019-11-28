@@ -12,11 +12,10 @@
 #ifndef MARBLE_ROUTINGPROFILESMODEL_H
 #define MARBLE_ROUTINGPROFILESMODEL_H
 
-#include "marble_export.h"
-#include "RoutingProfile.h"
-
 #include <QAbstractListModel>
 
+#include "marble_export.h"
+#include "RoutingProfile.h"
 
 namespace Marble {
 
@@ -26,13 +25,8 @@ class MARBLE_EXPORT RoutingProfilesModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    explicit RoutingProfilesModel( const PluginManager *pluginManager, QObject *parent = nullptr  );
-
-    QVariant data( const QModelIndex& index, int role = Qt::DisplayRole ) const override;
-    int rowCount( const QModelIndex& parent = QModelIndex() ) const override;
-    bool removeRows( int row, int count, const QModelIndex& parent = QModelIndex() ) override;
-
-    enum ProfileTemplate {
+    enum ProfileTemplate
+    {
         CarFastestTemplate,
         CarShortestTemplate,
         CarEcologicalTemplate,
@@ -42,21 +36,28 @@ public:
         LastTemplate
     };
 
-    void setProfiles( const QList<RoutingProfile> &profiles );
+public:
+    explicit RoutingProfilesModel(const PluginManager *pluginManager, QObject *parent = nullptr);
+
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
+
+    void setProfiles(const QList<RoutingProfile> &profiles);
     QList<RoutingProfile> profiles() const;
 
     void loadDefaultProfiles();
 
-    void addProfile( const QString &name );
-    bool moveUp( int row );
-    bool moveDown( int row );
+    void addProfile(const QString &name);
+    bool moveUp(int row);
+    bool moveDown(int row);
 
-    bool setProfileName( int row, const QString &name );
-    bool setProfilePluginSettings( int row, const QHash<QString, QHash<QString, QVariant> > &pluginSettings );
+    bool setProfileName(int row, const QString &name);
+    bool setProfilePluginSettings(int row, const QHash<QString, QHash<QString, QVariant>> &pluginSettings);
 
 private:
     QList<RoutingProfile> m_profiles;
-    const PluginManager* m_pluginManager;
+    const PluginManager *m_pluginManager;
 };
 
 }

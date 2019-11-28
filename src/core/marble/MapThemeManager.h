@@ -93,7 +93,7 @@ class MARBLE_EXPORT MapThemeManager : public QObject
      */
     static void deleteMapTheme( const QString &mapThemeId );
 
- Q_SIGNALS:
+ signals:
     /**
      * @brief This signal will be emitted, when the themes change.
      */

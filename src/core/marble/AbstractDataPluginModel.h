@@ -96,7 +96,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      */
     bool itemExists( const QString& id ) const;
 
-public Q_SLOTS:
+public slots:
     /**
      * Adds the @p items to the list of initialized items. It checks if items with the same id are
      * already in the list and ignores and deletes them in this case.
@@ -151,7 +151,7 @@ public Q_SLOTS:
 
     void registerItemProperties( const QMetaObject& item );
     
- private Q_SLOTS:
+ private slots:
     /**
      * @brief Get new items with getAdditionalItems if it is reasonable.
      */
@@ -176,7 +176,7 @@ public Q_SLOTS:
 
     void themeChanged();
 
- Q_SIGNALS:
+ signals:
     void itemsUpdated();
     void favoriteItemsChanged( const QStringList& favoriteItems );
     void favoriteItemsOnlyChanged();

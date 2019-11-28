@@ -77,7 +77,7 @@ class LayerManager : public QObject
 
     RenderState renderState() const;
 
- Q_SIGNALS:
+ signals:
     /**
      * @brief Signal that a render item has been initialized
      */
@@ -97,7 +97,7 @@ class LayerManager : public QObject
 
     void visibilityChanged( const QString &nameId, bool visible );
 
- public Q_SLOTS:
+ public slots:
     void setShowBackground( bool show );
 
     void setShowRuntimeTrace( bool show );

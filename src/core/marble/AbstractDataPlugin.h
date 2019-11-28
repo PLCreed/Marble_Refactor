@@ -117,12 +117,12 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
 
     QObject* favoritesModel();
 
- private Q_SLOTS:
+ private slots:
     virtual void favoriteItemsChanged( const QStringList& favoriteItems );
 
     void delayedUpdate();
 
- Q_SIGNALS:
+ signals:
     void changedNumberOfItems( quint32 number );
 
     void favoriteItemsOnlyChanged();

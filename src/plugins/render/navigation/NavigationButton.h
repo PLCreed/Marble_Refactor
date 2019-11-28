@@ -22,7 +22,7 @@ class NavigationButton : public QAbstractButton
 public:
     explicit NavigationButton( QWidget *parent = nullptr );
 
-Q_SIGNALS:
+signals:
     void repaintNeeded();
 
 protected:

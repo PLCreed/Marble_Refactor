@@ -17,7 +17,7 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #ifndef MARBLE_GEOSCENEVECTOR_H
 #define MARBLE_GEOSCENEVECTOR_H
@@ -26,6 +26,7 @@
 #include <QPen>
 #include <QBrush>
 
+#include "geodata_export.h"
 #include "GeoSceneAbstractDataset.h"
 
 namespace Marble
@@ -34,31 +35,30 @@ namespace Marble
 /**
  * @short Vector dataset stored in a layer.
  */
-
 class GEODATA_EXPORT GeoSceneVector : public GeoSceneAbstractDataset
 {
- public:
-    explicit GeoSceneVector( const QString& name );
-    const char* nodeType() const override;
+public:
+    explicit GeoSceneVector(const QString &name);
+    const char *nodeType() const override;
 
     QString sourceFile() const;
-    void setSourceFile( const QString& sourceFile );
+    void setSourceFile(const QString &sourceFile);
 
     QString feature() const;
-    void setFeature( const QString& feature );
+    void setFeature(const QString &feature);
 
     QPen pen() const;
-    void setPen( const QPen& pen );
+    void setPen(const QPen &pen);
 
     QBrush brush() const;
-    void setBrush( const QBrush& brush );
+    void setBrush(const QBrush &brush);
 
- private:
+private:
     QString m_sourceFile;
     QString m_feature;
 
-    QPen    m_pen;
-    QBrush  m_brush;
+    QPen m_pen;
+    QBrush m_brush;
 };
 
 }

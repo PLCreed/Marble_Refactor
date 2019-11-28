@@ -49,7 +49,7 @@ class MARBLE_EXPORT MarblePluginSettingsWidget : public QWidget
     void setAboutIcon( const QIcon& icon );
     void setConfigIcon( const QIcon& icon );
 
- Q_SIGNALS:
+ signals:
     void pluginListViewClicked();
 
  private:

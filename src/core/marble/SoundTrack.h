@@ -33,7 +33,7 @@ public:
     void stop();
     void setPaused( bool );
 
-public Q_SLOTS:
+public slots:
     void playSlot();
 
 private:

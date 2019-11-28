@@ -31,13 +31,13 @@ class FileStorageWatcherThread : public QObject
     
 	quint64 cacheLimit();
 	
-    Q_SIGNALS:
+    signals:
 	/**
 	 * Is emitted when a variable has changed.
 	 */
 	void variableChanged();
 	
-    public Q_SLOTS:
+    public slots:
 	/**
          * Sets the limit of the cache in @p bytes.
          */
@@ -64,7 +64,7 @@ class FileStorageWatcherThread : public QObject
 	 */
 	void getCurrentCacheSize();
 
-    private Q_SLOTS:
+    private slots:
 	/**
 	 * Ensures that the cache doesn't exceed limits.
 	 */
@@ -112,7 +112,7 @@ class FileStorageWatcher : public QThread
 	 */
 	quint64 cacheLimit();
 	
-    public Q_SLOTS:
+    public slots:
 	/**
          * Sets the limit of the cache in @p bytes.
          */
@@ -130,7 +130,7 @@ class FileStorageWatcher : public QThread
 	void resetCurrentSize();
 	
 
-    Q_SIGNALS:
+    signals:
 	void sizeChanged( qint64 bytes );
 	void cleared();
 	

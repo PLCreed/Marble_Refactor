@@ -33,7 +33,7 @@ public:
     // Overriding MarbleAbstractRunner
     void retrieveRoute( const RouteRequest *request ) override;
 
-private Q_SLOTS:
+private slots:
     /** Route data was retrieved via http */
     void retrieveData( QNetworkReply *reply );
 

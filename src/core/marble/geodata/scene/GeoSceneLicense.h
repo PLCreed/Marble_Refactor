@@ -13,8 +13,7 @@
 
 #include <QString>
 
-#include <geodata_export.h>
-
+#include "geodata_export.h"
 #include "GeoDocument.h"
 
 namespace Marble
@@ -22,31 +21,32 @@ namespace Marble
 
 class GEODATA_EXPORT GeoSceneLicense : public GeoNode
 {
- public:
-    enum Attribution {
+public:
+    enum Attribution
+    {
         Never,
         OptOut,
         OptIn,
         Always
     };
 
+public:
     GeoSceneLicense();
 
     QString license() const;
     QString shortLicense() const;
     Attribution attribution() const;
 
-    void setLicense( const QString &license );
-    void setShortLicense( const QString &license );
-    void setAttribution(Attribution attr );
+    void setLicense(const QString &license);
+    void setShortLicense(const QString &license);
+    void setAttribution(Attribution attr);
 
     const char *nodeType() const override;
 
- private:
+private:
     QString m_fullLicense;
     QString m_shortLicense;
     Attribution m_attribution;
-
 };
 
 }

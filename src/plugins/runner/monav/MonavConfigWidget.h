@@ -40,7 +40,7 @@ public:
 protected:
     void showEvent ( QShowEvent * event ) override;
 
-private Q_SLOTS:
+private slots:
     void retrieveMapList( QNetworkReply *reply );
 
     void retrieveData();

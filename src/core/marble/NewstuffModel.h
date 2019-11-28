@@ -90,14 +90,14 @@ public:
 
     QString registryFile() const;
 
-public Q_SLOTS:
+public slots:
     void install( int index );
 
     void uninstall( int index );
 
     void cancel( int index );
 
-Q_SIGNALS:
+signals:
     void countChanged();
 
     void providerChanged();
@@ -114,7 +114,7 @@ Q_SIGNALS:
 
     void uninstallationFinished( int newstuffindex );
 
-private Q_SLOTS:
+private slots:
     void updateProgress( qint64 bytesReceived, qint64 bytesTotal );
 
     void retrieveData();

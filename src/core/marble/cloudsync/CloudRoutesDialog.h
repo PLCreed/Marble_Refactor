@@ -20,27 +20,26 @@ class CloudRouteModel;
 class CloudRoutesDialog : public QDialog
 {
     Q_OBJECT
-    
 public:
-    explicit CloudRoutesDialog( CloudRouteModel *model, QWidget *parent = nullptr );
+    explicit CloudRoutesDialog(CloudRouteModel *model, QWidget *parent = nullptr);
     ~CloudRoutesDialog() override;
     CloudRouteModel *model();
 
-public Q_SLOTS:
-    void updateListDownloadProgressbar( qint64 received, qint64 total );
+public slots:
+    void updateListDownloadProgressbar(qint64 received, qint64 total);
 
-Q_SIGNALS:
-    void downloadButtonClicked( const QString& timestamp );
-    void openButtonClicked( const QString& timestamp );
-    void deleteButtonClicked( const QString& timestamp );
-    void removeFromCacheButtonClicked( const QString& timestamp );
-    void uploadToCloudButtonClicked( const QString& timestamp );
+signals:
+    void downloadButtonClicked(const QString &timestamp);
+    void openButtonClicked(const QString &timestamp);
+    void deleteButtonClicked(const QString &timestamp);
+    void removeFromCacheButtonClicked(const QString &timestamp);
+    void uploadToCloudButtonClicked(const QString &timestamp);
 
 private:
     class Private;
     Private *d;
 
-private Q_SLOTS:
+private slots:
     void updateNoRouteLabel();
 };
 

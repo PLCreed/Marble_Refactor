@@ -11,9 +11,9 @@
 #ifndef CONFLICTDIALOG_H
 #define CONFLICTDIALOG_H
 
-#include "marble_export.h"
-
 #include <QDialog>
+
+#include "marble_export.h"
 
 class QDialogButtonBox;
 class QAbstractButton;
@@ -26,33 +26,34 @@ class MergeItem;
 class MARBLE_EXPORT ConflictDialog : public QDialog
 {
     Q_OBJECT
-
 public:
-    enum Button {
+    enum Button
+    {
         Local = 1,
         Cloud,
         AllLocal,
         AllCloud
     };
 
-    enum ResolveAction {
+    enum ResolveAction
+    {
         AskUser,
         PreferLocal,
         PreferCloud
     };
 
-    explicit ConflictDialog( QWidget *parent = nullptr );
-    void setMergeItem( MergeItem *item );
+    explicit ConflictDialog(QWidget *parent = nullptr);
+    void setMergeItem(MergeItem *item);
 
-public Q_SLOTS:
+public slots:
     void open() override;
     void stopAutoResolve();
 
-Q_SIGNALS:
-    void resolveConflict( MergeItem *mergeItem );
+signals:
+    void resolveConflict(MergeItem *mergeItem);
 
-private Q_SLOTS:
-    void resolveConflict( QAbstractButton *button );
+private slots:
+    void resolveConflict(QAbstractButton *button);
 
 private:
     void prepareLayout();

@@ -11,9 +11,9 @@
 #ifndef MARBLE_DECLARATIVE_POSITIONSOURCE_H
 #define MARBLE_DECLARATIVE_POSITIONSOURCE_H
 
-#include "Coordinate.h"
-
 #include <QObject>
+
+#include "Coordinate.h"
 
 namespace Marble {
 
@@ -23,35 +23,35 @@ class PositionSource : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY( MarbleQuickItem* map READ map WRITE setMap NOTIFY mapChanged )
-    Q_PROPERTY( bool active READ active WRITE setActive NOTIFY activeChanged )
-    Q_PROPERTY( QString source READ source WRITE setSource NOTIFY sourceChanged )
-    Q_PROPERTY( bool hasPosition READ hasPosition NOTIFY hasPositionChanged )
-    Q_PROPERTY( Coordinate* position READ position NOTIFY positionChanged )
-    Q_PROPERTY( qreal speed READ speed NOTIFY speedChanged )
+    Q_PROPERTY(MarbleQuickItem * map READ map WRITE setMap NOTIFY mapChanged)
+    Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
+    Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged)
+    Q_PROPERTY(bool hasPosition READ hasPosition NOTIFY hasPositionChanged)
+    Q_PROPERTY(Coordinate * position READ position NOTIFY positionChanged)
+    Q_PROPERTY(qreal speed READ speed NOTIFY speedChanged)
 
 public:
-    explicit PositionSource( QObject* parent = nullptr);
+    explicit PositionSource(QObject *parent = nullptr);
 
     bool active() const;
 
-    void setActive( bool active );
+    void setActive(bool active);
 
     QString source() const;
 
-    void setSource( const QString &source );
+    void setSource(const QString &source);
 
     bool hasPosition() const;
 
-    Coordinate* position();
+    Coordinate *position();
 
     MarbleQuickItem *map();
 
-    void setMap( MarbleQuickItem *map );
+    void setMap(MarbleQuickItem *map);
 
     qreal speed() const;
 
-Q_SIGNALS:
+signals:
     void mapChanged();
 
     void activeChanged();
@@ -64,7 +64,7 @@ Q_SIGNALS:
 
     void speedChanged();
 
-private Q_SLOTS:
+private slots:
     void updatePosition();
 
 private:

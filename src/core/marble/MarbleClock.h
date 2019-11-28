@@ -38,7 +38,7 @@ class GEODATA_EXPORT MarbleClock : public QObject
      */
     qreal dayFraction() const;
 
- Q_SIGNALS:
+ signals:
     /**
      * @brief the timeChanged signal will be triggered at updateInterval() rate
      * or at most every second.

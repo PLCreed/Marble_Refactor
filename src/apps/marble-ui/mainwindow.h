@@ -68,7 +68,7 @@ private:
     void  readSettings(const QVariantMap& overrideSettings = QVariantMap());
     void  writeSettings();
 
-private Q_SLOTS:
+private slots:
     void  showPosition( const QString& position);
     void  showDistance( const QString& position);
     void  showZoom( int );

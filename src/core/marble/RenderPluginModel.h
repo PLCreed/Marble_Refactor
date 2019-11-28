@@ -65,7 +65,7 @@ public:
 
     DialogConfigurationInterface *pluginDialogConfigurationInterface( const QModelIndex &index );
 
-public Q_SLOTS:
+public slots:
     /**
      * Retrieve the current plugin state for the user interface.
      */

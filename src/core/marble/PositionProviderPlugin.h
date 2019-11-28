@@ -42,7 +42,7 @@ class MARBLE_EXPORT PositionProviderPlugin : public QObject, public PositionProv
      */
     virtual PositionProviderPlugin * newInstance() const = 0;
 
- Q_SIGNALS:
+ signals:
     void statusChanged( PositionProviderStatus status ) const;
     void positionChanged( const GeoDataCoordinates& position,
                           const GeoDataAccuracy& accuracy ) const;

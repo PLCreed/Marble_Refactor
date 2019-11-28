@@ -17,34 +17,30 @@
 namespace Marble
 {
 
-GroundLayer::GroundLayer()
-        : m_color( QColor( 153, 179, 204 ) )
-{
-}
+GroundLayer::GroundLayer() :
+    m_color(QColor(153, 179, 204))
+{}
 
 GroundLayer::~GroundLayer()
-{
-}
+{}
 
 QStringList GroundLayer::renderPosition() const
 {
     return QStringList(QStringLiteral("SURFACE"));
 }
 
-bool GroundLayer::render( GeoPainter *painter,
-                              ViewportParams *viewParams,
-                              const QString &renderPos,
-                              GeoSceneLayer *layer )
+bool GroundLayer::render(GeoPainter *painter, ViewportParams *viewParams,
+                         const QString &renderPos, GeoSceneLayer *layer)
 {
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
+    Q_UNUSED(renderPos)
+    Q_UNUSED(layer)
 
-    QBrush backgroundBrush( m_color );
-    QPen backgroundPen( Qt::NoPen );
+    QBrush backgroundBrush(m_color);
+    QPen backgroundPen(Qt::NoPen);
 
-    painter->setBrush( backgroundBrush );
-    painter->setPen( backgroundPen );
-    painter->drawPath( viewParams->mapShape() );
+    painter->setBrush(backgroundBrush);
+    painter->setPen(backgroundPen);
+    painter->drawPath(viewParams->mapShape());
 
     return true;
 }
@@ -54,8 +50,8 @@ qreal GroundLayer::zValue() const
     return -50.0;
 }
 
-void GroundLayer::setColor( const QColor &color )
-{   
+void GroundLayer::setColor(const QColor &color)
+{
     m_color = color;
 }
 

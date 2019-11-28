@@ -50,7 +50,7 @@ public:
     void retrieveRoute( const RouteRequest *request );
     QVector<GeoDataDocument *> searchRoute( const RouteRequest *request, int timeout = 30000 );
 
-Q_SIGNALS:
+signals:
     /**
      * A route was retrieved
      */

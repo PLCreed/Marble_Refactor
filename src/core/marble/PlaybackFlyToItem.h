@@ -37,7 +37,7 @@ public:
     void setStartCoordinates( const GeoDataCoordinates &coordinates );
     void setFirst( bool isFirst );
 
-private Q_SLOTS:
+private slots:
     void playNext();
 
 private:

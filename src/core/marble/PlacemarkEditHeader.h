@@ -47,7 +47,7 @@ public:
     QString targetId() const;
     QStringList targetIdList() const;
     bool isTargetIdVisible() const;
-public Q_SLOTS:
+public slots:
     void setName(const QString &name);
     void setIconLink(const QString &iconLink);
     void setLatitude(qreal latitude);
@@ -62,9 +62,9 @@ public Q_SLOTS:
     void setTargetIdVisible( bool visible );
     void selectAll();
     void setReadOnly(bool state);
-Q_SIGNALS:
+signals:
     void valueChanged();
-private Q_SLOTS:
+private slots:
     void updateValues();
 private:
     PlacemarkEditHeaderPrivate* const d;

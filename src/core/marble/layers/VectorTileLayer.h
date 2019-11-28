@@ -1,22 +1,22 @@
 /*
- This file is part of the Marble Virtual Globe.
+   This file is part of the Marble Virtual Globe.
 
- This program is free software licensed under the GNU LGPL. You can
- find a copy of this license in LICENSE.txt in the top directory of
- the source code.
+   This program is free software licensed under the GNU LGPL. You can
+   find a copy of this license in LICENSE.txt in the top directory of
+   the source code.
 
- Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>
- Copyright 2010      Thibaut Gridel  <tgridel@free.fr>
- Copyright 2012      Ander Pijoan <ander.pijoan@deusto.es>
- Copyright 2013      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
-*/
+   Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>
+   Copyright 2010      Thibaut Gridel  <tgridel@free.fr>
+   Copyright 2012      Ander Pijoan <ander.pijoan@deusto.es>
+   Copyright 2013      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+ */
 
 #ifndef MARBLE_VECTORTILELAYER_H
 #define MARBLE_VECTORTILELAYER_H
 
-#include "LayerInterface.h"
 #include <QObject>
 
+#include "LayerInterface.h"
 #include "MarbleGlobal.h"
 
 namespace Marble
@@ -35,10 +35,8 @@ class TileId;
 class VectorTileLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
-
 public:
-    VectorTileLayer(HttpDownloadManager *downloadManager,
-                    const PluginManager *pluginManager,
+    VectorTileLayer(HttpDownloadManager *downloadManager, const PluginManager *pluginManager,
                     GeoDataTreeModel *treeModel);
 
     ~VectorTileLayer() override;
@@ -51,24 +49,23 @@ public:
 
     QString runtimeTrace() const override;
 
-    bool render(GeoPainter *painter, ViewportParams *viewport,
-                const QString &renderPos = QLatin1String("NONE"),
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos = QLatin1String("NONE"),
                 GeoSceneLayer *layer = nullptr) override;
 
     void reload();
 
-Q_SIGNALS:
+signals:
     void tileLevelChanged(int tileLevel);
 
-public Q_SLOTS:
-    void setMapTheme(const QVector<const GeoSceneVectorTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings);
+public slots:
+    void setMapTheme(const QVector<const GeoSceneVectorTileDataset *> &textures,
+                     const GeoSceneGroup *textureLayerSettings);
 
     void reset();
 
 private:
     Q_PRIVATE_SLOT(d, void updateLayerSettings())
-    Q_PRIVATE_SLOT(d, void updateTile(const TileId &tileId, GeoDataDocument* document))
-
+    Q_PRIVATE_SLOT(d, void updateTile(const TileId &tileId, GeoDataDocument * document))
 
 private:
     class Private;

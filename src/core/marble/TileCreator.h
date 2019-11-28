@@ -84,7 +84,7 @@ class MARBLE_EXPORT TileCreator : public QThread
  protected:
     void run() override;
 
- Q_SIGNALS:
+ signals:
     void  progress( int value );
 
 

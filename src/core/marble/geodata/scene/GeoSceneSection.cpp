@@ -17,7 +17,7 @@
     aint with this library see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
-*/
+ */
 
 #include "GeoSceneSection.h"
 
@@ -29,66 +29,72 @@
 namespace Marble
 {
 
-GeoSceneSection::GeoSceneSection( const QString& name )
-    : m_name( name ),
-      m_checkable( false ),
-      m_spacing( 12 )
-{
-}
+GeoSceneSection::GeoSceneSection(const QString &name) :
+    m_name(name),
+    m_checkable(false),
+    m_spacing(12)
+{}
 
 GeoSceneSection::~GeoSceneSection()
 {
-    qDeleteAll( m_items );
+    qDeleteAll(m_items);
 }
 
-const char* GeoSceneSection::nodeType() const
+const char *GeoSceneSection::nodeType() const
 {
     return GeoSceneTypes::GeoSceneSectionType;
 }
 
-void GeoSceneSection::addItem( GeoSceneItem* item )
+void GeoSceneSection::addItem(GeoSceneItem *item)
 {
     // Remove any item that has the same name
-    QVector<GeoSceneItem*>::iterator it = m_items.begin();
-    while (it != m_items.end()) {
-        GeoSceneItem* currentItem = *it;
-        if ( currentItem->name() == item->name() ) {
+    QVector<GeoSceneItem *>::iterator it = m_items.begin();
+    while (it != m_items.end())
+    {
+        GeoSceneItem *currentItem = *it;
+        if (currentItem->name() == item->name())
+        {
             delete currentItem;
             m_items.erase(it);
             break;
         }
-        else {
+        else
+        {
             ++it;
         }
-     }
+    }
 
-    if ( item ) {
-        m_items.append( item );
+    if (item)
+    {
+        m_items.append(item);
     }
 }
 
-GeoSceneItem* GeoSceneSection::item( const QString& name )
+GeoSceneItem *GeoSceneSection::item(const QString &name)
 {
-    GeoSceneItem* item = nullptr;
+    GeoSceneItem *item = nullptr;
 
-    QVector<GeoSceneItem*>::const_iterator it = m_items.constBegin();
-    QVector<GeoSceneItem*>::const_iterator end = m_items.constEnd();
-    for (; it != end; ++it) {
-        if ( (*it)->name() == name ) {
+    QVector<GeoSceneItem *>::const_iterator it  = m_items.constBegin();
+    QVector<GeoSceneItem *>::const_iterator end = m_items.constEnd();
+    for (; it != end; ++it)
+    {
+        if ((*it)->name() == name)
+        {
             item = *it;
             break;
         }
     }
 
-    if ( !item ) {
-        item = new GeoSceneItem( name );
-        addItem( item );
+    if (!item)
+    {
+        item = new GeoSceneItem(name);
+        addItem(item);
     }
 
     return item;
 }
 
-QVector<GeoSceneItem*> GeoSceneSection::items() const
+QVector<GeoSceneItem *> GeoSceneSection::items() const
 {
     return m_items;
 }
@@ -103,7 +109,7 @@ QString GeoSceneSection::heading() const
     return m_heading;
 }
 
-void GeoSceneSection::setHeading( const QString& heading )
+void GeoSceneSection::setHeading(const QString &heading)
 {
     m_heading = heading;
 }
@@ -113,7 +119,7 @@ bool GeoSceneSection::checkable() const
     return m_checkable;
 }
 
-void GeoSceneSection::setCheckable( bool checkable )
+void GeoSceneSection::setCheckable(bool checkable)
 {
     m_checkable = checkable;
 }
@@ -123,17 +129,17 @@ QString GeoSceneSection::connectTo() const
     return m_connectTo;
 }
 
-void GeoSceneSection::setConnectTo( const QString& connectTo )
+void GeoSceneSection::setConnectTo(const QString &connectTo)
 {
     m_connectTo = connectTo;
 }
 
-int  GeoSceneSection::spacing() const
+int GeoSceneSection::spacing() const
 {
     return m_spacing;
 }
 
-void GeoSceneSection::setSpacing( int spacing )
+void GeoSceneSection::setSpacing(int spacing)
 {
     m_spacing = spacing;
 }
@@ -143,7 +149,7 @@ QString GeoSceneSection::radio() const
     return m_radio;
 }
 
-void GeoSceneSection::setRadio( const QString& radio )
+void GeoSceneSection::setRadio(const QString &radio)
 {
     m_radio = radio;
 }

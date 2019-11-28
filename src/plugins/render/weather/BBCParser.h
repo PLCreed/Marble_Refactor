@@ -50,7 +50,7 @@ protected:
     bool workAvailable() override;
     void work() override;
 
-Q_SIGNALS:
+signals:
     void parsedFile();
 
 private:

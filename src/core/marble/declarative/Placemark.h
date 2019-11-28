@@ -11,18 +11,18 @@
 #ifndef MARBLE_DECLARATIVE_PLACEMARK_H
 #define MARBLE_DECLARATIVE_PLACEMARK_H
 
-#include "GeoDataPlacemark.h"
-#include "RouteRelationModel.h"
-
 #include <QObject>
 #include <QtQml>
 #include <QStringListModel>
 
+#include "GeoDataPlacemark.h"
+#include "RouteRelationModel.h"
+
 namespace Marble {
 
 /**
-  * Wraps a GeoDataPlacemark for QML access
-  */
+ * Wraps a GeoDataPlacemark for QML access
+ */
 class Placemark : public QObject
 {
     Q_OBJECT
@@ -41,16 +41,16 @@ class Placemark : public QObject
     Q_PROPERTY(double latitude READ latitude NOTIFY coordinatesChanged)
     Q_PROPERTY(QStringList tags READ tags NOTIFY tagsChanged)
 
-    Q_PROPERTY(RouteRelationModel* routeRelationModel READ routeRelationModel CONSTANT)
+    Q_PROPERTY(RouteRelationModel * routeRelationModel READ routeRelationModel CONSTANT)
 
 public:
     /** Constructor */
-    explicit Placemark( QObject *parent = nullptr );
+    explicit Placemark(QObject *parent = nullptr);
 
-    void setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark );
+    void setGeoDataPlacemark(const Marble::GeoDataPlacemark &placemark);
 
-    Marble::GeoDataPlacemark & placemark();
-    const Marble::GeoDataPlacemark & placemark() const;
+    Marble::GeoDataPlacemark &placemark();
+    const Marble::GeoDataPlacemark &placemark() const;
 
     QString name() const;
     QString description() const;
@@ -64,14 +64,14 @@ public:
     QString phone() const;
     double longitude() const;
     double latitude() const;
-    const QStringList & tags() const;
+    const QStringList &tags() const;
 
-    RouteRelationModel* routeRelationModel();
+    RouteRelationModel *routeRelationModel();
 
-public Q_SLOTS:
+public slots:
     void setName(const QString &name);
 
-Q_SIGNALS:
+signals:
     void nameChanged();
     void coordinatesChanged();
     void descriptionChanged();
@@ -87,7 +87,7 @@ Q_SIGNALS:
     void routeRelationModelChanged();
 
 private:
-    bool addTagValue(QString &target, const QString &key, const QString &format=QString(), const QString& separator = QStringLiteral(" · ")) const;
+    bool addTagValue(QString &target, const QString &key, const QString &format = QString(), const QString &separator = QStringLiteral(" · ")) const;
     void addFirstTagValueOf(QString &target, const QStringList &keys) const;
     void addTagDescription(QString &target, const QString &key, const QString &value, const QString &description) const;
     static void append(QString &target, const QString &value);

@@ -11,6 +11,7 @@
 #ifndef MARBLE_GEOTRACKGRAPHICSITEM_H
 #define MARBLE_GEOTRACKGRAPHICSITEM_H
 
+#include "marble_export.h"
 #include "GeoLineStringGraphicsItem.h"
 
 namespace Marble

@@ -42,7 +42,7 @@ public:
      */
     virtual void reverseGeocoding( const GeoDataCoordinates &coordinates ) = 0;
 
-Q_SIGNALS:
+signals:
     /**
      * Reverse geocoding is finished, result in the given placemark.
      * To be emitted by runners after a @see reverseGeocoding call.

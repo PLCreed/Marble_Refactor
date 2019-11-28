@@ -12,9 +12,10 @@
 #ifndef MARBLE_LAYERINTERFACE_H
 #define MARBLE_LAYERINTERFACE_H
 
+#include <QtGlobal>
+
 #include "marble_export.h"
 
-#include <QtGlobal>
 
 class QStringList;
 class QString;
@@ -30,7 +31,6 @@ class ViewportParams;
 class MARBLE_EXPORT LayerInterface
 {
 public:
-
     /** Destructor */
     virtual ~LayerInterface();
 
@@ -62,21 +62,21 @@ public:
      * @param layer  deprecated, always zero (NULL)
      * @return @c true  Returns whether the rendering has been successful
      */
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-       const QString &renderPos, GeoSceneLayer *layer ) = 0;
+    virtual bool render(GeoPainter *painter, ViewportParams *viewport,
+                        const QString &renderPos, GeoSceneLayer *layer) = 0;
 
     /**
-      * @brief Returns the z value of the layer (default: 0.0). If two layers are painted
-      * at the same render position, the one with the higher z value is painted on top.
-      * If both have the same z value, their paint order is undefined.
-      */
+     * @brief Returns the z value of the layer (default: 0.0). If two layers are painted
+     * at the same render position, the one with the higher z value is painted on top.
+     * If both have the same z value, their paint order is undefined.
+     */
     virtual qreal zValue() const;
 
     virtual RenderState renderState() const;
 
     /**
-      * @brief Returns a debug line for perfo/tracing issues
-      */
+     * @brief Returns a debug line for perfo/tracing issues
+     */
     virtual QString runtimeTrace() const;
 };
 

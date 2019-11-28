@@ -39,11 +39,11 @@ class MARBLE_EXPORT FileViewWidget : public QWidget
 
     void setMarbleWidget( MarbleWidget *widget );
 
- Q_SIGNALS:
+ signals:
     void centerOn( const GeoDataPlacemark &, bool animated );
     void centerOn( const GeoDataLatLonBox &, bool animated );
 
- private Q_SLOTS:
+ private slots:
     void mapCenterOnTreeViewModel( const QModelIndex & );
 
  private:

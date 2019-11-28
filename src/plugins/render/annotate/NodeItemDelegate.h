@@ -47,11 +47,11 @@ private:
     mutable QModelIndex m_indexBeingEdited;
     QTreeView* m_view;
 
-private Q_SLOTS:
+private slots:
     void previewNodeMove( qreal value);
     void unsetCurrentEditor( QWidget* widget );
 
-Q_SIGNALS:
+signals:
     void modelChanged( GeoDataPlacemark* placemark ) const;
     void geometryChanged() const;
 };

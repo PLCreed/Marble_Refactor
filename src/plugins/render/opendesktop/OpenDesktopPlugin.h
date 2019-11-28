@@ -65,7 +65,7 @@ class OpenDesktopPlugin : public AbstractDataPlugin, public DialogConfigurationI
 protected:
     bool eventFilter(QObject *object, QEvent *event) override;
 
-private Q_SLOTS:
+private slots:
     void readSettings();
 
     void writeSettings();

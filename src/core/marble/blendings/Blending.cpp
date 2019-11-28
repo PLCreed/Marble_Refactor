@@ -19,7 +19,6 @@ namespace Marble
 {
 
 Blending::~Blending()
-{
-}
+{}
 
 }

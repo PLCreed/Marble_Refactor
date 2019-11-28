@@ -45,7 +45,7 @@ public:
      */
     void run() override;
 
-Q_SIGNALS:
+signals:
     void finished( SearchTask *task );
 
 private:
@@ -67,7 +67,7 @@ public:
      */
     void run() override;
 
-Q_SIGNALS:
+signals:
     void finished( ReverseGeocodingTask *task );
 
 private:
@@ -89,7 +89,7 @@ public:
      */
     void run() override;
 
-Q_SIGNALS:
+signals:
     void finished( RoutingTask *task );
 
 private:
@@ -110,7 +110,7 @@ public:
      */
     void run() override;
 
-Q_SIGNALS:
+signals:
     void parsed(GeoDataDocument* document, const QString &error);
     void finished();
 

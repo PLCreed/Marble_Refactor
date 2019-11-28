@@ -42,13 +42,13 @@ public:
     QString defaultFeatureId() const;
     GeoDataFeature *findFeature( const QString &id ) const;
 
-public Q_SLOTS:
+public slots:
     /** Editing duration for first flyTo element in playlist will be disabled.  */
     void setFirstFlyTo( const QPersistentModelIndex &index );
     /** Sets id of default feature for Remove Item */
     void setDefaultFeatureId( const QString &id );
 
-Q_SIGNALS:
+signals:
     void editingChanged( const QModelIndex& index );
     void edited( const QModelIndex& index );
     void editableChanged( bool editable );
@@ -68,7 +68,7 @@ public:
 protected:
     bool editorEvent( QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index ) override;
 
-private Q_SLOTS:
+private slots:
     void closeEditor(const QModelIndex& index);
 
 private:

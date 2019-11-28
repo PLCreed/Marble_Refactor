@@ -44,7 +44,7 @@ class BBCItemGetter : public AbstractWorkerThread
     bool workAvailable() override;
     void work() override;
 
- Q_SIGNALS:
+ signals:
     void foundStation( const BBCStation& );
 
  public:

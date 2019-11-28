@@ -150,7 +150,7 @@ class MARBLE_EXPORT PluginManager : public QObject
      */
     static void whitelistPlugin(const QString &filename);
 
-Q_SIGNALS:
+signals:
     void renderPluginsChanged();
 
     void positionProviderPluginsChanged();
