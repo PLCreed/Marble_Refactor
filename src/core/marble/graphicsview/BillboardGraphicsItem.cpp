@@ -21,12 +21,16 @@ namespace Marble
 
 class BillboardGraphicsItemPrivate : public MarbleGraphicsItemPrivate
 {
- public:
-    BillboardGraphicsItemPrivate(BillboardGraphicsItem *parent)
-        : MarbleGraphicsItemPrivate(parent),
-        m_alignment( Qt::AlignHCenter | Qt::AlignVCenter )
-    {
-    }
+public:
+    Qt::Alignment m_alignment;
+
+    GeoDataCoordinates m_coordinates;
+    QVector<QPointF> m_positions;
+
+public:
+    BillboardGraphicsItemPrivate(BillboardGraphicsItem *parent) : MarbleGraphicsItemPrivate(parent),
+        m_alignment(Qt::AlignHCenter | Qt::AlignVCenter)
+    {}
 
     QVector<QPointF> positions() const override
     {
@@ -38,8 +42,6 @@ class BillboardGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         return m_positions;
     }
 
-    Qt::Alignment m_alignment;
-
     void setProjection(const ViewportParams *viewport) override
     {
         m_positions.clear();
@@ -48,50 +50,56 @@ class BillboardGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         int pointRepeatNumber = 0;
         bool globeHidesPoint;
 
-        viewport->screenCoordinates( m_coordinates, x, y, pointRepeatNumber,
-                                         m_size, globeHidesPoint );
+        viewport->screenCoordinates(m_coordinates, x, y, pointRepeatNumber, m_size, globeHidesPoint);
 
         // Don't display items if they are on the far side of the globe.
-        if (globeHidesPoint) return;
+        if (globeHidesPoint)
+            return;
 
         m_positions.reserve(pointRepeatNumber);
         // handle vertical alignment
-        qint32 topY = ( viewport->height() - m_size.height() ) / 2;
-        if ( m_alignment & Qt::AlignTop ) {
-            topY = y - m_size.height();
+        qint32 topY = qint32(viewport->height() - m_size.height()) / 2;
+        if (m_alignment & Qt::AlignTop)
+        {
+            topY = qint32(y - m_size.height());
         }
-        else if ( m_alignment & Qt::AlignVCenter ) {
-            topY = y - ( m_size.height() / 2 );
+        else if (m_alignment & Qt::AlignVCenter)
+        {
+            topY = qint32(y - (m_size.height() / 2));
         }
-        else if ( m_alignment & Qt::AlignBottom ) {
-            topY = y;
+        else if (m_alignment & Qt::AlignBottom)
+        {
+            topY = qint32(y);
         }
 
-        for ( int i = 0; i < pointRepeatNumber; ++i ) {
+        for (int i = 0; i < pointRepeatNumber; ++i)
+        {
             // handle horizontal alignment
-            qint32 leftX = ( viewport->width() - m_size.width() ) / 2;
-            if ( m_alignment & Qt::AlignLeft ) {
-                leftX =  x[i] - m_size.width();
+            qint32 leftX = qint32(viewport->width() - m_size.width()) / 2;
+            if (m_alignment & Qt::AlignLeft)
+            {
+                leftX = qint32(x[i] - m_size.width());
             }
-            else if ( m_alignment & Qt::AlignHCenter ) {
-                leftX = x[i] - ( m_size.width() / 2 );
+            else if (m_alignment & Qt::AlignHCenter)
+            {
+                leftX = qint32(x[i] - (m_size.width() / 2));
             }
-            else if ( m_alignment & Qt::AlignRight ) {
-                leftX = x[i];
+            else if (m_alignment & Qt::AlignRight)
+            {
+                leftX = qint32(x[i]);
             }
 
-            m_positions.append( QPoint( leftX, topY ) );
+            m_positions.append(QPoint(leftX, topY));
         }
     }
 
-    GeoDataCoordinates m_coordinates;
-    QVector<QPointF> m_positions;
 };
+
+
 
 BillboardGraphicsItem::BillboardGraphicsItem()
     : MarbleGraphicsItem(new BillboardGraphicsItemPrivate(this))
-{
-}
+{}
 
 GeoDataCoordinates BillboardGraphicsItem::coordinate() const
 {
@@ -99,7 +107,7 @@ GeoDataCoordinates BillboardGraphicsItem::coordinate() const
     return d->m_coordinates;
 }
 
-void BillboardGraphicsItem::setCoordinate( const GeoDataCoordinates &coordinates )
+void BillboardGraphicsItem::setCoordinate(const GeoDataCoordinates &coordinates)
 {
     Q_D(BillboardGraphicsItem);
     d->m_coordinates = coordinates;
@@ -119,16 +127,18 @@ QVector<QRectF> BillboardGraphicsItem::boundingRects() const
     rects.reserve(d->m_positions.size());
 
     QSizeF const size = d->m_size;
-    for (const QPointF &point: d->m_positions) {
+    for (const QPointF &point: d->m_positions)
+    {
         rects << QRectF(point, size);
     }
     return rects;
 }
 
-QRectF BillboardGraphicsItem::containsRect( const QPointF &point ) const
+QRectF BillboardGraphicsItem::containsRect(const QPointF &point) const
 {
-    for( const QRectF &rect: boundingRects() ) {
-        if( rect.contains( point ) )
+    for (const QRectF &rect: boundingRects())
+    {
+        if (rect.contains(point))
             return rect;
     }
 

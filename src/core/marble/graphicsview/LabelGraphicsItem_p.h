@@ -11,14 +11,13 @@
 #ifndef MARBLE_LABELGRAPHICSITEMPRIVATE_H
 #define MARBLE_LABELGRAPHICSITEMPRIVATE_H
 
-#include "FrameGraphicsItem_p.h"
-
 #include <QString>
 #include <QSizeF>
 #include <QImage>
+#include <QFont>
 #include <QIcon>
 
-class QFont;
+#include "FrameGraphicsItem_p.h"
 
 namespace Marble
 {
@@ -27,9 +26,8 @@ class LabelGraphicsItem;
 
 class LabelGraphicsItemPrivate : public FrameGraphicsItemPrivate
 {
- public:
-    LabelGraphicsItemPrivate(LabelGraphicsItem *labelGraphicsItem,
-                             MarbleGraphicsItem *parent);
+public:
+    LabelGraphicsItemPrivate(LabelGraphicsItem *labelGraphicsItem, MarbleGraphicsItem *parent);
 
     // TODO: This has to go up to MarbleGraphicsItem
     static QFont font();

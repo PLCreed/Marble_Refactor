@@ -13,6 +13,7 @@
 #define MARBLE_CLIPPAINTER_H
 
 #include <QPainter>
+
 #include "marble_export.h"
 #include "MarbleGlobal.h"
 
@@ -23,13 +24,13 @@ class QPointF;
 namespace Marble
 {
 /**
- * @short A QPainter that does viewport clipping for polygons 
+ * @short A QPainter that does viewport clipping for polygons
  *
  * This class introduces fast polygon/polyline clipping for QPainter
  * to increase the performance.
- * Clipping is accomplished using an algorithm (by Torsten Rahn) that 
- * processes each polyline once. 
- * To keep things fast each possible scenario of two subsequent 
+ * Clipping is accomplished using an algorithm (by Torsten Rahn) that
+ * processes each polyline once.
+ * To keep things fast each possible scenario of two subsequent
  * points is implemented case by case in a specialized handler which
  * creates interpolated points and helper points.
  */
@@ -41,46 +42,45 @@ namespace Marble
 // bitmap that is at least 100000 x 100000 and in the process eat all
 // available memory.
 //
-// So we introduce the ClipPainter that clips all polylines and polygons 
+// So we introduce the ClipPainter that clips all polylines and polygons
 // to the area that is actually visible in the viewport.
 //
 // @internal
 
 class ClipPainterPrivate;
-class MARBLE_EXPORT ClipPainter : public QPainter 
-{
- public:
-    ClipPainter();
-    ClipPainter(QPaintDevice*, bool);
 
+class MARBLE_EXPORT ClipPainter : public QPainter
+{
+public:
+    ClipPainter();
+    ClipPainter(QPaintDevice *, bool);
     ~ClipPainter();
 
-    void setScreenClip( bool enable );
+    void setScreenClip(bool enable);
     bool hasScreenClip() const;
 
-    void drawPolygon( const QPolygonF &, 
-                      Qt::FillRule fillRule = Qt::OddEvenFill );
+    void drawPolygon(const QPolygonF &, Qt::FillRule fillRule = Qt::OddEvenFill);
 
-    void drawPolyline( const QPolygonF & );
-    void drawPolyline( const QPolygonF &, QVector<QPointF>& labelNodes, 
-                       LabelPositionFlags labelPositionFlag = LineCenter );
+    void drawPolyline(const QPolygonF &);
+    void drawPolyline(const QPolygonF &, QVector<QPointF> &labelNodes,
+                      LabelPositionFlags labelPositionFlag = LineCenter);
 
     void labelPosition(const QPolygonF &polygon, QVector<QPointF> &labelNodes,
                        LabelPositionFlags labelPositionFlags) const;
 
     void setPen(const QColor &);
-    void setPen(const QPen & pen);
+    void setPen(const QPen &pen);
     void setPen(Qt::PenStyle style);
-    void setBrush(const QBrush & brush);
+    void setBrush(const QBrush &brush);
 
-    void setDebugPolygonsLevel( int );
-    void setDebugBatchRender( bool );
+    void setDebugPolygonsLevel(int);
+    void setDebugBatchRender(bool);
 
     //	void clearNodeCount(){ m_debugNodeCount = 0; }
     //	int nodeCount(){ return m_debugNodeCount; }
 
- private:
-    ClipPainterPrivate * const d;
+private:
+    ClipPainterPrivate *const d;
 };
 
 }

@@ -11,11 +11,12 @@
 #ifndef MARBLE_LABELGRAPHICSITEM_H
 #define MARBLE_LABELGRAPHICSITEM_H
 
-// Marble
-#include "FrameGraphicsItem.h"
-#include "marble_export.h"
-
 #include <QSize>
+
+// Marble
+#include "marble_export.h"
+#include "FrameGraphicsItem.h"
+
 
 class QImage;
 class QIcon;
@@ -32,31 +33,31 @@ class LabelGraphicsItemPrivate;
  */
 class MARBLE_EXPORT LabelGraphicsItem : public FrameGraphicsItem
 {
- public:
-    explicit LabelGraphicsItem( MarbleGraphicsItem *parent = nullptr );
+public:
+    explicit LabelGraphicsItem(MarbleGraphicsItem *parent = nullptr);
     ~LabelGraphicsItem() override;
 
-    void setContentSize( const QSizeF &contentSize ) override;
+    void setContentSize(const QSizeF &contentSize) override;
 
     QString text() const;
-    void setText( const QString& text );
+    void setText(const QString &text);
 
     QImage image() const;
-    void setImage( const QImage& image, const QSize& size = QSize() );
+    void setImage(const QImage &image, const QSize &size = QSize());
 
     QIcon icon() const;
-    void setIcon( const QIcon& icon, const QSize& size );
+    void setIcon(const QIcon &icon, const QSize &size);
 
-    void setMinimumSize( const QSizeF& size );
+    void setMinimumSize(const QSizeF &size);
     QSizeF minimumSize() const;
 
     void clear();
 
- protected:
-    void paintContent( QPainter *painter ) override;
+protected:
+    void paintContent(QPainter *painter) override;
 
- private:
-    Q_DISABLE_COPY( LabelGraphicsItem )
+private:
+    Q_DISABLE_COPY(LabelGraphicsItem)
     Q_DECLARE_PRIVATE(LabelGraphicsItem)
 };
 

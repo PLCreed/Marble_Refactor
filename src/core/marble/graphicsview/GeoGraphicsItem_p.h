@@ -11,33 +11,20 @@
 #ifndef MARBLE_GEOGRAPHICSITEMPRIVATE_H
 #define MARBLE_GEOGRAPHICSITEMPRIVATE_H
 
+#include <QSet>
+
 #include "GeoGraphicsItem.h"
 
 // Marble
 #include "GeoDataStyle.h"
 #include "StyleBuilder.h"
 
-#include <QSet>
-
 namespace Marble
 {
 
 class GeoGraphicsItemPrivate
 {
- public:
-    explicit GeoGraphicsItemPrivate( const GeoDataFeature *feature)
-        : m_zValue( 0 ),
-          m_minZoomLevel( 0 ),
-          m_feature( feature ),
-          m_styleBuilder(nullptr),
-          m_highlighted( false )
-    {
-    }
-
-    virtual ~GeoGraphicsItemPrivate()
-    {
-    }
-
+public:
     qreal m_zValue;
     GeoGraphicsItem::GeoGraphicsItemFlags m_flags;
 
@@ -46,13 +33,26 @@ class GeoGraphicsItemPrivate
     RenderContext m_renderContext;
     GeoDataStyle::ConstPtr m_style;
     const StyleBuilder *m_styleBuilder;
-    QVector<const GeoDataRelation*> m_relations;
+    QVector<const GeoDataRelation *> m_relations;
 
     QStringList m_paintLayers;
 
     // To highlight a placemark
     bool m_highlighted;
     GeoDataStyle::ConstPtr m_highlightStyle;
+
+public:
+    explicit GeoGraphicsItemPrivate(const GeoDataFeature *feature) :
+        m_zValue(0),
+        m_minZoomLevel(0),
+        m_feature(feature),
+        m_styleBuilder(nullptr),
+        m_highlighted(false)
+    {}
+
+    virtual ~GeoGraphicsItemPrivate()
+    {}
+
 };
 
 }

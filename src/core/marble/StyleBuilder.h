@@ -41,6 +41,7 @@ class MARBLE_EXPORT StyleBuilder
 public:
     typedef QPair<QString, QString> OsmTag;
 
+public:
     StyleBuilder();
     ~StyleBuilder();
 
@@ -48,10 +49,10 @@ public:
      * Return the label font of the placemark.
      */
     QFont defaultFont() const;
-    void setDefaultFont( const QFont& font );
+    void setDefaultFont(const QFont &font);
 
     QColor defaultLabelColor() const;
-    void setDefaultLabelColor( const QColor& color );
+    void setDefaultLabelColor(const QColor &color);
 
     GeoDataStyle::ConstPtr createStyle(const StyleParameters &parameters) const;
 
@@ -72,7 +73,7 @@ public:
 
     static int minimumZoomLevel(const GeoDataPlacemark::GeoDataVisualCategory &visualCategory);
 
-    static qint64 popularity(const GeoDataPlacemark* placemark);
+    static qint64 popularity(const GeoDataPlacemark *placemark);
 
     /**
      * @brief Returns the maximum zoom level in the theme.
@@ -96,7 +97,7 @@ private:
     Q_DISABLE_COPY(StyleBuilder)
 
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
 }
