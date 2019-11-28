@@ -9,6 +9,9 @@
 // Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de
 //
 
+#include <QImage>
+#include <QtGlobal>
+
 #include "ScanlineTextureMapperContext.h"
 
 #include "GeoSceneAbstractTileProjection.h"
@@ -19,7 +22,6 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
-#include <QImage>
 
 using namespace Marble;
 
@@ -324,6 +326,9 @@ void ScanlineTextureMapperContext::pixelValueApprox( const qreal lon, const qrea
                     iPosX = ( itLon + itStepLon * j ) >> 7;
                     iPosY = ( itLat + itStepLat * j ) >> 7;
                 }
+
+                Q_ASSERT(iPosX >= 0);
+                Q_ASSERT(iPosY >= 0);
 
                 *scanLine = m_tile->pixel( iPosX, iPosY );
                 ++scanLine;
