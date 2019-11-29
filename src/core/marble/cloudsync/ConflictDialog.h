@@ -42,6 +42,7 @@ public:
         PreferCloud
     };
 
+public:
     explicit ConflictDialog(QWidget *parent = nullptr);
     void setMergeItem(MergeItem *item);
 

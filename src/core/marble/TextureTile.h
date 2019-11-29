@@ -1,21 +1,21 @@
 /*
-Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
+   Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 
-Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
+   Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 
-This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
-version 2.1 of the License, or (at your option) any later version.
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
 
-This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-Lesser General Public License for more details.
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+   Lesser General Public License for more details.
 
-You should have received a copy of the GNU Lesser General Public
-License along with this library. If not, see <http://www.gnu.org/licenses/>.
-*/
+   You should have received a copy of the GNU Lesser General Public
+   License along with this library. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MARBLE_TEXTURETILE_H
 #define MARBLE_TEXTURETILE_H
@@ -29,7 +29,7 @@ namespace Marble
 class Blending;
 class TileId;
 
-/*!
+/**
     \class TextureTile
     \brief A class that resembles an image tile (extends Tile).
 
@@ -52,51 +52,51 @@ class TileId;
 
     The life time cycle of a Tile can also be influenced by its
     expiration time which will trigger a reload of the tile data.
-*/
+ */
 
 class TextureTile : public Tile
 {
- public:
-    TextureTile(TileId const & tileId, QImage const & image, const Blending * blending );
+public:
+    TextureTile(TileId const &tileId, QImage const &image, const Blending *blending);
     ~TextureTile() override;
 
-/*!
-    \brief Returns the QImage that describes the look of the Tile
-    \return A non-zero pointer to a QImage associated with the tile.
-*/
-    QImage const * image() const;
+    /**
+        \brief Returns the QImage that describes the look of the Tile
+        \return A non-zero pointer to a QImage associated with the tile.
+     */
+    QImage const *image() const;
 
-/*!
-    \brief Returns the kind of blending used for the texture tile.
-    \return A pointer to the blending object used for painting/merging the Tile.
+    /**
+        \brief Returns the kind of blending used for the texture tile.
+        \return A pointer to the blending object used for painting/merging the Tile.
 
-    If no blending is set the pointer returned will be zero.
-*/
-    Blending const * blending() const;
+        If no blending is set the pointer returned will be zero.
+     */
+    Blending const *blending() const;
 
     int byteCount() const;
 
- private:
-    Q_DISABLE_COPY( TextureTile )
+private:
+    Q_DISABLE_COPY(TextureTile)
 
     QImage const m_image;
-    Blending const * const m_blending;
+    Blending const *const m_blending;
 
 };
 
-inline QImage const * TextureTile::image() const
+inline QImage const *TextureTile::image() const
 {
     return &m_image;
 }
 
-inline Blending const * TextureTile::blending() const
+inline Blending const *TextureTile::blending() const
 {
     return m_blending;
 }
 
 inline int TextureTile::byteCount() const
 {
-    return m_image.byteCount();
+    return m_image.byteCount();  /// TODO byteCount() Obsolete after Qt 5.10
 }
 
 }

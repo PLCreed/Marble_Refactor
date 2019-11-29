@@ -38,8 +38,10 @@ public:
 
     int minimum() const;
     void setMinimum(int name);
+
     int maximum() const;
     void setMaximum(int target);
+
     bool discrete() const;
     void setDiscrete(bool theme);
 

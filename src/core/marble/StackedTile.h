@@ -25,7 +25,7 @@ namespace Marble
 
 class TextureTile;
 
-/*!
+/**
     \class StackedTile
     \brief A single tile that consists of a stack of Tile layers.
 
@@ -64,19 +64,19 @@ class StackedTile : public Tile
     int depth() const;
     int byteCount() const;
 
-/*!
+/**
     \brief Returns the stack of Tiles
     \return A container of Tile objects.
 */
     QVector<QSharedPointer<TextureTile> > tiles() const;
 
-/*!
+/**
     \brief Returns the QImage that describes the merged stack of Tiles
     \return A non-zero pointer to the resulting QImage 
 */
     QImage const * resultImage() const;
 
-/*!
+/**
     \brief Returns the color value of the result tile at the given integer position.
     \return The uint that describes the color value of the given pixel 
     
@@ -85,7 +85,7 @@ class StackedTile : public Tile
 */
     uint pixel( int x, int y ) const;
     
-/*!
+/**
     \brief Returns the color value of the result tile at a given floating point position.
     \return The uint that describes the color value of the given pixel 
     

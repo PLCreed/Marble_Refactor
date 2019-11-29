@@ -19,16 +19,17 @@
 #include <QTime>
 #include <QMessageBox>
 
-// Local dir
-#include "MarbleDirs.h"
-#include "MarbleDebug.h"
+// Plugins
 #include "RenderPlugin.h"
 #include "PositionProviderPlugin.h"
 #include "ParseRunnerPlugin.h"
 #include "ReverseGeocodingRunnerPlugin.h"
 #include "RoutingRunnerPlugin.h"
 #include "SearchRunnerPlugin.h"
-#include <config-marble.h>
+// Local dir
+#include "MarbleDirs.h"
+#include "MarbleDebug.h"
+#include "config-marble.h"
 
 namespace Marble
 {

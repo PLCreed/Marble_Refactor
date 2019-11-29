@@ -44,10 +44,7 @@ namespace Marble
 
 class Q_DECL_HIDDEN OwncloudSyncBackend::Private
 {
-
 public:
-    Private(CloudSyncManager *cloudSyncManager);
-
     QDir m_cacheDir;
     QNetworkAccessManager m_network;
     QNetworkReply *m_routeUploadReply;
@@ -66,6 +63,10 @@ public:
 
     CloudSyncManager *m_cloudSyncManager;
     QUrl m_apiUrl;
+
+public:
+    Private(CloudSyncManager *cloudSyncManager);
+
 };
 
 OwncloudSyncBackend::Private::Private(CloudSyncManager *cloudSyncManager) :

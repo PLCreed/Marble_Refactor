@@ -11,11 +11,10 @@
 #ifndef MARBLE_RENDERPLUGINMODEL_H
 #define MARBLE_RENDERPLUGINMODEL_H
 
-#include "marble_export.h"
 #include <QStandardItemModel>
-
 #include <QList>
 
+#include "marble_export.h"
 #include "PluginInterface.h"
 
 namespace Marble
@@ -35,7 +34,8 @@ public:
     /**
      * This enum contains the data roles for the QStandardItems.
      */
-    enum ItemDataRole {
+    enum ItemDataRole
+    {
         Name = Qt::DisplayRole,          // QString
         Icon = Qt::DecorationRole,       // QIcon
         Description = Qt::ToolTipRole,   // QString
@@ -47,7 +47,8 @@ public:
         CopyrightYears                   // QString
     };
 
-    explicit RenderPluginModel( QObject *parent = nullptr );
+public:
+    explicit RenderPluginModel(QObject *parent = nullptr);
 
     ~RenderPluginModel() override;
 
@@ -59,11 +60,11 @@ public:
      *
      * @param renderPlugins the RenderPlugins to be managed
      */
-    void setRenderPlugins( const QList<RenderPlugin *> &renderPlugins );
+    void setRenderPlugins(const QList<RenderPlugin *> &renderPlugins);
 
-    QVector<PluginAuthor> pluginAuthors( const QModelIndex &index ) const;
+    QVector<PluginAuthor> pluginAuthors(const QModelIndex &index) const;
 
-    DialogConfigurationInterface *pluginDialogConfigurationInterface( const QModelIndex &index );
+    DialogConfigurationInterface *pluginDialogConfigurationInterface(const QModelIndex &index);
 
 public slots:
     /**

@@ -17,7 +17,6 @@ namespace Marble {
 
 class Q_DECL_HIDDEN RouteItem::Private
 {
-
 public:
     QString m_identifier;
     QString m_name;

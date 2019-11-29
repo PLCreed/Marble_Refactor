@@ -21,6 +21,7 @@ public:
     QList<RenderState> m_children;
     RenderStatus m_status;
 
+public:
     Private(const QString &name = QString(), RenderStatus status = Complete);
     RenderStatus status() const;
     static RenderStatus minimumStatus(RenderStatus a, RenderStatus b);

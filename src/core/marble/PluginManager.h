@@ -14,8 +14,8 @@
 
 #include <QObject>
 #include <QList>
-#include "marble_export.h"
 
+#include "marble_export.h"
 
 namespace Marble
 {
@@ -45,8 +45,8 @@ class MARBLE_EXPORT PluginManager : public QObject
 {
     Q_OBJECT
 
- public:
-    explicit PluginManager( QObject* parent = nullptr );
+public:
+    explicit PluginManager(QObject *parent = nullptr);
 
     ~PluginManager() override;
 
@@ -58,13 +58,12 @@ class MARBLE_EXPORT PluginManager : public QObject
      * RenderPlugin::newInstance().
      */
     QList<const RenderPlugin *> renderPlugins() const;
-
     /**
      * @brief Add a RenderPlugin manually to the list of known plugins. Normally you
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addRenderPlugin( const RenderPlugin *plugin );
+    void addRenderPlugin(const RenderPlugin *plugin);
 
     /**
      * @brief Returns all available PositionProviderPlugins.
@@ -74,65 +73,60 @@ class MARBLE_EXPORT PluginManager : public QObject
      * PositionProviderPlugin::newInstance().
      */
     QList<const PositionProviderPlugin *> positionProviderPlugins() const;
-
     /**
      * @brief Add a PositionProviderPlugin manually to the list of known plugins. Normally you
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addPositionProviderPlugin( const PositionProviderPlugin *plugin );
+    void addPositionProviderPlugin(const PositionProviderPlugin *plugin);
 
     /**
      * Returns all search runner plugins.
      * @note: Runner plugins are owned by the PluginManager, do not delete them.
      */
     QList<const SearchRunnerPlugin *> searchRunnerPlugins() const;
-
     /**
      * @brief Add a SearchRunnerPlugin manually to the list of known plugins. Normally you
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addSearchRunnerPlugin( const SearchRunnerPlugin *plugin );
+    void addSearchRunnerPlugin(const SearchRunnerPlugin *plugin);
 
     /**
      * Returns all reverse geocoding runner plugins.
      * @note: The runner plugins are owned by the PluginManager, do not delete them.
      */
     QList<const ReverseGeocodingRunnerPlugin *> reverseGeocodingRunnerPlugins() const;
-
     /**
      * @brief Add a ReverseGeocodingRunnerPlugin manually to the list of known plugins. Normally you
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addReverseGeocodingRunnerPlugin( const ReverseGeocodingRunnerPlugin *plugin );
+    void addReverseGeocodingRunnerPlugin(const ReverseGeocodingRunnerPlugin *plugin);
 
     /**
      * Returns all routing runner plugins.
      * @note: The runner plugins are owned by the PluginManager, do not delete them.
      */
     QList<RoutingRunnerPlugin *> routingRunnerPlugins() const;
-
     /**
      * @brief Add a RoutingRunnerPlugin manually to the list of known plugins. Normally you
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addRoutingRunnerPlugin( RoutingRunnerPlugin * plugin );
+    void addRoutingRunnerPlugin(RoutingRunnerPlugin *plugin);
 
     /**
      * Returns all parse runner plugins.
      * @note: The runner plugins are owned by the PluginManager, do not delete them.
      */
     QList<const ParseRunnerPlugin *> parsingRunnerPlugins() const;
-
     /**
      * @brief Add a ParseRunnerPlugin manually to the list of known plugins. Normally you
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addParseRunnerPlugin( const ParseRunnerPlugin *plugin );
+    void addParseRunnerPlugin(const ParseRunnerPlugin *plugin);
 
     /**
      * @brief blacklistPlugin Prevent that a plugin is loaded from the given filename
@@ -163,14 +157,14 @@ signals:
 
     void parseRunnerPluginsChanged();
 
- private:
-    Q_DISABLE_COPY( PluginManager )
+private:
+    Q_DISABLE_COPY(PluginManager)
 
 #ifdef Q_OS_ANDROID
     void installPluginsFromAssets() const;
 #endif
 
-    PluginManagerPrivate  * const d;
+    PluginManagerPrivate  *const d;
 };
 
 }

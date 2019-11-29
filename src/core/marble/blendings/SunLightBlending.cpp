@@ -16,7 +16,6 @@
 #include <QImage>
 #include <QColor>
 
-
 #include "SunLightBlending.h"
 
 #include "MarbleDebug.h"
@@ -28,8 +27,8 @@
 namespace Marble
 {
 
-SunLightBlending::SunLightBlending(const SunLocator *sunLocator)
-    : Blending(),
+SunLightBlending::SunLightBlending(const SunLocator *sunLocator) :
+    Blending(),
     m_sunLocator(sunLocator),
     m_levelZeroColumns(0),
     m_levelZeroRows(0)
@@ -57,7 +56,7 @@ void SunLightBlending::blend(QImage *const tileImage, TextureTile const *const t
 
     // First we determine the supporting point interval for the interpolation.
     const int n = maxDivisor(30, tileWidth);
-    const int ipRight = n * (int)(tileWidth / n);
+    const int ipRight = n * int(tileWidth / n);
 
     const QImage *nighttile = top->image();
 

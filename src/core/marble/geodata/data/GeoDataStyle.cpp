@@ -24,22 +24,23 @@ namespace Marble
 class GeoDataStylePrivate
 {
 public:
-    GeoDataStylePrivate() {}
-
-    GeoDataStylePrivate(const QString &iconPath, const QFont &font, const QColor &color)
-        : m_iconStyle(iconPath),
-        m_labelStyle(font, color),
-        m_lineStyle(color),
-        m_polyStyle(color),
-        m_balloonStyle()
-    {}
-
     GeoDataIconStyle m_iconStyle;
     GeoDataLabelStyle m_labelStyle;
     GeoDataLineStyle m_lineStyle;
     GeoDataPolyStyle m_polyStyle;
     GeoDataBalloonStyle m_balloonStyle;
     GeoDataListStyle m_listStyle;
+
+public:
+    GeoDataStylePrivate() {}
+
+    GeoDataStylePrivate(const QString &iconPath, const QFont &font, const QColor &color) :
+        m_iconStyle(iconPath),
+        m_labelStyle(font, color),
+        m_lineStyle(color),
+        m_polyStyle(color),
+        m_balloonStyle()
+    {}
 };
 
 GeoDataStyle::GeoDataStyle() : d(new GeoDataStylePrivate)

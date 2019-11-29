@@ -51,11 +51,7 @@ public:
     };
 
 public:
-    /**
-     * @brief Construct a new GeoSceneAbstractTileProjection.
-     */
     GeoSceneAbstractTileProjection();
-
     virtual ~GeoSceneAbstractTileProjection();
 
     virtual GeoSceneAbstractTileProjection::Type type() const = 0;

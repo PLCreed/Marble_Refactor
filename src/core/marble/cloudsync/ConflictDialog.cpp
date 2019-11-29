@@ -96,8 +96,7 @@ void ConflictDialog::resolveConflict(QAbstractButton *button)
                 default:
                     break;
             }
-        }
-
+        } break;
         default:
             break;
     }

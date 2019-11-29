@@ -16,7 +16,6 @@
 #include "CloudRouteModel.h"
 #include "RouteItemDelegate.h"
 
-
 namespace Marble {
 
 class Q_DECL_HIDDEN CloudRoutesDialog::Private : public Ui::CloudRoutesDialog

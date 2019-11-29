@@ -12,20 +12,21 @@
 #ifndef MARBLE_FILEMANAGER_H
 #define MARBLE_FILEMANAGER_H
 
-#include "GeoDataDocument.h"
-
 #include <QObject>
+
+#include "GeoDataDocument.h"
 
 class QString;
 
 namespace Marble
 {
 
-class FileManagerPrivate;
-class FileLoader;
 class GeoDataLatLonBox;
 class GeoDataTreeModel;
+class FileLoader;
 class PluginManager;
+
+class FileManagerPrivate;
 
 /**
  * This class is responsible for loading the
@@ -38,7 +39,7 @@ class FileManager : public QObject
 {
     Q_OBJECT
 
- public:
+public:
     /**
      * Creates a new file manager.
      *
@@ -46,7 +47,7 @@ class FileManager : public QObject
      * @param pluginManager The plugin manager.
      * @param parent The parent object.
      */
-    explicit FileManager( GeoDataTreeModel *treeModel, const PluginManager *pluginManager, QObject *parent = nullptr );
+    explicit FileManager(GeoDataTreeModel *treeModel, const PluginManager *pluginManager, QObject *parent = nullptr);
 
     /**
      * Destroys the file manager.
@@ -56,37 +57,38 @@ class FileManager : public QObject
     /**
      * Loads a new file into the manager.
      */
-    void addFile(const QString &fileName, const QString &property, const GeoDataStyle::Ptr &style, DocumentRole role, int renderOrder = 0, bool recenter = false );
+    void addFile(const QString &fileName, const QString &property, const GeoDataStyle::Ptr &style,
+                 DocumentRole role, int renderOrder = 0, bool recenter = false);
 
 
     /**
-    * removes an existing file from the manager
-    */
-    void removeFile( const QString &fileName );
+     * removes an existing file from the manager
+     */
+    void removeFile(const QString &fileName);
 
     /**
-    * add Data containing KML code as string
-    */
-    void addData( const QString &name, const QString &data, DocumentRole role );
+     * add Data containing KML code as string
+     */
+    void addData(const QString &name, const QString &data, DocumentRole role);
 
-    void closeFile( const GeoDataDocument *document );
+    void closeFile(const GeoDataDocument *document);
 
     int size() const;
-    GeoDataDocument *at( const QString &key );
+    GeoDataDocument *at(const QString &key);
 
     /** Returns the number of files being opened at the moment */
     int pendingFiles() const;
 
- signals:
-    void fileAdded( const QString &key );
-    void fileRemoved( const QString &key );
-    void centeredDocument( const GeoDataLatLonBox& );
+signals:
+    void fileAdded(const QString &key);
+    void fileRemoved(const QString &key);
+    void centeredDocument(const GeoDataLatLonBox &);
 
- private:
+private:
 
-    Q_PRIVATE_SLOT( d, void cleanupLoader( FileLoader *loader ) )
+    Q_PRIVATE_SLOT(d, void cleanupLoader(FileLoader * loader))
 
-    Q_DISABLE_COPY( FileManager )
+    Q_DISABLE_COPY(FileManager)
 
     friend class FileManagerPrivate;
     FileManagerPrivate *const d;

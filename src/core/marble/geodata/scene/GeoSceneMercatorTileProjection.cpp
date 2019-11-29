@@ -19,10 +19,9 @@
     Boston, MA 02110-1301, USA.
  */
 
-#include <MarbleMath.h>
-
 #include "GeoSceneMercatorTileProjection.h"
 #include "GeoDataLatLonBox.h"
+#include "MarbleMath.h"
 
 namespace Marble
 {
@@ -124,7 +123,6 @@ static inline qreal latFromTileY(unsigned int y, unsigned int tileCount)
     return gd(M_PI * (1.0 - (2.0 * y) / tileCount));
 }
 
-
 QRect GeoSceneMercatorTileProjection::tileIndexes(const GeoDataLatLonBox &latLonBox, int zoomLevel) const
 {
     const unsigned int xTileCount = (1 << zoomLevel) * levelZeroColumns();
@@ -139,7 +137,6 @@ QRect GeoSceneMercatorTileProjection::tileIndexes(const GeoDataLatLonBox &latLon
 
     return QRect(QPoint(westX, northY), QPoint(eastX, southY));
 }
-
 
 GeoDataLatLonBox GeoSceneMercatorTileProjection::geoCoordinates(int zoomLevel, int x, int y) const
 {

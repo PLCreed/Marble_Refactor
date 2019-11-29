@@ -11,6 +11,7 @@
 #define MARBLE_DIALOGCONFIGURATIONINTERFACE_H
 
 #include <QObject> // for Q_DECLARE_INTERFACE macro
+
 #include "marble_export.h"
 
 class QDialog;
@@ -30,7 +31,7 @@ namespace Marble
  */
 class MARBLE_EXPORT DialogConfigurationInterface
 {
- public:
+public:
     virtual ~DialogConfigurationInterface();
 
     /**
@@ -43,6 +44,6 @@ class MARBLE_EXPORT DialogConfigurationInterface
 
 }
 
-Q_DECLARE_INTERFACE( Marble::DialogConfigurationInterface, "org.kde.Marble.DialogConfigurationInterface/1.0" )
+Q_DECLARE_INTERFACE(Marble::DialogConfigurationInterface, "org.kde.Marble.DialogConfigurationInterface/1.0")
 
 #endif

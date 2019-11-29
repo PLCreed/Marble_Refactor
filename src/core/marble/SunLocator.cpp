@@ -13,18 +13,15 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "SunLocator.h"
-
-#include "MarbleGlobal.h"
-#include "MarbleClock.h"
-#include "Planet.h"
-#include "MarbleMath.h"
-
-#include "MarbleDebug.h"
-
+#include <cmath>
 #include <QDateTime>
 
-#include <cmath>
+#include "SunLocator.h"
+#include "Planet.h"
+#include "MarbleClock.h"
+#include "MarbleGlobal.h"
+#include "MarbleMath.h"
+#include "MarbleDebug.h"
 
 namespace Marble
 {
@@ -34,16 +31,6 @@ using std::sin;
 class SunLocatorPrivate
 {
 public:
-    SunLocatorPrivate(const MarbleClock *clock, const Planet *planet)
-        : m_lon(0.0),
-        m_lat(0.0),
-        m_twilightZone(planet->twilightZone()),
-        m_clock(clock),
-        m_planet(planet)
-    {
-        planet->sunPosition(m_lon, m_lat, clock->dateTime());
-    }
-
     qreal m_lon;
     qreal m_lat;
 
@@ -51,11 +38,21 @@ public:
 
     const MarbleClock *const m_clock;
     const Planet *m_planet;
+
+public:
+    SunLocatorPrivate(const MarbleClock *clock, const Planet *planet) :
+        m_lon(0.0),
+        m_lat(0.0),
+        m_twilightZone(planet->twilightZone()),
+        m_clock(clock),
+        m_planet(planet)
+    {
+        planet->sunPosition(m_lon, m_lat, clock->dateTime());
+    }
 };
 
 
-SunLocator::SunLocator(const MarbleClock *clock, const Planet *planet)
-    : QObject(),
+SunLocator::SunLocator(const MarbleClock *clock, const Planet *planet) : QObject(),
     d(new SunLocatorPrivate(clock, planet))
 {}
 
@@ -101,7 +98,7 @@ void SunLocator::shadePixel(QRgb &pixcol, qreal brightness)
         // night
         //      Doing  "pixcol = qRgb(r/2, g/2, b/2);" by shifting some electrons around ;)
         // by shifting some electrons around ;)
-        pixcol = qRgb(qRed(pixcol) * 0.35, qGreen(pixcol) * 0.35, qBlue(pixcol) * 0.35);
+        pixcol = qRgb(int(qRed(pixcol) * 0.35), int(qGreen(pixcol) * 0.35), int(qBlue(pixcol) * 0.35));
         // pixcol = (pixcol & 0xff000000) | ((pixcol >> 1) & 0x7f7f7f);
     }
     else
@@ -111,7 +108,7 @@ void SunLocator::shadePixel(QRgb &pixcol, qreal brightness)
         int g = qGreen(pixcol);
         int b = qBlue(pixcol);
         qreal d = 0.65 * brightness + 0.35;
-        pixcol = qRgb((int)(d * r), (int)(d * g), (int)(d * b));
+        pixcol = qRgb(int(d * r), int(d * g), int(d * b));
     }
 }
 
@@ -140,9 +137,9 @@ void SunLocator::shadePixelComposite(QRgb &pixcol, const QRgb &dpixcol,
         int dg = qGreen(dpixcol);
         int db = qBlue(dpixcol);
 
-        pixcol = qRgb((int)(d * r + (1 - d) * dr),
-                      (int)(d * g + (1 - d) * dg),
-                      (int)(d * b + (1 - d) * db));
+        pixcol = qRgb(int(d * r + (1 - d) * dr),
+                      int(d * g + (1 - d) * dg),
+                      int(d * b + (1 - d) * db));
     }
 }
 

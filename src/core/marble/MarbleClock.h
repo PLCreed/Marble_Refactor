@@ -12,9 +12,9 @@
 #ifndef MARBLE_MARBLECLOCK_H
 #define MARBLE_MARBLECLOCK_H
 
-#include "geodata_export.h"
-
 #include <QObject>
+
+#include "geodata_export.h"
 
 class QDateTime;
 
@@ -27,9 +27,8 @@ class GEODATA_EXPORT MarbleClock : public QObject
 {
     Q_OBJECT
 
- public:
-    explicit MarbleClock( QObject* parent = nullptr );
-
+public:
+    explicit MarbleClock(QObject *parent = nullptr);
     ~MarbleClock() override;
 
     /**
@@ -38,17 +37,16 @@ class GEODATA_EXPORT MarbleClock : public QObject
      */
     qreal dayFraction() const;
 
- signals:
+signals:
     /**
-     * @brief the timeChanged signal will be triggered at updateInterval() rate
-     * or at most every second.
+     * @brief the timeChanged signal will be triggered at updateInterval() rate or at most every second.
      **/
     void timeChanged();
 
     /**
      * @brief Emitted when setUpdateInterval() is called.
      */
-    void updateIntervalChanged( int seconds );
+    void updateIntervalChanged(int seconds);
 
 public:
 
@@ -56,7 +54,7 @@ public:
      * @brief Sets the internal date and time a custom one
      * @param datetime The custom date and time
      **/
-    void setDateTime( const QDateTime& datetime );
+    void setDateTime(const QDateTime &datetime);
 
     /**
      * @brief Returns the internal date and time
@@ -68,7 +66,7 @@ public:
      * @param seconds The interval in seconds
      * @see updateInterval
      */
-    void setUpdateInterval( int seconds );
+    void setUpdateInterval(int seconds);
 
     /**
      * @brief Returns the interval at which dateTime() is updated and timeChanged() is emitted,
@@ -82,7 +80,7 @@ public:
      * @brief Sets the speed of the timer which is how fast the marble clock can run relative to actual speed of time.
      * @param speed The new speed (integer)
      **/
-    void setSpeed( int speed );
+    void setSpeed(int speed);
 
     /**
      * @brief Returns the speed of the timer
@@ -93,19 +91,19 @@ public:
      * @brief Sets the timezone of the clock
      * @param timeInSec The new timezone ( in seconds w.r.t. UTC )
      **/
-    void setTimezone( int timeInSec );
+    void setTimezone(int timeInSec);
 
     /**
      * @brief Returns the timezone of the clock
      **/
     int timezone() const;
 
- private:
-    Q_DISABLE_COPY( MarbleClock )
+private:
+    Q_DISABLE_COPY(MarbleClock)
 
-    Q_PRIVATE_SLOT( d,  void timerTimeout() )
+    Q_PRIVATE_SLOT(d, void timerTimeout())
 
-    MarbleClockPrivate* const d;
+    MarbleClockPrivate *const d;
 
     friend class MarbleClockPrivate;
 };

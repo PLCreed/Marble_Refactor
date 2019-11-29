@@ -34,6 +34,19 @@ namespace Marble
 class GeoSceneHeadPrivate
 {
 public:
+    GeoSceneZoom *m_zoom;
+    GeoSceneIcon *m_icon;
+    GeoSceneLicense *m_license;
+
+    QString m_name;
+    QString m_target;
+    QString m_theme;
+    QString m_description;
+    qreal m_radius;
+
+    bool m_visible;
+
+public:
     GeoSceneHeadPrivate() :
         m_zoom(new GeoSceneZoom),
         m_icon(new GeoSceneIcon),
@@ -52,18 +65,6 @@ public:
         delete m_zoom;
         delete m_license;
     }
-
-    GeoSceneZoom *m_zoom;
-    GeoSceneIcon *m_icon;
-    GeoSceneLicense *m_license;
-
-    QString m_name;
-    QString m_target;
-    QString m_theme;
-    QString m_description;
-    qreal m_radius;
-
-    bool m_visible;
 };
 
 

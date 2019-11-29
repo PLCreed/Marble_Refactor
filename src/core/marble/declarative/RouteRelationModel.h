@@ -21,7 +21,6 @@ namespace Marble {
 class RouteRelationModel : public QAbstractListModel
 {
     Q_OBJECT
-
 public:
     enum RouteRelationRoles
     {
@@ -38,6 +37,7 @@ public:
         RouteVisible
     };
 
+public:
     explicit RouteRelationModel(QObject *parent = nullptr);
 
     void setRelations(const QSet<const GeoDataRelation *> &relations);

@@ -25,8 +25,9 @@
 namespace Marble
 {
 class MarbleClock;
-class SunLocatorPrivate;
 class Planet;
+
+class SunLocatorPrivate;
 
 class MARBLE_EXPORT SunLocator : public QObject
 {
@@ -52,9 +53,9 @@ signals:
     void positionChanged(qreal lon, qreal lat);
 
 private:
-    SunLocatorPrivate *const d;
-
     Q_DISABLE_COPY(SunLocator)
+
+    SunLocatorPrivate *const d;
 };
 
 }

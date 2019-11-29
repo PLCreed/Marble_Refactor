@@ -28,7 +28,7 @@ class MarbleGraphicsGridLayoutPrivate
 {
 public:
     // A two dimensional array of pointers to ScreenGraphicsItems
-    ScreenGraphicsItem * * *m_items;
+    ScreenGraphicsItem* **m_items;
 
     int m_rows;
     int m_columns;
