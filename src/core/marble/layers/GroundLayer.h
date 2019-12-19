@@ -21,7 +21,6 @@ namespace Marble
 class GroundLayer : public LayerInterface
 {
 public:
-
     GroundLayer();
 
     ~GroundLayer() override;

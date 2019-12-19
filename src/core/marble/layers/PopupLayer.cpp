@@ -142,7 +142,7 @@ void PopupLayer::popup()
     qreal sx, sy, lon, lat;
     viewport.screenCoordinates(coords, sx, sy);
     sx = viewport.radius() < viewport.width() ? 0.5 * (viewport.width() + viewport.radius()) : 0.75 * viewport.width();
-    viewport.geoCoordinates(sx, sy, lon, lat, GeoDataCoordinates::Radian);
+    viewport.geoCoordinates(int(sx), int(sy), lon, lat, GeoDataCoordinates::Radian);
     coords.setLatitude(lat);
     coords.setLongitude(lon);
     d->m_widget->centerOn(coords, true);

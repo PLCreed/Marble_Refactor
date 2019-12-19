@@ -34,8 +34,7 @@ bool PlacemarkLayer::m_useXWorkaround = false;
 PlacemarkLayer::PlacemarkLayer(QAbstractItemModel *placemarkModel,
                                QItemSelectionModel *selectionModel,
                                MarbleClock *clock, const StyleBuilder *styleBuilder,
-                               QObject *parent) :
-    QObject(parent),
+                               QObject *parent) : QObject(parent),
     m_layout(placemarkModel, selectionModel, clock, styleBuilder),
     m_debugModeEnabled(false),
     m_levelTagDebugModeEnabled(false),
@@ -194,13 +193,13 @@ bool PlacemarkLayer::render(GeoPainter *geoPainter, ViewportParams *viewport,
             {
                 idStr.remove("shop_");
                 backgroundColor = QColor(
-                    (10 * (int)(idStr[0].toLatin1())) % 255,
-                    (10 * (int)(idStr[1].toLatin1())) % 255,
-                    (10 * (int)(idStr[2].toLatin1())) % 255);
+                    (10 * int(idStr[0].toLatin1())) % 255,
+                    (10 * int(idStr[1].toLatin1())) % 255,
+                    (10 * int(idStr[2].toLatin1())) % 255);
             }
             else
             {
-                backgroundColor = QColor((quint64)(&iter.key()));
+                backgroundColor = QColor(quint32(&iter.key()));
             }
             debugPixmap.fill(backgroundColor);
             QPainter pixpainter;
@@ -372,7 +371,7 @@ void PlacemarkLayer::renderDebug(GeoPainter *painter, ViewportParams *viewport, 
         QPoint position = placemark->symbolRect().bottomLeft().toPoint() + QPoint(0, qRound(0.8 * height));
         auto const popularity = placemark->placemark()->popularity();
         painter->drawText(position, QStringLiteral("p: %1").arg(popularity));
-        position -= QPoint(0, placemark->symbolRect().height() + height);
+        position -= QPoint(0, int(placemark->symbolRect().height() + height));
         auto const zoomLevel = placemark->placemark()->zoomLevel();
         painter->drawText(position, QStringLiteral("z: %1").arg(zoomLevel));
     }

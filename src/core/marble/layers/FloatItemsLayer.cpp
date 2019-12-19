@@ -26,10 +26,8 @@ QStringList FloatItemsLayer::renderPosition() const
     return QStringList(QStringLiteral("FLOAT_ITEM"));
 }
 
-bool FloatItemsLayer::render(GeoPainter *painter,
-                             ViewportParams *viewport,
-                             const QString &renderPos,
-                             GeoSceneLayer *layer)
+bool FloatItemsLayer::render(GeoPainter *painter, ViewportParams *viewport,
+                             const QString &renderPos, GeoSceneLayer *layer)
 {
     Q_UNUSED(renderPos)
     Q_UNUSED(layer)
