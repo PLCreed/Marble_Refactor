@@ -21,9 +21,10 @@ class QTreeWidgetItem;
 namespace Marble
 {
 
-class OsmRelationManagerWidgetPrivate;
 class GeoDataPlacemark;
 class OsmPlacemarkData;
+
+class OsmRelationManagerWidgetPrivate;
 
 enum Column
 {

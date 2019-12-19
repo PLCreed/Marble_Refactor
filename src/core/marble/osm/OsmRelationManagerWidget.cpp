@@ -32,8 +32,7 @@ namespace Marble
 
 OsmRelationManagerWidget::OsmRelationManagerWidget(GeoDataPlacemark *placemark,
                                                    const QHash<qint64, OsmPlacemarkData> *relations,
-                                                   QWidget *parent)
-    : QWidget(parent),
+                                                   QWidget *parent) : QWidget(parent),
     d(new OsmRelationManagerWidgetPrivate)
 {
     d->m_placemark = placemark;

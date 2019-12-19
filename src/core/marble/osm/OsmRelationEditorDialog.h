@@ -20,10 +20,11 @@ class QDialogButtonBox;
 
 namespace Marble {
 
-class OsmRelationEditorDialogPrivate;
 class OsmTagEditorWidget;
 class OsmPlacemarkData;
 class GeoDataPlacemark;
+
+class OsmRelationEditorDialogPrivate;
 
 /**
  * @brief The OsmRelationEditorDialog class small dialog that is used to edit relations
