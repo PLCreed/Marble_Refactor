@@ -13,10 +13,10 @@
 #ifndef MARBLE_POSITIONTRACKING_H
 #define MARBLE_POSITIONTRACKING_H
 
+#include <QObject>
+
 #include "marble_export.h"
 #include "PositionProviderPluginInterface.h"
-
-#include <QObject>
 
 namespace Marble
 {
@@ -31,24 +31,26 @@ class MARBLE_EXPORT PositionTracking : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY( PositionProviderPlugin* positionProviderPlugin READ positionProviderPlugin WRITE setPositionProviderPlugin NOTIFY positionProviderPluginChanged )
+    Q_PROPERTY(
+        PositionProviderPlugin *
+        positionProviderPlugin READ positionProviderPlugin WRITE setPositionProviderPlugin NOTIFY positionProviderPluginChanged)
 
 public:
-    explicit PositionTracking( GeoDataTreeModel* model );
+    explicit PositionTracking(GeoDataTreeModel *model);
     ~PositionTracking() override;
 
     /**
-      * Change the position provider to use. You can provide 0 to disable
-      * position tracking. Ownership of the provided plugin is taken.
-      */
-    void setPositionProviderPlugin( PositionProviderPlugin* plugin );
+     * Change the position provider to use. You can provide 0 to disable
+     * position tracking. Ownership of the provided plugin is taken.
+     */
+    void setPositionProviderPlugin(PositionProviderPlugin *plugin);
 
     /** @brief Returns the current position provider plugin, or 0 if none is in use */
-    PositionProviderPlugin* positionProviderPlugin();
+    PositionProviderPlugin *positionProviderPlugin();
 
     /**
-      * @brief gives the error message from the current position provider
-      */
+     * @brief gives the error message from the current position provider
+     */
     QString error() const;
 
     /**
@@ -88,7 +90,7 @@ public:
      * @param planetRadius Scale factor, usually the radius of the underlying planet
      * @return Length of all track segments on the unit sphere scaled by planetRadius
      */
-    qreal length( qreal planetRadius ) const;
+    qreal length(qreal planetRadius) const;
 
     void readSettings();
 
@@ -96,36 +98,36 @@ public:
 
 public slots:
     /**
-      * Toggles the visibility of the Position Tracking document
-      */
-    void setTrackVisible ( bool visible );
+     * Toggles the visibility of the Position Tracking document
+     */
+    void setTrackVisible(bool visible);
 
     /**
-      * Saves the track document to file
-      */
-    bool saveTrack( const QString& fileName );
+     * Saves the track document to file
+     */
+    bool saveTrack(const QString &fileName);
 
     /**
-      * Removes all track segments which were recorded
-      */
+     * Removes all track segments which were recorded
+     */
     void clearTrack();
 
 signals:
-    void  gpsLocation( const GeoDataCoordinates&, qreal );
+    void gpsLocation(const GeoDataCoordinates &, qreal);
 
-    void statusChanged( PositionProviderStatus status );
+    void statusChanged(PositionProviderStatus status);
 
     /**
      * @brief emits positionProviderPluginChanged(0) when provider is disabled
      */
-    void positionProviderPluginChanged( PositionProviderPlugin *activePlugin );
+    void positionProviderPluginChanged(PositionProviderPlugin *activePlugin);
 
- private:
-    Q_PRIVATE_SLOT( d, void updatePosition() )
-    Q_PRIVATE_SLOT( d, void updateStatus() )
+private:
+    Q_PRIVATE_SLOT(d, void updatePosition())
+    Q_PRIVATE_SLOT(d, void updateStatus())
 
     friend class PositionTrackingPrivate;
-    PositionTrackingPrivate* const d;
+    PositionTrackingPrivate *const d;
 };
 
 }

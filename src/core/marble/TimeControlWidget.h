@@ -20,7 +20,7 @@
 
 namespace Ui
 {
-    class TimeControlWidget;
+class TimeControlWidget;
 }
 
 namespace Marble
@@ -32,47 +32,47 @@ class MARBLE_EXPORT TimeControlWidget : public QDialog
 {
     Q_OBJECT
 
- public:
-    explicit TimeControlWidget( MarbleClock* clock, QWidget* parent = nullptr );
+public:
+    explicit TimeControlWidget(MarbleClock *clock, QWidget *parent = nullptr);
     ~TimeControlWidget() override;
 
- private slots:
+private slots:
     /**
-    * @brief  apply the settings to internal clock
-    */
+     * @brief  apply the settings to internal clock
+     */
     void apply();
 
     /**
-    * @brief  set the newDateTimeEdit to current system time
-    */
+     * @brief  set the newDateTimeEdit to current system time
+     */
     void nowClicked();
 
     /**
      * @brief Set the refreshIntervalSpinBox value to @p seconds.
      */
-    void updateRefreshRate( int seconds );
+    void updateRefreshRate(int seconds);
 
     /**
-    * @brief  set the text of speedLabel to @p speed
-    */
-    void updateSpeedLabel( int speed );
+     * @brief  set the text of speedLabel to @p speed
+     */
+    void updateSpeedLabel(int speed);
 
     /**
-    * @brief  update the currentDateTimeEdit to current internal time
-    */
+     * @brief  update the currentDateTimeEdit to current internal time
+     */
     void updateDateTime();
 
- protected:
-    Q_DISABLE_COPY( TimeControlWidget )
+protected:
+    Q_DISABLE_COPY(TimeControlWidget)
 
-    void showEvent( QShowEvent* event ) override;
+    void showEvent(QShowEvent *event) override;
 
     Ui::TimeControlWidget *m_uiWidget;
 
     MarbleClock *m_clock;
-    QDateTime    m_lastDateTime;
+    QDateTime m_lastDateTime;
 };
 
 }
 
-#endif  //MARBLE_TIMECONTROLWIDGET_H
+#endif  // MARBLE_TIMECONTROLWIDGET_H

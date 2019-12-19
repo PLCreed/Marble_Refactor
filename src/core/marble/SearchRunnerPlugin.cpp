@@ -10,9 +10,9 @@
 // Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include "SearchRunnerPlugin.h"
-
 #include <QIcon>
+
+#include "SearchRunnerPlugin.h"
 
 namespace Marble
 {
@@ -21,23 +21,21 @@ class Q_DECL_HIDDEN SearchRunnerPlugin::Private
 {
 public:
     QStringList m_supportedCelestialBodies;
-
     bool m_canWorkOffline;
 
+public:
     Private();
 };
 
-SearchRunnerPlugin::Private::Private()
-    : m_canWorkOffline( true )
+SearchRunnerPlugin::Private::Private() :
+    m_canWorkOffline(true)
 {
     // nothing to do
 }
 
-SearchRunnerPlugin::SearchRunnerPlugin( QObject* parent ) :
-    QObject( parent ),
-    d( new Private )
-{
-}
+SearchRunnerPlugin::SearchRunnerPlugin(QObject *parent) : QObject(parent),
+    d(new Private)
+{}
 
 SearchRunnerPlugin::~SearchRunnerPlugin()
 {
@@ -49,21 +47,22 @@ QIcon SearchRunnerPlugin::icon() const
     return QIcon();
 }
 
-bool SearchRunnerPlugin::supportsCelestialBody( const QString &celestialBodyId ) const
+bool SearchRunnerPlugin::supportsCelestialBody(const QString &celestialBodyId) const
 {
-    if ( d->m_supportedCelestialBodies.isEmpty() ) {
+    if (d->m_supportedCelestialBodies.isEmpty())
+    {
         return true;
     }
 
-    return d->m_supportedCelestialBodies.contains( celestialBodyId );
+    return d->m_supportedCelestialBodies.contains(celestialBodyId);
 }
 
-void SearchRunnerPlugin::setSupportedCelestialBodies( const QStringList &celestialBodies )
+void SearchRunnerPlugin::setSupportedCelestialBodies(const QStringList &celestialBodies)
 {
     d->m_supportedCelestialBodies = celestialBodies;
 }
 
-void SearchRunnerPlugin::setCanWorkOffline( bool canWorkOffline )
+void SearchRunnerPlugin::setCanWorkOffline(bool canWorkOffline)
 {
     d->m_canWorkOffline = canWorkOffline;
 }

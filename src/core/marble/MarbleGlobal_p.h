@@ -9,7 +9,7 @@
 //
 
 //
-// Description: AbstractTile contains the base class for a single quadtile 
+// Description: AbstractTile contains the base class for a single quadtile
 //
 
 
@@ -17,22 +17,20 @@
 #define MARBLE_GLOBAL_P_H
 
 #include "MarbleLocale.h"
-
 #include "MarbleGlobal.h"
 
 namespace Marble
 {
 
-
 class MarbleGlobalPrivate
 {
- public:
+public:
     MarbleGlobalPrivate();
-    
+
     virtual ~MarbleGlobalPrivate();
 
     MarbleLocale m_locale;
-    
+
     MarbleGlobal::Profiles m_profiles;
 };
 

@@ -21,34 +21,34 @@
 namespace Marble
 {
 
-class MARBLE_EXPORT TileLevelRangeWidget: public QWidget
+class MARBLE_EXPORT TileLevelRangeWidget : public QWidget
 {
     Q_OBJECT
 
- public:
-    explicit TileLevelRangeWidget( QWidget * const parent = nullptr, Qt::WindowFlags const f = nullptr );
+public:
+    explicit TileLevelRangeWidget(QWidget *const parent = nullptr, Qt::WindowFlags const f = nullptr);
     ~TileLevelRangeWidget() override;
 
     QSize sizeHint() const override;
 
-    void setAllowedLevelRange( int const minimumLevel, int const maximumLevel );
-    void setDefaultLevel( int const );
+    void setAllowedLevelRange(int const minimumLevel, int const maximumLevel);
+    void setDefaultLevel(int const);
 
     int topLevel() const;
     int bottomLevel() const;
 
- signals:
-    void topLevelChanged( int );
-    void bottomLevelChanged( int );
+signals:
+    void topLevelChanged(int);
+    void bottomLevelChanged(int);
 
- private slots:
-    void setMaximumTopLevel( int const );
-    void setMinimumBottomLevel( int const );
+private slots:
+    void setMaximumTopLevel(int const);
+    void setMinimumBottomLevel(int const);
 
- private:
-    Q_DISABLE_COPY( TileLevelRangeWidget )
+private:
+    Q_DISABLE_COPY(TileLevelRangeWidget)
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
 }

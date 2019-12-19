@@ -14,9 +14,9 @@
 
 #include <QSortFilterProxyModel>
 
+#include "marble_export.h"
 #include "MarbleLineEdit.h"
 #include "MarbleGlobal.h"
-#include "marble_export.h"
 
 class QAbstractItemModel;
 
@@ -32,22 +32,22 @@ class MARBLE_EXPORT SearchInputWidget : public MarbleLineEdit
     Q_OBJECT
 
 public:
-    explicit SearchInputWidget( QWidget* parent = nullptr );
+    explicit SearchInputWidget(QWidget *parent = nullptr);
 
-    void setCompletionModel( QAbstractItemModel *completionModel );
+    void setCompletionModel(QAbstractItemModel *completionModel);
 
 public Q_SLOTS:
     void disableSearchAnimation();
 
 signals:
-    void search( const QString &searchTerm, SearchMode searchMode );
+    void search(const QString &searchTerm, SearchMode searchMode);
 
-    void centerOn( const GeoDataCoordinates &coordinates );
+    void centerOn(const GeoDataCoordinates &coordinates);
 
 private Q_SLOTS:
     void search();
 
-    void centerOnSearchSuggestion( const QModelIndex &suggestionIndex );
+    void centerOnSearchSuggestion(const QModelIndex &suggestionIndex);
 
     void showDropDownMenu();
 

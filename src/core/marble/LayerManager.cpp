@@ -10,6 +10,7 @@
 // Copyright 2011,2012 Bernahrd Beschow <bbeschow@cs.tu-berlin.de>
 //
 
+#include <QTime>
 
 // Own
 #include "LayerManager.h"
@@ -23,18 +24,16 @@
 #include "LayerInterface.h"
 #include "RenderState.h"
 
-#include <QTime>
-
 namespace Marble
 {
 
 class Q_DECL_HIDDEN LayerManager::Private
 {
- public:
+public:
     Private(LayerManager *parent);
     ~Private();
 
-    void updateVisibility( bool visible, const QString &nameId );
+    void updateVisibility(bool visible, const QString &nameId);
 
     LayerManager *const q;
 
@@ -53,24 +52,21 @@ LayerManager::Private::Private(LayerManager *parent) :
     m_renderPlugins(),
     m_showBackground(true),
     m_showRuntimeTrace(false)
-{
-}
+{}
 
 LayerManager::Private::~Private()
-{
-}
+{}
 
-void LayerManager::Private::updateVisibility( bool visible, const QString &nameId )
+void LayerManager::Private::updateVisibility(bool visible, const QString &nameId)
 {
-    emit q->visibilityChanged( nameId, visible );
+    emit q->visibilityChanged(nameId, visible);
 }
 
 
 LayerManager::LayerManager(QObject *parent) :
     QObject(parent),
     d(new Private(this))
-{
-}
+{}
 
 LayerManager::~LayerManager()
 {
@@ -100,7 +96,8 @@ void LayerManager::addRenderPlugin(RenderPlugin *renderPlugin)
 
     // get data plugins
     AbstractDataPlugin *const dataPlugin = qobject_cast<AbstractDataPlugin *>(renderPlugin);
-    if(dataPlugin) {
+    if (dataPlugin)
+    {
         d->m_dataPlugins.append(dataPlugin);
     }
 }
@@ -110,27 +107,29 @@ QList<AbstractDataPlugin *> LayerManager::dataPlugins() const
     return d->m_dataPlugins;
 }
 
-QList<AbstractDataPluginItem *> LayerManager::whichItemAt( const QPoint& curpos ) const
+QList<AbstractDataPluginItem *> LayerManager::whichItemAt(const QPoint &curpos) const
 {
     QList<AbstractDataPluginItem *> itemList;
 
-    for( auto *plugin: d->m_dataPlugins ) {
-        itemList.append( plugin->whichItemAt( curpos ) );
+    for (auto *plugin: d->m_dataPlugins)
+    {
+        itemList.append(plugin->whichItemAt(curpos));
     }
     return itemList;
 }
 
-void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
+void LayerManager::renderLayers(GeoPainter *painter, ViewportParams *viewport)
 {
     d->m_renderState = RenderState(QStringLiteral("Marble"));
     const QTime totalTime = QTime::currentTime();
 
     QStringList renderPositions;
 
-    if ( d->m_showBackground ) {
+    if (d->m_showBackground)
+    {
         renderPositions
-        << QStringLiteral("STARS")
-        << QStringLiteral("BEHIND_TARGET");
+            << QStringLiteral("STARS")
+            << QStringLiteral("BEHIND_TARGET");
     }
 
     renderPositions
@@ -145,82 +144,93 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
         << QStringLiteral("USER_TOOLS");
 
     QStringList traceList;
-    for( const auto& renderPosition: renderPositions ) {
-        QList<LayerInterface*> layers;
+    for (const auto &renderPosition: renderPositions)
+    {
+        QList<LayerInterface *> layers;
 
         // collect all RenderPlugins of current renderPosition
-        for( auto *renderPlugin: d->m_renderPlugins ) {
-            if ( renderPlugin && renderPlugin->renderPosition().contains( renderPosition ) ) {
-                if ( renderPlugin->enabled() && renderPlugin->visible() ) {
-                    if ( !renderPlugin->isInitialized() ) {
+        for (auto *renderPlugin: d->m_renderPlugins)
+        {
+            if (renderPlugin && renderPlugin->renderPosition().contains(renderPosition))
+            {
+                if (renderPlugin->enabled() && renderPlugin->visible())
+                {
+                    if (!renderPlugin->isInitialized())
+                    {
                         renderPlugin->initialize();
-                        emit renderPluginInitialized( renderPlugin );
+                        emit renderPluginInitialized(renderPlugin);
                     }
-                    layers.push_back( renderPlugin );
+                    layers.push_back(renderPlugin);
                 }
             }
         }
 
         // collect all internal LayerInterfaces of current renderPosition
-        for( auto *layer: d->m_internalLayers ) {
-            if ( layer && layer->renderPosition().contains( renderPosition ) ) {
-                layers.push_back( layer );
+        for (auto *layer: d->m_internalLayers)
+        {
+            if (layer && layer->renderPosition().contains(renderPosition))
+            {
+                layers.push_back(layer);
             }
         }
 
         // sort them according to their zValue()s
-        std::sort( layers.begin(), layers.end(), [] ( const LayerInterface * const one, const LayerInterface * const two ) -> bool {
-            Q_ASSERT( one && two );
-            return one->zValue() < two->zValue();
-        } );
+        std::sort(layers.begin(), layers.end(), [] (const LayerInterface *const one, const LayerInterface *const two) -> bool {
+                Q_ASSERT(one && two);
+                return one->zValue() < two->zValue();
+            });
 
         // render the layers of the current renderPosition
         QTime timer;
-        for( auto *layer: layers ) {
+        for (auto *layer: layers)
+        {
             timer.start();
-            layer->render( painter, viewport, renderPosition, nullptr );
-            d->m_renderState.addChild( layer->renderState() );
-            traceList.append( QString("%2 ms %3").arg( timer.elapsed(),3 ).arg( layer->runtimeTrace() ) );
+            layer->render(painter, viewport, renderPosition, nullptr);
+            d->m_renderState.addChild(layer->renderState());
+            traceList.append(QString("%2 ms %3").arg(timer.elapsed(), 3).arg(layer->runtimeTrace()));
         }
     }
 
-    if ( d->m_showRuntimeTrace ) {
+    if (d->m_showRuntimeTrace)
+    {
         const int totalElapsed = totalTime.elapsed();
-        const int fps = 1000.0/totalElapsed;
-        traceList.append( QString( "Total: %1 ms (%2 fps)" ).arg( totalElapsed, 3 ).arg( fps ) );
+        const int fps = int(1000.0 / totalElapsed);
+        traceList.append(QString("Total: %1 ms (%2 fps)").arg(totalElapsed, 3).arg(fps));
 
         painter->save();
-        painter->setBackgroundMode( Qt::OpaqueMode );
-        painter->setBackground( Qt::gray );
-        painter->setFont( QFont( QStringLiteral("Sans Serif"), 10, QFont::Bold ) );
+        painter->setBackgroundMode(Qt::OpaqueMode);
+        painter->setBackground(Qt::gray);
+        painter->setFont(QFont(QStringLiteral("Sans Serif"), 10, QFont::Bold));
 
-        int i=0;
+        int i = 0;
         int const top = 150;
         int const lineHeight = painter->fontMetrics().height();
-        for ( const auto &text: traceList ) {
-            painter->setPen( Qt::black );
-            painter->drawText( QPoint(10,top+1+lineHeight*i), text );
-            painter->setPen( Qt::white );
-            painter->drawText( QPoint(9,top+lineHeight*i), text );
+        for (const auto &text: traceList)
+        {
+            painter->setPen(Qt::black);
+            painter->drawText(QPoint(10, top + 1 + lineHeight * i), text);
+            painter->setPen(Qt::white);
+            painter->drawText(QPoint(9, top + lineHeight * i), text);
             ++i;
         }
         painter->restore();
     }
 }
 
-void LayerManager::setShowBackground( bool show )
+void LayerManager::setShowBackground(bool show)
 {
     d->m_showBackground = show;
 }
 
-void LayerManager::setShowRuntimeTrace( bool show )
+void LayerManager::setShowRuntimeTrace(bool show)
 {
     d->m_showRuntimeTrace = show;
 }
 
 void LayerManager::addLayer(LayerInterface *layer)
 {
-    if (!d->m_internalLayers.contains(layer)) {
+    if (!d->m_internalLayers.contains(layer))
+    {
         d->m_internalLayers.push_back(layer);
     }
 }

@@ -11,9 +11,9 @@
 #ifndef MARBLE_SEARCHWIDGET_H
 #define MARBLE_SEARCHWIDGET_H
 
-#include "marble_export.h"
-
 #include <QWidget>
+
+#include "marble_export.h"
 
 namespace Marble {
 
@@ -25,19 +25,19 @@ class MARBLE_EXPORT SearchWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SearchWidget( QWidget * parent = nullptr, Qt::WindowFlags flags = nullptr );
+    explicit SearchWidget(QWidget *parent = nullptr, Qt::WindowFlags flags = nullptr);
 
-    void setMarbleWidget( MarbleWidget* widget );
+    void setMarbleWidget(MarbleWidget *widget);
 
     ~SearchWidget() override;
 
 private:
-    Q_PRIVATE_SLOT( d, void setSearchResult( const QVector<GeoDataPlacemark*>& ) )
-    Q_PRIVATE_SLOT( d, void search( const QString &searchTerm, SearchMode searchMode ) )
-    Q_PRIVATE_SLOT( d, void centerMapOn( const QModelIndex &index ) )
-    Q_PRIVATE_SLOT( d, void handlePlanetChange() )
+    Q_PRIVATE_SLOT(d, void setSearchResult(const QVector<GeoDataPlacemark *> &))
+    Q_PRIVATE_SLOT(d, void search(const QString &searchTerm, SearchMode searchMode))
+    Q_PRIVATE_SLOT(d, void centerMapOn(const QModelIndex &index))
+    Q_PRIVATE_SLOT(d, void handlePlanetChange())
 
-    SearchWidgetPrivate* const d;
+    SearchWidgetPrivate *const d;
 
 };
 

@@ -10,7 +10,6 @@
 // Copyright 2014      Adam Dabrowski <adamdbrw@gmail.com>
 //
 
-#include "MarbleInputHandler.h"
 
 #include <QPoint>
 #include <QPointer>
@@ -21,6 +20,7 @@
 #include <QGestureEvent>
 #include <QPinchGesture>
 
+#include "MarbleInputHandler.h"
 #include "kineticmodel.h"
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
@@ -53,25 +53,24 @@ public:
 };
 
 MarbleInputHandler::Protected::Protected(MarbleAbstractPresenter *marblePresenter)
-    : m_marblePresenter( marblePresenter ),
-      m_positionSignalConnected( false ),
-      m_mouseWheelTimer( nullptr ),
-      m_disabledMouseButtons( Qt::NoButton ),
-      m_wheelZoomTargetDistance( 0.0 ),
-      m_panViaArrowsEnabled( true ),
-      m_inertialEarthRotation( true ),
-      m_steps(0)
-{
-}
+    : m_marblePresenter(marblePresenter),
+    m_positionSignalConnected(false),
+    m_mouseWheelTimer(nullptr),
+    m_disabledMouseButtons(Qt::NoButton),
+    m_wheelZoomTargetDistance(0.0),
+    m_panViaArrowsEnabled(true),
+    m_inertialEarthRotation(true),
+    m_steps(0)
+{}
 
 MarbleInputHandler::MarbleInputHandler(MarbleAbstractPresenter *marblePresenter)
     : d(new Protected(marblePresenter))
 {
-    d->m_mouseWheelTimer = new QTimer( this );
+    d->m_mouseWheelTimer = new QTimer(this);
     connect(d->m_mouseWheelTimer, SIGNAL(timeout()), this, SLOT(restoreViewContext()));
 
     connect(d->m_marblePresenter->map(), SIGNAL(renderPluginInitialized(RenderPlugin*)),
-             this, SLOT(installPluginEventFilter(RenderPlugin*)));
+            this, SLOT(installPluginEventFilter(RenderPlugin*)));
 }
 
 MarbleInputHandler::~MarbleInputHandler()
@@ -128,12 +127,11 @@ bool MarbleInputHandler::inertialEarthRotationEnabled() const
 }
 
 void MarbleInputHandler::stopInertialEarthRotation()
-{
-}
+{}
 
 class Q_DECL_HIDDEN MarbleDefaultInputHandler::Private
 {
- public:
+public:
     Private();
     ~Private();
 
@@ -192,10 +190,10 @@ class Q_DECL_HIDDEN MarbleDefaultInputHandler::Private
 
 MarbleDefaultInputHandler::Private::Private()
     : m_leftPressed(false),
-      m_midPressed(false),
-      m_rightPressed(false),
-      m_heading(0),
-      m_dragThreshold(MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 15 : 3)
+    m_midPressed(false),
+    m_rightPressed(false),
+    m_heading(0),
+    m_dragThreshold(MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 15 : 3)
 {
     m_curpmtl.load(QStringLiteral(":/marble/cursor/tl.png"));
     m_curpmtc.load(QStringLiteral(":/marble/cursor/tc.png"));
@@ -206,24 +204,23 @@ MarbleDefaultInputHandler::Private::Private()
     m_curpmbc.load(QStringLiteral(":/marble/cursor/bc.png"));
     m_curpmbr.load(QStringLiteral(":/marble/cursor/br.png"));
 
-    m_arrowCur[0][0] = QCursor( m_curpmtl, 2, 2 );
-    m_arrowCur[1][0] = QCursor( m_curpmtc, 10, 3 );
-    m_arrowCur[2][0] = QCursor( m_curpmtr, 19, 2 );
-    m_arrowCur[0][1] = QCursor( m_curpmcl, 3, 10 );
-    m_arrowCur[1][1] = QCursor( Qt::OpenHandCursor );
-    m_arrowCur[2][1] = QCursor( m_curpmcr, 18, 10 );
-    m_arrowCur[0][2] = QCursor( m_curpmbl, 2, 19 );
-    m_arrowCur[1][2] = QCursor( m_curpmbc, 11, 18 );
-    m_arrowCur[2][2] = QCursor( m_curpmbr, 19, 19 );
+    m_arrowCur[0][0] = QCursor(m_curpmtl, 2, 2);
+    m_arrowCur[1][0] = QCursor(m_curpmtc, 10, 3);
+    m_arrowCur[2][0] = QCursor(m_curpmtr, 19, 2);
+    m_arrowCur[0][1] = QCursor(m_curpmcl, 3, 10);
+    m_arrowCur[1][1] = QCursor(Qt::OpenHandCursor);
+    m_arrowCur[2][1] = QCursor(m_curpmcr, 18, 10);
+    m_arrowCur[0][2] = QCursor(m_curpmbl, 2, 19);
+    m_arrowCur[1][2] = QCursor(m_curpmbc, 11, 18);
+    m_arrowCur[2][2] = QCursor(m_curpmbr, 19, 19);
 }
 
 MarbleDefaultInputHandler::Private::~Private()
-{
-}
+{}
 
 MarbleDefaultInputHandler::MarbleDefaultInputHandler(MarbleAbstractPresenter *marblePresenter)
     : MarbleInputHandler(marblePresenter),
-      d(new Private())
+    d(new Private())
 {
     d->m_toolTipTimer.setSingleShot(true);
     d->m_toolTipTimer.setInterval(TOOLTIP_START_INTERVAL);
@@ -233,9 +230,9 @@ MarbleDefaultInputHandler::MarbleDefaultInputHandler(MarbleAbstractPresenter *ma
 
     d->m_kineticSpinning.setUpdateInterval(35);
     connect(&d->m_kineticSpinning, SIGNAL(positionChanged(qreal,qreal)),
-             MarbleInputHandler::d->m_marblePresenter, SLOT(centerOn(qreal,qreal)));
+            MarbleInputHandler::d->m_marblePresenter, SLOT(centerOn(qreal,qreal)));
     connect(&d->m_kineticSpinning, SIGNAL(headingChanged(qreal)),
-             MarbleInputHandler::d->m_marblePresenter, SLOT(headingOn(qreal)));
+            MarbleInputHandler::d->m_marblePresenter, SLOT(headingOn(qreal)));
     connect(&d->m_kineticSpinning, SIGNAL(finished()), SLOT(restoreViewContext()));
 
     // Left and right mouse button signals.
@@ -264,18 +261,19 @@ void MarbleDefaultInputHandler::lmbTimeout()
         qreal clickedLon = 0;
         qreal clickedLat = 0;
 
-        bool isPointOnGlobe = MarbleInputHandler::d->m_marblePresenter->map()->geoCoordinates( d->m_leftPressedX, d->m_leftPressedY,
-                                                                        clickedLon, clickedLat,
-                                                                        GeoDataCoordinates::Degree );
+        bool isPointOnGlobe = MarbleInputHandler::d->m_marblePresenter->map()->geoCoordinates(d->m_leftPressedX, d->m_leftPressedY,
+                                                                                              clickedLon, clickedLat,
+                                                                                              GeoDataCoordinates::Degree);
         emit lmbRequest(d->m_leftPressedX, d->m_leftPressedY);
 
         /**
          * emit mouse click only when the clicked
          * position is within the globe.
          */
-        if ( isPointOnGlobe ) {
-            emit mouseClickGeoPosition( clickedLon, clickedLat,
-                                        GeoDataCoordinates::Degree );
+        if (isPointOnGlobe)
+        {
+            emit mouseClickGeoPosition(clickedLon, clickedLat,
+                                       GeoDataCoordinates::Degree);
         }
     }
 }
@@ -293,9 +291,9 @@ void MarbleInputHandler::restoreViewContext()
 
 void MarbleDefaultInputHandler::hideSelectionIfCtrlReleased(QEvent *e)
 {
-    if (selectionRubber()->isVisible() && e->type() == QEvent::MouseMove)
+    if (selectionRubber()->isVisible() && (e->type() == QEvent::MouseMove))
     {
-        QMouseEvent *event = static_cast<QMouseEvent*>(e);
+        QMouseEvent *event = static_cast<QMouseEvent *>(e);
         if (!(event->modifiers() & Qt::ControlModifier))
         {
             selectionRubber()->hide();
@@ -308,8 +306,8 @@ bool MarbleDefaultInputHandler::handleDoubleClick(QMouseEvent *event)
     qreal mouseLon;
     qreal mouseLat;
     const bool isMouseAboveMap = MarbleInputHandler::d->m_marblePresenter->map()->geoCoordinates(event->x(), event->y(),
-                                             mouseLon, mouseLat, GeoDataCoordinates::Radian);
-    if(isMouseAboveMap)
+                                                                                                 mouseLon, mouseLat, GeoDataCoordinates::Radian);
+    if (isMouseAboveMap)
     {
         d->m_pressAndHoldTimer.stop();
         d->m_lmbTimer.stop();
@@ -323,8 +321,8 @@ bool MarbleDefaultInputHandler::handleWheel(QWheelEvent *wheelevt)
     MarbleAbstractPresenter *marblePresenter = MarbleInputHandler::d->m_marblePresenter;
     marblePresenter->setViewContext(Animation);
 
-    if( (MarbleInputHandler::d->m_steps > 0 && wheelevt->delta() < 0) ||
-        (MarbleInputHandler::d->m_steps < 0 && wheelevt->delta() > 0) )
+    if (((MarbleInputHandler::d->m_steps > 0) && (wheelevt->delta() < 0))
+        || ((MarbleInputHandler::d->m_steps < 0) && (wheelevt->delta() > 0)))
     {
         MarbleInputHandler::d->m_steps = wheelevt->delta();
     }
@@ -335,7 +333,7 @@ bool MarbleDefaultInputHandler::handleWheel(QWheelEvent *wheelevt)
 
     if (marblePresenter->map()->discreteZoom())
     {
-        if(qAbs(MarbleInputHandler::d->m_steps) >= MarbleInputHandler::d->m_discreteZoomSteps)
+        if (qAbs(MarbleInputHandler::d->m_steps) >= MarbleInputHandler::d->m_discreteZoomSteps)
         {
             marblePresenter->zoomAtBy(wheelevt->pos(), MarbleInputHandler::d->m_steps);
             MarbleInputHandler::d->m_steps = 0;
@@ -345,7 +343,7 @@ bool MarbleDefaultInputHandler::handleWheel(QWheelEvent *wheelevt)
     {
         qreal zoom = marblePresenter->zoom();
         qreal target = MarbleInputHandler::d->m_wheelZoomTargetDistance;
-        if (marblePresenter->animationsEnabled() && target > 0.0)
+        if (marblePresenter->animationsEnabled() && (target > 0.0))
         {
             // Do not use intermediate (interpolated) distance values caused by animations
             zoom = marblePresenter->zoomFromDistance(target);
@@ -367,13 +365,13 @@ bool MarbleDefaultInputHandler::handleWheel(QWheelEvent *wheelevt)
 
 bool MarbleDefaultInputHandler::handlePinch(const QPointF &center, qreal scaleFactor, Qt::GestureState state)
 {
-    qreal  destLat;
-    qreal  destLon;
+    qreal destLat;
+    qreal destLon;
 
     MarbleAbstractPresenter *marblePresenter = MarbleInputHandler::d->m_marblePresenter;
 
     bool isValid = marblePresenter->map()->geoCoordinates(center.x(), center.y(),
-                 destLon, destLat, GeoDataCoordinates::Radian );
+                                                          destLon, destLat, GeoDataCoordinates::Radian);
 
     if (isValid)
     {
@@ -382,46 +380,46 @@ bool MarbleDefaultInputHandler::handlePinch(const QPointF &center, qreal scaleFa
 
     qreal zoom, target, newDistance;
 
-    qreal zoomDelta = scaleFactor > 1.0 ? scaleFactor : -1.0/scaleFactor;
+    qreal zoomDelta = scaleFactor > 1.0 ? scaleFactor : -1.0 / scaleFactor;
 
     switch (state)
     {
-    case Qt::NoGesture:
-        break;
-    case Qt::GestureStarted:
-        marblePresenter->setViewContext(Animation);
-        d->m_pressAndHoldTimer.stop();
-        d->m_lmbTimer.stop();
-        d->m_midPressed = false;
-        d->m_leftPressed = false;
-        break;
-    case Qt::GestureUpdated:
-        zoom = marblePresenter->zoom();
-        target = MarbleInputHandler::d->m_wheelZoomTargetDistance;
-        if (marblePresenter->animationsEnabled() && target > 0.0)
-        {
-            // Do not use intermediate (interpolated) distance values caused by animations
-            zoom = marblePresenter->zoomFromDistance(target);
-        }
-        newDistance = marblePresenter->distanceFromZoom(zoom + 20 * zoomDelta);
-        MarbleInputHandler::d->m_wheelZoomTargetDistance = newDistance;
-        marblePresenter->zoomAt(center.toPoint(), newDistance);
-        break;
-    case Qt::GestureFinished:
-        marblePresenter->map()->viewport()->resetFocusPoint();
-        marblePresenter->setViewContext(Still);
-        break;
-    case Qt::GestureCanceled:
-        marblePresenter->map()->viewport()->resetFocusPoint();
-        marblePresenter->setViewContext(Still);
-        break;
+        case Qt::NoGesture:
+            break;
+        case Qt::GestureStarted:
+            marblePresenter->setViewContext(Animation);
+            d->m_pressAndHoldTimer.stop();
+            d->m_lmbTimer.stop();
+            d->m_midPressed  = false;
+            d->m_leftPressed = false;
+            break;
+        case Qt::GestureUpdated:
+            zoom = marblePresenter->zoom();
+            target = MarbleInputHandler::d->m_wheelZoomTargetDistance;
+            if (marblePresenter->animationsEnabled() && (target > 0.0))
+            {
+                // Do not use intermediate (interpolated) distance values caused by animations
+                zoom = marblePresenter->zoomFromDistance(target);
+            }
+            newDistance = marblePresenter->distanceFromZoom(zoom + 20 * zoomDelta);
+            MarbleInputHandler::d->m_wheelZoomTargetDistance = newDistance;
+            marblePresenter->zoomAt(center.toPoint(), newDistance);
+            break;
+        case Qt::GestureFinished:
+            marblePresenter->map()->viewport()->resetFocusPoint();
+            marblePresenter->setViewContext(Still);
+            break;
+        case Qt::GestureCanceled:
+            marblePresenter->map()->viewport()->resetFocusPoint();
+            marblePresenter->setViewContext(Still);
+            break;
     }
     return true;
 }
 
 bool MarbleDefaultInputHandler::handleGesture(QGestureEvent *ge)
 {
-    QPinchGesture *pinch = static_cast<QPinchGesture*>(ge->gesture(Qt::PinchGesture));
+    QPinchGesture *pinch = static_cast<QPinchGesture *>(ge->gesture(Qt::PinchGesture));
     if (!pinch)
     {
         return false;
@@ -436,7 +434,7 @@ bool MarbleDefaultInputHandler::handleGesture(QGestureEvent *ge)
 void MarbleDefaultInputHandler::checkReleasedMove(QMouseEvent *event)
 {
     // To prevent error from lost MouseButtonRelease events
-    if (event->type() == QEvent::MouseMove && !(event->buttons() & Qt::LeftButton))
+    if ((event->type() == QEvent::MouseMove) && !(event->buttons() & Qt::LeftButton))
     {
         if (d->m_leftPressed)
         {
@@ -452,7 +450,7 @@ void MarbleDefaultInputHandler::checkReleasedMove(QMouseEvent *event)
             }
         }
     }
-    if (event->type() == QEvent::MouseMove && !(event->buttons() & Qt::MidButton))
+    if ((event->type() == QEvent::MouseMove) && !(event->buttons() & Qt::MidButton))
     {
         d->m_midPressed = false;
     }
@@ -460,20 +458,20 @@ void MarbleDefaultInputHandler::checkReleasedMove(QMouseEvent *event)
 
 void MarbleDefaultInputHandler::handleMouseButtonPress(QMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton )
+    if (event->button() == Qt::LeftButton)
     {
         d->m_pressAndHoldTimer.start();
-       handleLeftMouseButtonPress(event);
+        handleLeftMouseButtonPress(event);
     }
 
-    if ( event->button() == Qt::MidButton )
+    if (event->button() == Qt::MidButton)
     {
-       handleMiddleMouseButtonPress(event);
+        handleMiddleMouseButtonPress(event);
     }
 
-    if ( event->button() == Qt::RightButton )
+    if (event->button() == Qt::RightButton)
     {
-       handleRightMouseButtonPress(event);
+        handleRightMouseButtonPress(event);
     }
 }
 
@@ -490,7 +488,7 @@ void MarbleDefaultInputHandler::handleLeftMouseButtonPress(QMouseEvent *event)
     }
 
     d->m_leftPressed = true;
-    d->m_midPressed = false;
+    d->m_midPressed  = false;
     selectionRubber()->hide();
 
     // On the single event of a mouse button press these
@@ -523,7 +521,7 @@ void MarbleDefaultInputHandler::handleLeftMouseButtonPress(QMouseEvent *event)
 
 void MarbleDefaultInputHandler::handleMiddleMouseButtonPress(QMouseEvent *event)
 {
-    d->m_midPressed = true;
+    d->m_midPressed  = true;
     d->m_leftPressed = false;
     d->m_startingRadius = MarbleInputHandler::d->m_marblePresenter->radius();
     d->m_midPressedY = event->y();
@@ -539,8 +537,8 @@ void MarbleDefaultInputHandler::handleMiddleMouseButtonPress(QMouseEvent *event)
 
 void MarbleDefaultInputHandler::handleRightMouseButtonPress(QMouseEvent *event)
 {
-    d->m_rightPressed = true;
-    d->m_rightOrigin = event->pos();
+    d->m_rightPressed  = true;
+    d->m_rightOrigin   = event->pos();
     d->m_rightPosition = event->pos();
     d->m_heading = MarbleInputHandler::d->m_marblePresenter->map()->heading();
     if (MarbleInputHandler::d->m_inertialEarthRotation)
@@ -555,8 +553,8 @@ void MarbleDefaultInputHandler::handleMouseButtonRelease(QMouseEvent *event)
     if (event->button() == Qt::LeftButton)
     {
         d->m_pressAndHoldTimer.stop();
-        //emit current coordinates to be interpreted
-        //as requested
+        // emit current coordinates to be interpreted
+        // as requested
         emit mouseClickScreenPosition(d->m_leftPressedX, d->m_leftPressedY);
 
         d->m_leftPressed = false;
@@ -577,7 +575,7 @@ void MarbleDefaultInputHandler::handleMouseButtonRelease(QMouseEvent *event)
         MarbleInputHandler::d->m_marblePresenter->setViewContext(Still);
     }
 
-    if (event->type() == QEvent::MouseButtonRelease && event->button() == Qt::RightButton)
+    if ((event->type() == QEvent::MouseButtonRelease) && (event->button() == Qt::RightButton))
     {
         if (d->m_rightOrigin == event->pos())
         {
@@ -595,8 +593,8 @@ void MarbleDefaultInputHandler::handleMouseButtonRelease(QMouseEvent *event)
         }
     }
 
-    if (event->type() == QEvent::MouseButtonRelease && event->button() == Qt::LeftButton
-         && selectionRubber()->isVisible())
+    if ((event->type() == QEvent::MouseButtonRelease) && (event->button() == Qt::LeftButton)
+        && selectionRubber()->isVisible())
     {
         mDebug() << Q_FUNC_INFO << "Leaving selection";
         MarbleInputHandler::d->m_marblePresenter->setSelection(selectionRubber()->geometry());
@@ -607,10 +605,11 @@ void MarbleDefaultInputHandler::handleMouseButtonRelease(QMouseEvent *event)
 void MarbleDefaultInputHandler::notifyPosition(bool isMouseAboveMap, qreal mouseLon, qreal mouseLat)
 {
     // emit the position string only if the signal got attached
-    if (MarbleInputHandler::d->m_positionSignalConnected) {
+    if (MarbleInputHandler::d->m_positionSignalConnected)
+    {
         if (!isMouseAboveMap)
         {
-            emit mouseMoveGeoPosition(QCoreApplication::translate( "Marble", NOT_AVAILABLE));
+            emit mouseMoveGeoPosition(QCoreApplication::translate("Marble", NOT_AVAILABLE));
         }
         else
         {
@@ -642,10 +641,11 @@ void MarbleDefaultInputHandler::adjustCursorShape(const QPoint &mousePosition, c
         }
     }
 
-    if (toolTipItem.isNull()) {
+    if (toolTipItem.isNull())
+    {
         d->m_toolTipTimer.stop();
     }
-    else if (!( d->m_lastToolTipItem.data() == toolTipItem.data()))
+    else if (!(d->m_lastToolTipItem.data() == toolTipItem.data()))
     {
         d->m_toolTipTimer.start();
         d->m_lastToolTipItem = toolTipItem;
@@ -660,7 +660,8 @@ void MarbleDefaultInputHandler::adjustCursorShape(const QPoint &mousePosition, c
         d->m_toolTipPosition = mousePosition;
     }
 
-    if (!dataAction && !MarbleInputHandler::d->m_marblePresenter->map()->hasFeatureAt(mousePosition)) {
+    if (!dataAction && !MarbleInputHandler::d->m_marblePresenter->map()->hasFeatureAt(mousePosition))
+    {
         if (!d->m_leftPressed)
         {
             d->m_arrowCur [1][1] = QCursor(Qt::OpenHandCursor);
@@ -680,7 +681,7 @@ void MarbleDefaultInputHandler::adjustCursorShape(const QPoint &mousePosition, c
 
     if (panViaArrowsEnabled())
     {
-        setCursor(d->m_arrowCur[mouseDirection.x()+1][mouseDirection.y()+1]);
+        setCursor(d->m_arrowCur[mouseDirection.x() + 1][mouseDirection.y() + 1]);
     }
     else
     {
@@ -689,12 +690,13 @@ void MarbleDefaultInputHandler::adjustCursorShape(const QPoint &mousePosition, c
 }
 
 QPoint MarbleDefaultInputHandler::mouseMovedOutside(QMouseEvent *event)
-{   //Returns a 2d vector representing the direction in which the mouse left
+{   // Returns a 2d vector representing the direction in which the mouse left
     int dirX = 0;
     int dirY = 0;
     int polarity = MarbleInputHandler::d->m_marblePresenter->viewport()->polarity();
 
-    if (d->m_leftPressed) {
+    if (d->m_leftPressed)
+    {
         d->m_leftPressed = false;
 
         if (MarbleInputHandler::d->m_inertialEarthRotation)
@@ -707,7 +709,7 @@ QPoint MarbleDefaultInputHandler::mouseMovedOutside(QMouseEvent *event)
 
     if (boundingRect.width() != 0)
     {
-        dirX = (int)( 3 * (event->x() - boundingRect.left()) / boundingRect.width()) - 1;
+        dirX = (int)(3 * (event->x() - boundingRect.left()) / boundingRect.width()) - 1;
     }
     if (dirX > 1)
     {
@@ -731,8 +733,8 @@ QPoint MarbleDefaultInputHandler::mouseMovedOutside(QMouseEvent *event)
         dirY = -1;
     }
 
-    if (event->button() == Qt::LeftButton && event->type() == QEvent::MouseButtonPress
-            && panViaArrowsEnabled() && !d->m_kineticSpinning.hasVelocity())
+    if ((event->button() == Qt::LeftButton) && (event->type() == QEvent::MouseButtonPress)
+        && panViaArrowsEnabled() && !d->m_kineticSpinning.hasVelocity())
     {
         d->m_pressAndHoldTimer.stop();
         d->m_lmbTimer.stop();
@@ -764,13 +766,13 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
     // Do not handle (and therefore eat) mouse press and release events
     // that occur above visible float items. Mouse motion events are still
     // handled, however.
-    if (event->type() != QEvent::MouseMove && !selectionRubber()->isVisible())
+    if ((event->type() != QEvent::MouseMove) && !selectionRubber()->isVisible())
     {
-		auto const floatItems = MarbleInputHandler::d->m_marblePresenter->map()->floatItems();
+        auto const floatItems = MarbleInputHandler::d->m_marblePresenter->map()->floatItems();
         for (AbstractFloatItem *floatItem: floatItems)
         {
-            if ( floatItem->enabled() && floatItem->visible()
-                 && floatItem->contains( event->pos() ) )
+            if (floatItem->enabled() && floatItem->visible()
+                && floatItem->contains(event->pos()))
             {
                 d->m_pressAndHoldTimer.stop();
                 d->m_lmbTimer.stop();
@@ -782,13 +784,13 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
     qreal mouseLon;
     qreal mouseLat;
     const bool isMouseAboveMap = MarbleInputHandler::d->m_marblePresenter->map()->geoCoordinates(event->x(), event->y(),
-                                             mouseLon, mouseLat, GeoDataCoordinates::Radian);
+                                                                                                 mouseLon, mouseLat, GeoDataCoordinates::Radian);
     notifyPosition(isMouseAboveMap, mouseLon, mouseLat);
 
     QPoint mousePosition(event->x(), event->y());
 
     if (isMouseAboveMap || selectionRubber()->isVisible()
-         || MarbleInputHandler::d->m_marblePresenter->map()->hasFeatureAt(mousePosition))
+        || MarbleInputHandler::d->m_marblePresenter->map()->hasFeatureAt(mousePosition))
     {
         if (event->type() == QEvent::MouseButtonPress)
         {
@@ -807,19 +809,19 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
             qreal deltax = event->x() - d->m_leftPressedX;
             qreal deltay = event->y() - d->m_leftPressedY;
 
-            if (qAbs(deltax) > d->m_dragThreshold
-                 || qAbs(deltay) > d->m_dragThreshold
-                 || !d->m_lmbTimer.isActive())
+            if ((qAbs(deltax) > d->m_dragThreshold)
+                || (qAbs(deltay) > d->m_dragThreshold)
+                || !d->m_lmbTimer.isActive())
             {
                 MarbleInputHandler::d->m_marblePresenter->setViewContext(Animation);
 
                 d->m_pressAndHoldTimer.stop();
                 d->m_lmbTimer.stop();
-                const Quaternion rotation = Quaternion::fromEuler( 0, 0, MarbleInputHandler::d->m_marblePresenter->map()->heading() * DEG2RAD );
-                Quaternion quat = Quaternion::fromSpherical( - M_PI/2 * deltax / radius, + M_PI/2 * deltay / radius );
-                quat.rotateAroundAxis( rotation );
+                const Quaternion rotation = Quaternion::fromEuler(0, 0, MarbleInputHandler::d->m_marblePresenter->map()->heading() * DEG2RAD);
+                Quaternion quat = Quaternion::fromSpherical(-M_PI / 2 * deltax / radius, +M_PI / 2 * deltay / radius);
+                quat.rotateAroundAxis(rotation);
                 qreal lon, lat;
-                quat.getSpherical( lon, lat );
+                quat.getSpherical(lon, lat);
                 const qreal posLon = d->m_leftPressedLon + RAD2DEG * lon;
                 const qreal posLat = d->m_leftPressedLat + RAD2DEG * lat;
                 MarbleInputHandler::d->m_marblePresenter->centerOn(posLon, posLat);
@@ -853,7 +855,7 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
             // Moving on the bottom should be opposite direction.
             int sign = event->y() > centerY ? -1 : 1;
             // Left top and right bottom sides for y axis should be opposite direction.
-            if ((event->x() < centerX && event->y() < centerY) || (event->x() > centerX && event->y() > centerY))
+            if (((event->x() < centerX) && (event->y() < centerY)) || ((event->x() > centerX) && (event->y() > centerY)))
             {
                 dy *= -1;
             }
@@ -878,7 +880,8 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
         direction = mouseMovedOutside(event);
     }
 
-    if (MarbleInputHandler::d->m_marblePresenter->viewContext() != Animation) {
+    if (MarbleInputHandler::d->m_marblePresenter->viewContext() != Animation)
+    {
         adjustCursorShape(mousePosition, direction);
     }
     return acceptMouse();
@@ -892,7 +895,7 @@ bool MarbleDefaultInputHandler::acceptMouse()
     return false;
 }
 
-bool MarbleDefaultInputHandler::eventFilter(QObject* o, QEvent* e)
+bool MarbleDefaultInputHandler::eventFilter(QObject *o, QEvent *e)
 {
     Q_UNUSED(o);
 
@@ -905,73 +908,77 @@ bool MarbleDefaultInputHandler::eventFilter(QObject* o, QEvent* e)
 
     switch (e->type())
     {
-    case QEvent::TouchBegin:
-    case QEvent::TouchUpdate:
-    case QEvent::TouchEnd:
-        return handleTouch(static_cast<QTouchEvent *>(e));
-    case QEvent::KeyPress:
-        return handleKeyPress(static_cast<QKeyEvent *>(e));
-    case QEvent::Gesture:
-        return handleGesture(static_cast<QGestureEvent *>(e));
-    case QEvent::Wheel:
-        return handleWheel(static_cast<QWheelEvent*>(e));
-    case QEvent::MouseButtonDblClick:
-        return handleDoubleClick(static_cast<QMouseEvent*>(e));
-    case QEvent::MouseButtonPress:
-    case QEvent::MouseButtonRelease:
-    case QEvent::MouseMove:
-        return handleMouseEvent(static_cast<QMouseEvent*>(e));
-    default:
-        return false;
+        case QEvent::TouchBegin:
+        case QEvent::TouchUpdate:
+        case QEvent::TouchEnd:
+            return handleTouch(static_cast<QTouchEvent *>(e));
+        case QEvent::KeyPress:
+            return handleKeyPress(static_cast<QKeyEvent *>(e));
+        case QEvent::Gesture:
+            return handleGesture(static_cast<QGestureEvent *>(e));
+        case QEvent::Wheel:
+            return handleWheel(static_cast<QWheelEvent *>(e));
+        case QEvent::MouseButtonDblClick:
+            return handleDoubleClick(static_cast<QMouseEvent *>(e));
+        case QEvent::MouseButtonPress:
+        case QEvent::MouseButtonRelease:
+        case QEvent::MouseMove:
+            return handleMouseEvent(static_cast<QMouseEvent *>(e));
+        default:
+            return false;
     }
 }
 
-bool MarbleDefaultInputHandler::handleTouch(QTouchEvent*)
+bool MarbleDefaultInputHandler::handleTouch(QTouchEvent *)
 {
-    return false; //reimplement to handle in cases of QML and PinchArea element
+    return false; // reimplement to handle in cases of QML and PinchArea element
 }
 
-bool MarbleDefaultInputHandler::handleKeyPress(QKeyEvent* event)
+bool MarbleDefaultInputHandler::handleKeyPress(QKeyEvent *event)
 {
-    if ( event->type() == QEvent::KeyPress ) {
+    if (event->type() == QEvent::KeyPress)
+    {
         MarbleAbstractPresenter *marblePresenter = MarbleInputHandler::d->m_marblePresenter;
         bool handled = true;
-        switch ( event->key() ) {
-        case Qt::Key_Left:
-            stopInertialEarthRotation();
-            marblePresenter->moveByStep(-1, 0);
-            break;
-        case Qt::Key_Right:
-            stopInertialEarthRotation();
-            marblePresenter->moveByStep(1, 0);
-            break;
-        case Qt::Key_Up:
-            stopInertialEarthRotation();
-            marblePresenter->moveByStep(0, -1);
-            break;
-        case Qt::Key_Down:
-            stopInertialEarthRotation();
-            marblePresenter->moveByStep(0, 1);
-            break;
-        case Qt::Key_Plus:
-            if (event->modifiers() != Qt::ControlModifier) {
+        switch (event->key())
+        {
+            case Qt::Key_Left:
                 stopInertialEarthRotation();
-                marblePresenter->zoomIn();
-            }
-            break;
-        case Qt::Key_Minus:
-            if (event->modifiers() != Qt::ControlModifier) {
+                marblePresenter->moveByStep(-1, 0);
+                break;
+            case Qt::Key_Right:
                 stopInertialEarthRotation();
-                marblePresenter->zoomOut();
-            }
-            break;
-        case Qt::Key_Home:
-            stopInertialEarthRotation();
-            marblePresenter->goHome();
-            break;
-        default:
-            handled = false;
-            break;
+                marblePresenter->moveByStep(1, 0);
+                break;
+            case Qt::Key_Up:
+                stopInertialEarthRotation();
+                marblePresenter->moveByStep(0, -1);
+                break;
+            case Qt::Key_Down:
+                stopInertialEarthRotation();
+                marblePresenter->moveByStep(0, 1);
+                break;
+            case Qt::Key_Plus:
+                if (event->modifiers() != Qt::ControlModifier)
+                {
+                    stopInertialEarthRotation();
+                    marblePresenter->zoomIn();
+                }
+                break;
+            case Qt::Key_Minus:
+                if (event->modifiers() != Qt::ControlModifier)
+                {
+                    stopInertialEarthRotation();
+                    marblePresenter->zoomOut();
+                }
+                break;
+            case Qt::Key_Home:
+                stopInertialEarthRotation();
+                marblePresenter->goHome();
+                break;
+            default:
+                handled = false;
+                break;
         }
 
         return handled;
@@ -994,7 +1001,7 @@ const AbstractDataPluginItem *MarbleDefaultInputHandler::lastToolTipItem() const
     return d->m_lastToolTipItem;
 }
 
-QTimer* MarbleDefaultInputHandler::toolTipTimer()
+QTimer *MarbleDefaultInputHandler::toolTipTimer()
 {
     return &d->m_toolTipTimer;
 }
@@ -1007,4 +1014,3 @@ QPoint MarbleDefaultInputHandler::toolTipPosition() const
 }
 
 #include "moc_MarbleInputHandler.cpp"
-

@@ -47,50 +47,49 @@ public:
      *
      * tileLevel can be used to calculate the number of tiles in a row or column
      */
-    virtual QImage tile( int n, int m, int tileLevel ) = 0;
+    virtual QImage tile(int n, int m, int tileLevel) = 0;
 };
 
 class MARBLE_EXPORT TileCreator : public QThread
 {
     Q_OBJECT
 
- public:
+public:
     /**
      * Constructor for standard Image source
      */
-    TileCreator( const QString& sourceDir, const QString& installMap, 
-                 const QString& dem,       const QString& targetDir=QString() );
+    TileCreator(const QString &sourceDir, const QString &installMap,
+                const QString &dem, const QString &targetDir = QString());
 
     /**
      * Constructor for own, custom source class
      *
      * Ownership of source is taken by TileCreator
      */
-    TileCreator( TileCreatorSource *source, const QString& dem, const QString& targetDir );
+    TileCreator(TileCreatorSource *source, const QString &dem, const QString &targetDir);
 
     ~TileCreator() override;
 
     void cancelTileCreation();
 
-    void setTileFormat( const QString &format );
-    void setTileQuality( int quality );
-    void setResume( bool resume );
-    void setVerifyExactResult( bool verify );
+    void setTileFormat(const QString &format);
+    void setTileQuality(int quality);
+    void setResume(bool resume);
+    void setVerifyExactResult(bool verify);
     QString tileFormat() const;
     int tileQuality() const;
     bool resume() const;
     bool verifyExactResult() const;
 
- protected:
+protected:
     void run() override;
 
- signals:
-    void  progress( int value );
+signals:
+    void progress(int value);
 
-
- private:
-    Q_DISABLE_COPY( TileCreator )
-    TileCreatorPrivate  * const d;
+private:
+    Q_DISABLE_COPY(TileCreator)
+    TileCreatorPrivate  *const d;
 };
 
 }

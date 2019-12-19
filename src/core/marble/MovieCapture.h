@@ -27,10 +27,10 @@ class MovieFormat
 {
 public:
     MovieFormat() {}
-    explicit MovieFormat( const QString &type, const QString &name, const QString &extension) :
-        m_type( type ),
-        m_name( name ),
-        m_extension( extension )
+    explicit MovieFormat(const QString &type, const QString &name, const QString &extension) :
+        m_type(type),
+        m_name(name),
+        m_extension(extension)
     {}
 
     QString type() const { return m_type; }
@@ -69,11 +69,11 @@ private slots:
     void processWrittenMovie(int exitCode);
 
 signals:
-    void rateCalculated( double );
+    void rateCalculated(double);
     void errorOccured();
 
 protected:
-    MovieCapturePrivate * const d_ptr;
+    MovieCapturePrivate *const d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(MovieCapture)

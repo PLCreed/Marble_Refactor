@@ -11,12 +11,12 @@
 #ifndef MARBLE_RUNNERTASK_H
 #define MARBLE_RUNNERTASK_H
 
+#include <QRunnable>
+#include <QString>
+
 #include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonBox.h"
-
-#include <QRunnable>
-#include <QString>
 
 namespace Marble
 {
@@ -38,7 +38,8 @@ class SearchTask : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    SearchTask( SearchRunner *runner, SearchRunnerManager *manager, const MarbleModel *model, const QString &searchTerm, const GeoDataLatLonBox &preferred );
+    SearchTask(SearchRunner *runner, SearchRunnerManager *manager, const MarbleModel *model,
+               const QString &searchTerm, const GeoDataLatLonBox &preferred);
 
     /**
      * @reimp
@@ -46,7 +47,7 @@ public:
     void run() override;
 
 signals:
-    void finished( SearchTask *task );
+    void finished(SearchTask *task);
 
 private:
     SearchRunner *const m_runner;
@@ -60,7 +61,8 @@ class ReverseGeocodingTask : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    ReverseGeocodingTask( ReverseGeocodingRunner*runner, ReverseGeocodingRunnerManager *manager, const MarbleModel *model, const GeoDataCoordinates &coordinates );
+    ReverseGeocodingTask(ReverseGeocodingRunner *runner, ReverseGeocodingRunnerManager *manager,
+                         const MarbleModel *model, const GeoDataCoordinates &coordinates);
 
     /**
      * @reimp
@@ -68,7 +70,7 @@ public:
     void run() override;
 
 signals:
-    void finished( ReverseGeocodingTask *task );
+    void finished(ReverseGeocodingTask *task);
 
 private:
     ReverseGeocodingRunner *const m_runner;
@@ -82,7 +84,7 @@ class RoutingTask : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    RoutingTask( RoutingRunner *runner, RoutingRunnerManager *manager, const RouteRequest* routeRequest );
+    RoutingTask(RoutingRunner *runner, RoutingRunnerManager *manager, const RouteRequest *routeRequest);
 
     /**
      * @reimp
@@ -90,7 +92,7 @@ public:
     void run() override;
 
 signals:
-    void finished( RoutingTask *task );
+    void finished(RoutingTask *task);
 
 private:
     RoutingRunner *const m_runner;
@@ -103,7 +105,7 @@ class ParsingTask : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    ParsingTask( ParsingRunner *runner, ParsingRunnerManager *manager, const QString& fileName, DocumentRole role );
+    ParsingTask(ParsingRunner *runner, ParsingRunnerManager *manager, const QString &fileName, DocumentRole role);
 
     /**
      * @reimp
@@ -111,14 +113,14 @@ public:
     void run() override;
 
 signals:
-    void parsed(GeoDataDocument* document, const QString &error);
+    void parsed(GeoDataDocument *document, const QString &error);
     void finished();
 
 private:
     ParsingRunner *const m_runner;
     QString m_fileName;
     DocumentRole m_role;
-    ParsingRunnerManager* m_manager;
+    ParsingRunnerManager *m_manager;
 };
 
 }

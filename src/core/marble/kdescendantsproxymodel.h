@@ -15,7 +15,7 @@
     along with this library; see the file COPYING.LIB.  If not, write to the
     Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301, USA.
-*/
+ */
 
 #ifndef MARBLE_KDESCENDANTSPROXYMODEL_H
 #define MARBLE_KDESCENDANTSPROXYMODEL_H
@@ -31,39 +31,39 @@ namespace Marble
 class KDescendantsProxyModelPrivate;
 
 /**
-@brief Proxy Model for restructuring a Tree into a list.
+   @brief Proxy Model for restructuring a Tree into a list.
 
-A KDescendantsProxyModel may be used to alter how the items in the tree are presented.
+   A KDescendantsProxyModel may be used to alter how the items in the tree are presented.
 
-Given a model which is represented as a tree:
+   Given a model which is represented as a tree:
 
-The KDescendantsProxyModel restructures the sourceModel to represent it as a flat list.
+   The KDescendantsProxyModel restructures the sourceModel to represent it as a flat list.
 
-@code
-// ... Create an entityTreeModel
-KDescendantsProxyModel *descProxy = new KDescendantsProxyModel(this);
-descProxy->setSourceModel(entityTree);
-view->setModel(descProxy);
-@endcode
+   @code
+   // ... Create an entityTreeModel
+   KDescendantsProxyModel *descProxy = new KDescendantsProxyModel(this);
+   descProxy->setSourceModel(entityTree);
+   view->setModel(descProxy);
+   @endcode
 
-KDescendantEntitiesProxyModel can also display the ancestors of the index in the source model as part of its display.
+   KDescendantEntitiesProxyModel can also display the ancestors of the index in the source model as part of its display.
 
-@code
-// ... Create an entityTreeModel
-KDescendantsProxyModel *descProxy = new KDescendantsProxyModel(this);
-descProxy->setSourceModel(entityTree);
+   @code
+   // ... Create an entityTreeModel
+   KDescendantsProxyModel *descProxy = new KDescendantsProxyModel(this);
+   descProxy->setSourceModel(entityTree);
 
-// #### This is new
-descProxy->setDisplayAncestorData(true);
-descProxy->setDisplayAncestorSeparator(QString(" / "));
+   // #### This is new
+   descProxy->setDisplayAncestorData(true);
+   descProxy->setDisplayAncestorSeparator(QString(" / "));
 
-view->setModel(descProxy);
+   view->setModel(descProxy);
 
-@endcode
+   @endcode
 
-@since 4.6
-@author Stephen Kelly <steveire@gmail.com>
-*/
+   @since 4.6
+   @author Stephen Kelly <steveire@gmail.com>
+ */
 class MARBLE_EXPORT KDescendantsProxyModel : public QAbstractProxyModel
 {
     Q_OBJECT
@@ -169,14 +169,14 @@ public:
     Qt::DropActions supportedDropActions() const Q_DECL_OVERRIDE;
 
     /**
-    Reimplemented to match all descendants.
-    */
+       Reimplemented to match all descendants.
+     */
     QModelIndexList match(const QModelIndex &start, int role, const QVariant &value,
-                                  int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags(Qt::MatchStartsWith | Qt::MatchWrap)) const Q_DECL_OVERRIDE;
+                          int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags(Qt::MatchStartsWith | Qt::MatchWrap)) const Q_DECL_OVERRIDE;
 
 private:
     Q_DECLARE_PRIVATE(KDescendantsProxyModel)
-    //@cond PRIVATE
+    // @cond PRIVATE
     KDescendantsProxyModelPrivate *d_ptr;
 
     Q_PRIVATE_SLOT(d_func(), void sourceRowsAboutToBeInserted(const QModelIndex &, int, int))
@@ -195,12 +195,12 @@ private:
     Q_PRIVATE_SLOT(d_func(), void processPendingParents())
 
     // Make these private, they shouldn't be called by applications
-//   virtual bool insertRows(int , int, const QModelIndex & = QModelIndex());
-//   virtual bool insertColumns(int, int, const QModelIndex & = QModelIndex());
-//   virtual bool removeRows(int, int, const QModelIndex & = QModelIndex());
-//   virtual bool removeColumns(int, int, const QModelIndex & = QModelIndex());
+    //   virtual bool insertRows(int , int, const QModelIndex & = QModelIndex());
+    //   virtual bool insertColumns(int, int, const QModelIndex & = QModelIndex());
+    //   virtual bool removeRows(int, int, const QModelIndex & = QModelIndex());
+    //   virtual bool removeColumns(int, int, const QModelIndex & = QModelIndex());
 
-    //@endcond
+    // @endcond
 };
 
 }

@@ -17,9 +17,9 @@
 using namespace Marble;
 // Ui
 #ifdef MARBLE_NO_WEBKITWIDGETS
-#include "ui_NullLegendWidget.h"
+ #include "ui_NullLegendWidget.h"
 #else
-#include "ui_LegendWidget.h"
+ #include "ui_LegendWidget.h"
 #endif
 
 namespace Marble
@@ -27,22 +27,20 @@ namespace Marble
 
 class LegendWidgetPrivate : public Ui::LegendWidget
 {
- public:
+public:
     LegendWidgetPrivate();
 };
 
 LegendWidgetPrivate::LegendWidgetPrivate()
-{
-}
+{}
 
-LegendWidget::LegendWidget( QWidget *parent, Qt::WindowFlags f )
-    : QWidget( parent, f ),
-      d( new LegendWidgetPrivate )
+LegendWidget::LegendWidget(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f),
+    d(new LegendWidgetPrivate)
 {
-    d->setupUi( this );
-    layout()->setMargin( 0 );
-    connect( d->m_marbleLegendBrowser, SIGNAL(tourLinkClicked(QString)),
-             this, SIGNAL(tourLinkClicked(QString)) );
+    d->setupUi(this);
+    layout()->setMargin(0);
+    connect(d->m_marbleLegendBrowser, SIGNAL(tourLinkClicked(QString)),
+            this, SIGNAL(tourLinkClicked(QString)));
 }
 
 LegendWidget::~LegendWidget()
@@ -50,14 +48,14 @@ LegendWidget::~LegendWidget()
     delete d;
 }
 
-void LegendWidget::setMarbleModel( MarbleModel *model )
+void LegendWidget::setMarbleModel(MarbleModel *model)
 {
     // Initialize the MarbleLegendBrowser
-    d->m_marbleLegendBrowser->setMarbleModel( model );
+    d->m_marbleLegendBrowser->setMarbleModel(model);
 
     // connect signals for the Legend
-    connect( d->m_marbleLegendBrowser, SIGNAL(toggledShowProperty(QString,bool)),
-             this,                            SIGNAL(propertyValueChanged(QString,bool)) );
+    connect(d->m_marbleLegendBrowser, SIGNAL(toggledShowProperty(QString,bool)),
+            this, SIGNAL(propertyValueChanged(QString,bool)));
 }
 
 }

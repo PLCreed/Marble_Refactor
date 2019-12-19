@@ -9,8 +9,7 @@
    Copyright 2013      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
  */
 
-
-#include <qmath.h>
+#include <QtMath>
 #include <QThreadPool>
 
 #include "VectorTileModel.h"
@@ -41,7 +40,8 @@ void TileRunner::run()
     emit documentLoaded(m_id, document);
 }
 
-VectorTileModel::CacheDocument::CacheDocument(GeoDataDocument *doc, VectorTileModel *vectorTileModel, const GeoDataLatLonBox &boundingBox) :
+VectorTileModel::CacheDocument::CacheDocument(GeoDataDocument *doc, VectorTileModel *vectorTileModel,
+                                              const GeoDataLatLonBox &boundingBox) :
     m_document(doc),
     m_vectorTileModel(vectorTileModel),
     m_boundingBox(boundingBox)
@@ -54,7 +54,8 @@ VectorTileModel::CacheDocument::~CacheDocument()
     m_vectorTileModel->removeTile(m_document);
 }
 
-VectorTileModel::VectorTileModel(TileLoader *loader, const GeoSceneVectorTileDataset *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool) :
+VectorTileModel::VectorTileModel(TileLoader *loader, const GeoSceneVectorTileDataset *layer,
+                                 GeoDataTreeModel *treeModel, QThreadPool *threadPool) :
     m_loader(loader),
     m_layer(layer),
     m_treeModel(treeModel),
@@ -225,7 +226,8 @@ void VectorTileModel::queryTiles(int tileZoomLevel, const QRect &rect)
             {
                 m_pendingDocuments << tileId;
                 TileRunner *job = new TileRunner(m_loader, m_layer, tileId);
-                connect(job, SIGNAL(documentLoaded(TileId,GeoDataDocument*)), this, SLOT(updateTile(TileId,GeoDataDocument*)));
+                connect(job, SIGNAL(documentLoaded(TileId,GeoDataDocument*)),
+                        this, SLOT(updateTile(TileId,GeoDataDocument*)));
                 m_threadPool->start(job);
             }
         }

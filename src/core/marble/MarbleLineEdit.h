@@ -15,9 +15,9 @@
 #ifndef MARBLE_MARBLELINEEDIT_H
 #define MARBLE_MARBLELINEEDIT_H
 
-#include "marble_export.h"
-
 #include <QLineEdit>
+
+#include "marble_export.h"
 
 namespace Marble
 {
@@ -25,24 +25,24 @@ namespace Marble
 class MarbleLineEditPrivate;
 
 /**
-  * A QLineEdit with an embedded clear button. The clear button removes any input
-  * in the line edit when clicked with the left mouse button. It replaces the line
-  * edit input with the current clipboard content on a middle mouse button click.
-  */
+ * A QLineEdit with an embedded clear button. The clear button removes any input
+ * in the line edit when clicked with the left mouse button. It replaces the line
+ * edit input with the current clipboard content on a middle mouse button click.
+ */
 class MARBLE_EXPORT MarbleLineEdit : public QLineEdit
 {
     Q_OBJECT
 
 public:
     /** Constructor */
-    explicit MarbleLineEdit( QWidget *parent = nullptr );
+    explicit MarbleLineEdit(QWidget *parent = nullptr);
 
     /** Destructor */
     ~MarbleLineEdit() override;
 
-    void setDecorator( const QPixmap &decorator );
+    void setDecorator(const QPixmap &decorator);
 
-    void setBusy( bool busy );
+    void setBusy(bool busy);
 
 signals:
     /** The clear button was clicked with the left mouse button */
@@ -51,19 +51,19 @@ signals:
     void decoratorButtonClicked();
 
 protected:
-    void mouseReleaseEvent( QMouseEvent* event ) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
-    void resizeEvent( QResizeEvent* event ) override;
+    void resizeEvent(QResizeEvent *event) override;
 
 private slots:
-    void updateClearButtonIcon( const QString& text );
+    void updateClearButtonIcon(const QString &text);
 
     void updateClearButton();
 
     void updateProgress();
 
 private:
-    MarbleLineEditPrivate* const d;
+    MarbleLineEditPrivate *const d;
 };
 
 } // namespace Marble

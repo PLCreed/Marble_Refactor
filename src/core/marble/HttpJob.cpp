@@ -40,7 +40,7 @@ public:
     ~HttpJobPrivate()
     {
         /// TODO cheack error
-        if(m_networkReply)
+        if (m_networkReply)
             m_networkReply->deleteLater();
     }
 

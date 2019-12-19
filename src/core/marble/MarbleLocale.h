@@ -13,9 +13,9 @@
 #ifndef MARBLE_MARBLELOCALE_H
 #define MARBLE_MARBLELOCALE_H
 
-#include "marble_export.h"
-
 #include <QtGlobal>
+
+#include "marble_export.h"
 
 namespace Marble
 {
@@ -30,17 +30,19 @@ class MarbleLocalePrivate;
 
 class MARBLE_EXPORT MarbleLocale
 {
- public:
+public:
     MarbleLocale();
     ~MarbleLocale();
 
-    enum MeasurementSystem {
+    enum MeasurementSystem
+    {
         MetricSystem = 0,
         ImperialSystem,
         NauticalSystem
     };
 
-    enum MeasureUnit {
+    enum MeasureUnit
+    {
         Meter = 0,
         Kilometer,
         Milimeter,
@@ -54,7 +56,7 @@ class MARBLE_EXPORT MarbleLocale
         NauticalMile
     };
 
-    void setMeasurementSystem( MarbleLocale::MeasurementSystem measurementSystem );
+    void setMeasurementSystem(MarbleLocale::MeasurementSystem measurementSystem);
     MarbleLocale::MeasurementSystem measurementSystem() const;
 
     static QString languageCode();
@@ -70,9 +72,9 @@ class MARBLE_EXPORT MarbleLocale
      */
     static QString unitAbbreviation(MeasureUnit unit);
 
- private:
-    Q_DISABLE_COPY( MarbleLocale )
-    MarbleLocalePrivate  * const d;
+private:
+    Q_DISABLE_COPY(MarbleLocale)
+    MarbleLocalePrivate  *const d;
 };
 
 }

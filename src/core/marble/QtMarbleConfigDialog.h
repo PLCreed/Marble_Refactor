@@ -28,14 +28,14 @@ class QtMarbleConfigDialogPrivate;
 class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
 {
     Q_OBJECT
-    
-    public:
+
+public:
     explicit QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSyncManager *syncManager = nullptr,
-                                   QWidget *parent = nullptr );
+                                  QWidget *parent = nullptr);
     ~QtMarbleConfigDialog() override;
 
     // View Settings
-    
+
     MarbleLocale::MeasurementSystem measurementSystem() const;
     Marble::AngleUnit angleUnit() const;
     void setAngleUnit(Marble::AngleUnit unit);
@@ -90,9 +90,9 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
      * Read the value of 'Time/chosenTimezone' key from settings
      */
     int chosenTimezone() const;
-    
+
     void initializeCustomTimezone();
-    
+
     // CloudSync settings
     bool syncEnabled() const;
     QString syncBackend() const;
@@ -102,7 +102,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     QString owncloudUsername() const;
     QString owncloudPassword() const;
 
-    signals:
+signals:
     /**
      * This signal is emitted when the loaded settings were changed.
      * Either by the user or by loading them initially from disk.
@@ -124,7 +124,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
      */
     void syncNowClicked();
 
-    public slots:
+public slots:
     /**
      * Disable "Sync Now" button while sync or for 30 sec of timout
      */
@@ -144,14 +144,14 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     /**
      * Show status on cloud sync settings tab
      */
-    void updateCloudSyncStatus( const QString &status );
+    void updateCloudSyncStatus(const QString &status);
 
     /**
      * Write settings to disk.
      */
     void writeSettings();
-    
-    private slots:
+
+private slots:
     /**
      * Synchronize the loaded settings with the file on hard disk.
      */
@@ -159,10 +159,10 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
 
     void updateCloudSyncCredentials();
 
-    private:
-    Q_DISABLE_COPY( QtMarbleConfigDialog )
+private:
+    Q_DISABLE_COPY(QtMarbleConfigDialog)
 
-    QtMarbleConfigDialogPrivate * const d;
+    QtMarbleConfigDialogPrivate *const d;
 };
 
 } // Marble namespace

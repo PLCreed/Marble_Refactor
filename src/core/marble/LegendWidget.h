@@ -11,11 +11,11 @@
 #ifndef MARBLE_LEGENDWIDGET_H
 #define MARBLE_LEGENDWIDGET_H
 
-// Marble
-#include "marble_export.h"
-
 // Qt
 #include <QWidget>
+
+// Marble
+#include "marble_export.h"
 
 namespace Marble
 {
@@ -28,24 +28,24 @@ class MARBLE_EXPORT LegendWidget : public QWidget
 {
     Q_OBJECT
 
- public:
-    explicit LegendWidget( QWidget *parent = nullptr, Qt::WindowFlags f = nullptr );
+public:
+    explicit LegendWidget(QWidget *parent = nullptr, Qt::WindowFlags f = nullptr);
     ~LegendWidget() override;
 
     /**
      * @brief Set a MarbleModel associated to this widget.
      * @param model  the MarbleModel to be set.
      */
-    void setMarbleModel( MarbleModel *model );
+    void setMarbleModel(MarbleModel *model);
 
- signals:
-    void propertyValueChanged( const QString &propertyName, bool value );
-    void tourLinkClicked( const QString &url );
+signals:
+    void propertyValueChanged(const QString &propertyName, bool value);
+    void tourLinkClicked(const QString &url);
 
- private:
-    Q_DISABLE_COPY( LegendWidget )
+private:
+    Q_DISABLE_COPY(LegendWidget)
 
-    LegendWidgetPrivate * const d;
+    LegendWidgetPrivate *const d;
 };
 
 }

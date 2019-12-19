@@ -14,8 +14,9 @@
 #ifndef MARBLECOLORS_H
 #define MARBLECOLORS_H
 
-#include "marble_export.h"
 #include <QColor>
+
+#include "marble_export.h"
 
 namespace Marble
 {

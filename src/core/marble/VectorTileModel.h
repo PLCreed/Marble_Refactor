@@ -13,9 +13,8 @@
 #define MARBLE_VECTORTILEMODEL_H
 
 #include <QObject>
-#include <QRunnable>
-
 #include <QMap>
+#include <QRunnable>
 
 #include "TileId.h"
 #include "GeoDataLatLonBox.h"
@@ -53,7 +52,8 @@ class VectorTileModel : public QObject
     Q_OBJECT
 
 public:
-    explicit VectorTileModel(TileLoader *loader, const GeoSceneVectorTileDataset *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool);
+    explicit VectorTileModel(TileLoader *loader, const GeoSceneVectorTileDataset *layer,
+                             GeoDataTreeModel *treeModel, QThreadPool *threadPool);
 
     void setViewport(const GeoDataLatLonBox &bbox);
 
@@ -95,7 +95,7 @@ private:
 
         GeoDataLatLonBox latLonBox() const { return m_boundingBox; }
 
-    private:
+private:
         Q_DISABLE_COPY(CacheDocument)
 
         GeoDataDocument *const m_document;

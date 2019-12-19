@@ -140,7 +140,7 @@ void VisiblePlacemark::setSymbolPixmap()
 {
     if (m_style)
     {
-        m_symbolId = m_style->iconStyle().iconPath() + QString::number(m_style->iconStyle().scale());
+        m_symbolId = m_style->iconStyle().iconPath() + QString::number(double(m_style->iconStyle().scale()));
         if (m_style->iconStyle().iconPath().isEmpty())
         {
             m_symbolId.clear();

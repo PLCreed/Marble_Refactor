@@ -15,7 +15,7 @@ namespace Marble
 
 PlaybackItem::~PlaybackItem()
 {
-    //nothing to do
+    // nothing to do
 }
 
 }

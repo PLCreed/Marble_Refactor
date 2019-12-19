@@ -37,7 +37,7 @@ public:
      * @param pluginManager The plugin manager that gives access to RunnerPlugins
      * @param parent Optional parent object
      */
-    explicit ReverseGeocodingRunnerManager( const MarbleModel *marbleModel, QObject *parent = nullptr );
+    explicit ReverseGeocodingRunnerManager(const MarbleModel *marbleModel, QObject *parent = nullptr);
 
     ~ReverseGeocodingRunnerManager() override;
 
@@ -48,8 +48,8 @@ public:
      * @see searchReverseGeocoding is blocking.
      * @see reverseGeocodingFinished signal indicates all runners are finished.
      */
-    void reverseGeocoding( const GeoDataCoordinates &coordinates );
-    QString searchReverseGeocoding( const GeoDataCoordinates &coordinates, int timeout = 30000 );
+    void reverseGeocoding(const GeoDataCoordinates &coordinates);
+    QString searchReverseGeocoding(const GeoDataCoordinates &coordinates, int timeout = 30000);
 
 signals:
     /**
@@ -59,7 +59,7 @@ signals:
      * emit further signals. If no result is found, this signal is emitted
      * with an empty (default constructed) placemark.
      */
-    void reverseGeocodingFinished( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
+    void reverseGeocodingFinished(const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark);
 
     /**
      * Emitted whenever all runners are finished for the query
@@ -67,8 +67,8 @@ signals:
     void reverseGeocodingFinished();
 
 private:
-    Q_PRIVATE_SLOT( d, void addReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark ) )
-    Q_PRIVATE_SLOT( d, void cleanupReverseGeocodingTask( ReverseGeocodingTask *task ) )
+    Q_PRIVATE_SLOT(d, void addReverseGeocodingResult(const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark))
+    Q_PRIVATE_SLOT(d, void cleanupReverseGeocodingTask(ReverseGeocodingTask * task))
 
     class Private;
     friend class Private;

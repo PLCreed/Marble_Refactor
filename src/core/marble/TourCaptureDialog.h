@@ -25,6 +25,7 @@ class MarbleWidget;
 
 class MovieCapture;
 class TourPlayback;
+
 class MARBLE_EXPORT TourCaptureDialog : public QDialog
 {
     Q_OBJECT
@@ -36,14 +37,14 @@ public:
 public slots:
     void startRecording();
     void stopRecording();
-    void setRate( double rate );
-    void setTourPlayback( TourPlayback* playback );
-    void setDefaultFilename( const QString &filename );
+    void setRate(double rate);
+    void setTourPlayback(TourPlayback *playback);
+    void setDefaultFilename(const QString &filename);
     void handleError();
 
 private slots:
     void loadDestinationFile();
-    void updateProgress( double position );
+    void updateProgress(double position);
     void recordNextFrame();
 
 private:

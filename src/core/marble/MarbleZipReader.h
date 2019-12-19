@@ -67,11 +67,11 @@
 // We mean it.
 //
 
-#include <QDateTime>
-#include <QFile>
-#include <QString>
+ #include <QDateTime>
+ #include <QFile>
+ #include <QString>
 
-#include "marble_export.h"
+ #include "marble_export.h"
 
 namespace Marble {
 
@@ -80,12 +80,12 @@ class MarbleZipReaderPrivate;
 class MARBLE_EXPORT MarbleZipReader
 {
 public:
-    MarbleZipReader(const QString &fileName, QIODevice::OpenMode mode = QIODevice::ReadOnly );
+    MarbleZipReader(const QString &fileName, QIODevice::OpenMode mode = QIODevice::ReadOnly);
 
     explicit MarbleZipReader(QIODevice *device);
     ~MarbleZipReader();
 
-    QIODevice* device() const;
+    QIODevice *device() const;
 
     bool isReadable() const;
     bool exists() const;
@@ -97,15 +97,15 @@ public:
         ~FileInfo();
         FileInfo &operator=(const FileInfo &other);
         bool isValid() const;
-        QString filePath;
-        uint isDir : 1;
-        uint isFile : 1;
-        uint isSymLink : 1;
+        QString            filePath;
+        uint               isDir     : 1;
+        uint               isFile    : 1;
+        uint               isSymLink : 1;
         QFile::Permissions permissions;
-        uint crc32;
-        qint64 size;
-        QDateTime lastModified;
-        void *d;
+        uint               crc32;
+        qint64             size;
+        QDateTime          lastModified;
+        void *             d;
     };
 
     QList<FileInfo> fileInfoList() const;
@@ -115,7 +115,8 @@ public:
     QByteArray fileData(const QString &fileName) const;
     bool extractAll(const QString &destinationDir) const;
 
-    enum Status {
+    enum Status
+    {
         NoError,
         FileReadError,
         FileOpenError,

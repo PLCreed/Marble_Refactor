@@ -36,25 +36,25 @@ class MARBLE_EXPORT TinyWebBrowser : public QWebEngineView
 {
     Q_OBJECT
 
- public:
-    explicit TinyWebBrowser( QWidget* parent = nullptr );
+public:
+    explicit TinyWebBrowser(QWidget *parent = nullptr);
     ~TinyWebBrowser() override;
 
- public slots:
-    void setWikipediaPath( const QString& relativeUrl );
+public slots:
+    void setWikipediaPath(const QString &relativeUrl);
     void print();
 
- signals:
-    void statusMessage( const QString& );
+signals:
+    void statusMessage(const QString &);
 
- protected:
-    QWebEngineView *createWindow( QWebEnginePage::WebWindowType type ) override;
+protected:
+    QWebEngineView *createWindow(QWebEnginePage::WebWindowType type) override;
 
- private slots:
-    void openExternalLink( const QUrl& );
+private slots:
+    void openExternalLink(const QUrl &);
 
- private:
-    TinyWebBrowserPrivate * const d;
+private:
+    TinyWebBrowserPrivate *const d;
 };
 
 }

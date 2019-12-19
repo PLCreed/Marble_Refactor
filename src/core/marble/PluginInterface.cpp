@@ -14,8 +14,7 @@ namespace Marble
 {
 
 PluginInterface::~PluginInterface()
-{
-}
+{}
 
 QString PluginInterface::aboutDataText() const
 {

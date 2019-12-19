@@ -9,7 +9,6 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-
 // Own
 #include "MarblePlacemarkModel.h"
 #include "MarblePlacemarkModel_P.h"

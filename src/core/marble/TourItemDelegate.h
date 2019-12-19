@@ -28,60 +28,60 @@ class TourWidget;
 
 class TourItemDelegate : public QStyledItemDelegate
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-    TourItemDelegate( QListView* view, MarbleWidget* widget, TourWidget* tour );
-    void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const override;
-    QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const override;
-    QWidget* createEditor ( QWidget * parent, const QStyleOptionViewItem & option, const QModelIndex & index ) const override;
-    bool editable() const;
-    void setEditable( bool editable );
-    QModelIndex firstFlyTo() const;
-    bool editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate, bool create = true );
-    QString defaultFeatureId() const;
-    GeoDataFeature *findFeature( const QString &id ) const;
-
-public slots:
-    /** Editing duration for first flyTo element in playlist will be disabled.  */
-    void setFirstFlyTo( const QPersistentModelIndex &index );
-    /** Sets id of default feature for Remove Item */
-    void setDefaultFeatureId( const QString &id );
-
-signals:
-    void editingChanged( const QModelIndex& index );
-    void edited( const QModelIndex& index );
-    void editableChanged( bool editable );
-    void firstFlyToChanged( const QPersistentModelIndex &newFirstFlyTo );
-    void featureIdsChanged( const QStringList& ids );
-    void defaultFeatureIdChanged( const QString& id );
-
-public:
-
-    enum Element {
+    enum Element
+    {
         GeoDataElementIcon,
         Label,
         EditButton,
         ActionButton
     };
 
+public:
+    TourItemDelegate(QListView *view, MarbleWidget *widget, TourWidget *tour);
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    bool editable() const;
+    void setEditable(bool editable);
+    QModelIndex firstFlyTo() const;
+    bool editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate, bool create = true);
+    QString defaultFeatureId() const;
+    GeoDataFeature *findFeature(const QString &id) const;
+
+public slots:
+    /** Editing duration for first flyTo element in playlist will be disabled.  */
+    void setFirstFlyTo(const QPersistentModelIndex &index);
+    /** Sets id of default feature for Remove Item */
+    void setDefaultFeatureId(const QString &id);
+
+signals:
+    void editingChanged(const QModelIndex &index);
+    void edited(const QModelIndex &index);
+    void editableChanged(bool editable);
+    void firstFlyToChanged(const QPersistentModelIndex &newFirstFlyTo);
+    void featureIdsChanged(const QStringList &ids);
+    void defaultFeatureIdChanged(const QString &id);
+
 protected:
-    bool editorEvent( QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index ) override;
+    bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index) override;
 
 private slots:
-    void closeEditor(const QModelIndex& index);
+    void closeEditor(const QModelIndex &index);
 
 private:
-    static QRect position( Element element, const QStyleOptionViewItem &option );
+    static QRect position(Element element, const QStyleOptionViewItem &option);
     static QStringList findIds(const GeoDataPlaylist &playlist, bool onlyFeatures = false);
     GeoDataPlaylist *playlist() const;
     QList<QPersistentModelIndex> m_editingIndices;
-    QListView* m_listView;
+    QListView *m_listView;
     MarbleWidget *m_widget;
     bool m_editable;
     QPersistentModelIndex m_firstFlyTo;
     QString m_defaultFeatureId;
-    TourWidget* m_tourWidget;
+    TourWidget *m_tourWidget;
 };
 
 } // namespace Marble

@@ -10,20 +10,20 @@
 // Copyright 2010-2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 // Copyright 2011 Thibaut Gridel <tgridel@free.fr>
 
-#include "ReverseGeocodingRunnerManager.h"
+#include <QList>
+#include <QThreadPool>
+#include <QTimer>
 
+#include "ReverseGeocodingRunnerManager.h"
+#include "ReverseGeocodingRunnerPlugin.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"
 #include "Planet.h"
 #include "PluginManager.h"
-#include "ReverseGeocodingRunnerPlugin.h"
 #include "RunnerTask.h"
 
-#include <QList>
-#include <QThreadPool>
-#include <QTimer>
 
 namespace Marble
 {
@@ -33,44 +33,48 @@ class MarbleModel;
 class Q_DECL_HIDDEN ReverseGeocodingRunnerManager::Private
 {
 public:
-    Private( ReverseGeocodingRunnerManager *parent, const MarbleModel *marbleModel );
+    Private(ReverseGeocodingRunnerManager *parent, const MarbleModel *marbleModel);
 
-    QList<const ReverseGeocodingRunnerPlugin *> plugins( const QList<const ReverseGeocodingRunnerPlugin *> &plugins ) const;
+    QList<const ReverseGeocodingRunnerPlugin *> plugins(const QList<const ReverseGeocodingRunnerPlugin *> &plugins) const;
 
-    void addReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
-    void cleanupReverseGeocodingTask( ReverseGeocodingTask *task );
+    void addReverseGeocodingResult(const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark);
+    void cleanupReverseGeocodingTask(ReverseGeocodingTask *task);
 
     ReverseGeocodingRunnerManager *const q;
     const MarbleModel *const m_marbleModel;
-    const PluginManager* m_pluginManager;
-    QList<ReverseGeocodingTask*> m_reverseTasks;
+    const PluginManager *m_pluginManager;
+    QList<ReverseGeocodingTask *> m_reverseTasks;
     QVector<GeoDataCoordinates> m_reverseGeocodingResults;
     QString m_reverseGeocodingResult;
 };
 
-ReverseGeocodingRunnerManager::Private::Private( ReverseGeocodingRunnerManager *parent, const MarbleModel *marbleModel ) :
-    q( parent ),
-    m_marbleModel( marbleModel ),
-    m_pluginManager( marbleModel->pluginManager() )
+ReverseGeocodingRunnerManager::Private::Private(ReverseGeocodingRunnerManager *parent, const MarbleModel *marbleModel) :
+    q(parent),
+    m_marbleModel(marbleModel),
+    m_pluginManager(marbleModel->pluginManager())
 {
-    qRegisterMetaType<GeoDataPlacemark>( "GeoDataPlacemark" );
-    qRegisterMetaType<GeoDataCoordinates>( "GeoDataCoordinates" );
+    qRegisterMetaType<GeoDataPlacemark>("GeoDataPlacemark");
+    qRegisterMetaType<GeoDataCoordinates>("GeoDataCoordinates");
 }
 
-QList<const ReverseGeocodingRunnerPlugin *> ReverseGeocodingRunnerManager::Private::plugins( const QList<const ReverseGeocodingRunnerPlugin *> &plugins ) const
+QList<const ReverseGeocodingRunnerPlugin *> ReverseGeocodingRunnerManager::Private::plugins(const QList<const ReverseGeocodingRunnerPlugin *> &plugins)
+const
 {
     QList<const ReverseGeocodingRunnerPlugin *> result;
 
-    for( const ReverseGeocodingRunnerPlugin *plugin: plugins ) {
-        if ( ( m_marbleModel && m_marbleModel->workOffline() && !plugin->canWorkOffline() ) ) {
+    for (const ReverseGeocodingRunnerPlugin *plugin: plugins)
+    {
+        if ((m_marbleModel && m_marbleModel->workOffline() && !plugin->canWorkOffline()))
+        {
             continue;
         }
 
-        if ( !plugin->canWork() ) {
+        if (!plugin->canWork())
+        {
             continue;
         }
 
-        if ( m_marbleModel && !plugin->supportsCelestialBody( m_marbleModel->planet()->id() ) )
+        if (m_marbleModel && !plugin->supportsCelestialBody(m_marbleModel->planet()->id()))
         {
             continue;
         }
@@ -81,34 +85,38 @@ QList<const ReverseGeocodingRunnerPlugin *> ReverseGeocodingRunnerManager::Priva
     return result;
 }
 
-void ReverseGeocodingRunnerManager::Private::addReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark )
+void ReverseGeocodingRunnerManager::Private::addReverseGeocodingResult(const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark)
 {
-    if ( !m_reverseGeocodingResults.contains( coordinates ) && !placemark.address().isEmpty() ) {
-        m_reverseGeocodingResults.push_back( coordinates );
+    if (!m_reverseGeocodingResults.contains(coordinates) && !placemark.address().isEmpty())
+    {
+        m_reverseGeocodingResults.push_back(coordinates);
         m_reverseGeocodingResult = placemark.address();
-        emit q->reverseGeocodingFinished( coordinates, placemark );
+        emit q->reverseGeocodingFinished(coordinates, placemark);
     }
 
-    if ( m_reverseTasks.isEmpty() ) {
+    if (m_reverseTasks.isEmpty())
+    {
         emit q->reverseGeocodingFinished();
     }
 }
 
-void ReverseGeocodingRunnerManager::Private::cleanupReverseGeocodingTask( ReverseGeocodingTask *task )
+void ReverseGeocodingRunnerManager::Private::cleanupReverseGeocodingTask(ReverseGeocodingTask *task)
 {
-    m_reverseTasks.removeAll( task );
-    mDebug() << "removing task " << m_reverseTasks.size() << " " << (quintptr)task;
-    if ( m_reverseTasks.isEmpty() ) {
+    m_reverseTasks.removeAll(task);
+    mDebug() << "removing task " << m_reverseTasks.size() << " " << quintptr(task);
+    if (m_reverseTasks.isEmpty())
+    {
         emit q->reverseGeocodingFinished();
     }
 }
 
-ReverseGeocodingRunnerManager::ReverseGeocodingRunnerManager( const MarbleModel *marbleModel, QObject *parent ) :
-    QObject( parent ),
-    d( new Private( this, marbleModel ) )
+ReverseGeocodingRunnerManager::ReverseGeocodingRunnerManager(const MarbleModel *marbleModel, QObject *parent) :
+    QObject(parent),
+    d(new Private(this, marbleModel))
 {
-    if ( QThreadPool::globalInstance()->maxThreadCount() < 4 ) {
-        QThreadPool::globalInstance()->setMaxThreadCount( 4 );
+    if (QThreadPool::globalInstance()->maxThreadCount() < 4)
+    {
+        QThreadPool::globalInstance()->setMaxThreadCount(4);
     }
 }
 
@@ -117,55 +125,63 @@ ReverseGeocodingRunnerManager::~ReverseGeocodingRunnerManager()
     delete d;
 }
 
-void ReverseGeocodingRunnerManager::reverseGeocoding( const GeoDataCoordinates &coordinates )
+void ReverseGeocodingRunnerManager::reverseGeocoding(const GeoDataCoordinates &coordinates)
 {
     d->m_reverseTasks.clear();
     d->m_reverseGeocodingResult.clear();
 #if QT_VERSION >= 0x050400
-    d->m_reverseGeocodingResults.removeAll( coordinates );
+    d->m_reverseGeocodingResults.removeAll(coordinates);
 #else
     QVector<GeoDataCoordinates> &vector = d->m_reverseGeocodingResults;
     QVector<GeoDataCoordinates>::iterator it = vector.begin();
 
-    while (it != vector.end()) {
-        if (*it == coordinates) {
+    while (it != vector.end())
+    {
+        if (*it == coordinates)
+        {
             it = vector.erase(it);
-        } else {
+        }
+        else
+        {
             ++it;
         }
     }
 #endif
-    QList<const ReverseGeocodingRunnerPlugin*> plugins = d->plugins( d->m_pluginManager->reverseGeocodingRunnerPlugins() );
-    for( const ReverseGeocodingRunnerPlugin* plugin: plugins ) {
-        ReverseGeocodingTask* task = new ReverseGeocodingTask( plugin->newRunner(), this, d->m_marbleModel, coordinates );
-        connect( task, SIGNAL(finished(ReverseGeocodingTask*)), this, SLOT(cleanupReverseGeocodingTask(ReverseGeocodingTask*)) );
-        mDebug() << "reverse task " << plugin->nameId() << " " << (quintptr)task;
+    QList<const ReverseGeocodingRunnerPlugin *> plugins = d->plugins(d->m_pluginManager->reverseGeocodingRunnerPlugins());
+    for (const ReverseGeocodingRunnerPlugin *plugin: plugins)
+    {
+        ReverseGeocodingTask *task = new ReverseGeocodingTask(plugin->newRunner(), this, d->m_marbleModel, coordinates);
+        connect(task, SIGNAL(finished(ReverseGeocodingTask*)), this, SLOT(cleanupReverseGeocodingTask(ReverseGeocodingTask*)));
+        mDebug() << "reverse task " << plugin->nameId() << " " << quintptr(task);
         d->m_reverseTasks << task;
     }
 
-    for( ReverseGeocodingTask* task: d->m_reverseTasks ) {
-        QThreadPool::globalInstance()->start( task );
+    for (ReverseGeocodingTask *task: d->m_reverseTasks)
+    {
+        QThreadPool::globalInstance()->start(task);
     }
 
-    if ( plugins.isEmpty() ) {
+    if (plugins.isEmpty())
+    {
         GeoDataPlacemark anonymous;
-        anonymous.setCoordinate( coordinates );
-        emit reverseGeocodingFinished( coordinates, anonymous );
-        d->cleanupReverseGeocodingTask( nullptr );
+        anonymous.setCoordinate(coordinates);
+        emit reverseGeocodingFinished(coordinates, anonymous);
+        d->cleanupReverseGeocodingTask(nullptr);
     }
 }
 
-QString ReverseGeocodingRunnerManager::searchReverseGeocoding( const GeoDataCoordinates &coordinates, int timeout ) {
+QString ReverseGeocodingRunnerManager::searchReverseGeocoding(const GeoDataCoordinates &coordinates, int timeout)
+{
     QEventLoop localEventLoop;
     QTimer watchdog;
     watchdog.setSingleShot(true);
-    connect( &watchdog, SIGNAL(timeout()),
-             &localEventLoop, SLOT(quit()));
+    connect(&watchdog, SIGNAL(timeout()),
+            &localEventLoop, SLOT(quit()));
     connect(this, SIGNAL(reverseGeocodingFinished()),
-            &localEventLoop, SLOT(quit()), Qt::QueuedConnection );
+            &localEventLoop, SLOT(quit()), Qt::QueuedConnection);
 
-    watchdog.start( timeout );
-    reverseGeocoding( coordinates );
+    watchdog.start(timeout);
+    reverseGeocoding(coordinates);
     localEventLoop.exec();
     return d->m_reverseGeocodingResult;
 }

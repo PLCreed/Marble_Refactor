@@ -11,51 +11,50 @@
 #ifndef MARBLE_PRINTOPTIONSWIDGET_H
 #define MARBLE_PRINTOPTIONSWIDGET_H
 
-#include "marble_export.h"
-
 #include <QWidget>
 
+#include "marble_export.h"
 #include "ui_PrintOptions.h"
 
 namespace Marble
 {
 
-class MARBLE_EXPORT PrintOptionsWidget: public QWidget, private Ui::PrintOptions
+class MARBLE_EXPORT PrintOptionsWidget : public QWidget, private Ui::PrintOptions
 {
     Q_OBJECT
 
 public:
-    explicit PrintOptionsWidget( QWidget * parent = nullptr, Qt::WindowFlags f = nullptr );
+    explicit PrintOptionsWidget(QWidget *parent = nullptr, Qt::WindowFlags f = nullptr);
 
     bool printMap() const;
 
-    void setPrintMap( bool print );
+    void setPrintMap(bool print);
 
     bool printBackground() const;
 
-    void setPrintBackground( bool print );
+    void setPrintBackground(bool print);
 
     bool printLegend() const;
 
-    void setPrintLegend( bool print );
+    void setPrintLegend(bool print);
 
     bool printRouteSummary() const;
 
-    void setPrintRouteSummary( bool print );
+    void setPrintRouteSummary(bool print);
 
     bool printDrivingInstructions() const;
 
-    void setPrintDrivingInstructions( bool print );
+    void setPrintDrivingInstructions(bool print);
 
     bool printDrivingInstructionsAdvice() const;
 
-    void setPrintDrivingInstructionsAdvice( bool print );
+    void setPrintDrivingInstructionsAdvice(bool print);
 
-    void setBackgroundControlsEnabled( bool enabled );
+    void setBackgroundControlsEnabled(bool enabled);
 
-    void setRouteControlsEnabled( bool enabled );
+    void setRouteControlsEnabled(bool enabled);
 
-    void setLegendControlsEnabled( bool enabled );
+    void setLegendControlsEnabled(bool enabled);
 };
 
 } // namespace Marble

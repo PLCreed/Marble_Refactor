@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>     
+// Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>
 // Copyright 2012      Thibaut Gridel <tgridel@free.fr>
 //
 
@@ -20,20 +20,19 @@ namespace Marble
 
 class MARBLE_EXPORT NewBookmarkFolderDialog : public QDialog, private Ui::UiNewBookmarkFolderDialog
 {
-
     Q_OBJECT
 
- public:
-    explicit NewBookmarkFolderDialog( QWidget *parent = nullptr );
+public:
+    explicit NewBookmarkFolderDialog(QWidget *parent = nullptr);
 
     ~NewBookmarkFolderDialog() override;
 
-    void setFolderName( const QString &name );
+    void setFolderName(const QString &name);
 
     QString folderName() const;
 
- private:
-    Q_DISABLE_COPY( NewBookmarkFolderDialog )
+private:
+    Q_DISABLE_COPY(NewBookmarkFolderDialog)
 
 };
 

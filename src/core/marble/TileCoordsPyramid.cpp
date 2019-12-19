@@ -11,11 +11,11 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-#include "TileCoordsPyramid.h"
+#include <algorithm>
 
 #include <QRect>
 
-#include <algorithm>
+#include "TileCoordsPyramid.h"
 
 namespace Marble
 {
@@ -23,41 +23,38 @@ namespace Marble
 class Q_DECL_HIDDEN TileCoordsPyramid::Private
 {
 public:
-    Private( int const topLevel, int const bottomLevel );
-
     int m_topLevel;
     int m_bottomLevel;
     QRect m_bottomLevelCoords;
+
+public:
+    Private(int const topLevel, int const bottomLevel);
 };
 
-TileCoordsPyramid::Private::Private( int const topLevel, int const bottomLevel )
-    : m_topLevel( topLevel ),
-      m_bottomLevel( bottomLevel )
+TileCoordsPyramid::Private::Private(int const topLevel, int const bottomLevel) :
+    m_topLevel(topLevel),
+    m_bottomLevel(bottomLevel)
 {
-    Q_ASSERT( m_topLevel <= m_bottomLevel );
+    Q_ASSERT(m_topLevel <= m_bottomLevel);
 }
 
 
-TileCoordsPyramid::TileCoordsPyramid( int const topLevel, int const bottomLevel )
-    : d( new Private( topLevel, bottomLevel ))
-{
-}
+TileCoordsPyramid::TileCoordsPyramid(int const topLevel, int const bottomLevel)
+    : d(new Private(topLevel, bottomLevel))
+{}
 
-TileCoordsPyramid::TileCoordsPyramid( TileCoordsPyramid const & other )
-    : d( new Private( *other.d ))
-{
-}
+TileCoordsPyramid::TileCoordsPyramid(TileCoordsPyramid const &other)
+    : d(new Private(*other.d))
+{}
 
 TileCoordsPyramid::TileCoordsPyramid()
-    :d( new Private( 0, 0 ) )
-{
+    : d(new Private(0, 0))
+{}
 
-}
-
-TileCoordsPyramid & TileCoordsPyramid::operator=( TileCoordsPyramid const & rhs )
+TileCoordsPyramid &TileCoordsPyramid::operator=(TileCoordsPyramid const &rhs)
 {
-    TileCoordsPyramid temp( rhs );
-    swap( temp );
+    TileCoordsPyramid temp(rhs);
+    swap(temp);
     return *this;
 }
 
@@ -76,40 +73,41 @@ int TileCoordsPyramid::bottomLevel() const
     return d->m_bottomLevel;
 }
 
-void TileCoordsPyramid::setBottomLevelCoords( QRect const & coords )
+void TileCoordsPyramid::setBottomLevelCoords(QRect const &coords)
 {
     d->m_bottomLevelCoords = coords;
 }
 
-QRect TileCoordsPyramid::coords( int const level ) const
+QRect TileCoordsPyramid::coords(int const level) const
 {
-    Q_ASSERT( d->m_topLevel <= level && level <= d->m_bottomLevel );
+    Q_ASSERT(d->m_topLevel <= level && level <= d->m_bottomLevel);
     int bottomX1, bottomY1, bottomX2, bottomY2;
-    d->m_bottomLevelCoords.getCoords( &bottomX1, &bottomY1, &bottomX2, &bottomY2 );
+    d->m_bottomLevelCoords.getCoords(&bottomX1, &bottomY1, &bottomX2, &bottomY2);
     int const deltaLevel = d->m_bottomLevel - level;
     int const x1 = bottomX1 >> deltaLevel;
     int const y1 = bottomY1 >> deltaLevel;
     int const x2 = bottomX2 >> deltaLevel;
     int const y2 = bottomY2 >> deltaLevel;
     QRect result;
-    result.setCoords( x1, y1, x2, y2 );
+    result.setCoords(x1, y1, x2, y2);
     return result;
 }
 
 qint64 TileCoordsPyramid::tilesCount() const
 {
     qint64 result = 0;
-    for ( int level = d->m_topLevel; level <= d->m_bottomLevel; ++level ) {
-        QRect const levelCoords = coords( level );
+    for (int level = d->m_topLevel; level <= d->m_bottomLevel; ++level)
+    {
+        QRect const levelCoords = coords(level);
         // w*h can exceed 32 bit range, so force 64 bit calculation; see bug 342397
-        result += qint64( levelCoords.width() ) * levelCoords.height();
+        result += qint64(levelCoords.width()) * levelCoords.height();
     }
     return result;
 }
 
-void TileCoordsPyramid::swap( TileCoordsPyramid & other )
+void TileCoordsPyramid::swap(TileCoordsPyramid &other)
 {
-    std::swap( d, other.d );
+    std::swap(d, other.d);
 }
 
 }

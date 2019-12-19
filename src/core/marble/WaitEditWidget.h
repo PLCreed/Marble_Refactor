@@ -24,25 +24,25 @@ namespace Marble
 
 class GeoDataWait;
 
-class WaitEditWidget: public QWidget
+class WaitEditWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit WaitEditWidget( const QModelIndex& index, QWidget* parent=nullptr );
+    explicit WaitEditWidget(const QModelIndex &index, QWidget *parent = nullptr);
     bool editable() const;
 
 signals:
-    void editingDone( const QModelIndex& index );
+    void editingDone(const QModelIndex &index);
 
 public slots:
-    void setEditable( bool editable );
+    void setEditable(bool editable);
 
 private slots:
     void save();
 
 private:
-    GeoDataWait* waitElement();
+    GeoDataWait *waitElement();
     QPersistentModelIndex m_index;
     QDoubleSpinBox *m_spinBox;
     QToolButton *m_button;

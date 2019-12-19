@@ -26,30 +26,30 @@ public:
     SerialTrack();
     ~SerialTrack() override;
 
-    void append( PlaybackItem* item );
+    void append(PlaybackItem *item);
     void play();
-    void seek( double position );
+    void seek(double position);
     double duration() const;
     void clear();
     int size() const;
-    PlaybackItem* at( int i );
+    PlaybackItem *at(int i);
     double currentPosition();
 
 signals:
-    void centerOn( const GeoDataCoordinates &coordinates );
-    void progressChanged( double );
+    void centerOn(const GeoDataCoordinates &coordinates);
+    void progressChanged(double);
     void finished();
     void paused();
-    void itemFinished( int index );
+    void itemFinished(int index);
 
 public slots:
     void handleFinishedItem();
-    void changeProgress( double );
+    void changeProgress(double);
     void pause();
     void stop();
 
 private:
-    QList<PlaybackItem*> m_items;
+    QList<PlaybackItem *> m_items;
     int m_currentIndex;
     double m_finishedPosition;
     double m_currentPosition;

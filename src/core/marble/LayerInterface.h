@@ -16,7 +16,6 @@
 
 #include "marble_export.h"
 
-
 class QStringList;
 class QString;
 

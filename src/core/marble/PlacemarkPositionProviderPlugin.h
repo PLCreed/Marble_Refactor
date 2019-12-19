@@ -12,12 +12,12 @@
 #ifndef PLACEMARKPOSITIONPROVIDERPLUGIN_H
 #define PLACEMARKPOSITIONPROVIDERPLUGIN_H
 
+#include <QDateTime>
+
 #include "PositionProviderPlugin.h"
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataAccuracy.h"
-
-#include <QDateTime>
 
 namespace Marble
 {
@@ -25,13 +25,13 @@ namespace Marble
 class GeoDataPlacemark;
 class MarbleModel;
 
-class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
+class PlacemarkPositionProviderPlugin : public PositionProviderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::PositionProviderPluginInterface )
+    Q_INTERFACES(Marble::PositionProviderPluginInterface)
 
- public:
-    explicit PlacemarkPositionProviderPlugin( MarbleModel *marbleModel, QObject* parent=nullptr );
+public:
+    explicit PlacemarkPositionProviderPlugin(MarbleModel *marbleModel, QObject *parent = nullptr);
 
     QString name() const override;
     QString nameId() const override;
@@ -53,7 +53,7 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     qreal direction() const override;
     QDateTime timestamp() const override;
 
- private:
+private:
     MarbleModel *const m_marbleModel;
     const GeoDataPlacemark *m_placemark;
     GeoDataCoordinates m_coordinates;
@@ -65,8 +65,8 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     GeoDataAccuracy m_accuracy;
     bool m_isInitialized;
 
- private slots:
-    void setPlacemark( const GeoDataPlacemark *placemark );
+private slots:
+    void setPlacemark(const GeoDataPlacemark *placemark);
 
     void updatePosition();
 };

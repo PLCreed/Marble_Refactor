@@ -24,25 +24,25 @@ namespace Marble
 
 class GeoDataTourControl;
 
-class TourControlEditWidget: public QWidget
+class TourControlEditWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit TourControlEditWidget( const QModelIndex& index, QWidget* parent=nullptr );
+    explicit TourControlEditWidget(const QModelIndex &index, QWidget *parent = nullptr);
     bool editable() const;
 
 signals:
-    void editingDone( const QModelIndex& index );
+    void editingDone(const QModelIndex &index);
 
 public slots:
-    void setEditable( bool editable );
+    void setEditable(bool editable);
 
 private slots:
     void save();
 
 private:
-    GeoDataTourControl* tourControlElement();
+    GeoDataTourControl *tourControlElement();
     QPersistentModelIndex m_index;
     QRadioButton *m_radio_play;
     QRadioButton *m_radio_pause;

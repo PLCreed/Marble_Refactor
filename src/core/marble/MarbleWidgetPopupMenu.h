@@ -12,9 +12,9 @@
 #ifndef MARBLE_MARBLEWIDGETPOPUPMENU_H
 #define MARBLE_MARBLEWIDGETPOPUPMENU_H
 
-#include "marble_export.h"
-
 #include <QObject>
+
+#include "marble_export.h"
 
 class QAction;
 class QPoint;
@@ -34,16 +34,16 @@ class MARBLE_EXPORT MarbleWidgetPopupMenu  : public QObject
 {
     Q_OBJECT
 
- public:
-    MarbleWidgetPopupMenu( MarbleWidget*, const MarbleModel* );
+public:
+    MarbleWidgetPopupMenu(MarbleWidget *, const MarbleModel *);
 
     ~MarbleWidgetPopupMenu() override;
 
     /**
-      * Adds the action to the menu associated with the specified
-      * mouse button
-      */
-    void addAction( Qt::MouseButton button, QAction* action );
+     * Adds the action to the menu associated with the specified
+     * mouse button
+     */
+    void addAction(Qt::MouseButton button, QAction *action);
 
     /**
      * @brief mousePosition Position of the last mouse button click
@@ -51,9 +51,9 @@ class MARBLE_EXPORT MarbleWidgetPopupMenu  : public QObject
      */
     QPoint mousePosition() const;
 
- public slots:
-    void  showLmbMenu( int, int );
-    void  showRmbMenu( int, int );
+public slots:
+    void showLmbMenu(int, int);
+    void showRmbMenu(int, int);
 
 private slots:
     void resetMenu();
@@ -65,14 +65,14 @@ private slots:
     void directionsFromHere();
     void directionsToHere();
     void startReverseGeocoding();
-    void showAddressInformation( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
+    void showAddressInformation(const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark);
     void addBookmark();
-    void toggleFullscreen( bool enabled );
+    void toggleFullscreen(bool enabled);
 
- private:
-    Q_DISABLE_COPY( MarbleWidgetPopupMenu )
+private:
+    Q_DISABLE_COPY(MarbleWidgetPopupMenu)
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 }

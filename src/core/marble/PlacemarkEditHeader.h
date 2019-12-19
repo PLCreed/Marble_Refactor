@@ -28,11 +28,11 @@ class MARBLE_EXPORT PlacemarkEditHeader : public QWidget
 
 public:
     explicit PlacemarkEditHeader(QWidget *parent = nullptr,
-                        GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS,
-                        const QString& name = QString(),
-                        const QString& iconLink = QString(),
-                        const QString& id = QString(),
-                        const QStringList &idFilter = QStringList() );
+                                 GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS,
+                                 const QString &name = QString(),
+                                 const QString &iconLink = QString(),
+                                 const QString &id = QString(),
+                                 const QStringList &idFilter = QStringList());
     ~PlacemarkEditHeader() override;
     QString name() const;
     QString iconLink() const;
@@ -53,13 +53,13 @@ public slots:
     void setLatitude(qreal latitude);
     void setLongitude(qreal longitude);
     void setNotation(GeoDataCoordinates::Notation notation);
-    void setPositionVisible( bool visible );
-    QString setId( const QString &id );
-    void setIdFilter( const QStringList &filter );
-    void setIdVisible( bool visible );
-    void setTargetId( const QString &targetId );
-    void setTargetIdList( const QStringList &targetIdList );
-    void setTargetIdVisible( bool visible );
+    void setPositionVisible(bool visible);
+    QString setId(const QString &id);
+    void setIdFilter(const QStringList &filter);
+    void setIdVisible(bool visible);
+    void setTargetId(const QString &targetId);
+    void setTargetIdList(const QStringList &targetIdList);
+    void setTargetIdVisible(bool visible);
     void selectAll();
     void setReadOnly(bool state);
 signals:
@@ -67,7 +67,7 @@ signals:
 private slots:
     void updateValues();
 private:
-    PlacemarkEditHeaderPrivate* const d;
+    PlacemarkEditHeaderPrivate *const d;
     Q_PRIVATE_SLOT(d, void loadIconFile())
     friend class PlacemarkEditHeaderPrivate;
 };

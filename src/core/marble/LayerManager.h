@@ -40,11 +40,11 @@ class LayerManager : public QObject
 {
     Q_OBJECT
 
- public:
+public:
     explicit LayerManager(QObject *parent = nullptr);
     ~LayerManager() override;
 
-    void renderLayers( GeoPainter *painter, ViewportParams *viewport );
+    void renderLayers(GeoPainter *painter, ViewportParams *viewport);
 
     bool showBackground() const;
 
@@ -57,11 +57,11 @@ class LayerManager : public QObject
      * @return the list of DataPlugins
      */
     QList<AbstractDataPlugin *> dataPlugins()  const;
-    
+
     /**
-     * @brief Returns all items of dataPlugins on the position curpos 
+     * @brief Returns all items of dataPlugins on the position curpos
      */
-    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
+    QList<AbstractDataPluginItem *> whichItemAt(const QPoint &curpos) const;
 
     /**
      * @brief Add a layer to be included in rendering.
@@ -77,11 +77,11 @@ class LayerManager : public QObject
 
     RenderState renderState() const;
 
- signals:
+signals:
     /**
      * @brief Signal that a render item has been initialized
      */
-    void renderPluginInitialized( RenderPlugin *renderPlugin );
+    void renderPluginInitialized(RenderPlugin *renderPlugin);
 
     /**
      * This signal is emitted when the settings of a plugin changed.
@@ -93,24 +93,24 @@ class LayerManager : public QObject
      * If available with the @p dirtyRegion which is the region the view will change in.
      * If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
      */
-    void repaintNeeded( const QRegion & dirtyRegion = QRegion() );
+    void repaintNeeded(const QRegion &dirtyRegion = QRegion());
 
-    void visibilityChanged( const QString &nameId, bool visible );
+    void visibilityChanged(const QString &nameId, bool visible);
 
- public slots:
-    void setShowBackground( bool show );
+public slots:
+    void setShowBackground(bool show);
 
-    void setShowRuntimeTrace( bool show );
+    void setShowRuntimeTrace(bool show);
 
- private:
-    Q_PRIVATE_SLOT( d, void updateVisibility( bool, const QString & ) )
+private:
+    Q_PRIVATE_SLOT(d, void updateVisibility(bool, const QString &))
 
- private:
-    Q_DISABLE_COPY( LayerManager )
+private:
+    Q_DISABLE_COPY(LayerManager)
 
     class Private;
     friend class Private;
-    Private  * const d;
+    Private  *const d;
 };
 
 }

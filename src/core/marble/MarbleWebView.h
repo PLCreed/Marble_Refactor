@@ -24,11 +24,13 @@ public:
     explicit MarbleWebPage(QObject *parent = nullptr)  : QWebEnginePage(parent){}
 
 signals:
-    void linkClicked(const QUrl & url);
+    void linkClicked(const QUrl &url);
 protected:
-    bool acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType type, bool isMainFrame) override {
+    bool acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType type, bool isMainFrame) override
+    {
         Q_UNUSED(isMainFrame)
-        if (type == QWebEnginePage::NavigationTypeLinkClicked) {
+        if (type == QWebEnginePage::NavigationTypeLinkClicked)
+        {
             emit linkClicked(url);
             return false;
         }

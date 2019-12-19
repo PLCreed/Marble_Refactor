@@ -14,6 +14,7 @@
 #define MARBLE_REVERSEGEOCODINGRUNNERPLUGIN_H
 
 #include <QObject>
+
 #include "PluginInterface.h"
 
 namespace Marble
@@ -22,15 +23,15 @@ namespace Marble
 class ReverseGeocodingRunner;
 
 /**
-  * A plugin for Marble to execute a reverse geocoding task.
-  */
+ * A plugin for Marble to execute a reverse geocoding task.
+ */
 class MARBLE_EXPORT ReverseGeocodingRunnerPlugin : public QObject, public PluginInterface
 {
     Q_OBJECT
 
 public:
     /** Constructor with optional parent object */
-    explicit ReverseGeocodingRunnerPlugin( QObject* parent = nullptr );
+    explicit ReverseGeocodingRunnerPlugin(QObject *parent = nullptr);
 
     /** Destructor */
     ~ReverseGeocodingRunnerPlugin() override;
@@ -43,12 +44,12 @@ public:
     virtual QString guiString() const = 0;
 
     /** Plugin factory method to create a new runner instance.
-      * Method caller gets ownership of the returned object
-      */
+     * Method caller gets ownership of the returned object
+     */
     virtual ReverseGeocodingRunner *newRunner() const = 0;
 
     /** True if the plugin supports its tasks on the given planet */
-    bool supportsCelestialBody( const QString &celestialBodyId ) const;
+    bool supportsCelestialBody(const QString &celestialBodyId) const;
 
     /** True if the plugin can execute its tasks without network access */
     bool canWorkOffline() const;
@@ -66,17 +67,17 @@ public:
     QIcon icon() const override;
 
 protected:
-    void setSupportedCelestialBodies( const QStringList &celestialBodies );
+    void setSupportedCelestialBodies(const QStringList &celestialBodies);
 
-    void setCanWorkOffline( bool canWorkOffline );
+    void setCanWorkOffline(bool canWorkOffline);
 
 private:
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
 }
 
-Q_DECLARE_INTERFACE( Marble::ReverseGeocodingRunnerPlugin, "org.kde.Marble.ReverseGeocodingRunnerPlugin/1.01" )
+Q_DECLARE_INTERFACE(Marble::ReverseGeocodingRunnerPlugin, "org.kde.Marble.ReverseGeocodingRunnerPlugin/1.01")
 
 #endif // MARBLE_REVERSEGEOCODINGRUNNERPLUGIN_H

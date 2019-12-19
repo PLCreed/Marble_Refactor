@@ -26,7 +26,6 @@ class QNetworkReply;
 namespace Marble {
 
 class GeoSceneDocument;
-
 class MapWizardPrivate;
 
 class MARBLE_EXPORT MapWizard : public QWizard
@@ -38,13 +37,13 @@ public:
     ~MapWizard() override;
 
     QStringList wmsServers() const;
-    void setWmsServers( const QStringList& uris );
+    void setWmsServers(const QStringList &uris);
 
     QStringList staticUrlServers() const;
-    void setStaticUrlServers( const QStringList& uris );
+    void setStaticUrlServers(const QStringList &uris);
 
-    static QString createArchive( QWidget *parent, const QString& mapId );
-    static void deleteArchive( const QString& mapId );
+    static QString createArchive(QWidget *parent, const QString &mapId);
+    static void deleteArchive(const QString &mapId);
 
     // QWizard's functions
     void accept() override;
@@ -54,8 +53,8 @@ public:
 public slots:
     // WMS protocol
     void queryServerCapabilities();
-    void parseServerCapabilities( QNetworkReply* reply );
-    void createWmsLegend( QNetworkReply* reply );
+    void parseServerCapabilities(QNetworkReply *reply);
+    void createWmsLegend(QNetworkReply *reply);
 
     // Open file dialogs
     void querySourceImage();
@@ -65,21 +64,21 @@ public slots:
     // Other
     void autoFillDetails();
     void downloadLevelZero();
-    void createLevelZero( QNetworkReply* reply = nullptr );
+    void createLevelZero(QNetworkReply *reply = nullptr);
     void showPreview();
 
 private:
-    Q_PRIVATE_SLOT( d, void pageEntered( int ) )
+    Q_PRIVATE_SLOT(d, void pageEntered(int))
 
-    GeoSceneDocument* createDocument();
-    bool createFiles( const GeoSceneDocument* head );
-    static QString createLegendHtml( const QString& image = QLatin1String("./legend/legend.png") );
-    void createLegendFile( const QString& legendHtml );
+    GeoSceneDocument *createDocument();
+    bool createFiles(const GeoSceneDocument *head);
+    static QString createLegendHtml(const QString &image = QLatin1String("./legend/legend.png"));
+    void createLegendFile(const QString &legendHtml);
     void createLegend();
-    void downloadLegend( const QString& url );
+    void downloadLegend(const QString &url);
 
-    Q_DISABLE_COPY( MapWizard )
-    MapWizardPrivate * const d;
+    Q_DISABLE_COPY(MapWizard)
+    MapWizardPrivate *const d;
 };
 
 }

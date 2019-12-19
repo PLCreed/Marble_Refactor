@@ -8,38 +8,39 @@
 // Copyright 2017      Sergey Popov <sergobot@protonmail.com>
 //
 
-#include "OsmcSymbol.h"
-
 #include <QDebug>
 #include <QDomDocument>
 #include <QFile>
 #include <QPainter>
 
-OsmcSymbol::OsmcSymbol(const QString &tag, int size)
-    : m_wayColor(Qt::white)
-    , m_backgroundColor(Qt::black)
-    , m_foreground(nullptr)
-    , m_foreground2(nullptr)
-    , m_textColor(Qt::black)
-    , m_side(size)
+#include "OsmcSymbol.h"
+
+OsmcSymbol::OsmcSymbol(const QString &tag, int size) :
+    m_wayColor(Qt::white),
+    m_backgroundColor(Qt::black),
+    m_foreground(nullptr),
+    m_foreground2(nullptr),
+    m_textColor(Qt::black),
+    m_side(size)
 {
     m_backgroundTypes
-            << "round" << "circle" << "frame";
+        << "round" << "circle" << "frame";
 
     m_foregroundTypes
-            << "dot" << "bowl" << "circle" << "bar"
-            << "stripe" << "cross" << "x" << "slash"
-            << "backslash" << "rectangle" << "rectangle_line"
-            << "triangle" << "triangle_turned" << "triangle_line"
-            << "diamond" << "pointer" << "fork" << "arch"
-            << "turned_T" << "L" << "lower" << "corner"
-            << "drop_line" << "horse" << "hiker";
+        << "dot" << "bowl" << "circle" << "bar"
+        << "stripe" << "cross" << "x" << "slash"
+        << "backslash" << "rectangle" << "rectangle_line"
+        << "triangle" << "triangle_turned" << "triangle_line"
+        << "diamond" << "pointer" << "fork" << "arch"
+        << "turned_T" << "L" << "lower" << "corner"
+        << "drop_line" << "horse" << "hiker";
 
     m_precoloredForegroundTypes
-            << "wolfshook" << "shell" << "shell_modern" << "ammonit"
-            << "mine" << "hiker" << "heart" << "tower" << "bridleway";
+        << "wolfshook" << "shell" << "shell_modern" << "ammonit"
+        << "mine" << "hiker" << "heart" << "tower" << "bridleway";
 
-    if (parseTag(tag)) {
+    if (parseTag(tag))
+    {
         render();
     }
 }
@@ -54,58 +55,83 @@ bool OsmcSymbol::parseTag(const QString &tag)
 {
     QStringList parts = tag.split(':');
 
-    if (parts.size() < 2) {
+    if (parts.size() < 2)
+    {
         return false;
     }
 
-    if (m_foreground) {
+    if (m_foreground)
+    {
         delete m_foreground;
         m_foreground = nullptr;
     }
-    if (m_foreground2) {
+    if (m_foreground2)
+    {
         delete m_foreground2;
         m_foreground2 = nullptr;
     }
 
     // Determine way color
-    if (QColor::isValidColor(parts.at(0))) {
+    if (QColor::isValidColor(parts.at(0)))
+    {
         m_wayColor.setNamedColor(parts.at(0));
-    } else {
+    }
+    else
+    {
         return false;
     }
 
-    if (!parseBackground(parts.at(1))) {
+    if (!parseBackground(parts.at(1)))
+    {
         return false;
     }
 
-    if (parts.size() == 3) {
+    if (parts.size() == 3)
+    {
         m_foreground = parseForeground(parts.at(2));
-    } else if (parts.size() == 4) {
-        if (QColor::isValidColor(parts.at(3))) {
+    }
+    else if (parts.size() == 4)
+    {
+        if (QColor::isValidColor(parts.at(3)))
+        {
             m_text = parts.at(2);
             m_textColor = parts.at(3);
-        } else {
-            m_foreground = parseForeground(parts.at(2));
+        }
+        else
+        {
+            m_foreground  = parseForeground(parts.at(2));
             m_foreground2 = parseForeground(parts.at(3));
         }
-    } else if (parts.size() == 5) {
+    }
+    else if (parts.size() == 5)
+    {
         m_foreground = parseForeground(parts.at(2));
-        if (QColor::isValidColor(parts.at(4))) {
+        if (QColor::isValidColor(parts.at(4)))
+        {
             m_text = parts.at(3);
             m_textColor = parts.at(4);
-        } else {
+        }
+        else
+        {
             return false;
         }
-    } else if (parts.size() == 6) {
-        m_foreground = parseForeground(parts.at(2));
+    }
+    else if (parts.size() == 6)
+    {
+        m_foreground  = parseForeground(parts.at(2));
         m_foreground2 = parseForeground(parts.at(3));
-        if (QColor::isValidColor(parts.at(5))) {
+        if (QColor::isValidColor(parts.at(5)))
+        {
             m_text = parts.at(4);
             m_textColor.setNamedColor(parts.at(5));
-        } else {
+        }
+        else
+        {
             return false;
         }
-    } else {
+    }
+    else
+    {
         return false;
     }
 
@@ -115,37 +141,45 @@ bool OsmcSymbol::parseTag(const QString &tag)
 bool OsmcSymbol::parseBackground(const QString &bg)
 {
     QString color = bg.section("_", 0, 0);
-    QString type = bg.section("_", 1, -1);
+    QString type  = bg.section("_", 1, -1);
 
-    if (!QColor::isValidColor(color)) {
+    if (!QColor::isValidColor(color))
+    {
         return false;
     }
 
     // Plain color was provided
-    if (type.isEmpty()) {
+    if (type.isEmpty())
+    {
         m_backgroundColor.setNamedColor(color);
         m_backgroundType = type;
-    } else if (m_backgroundTypes.contains(type)) {
+    }
+    else if (m_backgroundTypes.contains(type))
+    {
         m_backgroundColor.setNamedColor(color);
         m_backgroundType = type;
-    } else {
+    }
+    else
+    {
         return false;
     }
 
     return true;
 }
 
-void setXMLAttribute(QDomElement &elem, const QString& tag, const QString& attr, const QString& attrValue);
+void setXMLAttribute(QDomElement &elem, const QString &tag, const QString &attr, const QString &attrValue);
 
-QSvgRenderer* OsmcSymbol::parseForeground(const QString &fg)
+QSvgRenderer *OsmcSymbol::parseForeground(const QString &fg)
 {
-    if (m_precoloredForegroundTypes.contains(fg)) {
+    if (m_precoloredForegroundTypes.contains(fg))
+    {
         return new QSvgRenderer(QString(":/osmc-symbols/%1.svg").arg(fg));
     }
 
     QString color = fg.section('_', 0, 0);
-    QString type = fg.section('_', 1, -1);
-    if (QColor::isValidColor(color) && m_foregroundTypes.contains(type)) {
+    QString type  = fg.section('_', 1, -1);
+    if (QColor::isValidColor(color) && m_foregroundTypes.contains(type))
+    {
         // Open svg resource and load contents to QByteArray
         QFile file(QString(":/osmc-symbols/%1.svg").arg(type));
         file.open(QIODevice::ReadOnly);
@@ -178,7 +212,8 @@ void OsmcSymbol::render()
     int w = m_side, h = m_side;
 
     // If there is some text, our background size must be recalculated
-    if (!m_text.isEmpty()) {
+    if (!m_text.isEmpty())
+    {
         QFont font = painter.font();
         font.setPixelSize(int(m_side * 0.8));
         font.setBold(true);
@@ -192,17 +227,24 @@ void OsmcSymbol::render()
     const QRect bgRect = QRect((m_side - w) / 2, (m_side - h) / 2, w, h);
 
     // Draw symbol's background
-    if (m_backgroundType.isEmpty()) {
+    if (m_backgroundType.isEmpty())
+    {
         painter.fillRect(bgRect, m_backgroundColor);
-    } else if (m_backgroundType == "round") {
+    }
+    else if (m_backgroundType == "round")
+    {
         painter.setBrush(m_backgroundColor);
         painter.setPen(m_backgroundColor);
         painter.drawEllipse(bgRect);
-    } else if (m_backgroundType == "circle") {
+    }
+    else if (m_backgroundType == "circle")
+    {
         painter.setBrush(Qt::white);
         painter.setPen(QPen(m_backgroundColor, m_side / 10));
         painter.drawEllipse(bgRect);
-    } else if (m_backgroundType == "frame") {
+    }
+    else if (m_backgroundType == "frame")
+    {
         painter.setPen(QPen(m_backgroundColor, m_side / 10));
         painter.fillRect(bgRect, Qt::white);
         painter.drawRect(bgRect);
@@ -215,7 +257,8 @@ void OsmcSymbol::render()
     m_foreground2 ? m_foreground2->render(&fgPainter) : void();
     painter.drawPixmap(bgRect, foregrounds);
 
-    if (!m_text.isEmpty()) {
+    if (!m_text.isEmpty())
+    {
         // Draw text with provided color
         painter.setPen(m_textColor);
         painter.drawText(bgRect, Qt::AlignCenter, m_text);
@@ -234,16 +277,19 @@ QColor OsmcSymbol::wayColor() const
     return m_wayColor;
 }
 
-void setXMLAttribute(QDomElement &elem, const QString& tag, const QString& attr, const QString& attrValue)
+void setXMLAttribute(QDomElement &elem, const QString &tag, const QString &attr, const QString &attrValue)
 {
     // If elem's tag is equal to the provided one then overwrite desired attribute
-    if (elem.tagName() == tag) {
+    if (elem.tagName() == tag)
+    {
         elem.setAttribute(attr, attrValue);
     }
 
     // Do the same for all the child nodes
-    for (int i = 0; i < elem.childNodes().count(); ++i) {
-        if (!elem.childNodes().at(i).isElement()) {
+    for (int i = 0; i < elem.childNodes().count(); ++i)
+    {
+        if (!elem.childNodes().at(i).isElement())
+        {
             continue;
         }
 

@@ -15,6 +15,7 @@
 #define MARBLE_TILECOORDSPYRAMID_H
 
 #include <QtGlobal>
+
 #include "marble_export.h"
 
 class QRect;
@@ -24,27 +25,27 @@ namespace Marble
 
 class MARBLE_EXPORT TileCoordsPyramid
 {
- public:
-    TileCoordsPyramid( int const topLevel, int const bottomLevel );
-    TileCoordsPyramid( TileCoordsPyramid const & other );
+public:
+    TileCoordsPyramid(int const topLevel, int const bottomLevel);
+    TileCoordsPyramid(TileCoordsPyramid const &other);
     TileCoordsPyramid();
-    TileCoordsPyramid & operator=( TileCoordsPyramid const & rhs );
+    TileCoordsPyramid &operator=(TileCoordsPyramid const &rhs);
     ~TileCoordsPyramid();
 
     int topLevel() const;
     int bottomLevel() const;
-    void setBottomLevelCoords( QRect const & coords );
-    QRect coords( int const level ) const;
+    void setBottomLevelCoords(QRect const &coords);
+    QRect coords(int const level) const;
 
     /**
-      * @brief returns the number of tiles covered by one pyramid
-      **/
+     * @brief returns the number of tiles covered by one pyramid
+     **/
     qint64 tilesCount() const;
 
- private:
-    void swap( TileCoordsPyramid & other );
+private:
+    void swap(TileCoordsPyramid &other);
     class Private;
-    Private * d; // not const, needs to be swapable
+    Private *d;  // not const, needs to be swapable
 };
 
 }

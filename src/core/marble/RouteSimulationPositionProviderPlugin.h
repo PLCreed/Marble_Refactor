@@ -13,26 +13,26 @@
 #ifndef MARBLE_ROUTESIMULATIONPOSITIONPROVIDERPLUGIN_H
 #define MARBLE_ROUTESIMULATIONPOSITIONPROVIDERPLUGIN_H
 
+#include <QDateTime>
+#include <QTimer>
+
 #include "PositionProviderPlugin.h"
 
 #include "GeoDataLineString.h"
 #include "GeoDataCoordinates.h"
-
-#include <QDateTime>
-#include <QTimer>
 
 namespace Marble
 {
 
 class MarbleModel;
 
-class RouteSimulationPositionProviderPlugin: public PositionProviderPlugin
+class RouteSimulationPositionProviderPlugin : public PositionProviderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::PositionProviderPluginInterface )
+    Q_INTERFACES(Marble::PositionProviderPluginInterface)
 
 public:
-    explicit RouteSimulationPositionProviderPlugin(MarbleModel *marbleModel, QObject* parent=nullptr);
+    explicit RouteSimulationPositionProviderPlugin(MarbleModel *marbleModel, QObject *parent = nullptr);
     ~RouteSimulationPositionProviderPlugin() override;
 
     // Implementing PluginInterface
@@ -51,7 +51,7 @@ public:
     QDateTime timestamp() const override;
 
     // Implementing PositionProviderPlugin
-    PositionProviderPlugin * newInstance() const override;
+    PositionProviderPlugin *newInstance() const override;
 
     // Implementing PositionProviderPluginInterface
     PositionProviderStatus status() const override;
@@ -64,7 +64,7 @@ private Q_SLOTS:
     void updateRoute();
 
 private:
-    GeoDataCoordinates addNoise(const Marble::GeoDataCoordinates &,const Marble::GeoDataAccuracy &) const;
+    GeoDataCoordinates addNoise(const Marble::GeoDataCoordinates &, const Marble::GeoDataAccuracy &) const;
     static qreal addNoise(qreal bearing);
     void changeStatus(PositionProviderStatus status);
 

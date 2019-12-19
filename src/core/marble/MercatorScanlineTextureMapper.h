@@ -13,14 +13,11 @@
 #ifndef MARBLE_MERCATORSCANLINETEXTUREMAPPER_H
 #define MARBLE_MERCATORSCANLINETEXTUREMAPPER_H
 
-
-#include "TextureMapperInterface.h"
-
-#include "MarbleGlobal.h"
-
 #include <QThreadPool>
 #include <QImage>
 
+#include "TextureMapperInterface.h"
+#include "MarbleGlobal.h"
 
 namespace Marble
 {
@@ -29,25 +26,22 @@ class StackedTileLoader;
 
 class MercatorScanlineTextureMapper : public TextureMapperInterface
 {
- public:
-    explicit MercatorScanlineTextureMapper( StackedTileLoader *tileLoader );
+public:
+    explicit MercatorScanlineTextureMapper(StackedTileLoader *tileLoader);
 
-    void mapTexture( GeoPainter *painter,
-                             const ViewportParams *viewport,
-                             int tileZoomLevel,
-                             const QRect &dirtyRect,
-                             TextureColorizer *texColorizer ) override;
+    void mapTexture(GeoPainter *painter, const ViewportParams *viewport, int tileZoomLevel,
+                    const QRect &dirtyRect, TextureColorizer *texColorizer) override;
 
- private:
-    void mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality );
+private:
+    void mapTexture(const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality);
 
- private:
+private:
     class RenderJob;
 
     StackedTileLoader *const m_tileLoader;
     int m_radius;
     QImage m_canvasImage;
-    int    m_oldYPaintedTop;
+    int m_oldYPaintedTop;
     QThreadPool m_threadPool;
 };
 

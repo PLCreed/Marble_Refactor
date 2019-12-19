@@ -9,12 +9,12 @@
 // Copyright 2014      Adam Dabrowski <adamdbrw@gmail.com>
 //
 
-#include "MarbleWidgetInputHandler.h"
-
 #include <QRubberBand>
 #include <QToolTip>
 #include <QTimer>
 #include <QKeyEvent>
+
+#include "MarbleWidgetInputHandler.h"
 
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
@@ -32,69 +32,69 @@ class MarbleWidgetInputHandlerPrivate
 {
     class MarbleWidgetSelectionRubber : public AbstractSelectionRubber
     {
-        public:
-            explicit MarbleWidgetSelectionRubber(MarbleWidget *widget)
-                : m_rubberBand(QRubberBand::Rectangle, widget)
-            {
-                m_rubberBand.hide();
-            }
+public:
+        explicit MarbleWidgetSelectionRubber(MarbleWidget *widget) :
+            m_rubberBand(QRubberBand::Rectangle, widget)
+        {
+            m_rubberBand.hide();
+        }
 
-            void show() override { m_rubberBand.show(); }
-            void hide() override { m_rubberBand.hide(); }
-            bool isVisible() const override { return m_rubberBand.isVisible(); }
-            const QRect &geometry() const override { return m_rubberBand.geometry(); }
-            void setGeometry(const QRect &geometry) override { m_rubberBand.setGeometry(geometry); }
+        void show() override { m_rubberBand.show(); }
+        void hide() override { m_rubberBand.hide(); }
+        bool isVisible() const override { return m_rubberBand.isVisible(); }
+        const QRect &geometry() const override { return m_rubberBand.geometry(); }
+        void setGeometry(const QRect &geometry) override { m_rubberBand.setGeometry(geometry); }
 
-        private:
-            QRubberBand m_rubberBand;
+private:
+        QRubberBand m_rubberBand;
     };
 
-    public:
-        MarbleWidgetInputHandlerPrivate(MarbleWidgetInputHandler *handler, MarbleWidget *widget)
-            : m_inputHandler(handler)
-            ,m_marbleWidget(widget)
-            ,m_selectionRubber(widget)
-            ,m_debugModeEnabled(false)
-        {         
-            for(RenderPlugin *renderPlugin: widget->renderPlugins())
-            {
-                if(renderPlugin->isInitialized())
-                {
-                    installPluginEventFilter(renderPlugin);
-                }
-            }
-            m_marbleWidget->grabGesture(Qt::PinchGesture);
-        }
-
-        void setCursor(const QCursor &cursor)
+public:
+    MarbleWidgetInputHandlerPrivate(MarbleWidgetInputHandler *handler, MarbleWidget *widget) :
+        m_inputHandler(handler),
+        m_marbleWidget(widget),
+        m_selectionRubber(widget),
+        m_debugModeEnabled(false)
+    {
+        for (RenderPlugin *renderPlugin: widget->renderPlugins())
         {
-            m_marbleWidget->setCursor(cursor);
-        }
-
-        bool layersEventFilter(QObject *o, QEvent *e)
-        {   //FIXME - this should go up in hierarchy to MarbleInputHandler
-            if (m_marbleWidget->popupLayer()->eventFilter(o, e))
+            if (renderPlugin->isInitialized())
             {
-                return true;
+                installPluginEventFilter(renderPlugin);
             }
-
-            if (m_marbleWidget->routingLayer()->eventFilter(o, e))
-            {
-                return true;
-            }
-
-            return false;
         }
+        m_marbleWidget->grabGesture(Qt::PinchGesture);
+    }
 
-        void installPluginEventFilter(RenderPlugin *renderPlugin)
+    void setCursor(const QCursor &cursor)
+    {
+        m_marbleWidget->setCursor(cursor);
+    }
+
+    bool layersEventFilter(QObject *o, QEvent *e)
+    {       // FIXME - this should go up in hierarchy to MarbleInputHandler
+        if (m_marbleWidget->popupLayer()->eventFilter(o, e))
         {
-            m_marbleWidget->installEventFilter(renderPlugin);
+            return true;
         }
 
-        MarbleWidgetInputHandler *m_inputHandler;
-        MarbleWidget *m_marbleWidget;
-        MarbleWidgetSelectionRubber m_selectionRubber;
-        bool m_debugModeEnabled;
+        if (m_marbleWidget->routingLayer()->eventFilter(o, e))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    void installPluginEventFilter(RenderPlugin *renderPlugin)
+    {
+        m_marbleWidget->installEventFilter(renderPlugin);
+    }
+
+    MarbleWidgetInputHandler *m_inputHandler;
+    MarbleWidget *m_marbleWidget;
+    MarbleWidgetSelectionRubber m_selectionRubber;
+    bool m_debugModeEnabled;
 };
 
 
@@ -105,9 +105,12 @@ void MarbleWidgetInputHandler::setCursor(const QCursor &cursor)
 
 bool MarbleWidgetInputHandler::handleKeyPress(QKeyEvent *event)
 {
-    if (d->m_debugModeEnabled) {
-        if (event->modifiers() == Qt::ControlModifier && d->m_marbleWidget->debugLevelTags()) {
-            switch(event->key()) {
+    if (d->m_debugModeEnabled)
+    {
+        if ((event->modifiers() == Qt::ControlModifier) && d->m_marbleWidget->debugLevelTags())
+        {
+            switch (event->key())
+            {
                 case Qt::Key_0:
                     d->m_marbleWidget->setLevelToDebug(0);
                     break;
@@ -145,8 +148,11 @@ bool MarbleWidgetInputHandler::handleKeyPress(QKeyEvent *event)
                     d->m_marbleWidget->setLevelToDebug(d->m_marbleWidget->levelToDebug() - 1);
                     break;
             }
-        } else {
-            switch(event->key()) {
+        }
+        else
+        {
+            switch (event->key())
+            {
                 case Qt::Key_I:
                     MarbleDebug::setEnabled(!MarbleDebug::isEnabled());
                     break;
@@ -187,17 +193,16 @@ void MarbleWidgetInputHandler::installPluginEventFilter(RenderPlugin *renderPlug
 }
 
 MarbleWidgetInputHandler::MarbleWidgetInputHandler(MarbleAbstractPresenter *marblePresenter, MarbleWidget *widget)
-    : MarbleDefaultInputHandler(marblePresenter)
-    ,d(new MarbleWidgetInputHandlerPrivate(this, widget))
-{
-}
+    : MarbleDefaultInputHandler(marblePresenter),
+    d(new MarbleWidgetInputHandlerPrivate(this, widget))
+{}
 
 void MarbleWidgetInputHandler::setDebugModeEnabled(bool enabled)
 {
     d->m_debugModeEnabled = enabled;
 }
 
-//FIXME - these should be moved to superclass and popupMenu should be abstracted in MarbleAbstractPresenter
+// FIXME - these should be moved to superclass and popupMenu should be abstracted in MarbleAbstractPresenter
 void MarbleWidgetInputHandler::showLmbMenu(int x, int y)
 {
     if (isMouseButtonPopupEnabled(Qt::LeftButton))
@@ -220,9 +225,9 @@ void MarbleWidgetInputHandler::openItemToolTip()
     if (lastToolTipItem())
     {
         QToolTip::showText(d->m_marbleWidget->mapToGlobal(toolTipPosition()),
-                            lastToolTipItem()->toolTip(),
-                            d->m_marbleWidget,
-                            lastToolTipItem()->containsRect(toolTipPosition()).toRect());
+                           lastToolTipItem()->toolTip(),
+                           d->m_marbleWidget,
+                           lastToolTipItem()->containsRect(toolTipPosition()).toRect());
     }
 }
 

@@ -14,12 +14,12 @@
 #ifndef MARBLE_MAPVIEWWIDGET_H
 #define MARBLE_MAPVIEWWIDGET_H
 
+// Qt
+#include <QWidget>
+
 // Marble
 #include "MarbleGlobal.h"
 #include "marble_export.h"
-
-// Qt
-#include <QWidget>
 
 namespace Marble
 {
@@ -30,22 +30,22 @@ class MarbleWidget;
 class MARBLE_EXPORT MapViewWidget : public QWidget
 {
     Q_OBJECT
- public:
-    explicit MapViewWidget( QWidget *parent = nullptr, Qt::WindowFlags f = nullptr );
+public:
+    explicit MapViewWidget(QWidget *parent = nullptr, Qt::WindowFlags f = nullptr);
     ~MapViewWidget() override;
 
     /**
      * @brief Set a MarbleWidget associated to this widget.
      * @param widget  the MarbleWidget to be set.
      */
-    void setMarbleWidget( MarbleWidget *widget, MapThemeManager *mapThemeManager );
+    void setMarbleWidget(MarbleWidget *widget, MapThemeManager *mapThemeManager);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
 
- public slots:
-    void setMapThemeId( const QString & );
-    void setProjection( Projection projection );
+public slots:
+    void setMapThemeId(const QString &);
+    void setProjection(Projection projection);
 
 private slots:
     void globeViewRequested();
@@ -54,36 +54,36 @@ private slots:
     void gnomonicViewRequested();
     void stereographicViewRequested();
     void lambertAzimuthalViewRequested();
-    void azimuthalEquidistantViewRequested(); 
+    void azimuthalEquidistantViewRequested();
     void verticalPerspectiveViewRequested();
 
- private:
-    Q_PRIVATE_SLOT( d, void celestialBodySelected( int comboIndex ) )
+private:
+    Q_PRIVATE_SLOT(d, void celestialBodySelected(int comboIndex))
 
-    Q_PRIVATE_SLOT( d, void projectionSelected( int projectionIndex ) )
+    Q_PRIVATE_SLOT(d, void projectionSelected(int projectionIndex))
 
-    Q_PRIVATE_SLOT( d, void mapThemeSelected( QModelIndex index ) )
-    Q_PRIVATE_SLOT( d, void mapThemeSelected( int index ) )
+    Q_PRIVATE_SLOT(d, void mapThemeSelected(QModelIndex index))
+    Q_PRIVATE_SLOT(d, void mapThemeSelected(int index))
 
-    Q_PRIVATE_SLOT( d, void showContextMenu( const QPoint& pos ) )
-    Q_PRIVATE_SLOT( d, void deleteMap() )
-    Q_PRIVATE_SLOT( d, void toggleFavorite() )
-    Q_PRIVATE_SLOT( d, void toggleIconSize() )
+    Q_PRIVATE_SLOT(d, void showContextMenu(const QPoint &pos))
+    Q_PRIVATE_SLOT(d, void deleteMap())
+    Q_PRIVATE_SLOT(d, void toggleFavorite())
+    Q_PRIVATE_SLOT(d, void toggleIconSize())
 
- signals:
-    void celestialBodyChanged( const QString& );
-    void mapThemeIdChanged( const QString& );
-    void projectionChanged( Projection );
+signals:
+    void celestialBodyChanged(const QString &);
+    void mapThemeIdChanged(const QString &);
+    void projectionChanged(Projection);
     void showMapWizard();
     void showUploadDialog();
     void mapThemeDeleted();
 
- private:
-    Q_DISABLE_COPY( MapViewWidget )
+private:
+    Q_DISABLE_COPY(MapViewWidget)
 
     friend class Private;
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
 }

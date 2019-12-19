@@ -15,6 +15,7 @@
 
 #include <QObject>
 #include <QSharedPointer>
+
 #include "MarbleInputHandler.h"
 
 namespace Marble
@@ -41,7 +42,7 @@ private slots:
     void setCursor(const QCursor &cursor) override;
 
 private:
-    bool handleKeyPress(QKeyEvent* event) override;
+    bool handleKeyPress(QKeyEvent *event) override;
     AbstractSelectionRubber *selectionRubber() override;
     bool layersEventFilter(QObject *o, QEvent *e) override;
 

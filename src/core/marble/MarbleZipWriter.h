@@ -64,10 +64,10 @@
 // We mean it.
 //
 
-#include <QString>
-#include <QFile>
+ #include <QString>
+ #include <QFile>
 
-#include "marble_export.h"
+ #include "marble_export.h"
 
 namespace Marble {
 
@@ -77,17 +77,18 @@ class MarbleZipWriterPrivate;
 class MARBLE_EXPORT MarbleZipWriter
 {
 public:
-    MarbleZipWriter(const QString &fileName, QIODevice::OpenMode mode = (QIODevice::WriteOnly | QIODevice::Truncate) );
+    MarbleZipWriter(const QString &fileName, QIODevice::OpenMode mode = (QIODevice::WriteOnly | QIODevice::Truncate));
 
     explicit MarbleZipWriter(QIODevice *device);
     ~MarbleZipWriter();
 
-    QIODevice* device() const;
+    QIODevice *device() const;
 
     bool isWritable() const;
     bool exists() const;
 
-    enum Status {
+    enum Status
+    {
         NoError,
         FileWriteError,
         FileOpenError,
@@ -97,7 +98,8 @@ public:
 
     Status status() const;
 
-    enum CompressionPolicy {
+    enum CompressionPolicy
+    {
         AlwaysCompress,
         NeverCompress,
         AutoCompress

@@ -13,27 +13,29 @@
 
 #include <QWidget>
 
+#include "marble_export.h"
+
 #include "GeoDataCoordinates.h"
 #include "MarbleGlobal.h"
-#include "marble_export.h"
 
 namespace Marble
 {
 
 class LatLonEditPrivate;
 
-class MARBLE_EXPORT  LatLonEdit : public QWidget
+class MARBLE_EXPORT LatLonEdit : public QWidget
 {
     Q_OBJECT
-    //FIXME: make the dimension enum work
-    //Q_PROPERTY( qreal value READ value WRITE setValue )
-    //Q_PROPERTY( int dimension READ dimension WRITE setDimension )
+    // FIXME: make the dimension enum work
+    // Q_PROPERTY( qreal value READ value WRITE setValue )
+    // Q_PROPERTY( int dimension READ dimension WRITE setDimension )
 
 public:
     /**
      * @brief This enum is used to choose the dimension.
      */
-    enum Dimension {
+    enum Dimension
+    {
         Latitude,             ///< Latitude
         Longitude            ///< Longitude
     };
@@ -46,10 +48,10 @@ public:
     GeoDataCoordinates::Notation notation() const;
 public slots:
     void setValue(qreal newvalue);
-    void setDimension( Dimension dimension );
+    void setDimension(Dimension dimension);
     void setNotation(GeoDataCoordinates::Notation notation);
 signals:
-    void valueChanged( qreal value );
+    void valueChanged(qreal value);
 private slots:
     void checkIntValueOverflow();
     void checkUIntValueOverflow();
@@ -59,7 +61,7 @@ private:
     // recalculates m_value based on spinboxes
     void recalculate();
 private:
-    LatLonEditPrivate * const d;
+    LatLonEditPrivate *const d;
 };
 
 }

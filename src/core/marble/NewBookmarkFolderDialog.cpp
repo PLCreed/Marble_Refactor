@@ -15,24 +15,22 @@
 
 namespace Marble {
 
-NewBookmarkFolderDialog::NewBookmarkFolderDialog( QWidget *parent )
-    : QDialog(parent)
+NewBookmarkFolderDialog::NewBookmarkFolderDialog(QWidget *parent) : QDialog(parent)
 {
     setupUi(this);
 }
 
 NewBookmarkFolderDialog::~NewBookmarkFolderDialog()
-{
-}
+{}
 
 QString NewBookmarkFolderDialog::folderName() const
 {
     return m_name->text();
 }
 
-void NewBookmarkFolderDialog::setFolderName( const QString &name )
+void NewBookmarkFolderDialog::setFolderName(const QString &name)
 {
-    m_name->setText( name );
+    m_name->setText(name);
     m_name->selectAll();
 }
 

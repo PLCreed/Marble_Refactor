@@ -12,12 +12,11 @@
 namespace Marble
 {
 
-ReverseGeocodingRunner::ReverseGeocodingRunner( QObject *parent ) :
-    QObject( parent )
-{
-}
+ReverseGeocodingRunner::ReverseGeocodingRunner(QObject *parent) :
+    QObject(parent)
+{}
 
-void ReverseGeocodingRunner::setModel( const MarbleModel *model )
+void ReverseGeocodingRunner::setModel(const MarbleModel *model)
 {
     m_model = model;
 }

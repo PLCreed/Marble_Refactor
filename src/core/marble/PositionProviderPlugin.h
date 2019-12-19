@@ -26,7 +26,7 @@ class MARBLE_EXPORT PositionProviderPlugin : public QObject, public PositionProv
 {
     Q_OBJECT
 
- public:
+public:
     ~PositionProviderPlugin() override;
 
     /**
@@ -40,18 +40,17 @@ class MARBLE_EXPORT PositionProviderPlugin : public QObject, public PositionProv
      * Create a new PositionProvider Plugin and return it.
      * Has to be defined in concrete position provider plugin classes.
      */
-    virtual PositionProviderPlugin * newInstance() const = 0;
+    virtual PositionProviderPlugin *newInstance() const = 0;
 
- signals:
-    void statusChanged( PositionProviderStatus status ) const;
-    void positionChanged( const GeoDataCoordinates& position,
-                          const GeoDataAccuracy& accuracy ) const;
+signals:
+    void statusChanged(PositionProviderStatus status) const;
+    void positionChanged(const GeoDataCoordinates &position, const GeoDataAccuracy &accuracy) const;
 
- protected:
-    PositionProviderPlugin(QObject* parent=nullptr);
+protected:
+    PositionProviderPlugin(QObject *parent = nullptr);
 
- private:
-    Q_DISABLE_COPY( PositionProviderPlugin )
+private:
+    Q_DISABLE_COPY(PositionProviderPlugin)
     PositionProviderPluginPrivate *d;
 
 };

@@ -21,8 +21,8 @@
 #include <QPoint>
 #include <QRectF>
 
-#include <GeoDataStyle.h>
-#include <GeoDataCoordinates.h>
+#include "GeoDataStyle.h"
+#include "GeoDataCoordinates.h"
 
 namespace Marble
 {
@@ -124,7 +124,8 @@ private slots:
     void setSymbolPixmap();
 
 private:
-    static void drawLabelText(QPainter &labelPainter, const QString &text, const QFont &labelFont, LabelStyle labelStyle, const QColor &color);
+    static void drawLabelText(QPainter &labelPainter, const QString &text,
+                              const QFont &labelFont, LabelStyle labelStyle, const QColor &color);
     void drawLabelPixmap();
 
     const GeoDataPlacemark *m_placemark;

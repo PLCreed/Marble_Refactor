@@ -30,23 +30,22 @@ class TileCreatorDialogPrivate;
 
 class MARBLE_EXPORT TileCreatorDialog : public QDialog
 {
-
     Q_OBJECT
 
- public:
-    explicit TileCreatorDialog( TileCreator *creator, QWidget *parent = nullptr );
+public:
+    explicit TileCreatorDialog(TileCreator *creator, QWidget *parent = nullptr);
     ~TileCreatorDialog() override;
 
- public slots:
-    void setProgress( int progress );
-    void setSummary( const QString& name, const QString& description );
+public slots:
+    void setProgress(int progress);
+    void setSummary(const QString &name, const QString &description);
 
 private slots:
     void cancelTileCreation();
 
- private:
-    Q_DISABLE_COPY( TileCreatorDialog )
-    TileCreatorDialogPrivate  * const d;
+private:
+    Q_DISABLE_COPY(TileCreatorDialog)
+    TileCreatorDialogPrivate  *const d;
 };
 
 }

@@ -26,22 +26,22 @@ class PlaybackItem : public QObject
     Q_OBJECT
 public:
     ~PlaybackItem() override;
-    virtual void play() = 0;
+    virtual void play()  = 0;
     virtual void pause() = 0;
-    virtual void seek( double position ) = 0;
+    virtual void seek(double position) = 0;
     virtual void stop() = 0;
     virtual double duration() const = 0;
 
 signals:
     void finished();
-    void centerOn( const GeoDataCoordinates &coordinates );
+    void centerOn(const GeoDataCoordinates &coordinates);
     void paused();
-    void progressChanged( double seconds );
-    void balloonShown( GeoDataPlacemark* );
+    void progressChanged(double seconds);
+    void balloonShown(GeoDataPlacemark *);
     void balloonHidden();
-    void updated( GeoDataFeature* );
-    void added( GeoDataContainer *parent, GeoDataFeature *feature, int row );
-    void removed( const GeoDataFeature *feature  );
+    void updated(GeoDataFeature *);
+    void added(GeoDataContainer *parent, GeoDataFeature *feature, int row);
+    void removed(const GeoDataFeature *feature);
 };
 }
 #endif

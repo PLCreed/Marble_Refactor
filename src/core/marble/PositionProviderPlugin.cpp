@@ -17,15 +17,12 @@ class PositionProviderPluginPrivate
 {
 public:
     PositionProviderPluginPrivate()
-    {
-    }
+    {}
 };
 
-PositionProviderPlugin::PositionProviderPlugin(QObject *parent)
-    : QObject(parent),
-      d( new PositionProviderPluginPrivate() )
-{
-}
+PositionProviderPlugin::PositionProviderPlugin(QObject *parent) : QObject(parent),
+    d(new PositionProviderPluginPrivate())
+{}
 
 PositionProviderPlugin::~PositionProviderPlugin()
 {
