@@ -145,8 +145,7 @@ public:
 
         \see GeoDataCoordinates
      */
-    void drawAnnotation(const GeoDataCoordinates &position,
-                        const QString &text,
+    void drawAnnotation(const GeoDataCoordinates &position, const QString &text,
                         QSizeF bubbleSize = QSizeF( 130, 100 ),
                         qreal bubbleOffsetX = -10, qreal bubbleOffsetY = -30,
                         qreal xRnd = 5, qreal yRnd = 5);

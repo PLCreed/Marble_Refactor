@@ -9,15 +9,14 @@
 // Copyright 2013      Levente Kurusa <levex@linux.com>
 //
 
-
-// Own
-#include "GeoDataTreeModel.h"
-
 // Qt
 #include <QBrush>
 #include <QModelIndex>
 #include <QList>
 #include <QItemSelectionModel>
+
+// Own
+#include "GeoDataTreeModel.h"
 
 // Marble
 #include "GeoDataObject.h"
@@ -48,15 +47,16 @@ using namespace Marble;
 class Q_DECL_HIDDEN GeoDataTreeModel::Private
 {
 public:
-    Private(QAbstractItemModel *model);
-    ~Private();
-
-    static void checkParenting(GeoDataObject *object);
-
     GeoDataDocument *m_rootDocument;
     bool m_ownsRootDocument;
     QItemSelectionModel m_selectionModel;
     QHash<int, QByteArray> m_roleNames;
+
+public:
+    Private(QAbstractItemModel *model);
+    ~Private();
+
+    static void checkParenting(GeoDataObject *object);
 };
 
 GeoDataTreeModel::Private::Private(QAbstractItemModel *model) :

@@ -13,10 +13,10 @@
 // Copyright 2012      Illya Kovalevskyy  <illya.kovalevskyy@gmail.com>
 //
 
-#include <QSortFilterProxyModel>
-
 #ifndef MARBLE_CELESTIALSORTFILTERPROXYMODEL_H
 #define MARBLE_CELESTIALSORTFILTERPROXYMODEL_H
+
+#include <QSortFilterProxyModel>
 
 namespace Marble {
 

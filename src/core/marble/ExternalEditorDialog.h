@@ -11,10 +11,9 @@
 #ifndef MARBLE_EXTERNALEDITORDIALOG_H
 #define MARBLE_EXTERNALEDITORDIALOG_H
 
-#include "marble_export.h"
-
 #include <QDialog>
 
+#include "marble_export.h"
 #include "ui_ExternalEditor.h"
 
 namespace Marble
@@ -22,12 +21,12 @@ namespace Marble
 
 class ExternalEditorDialogPrivate;
 
-class MARBLE_EXPORT ExternalEditorDialog: public QDialog, private Ui::ExternalEditor
+class MARBLE_EXPORT ExternalEditorDialog : public QDialog, private Ui::ExternalEditor
 {
     Q_OBJECT
 
 public:
-    explicit ExternalEditorDialog( QWidget * parent = nullptr, Qt::WindowFlags f = nullptr );
+    explicit ExternalEditorDialog(QWidget *parent = nullptr, Qt::WindowFlags f = nullptr);
 
     ~ExternalEditorDialog() override;
 
@@ -36,10 +35,10 @@ public:
     bool saveDefault() const;
 
 private slots:
-    void updateDefaultEditor( int index );
+    void updateDefaultEditor(int index);
 
 private:
-    ExternalEditorDialogPrivate * const d;
+    ExternalEditorDialogPrivate *const d;
 };
 
 } // namespace Marble

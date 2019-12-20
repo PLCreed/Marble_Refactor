@@ -15,9 +15,8 @@
 
 #include "DownloadQueueSet.h"
 
-#include "MarbleDebug.h"
-
 #include "HttpJob.h"
+#include "MarbleDebug.h"
 
 namespace Marble
 {

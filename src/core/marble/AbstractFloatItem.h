@@ -45,13 +45,13 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
 {
     Q_OBJECT
 
- public:
-    explicit AbstractFloatItem( const MarbleModel *marbleModel,
-                                const QPointF &point = QPointF( 10.0, 10.0 ),
-                                const QSizeF &size = QSizeF( 150.0, 50.0 ) );
+public:
+    explicit AbstractFloatItem(const MarbleModel *marbleModel,
+                               const QPointF &point = QPointF( 10.0, 10.0 ),
+                               const QSizeF &size = QSizeF( 150.0, 50.0 ));
     ~AbstractFloatItem() override;
 
-    QHash<QString,QVariant> settings() const override;
+    QHash<QString, QVariant> settings() const override;
     void setSettings(const QHash<QString, QVariant> &settings) override;
 
     RenderType renderType() const override;
@@ -66,7 +66,7 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
      * @brief setting current pen for rendering
      * @param pen
      */
-    void setPen( const QPen &pen );
+    void setPen(const QPen &pen);
 
     /**
      * @brief current font for rendering
@@ -78,16 +78,16 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
      * @brief setting current font for rendering
      * @param font
      */
-    void setFont( const QFont &font );
+    void setFont(const QFont &font);
 
     /**
      * @brief Paints the float item on the map.
      * @deprecated Do not override this method since it won't be called any longer.
      *             Override one of FrameGraphicsItem's paint methods instead.
      */
-    MARBLE_DEPRECATED bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString& renderPos = QLatin1String("FLOAT_ITEM"),
-                 GeoSceneLayer * layer = nullptr ) override;
+    MARBLE_DEPRECATED bool render(GeoPainter *painter, ViewportParams *viewport,
+                                  const QString &renderPos = QLatin1String("FLOAT_ITEM"),
+                                  GeoSceneLayer *layer = nullptr) override;
 
     QString renderPolicy() const override;
 
@@ -106,7 +106,7 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
      *
      * @param visible visibility of the item
      */
-    void setVisible( bool visible );
+    void setVisible(bool visible);
 
     /**
      * @brief Check visibility of the float item
@@ -130,7 +130,7 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
      */
     bool positionLocked() const;
 
- public slots:
+public slots:
     /**
      * @brief Set is position locked
      * @param lock is locked?
@@ -141,7 +141,7 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
      * To check it use @see positionLocked
      *
      */
-    void setPositionLocked( bool lock );
+    void setPositionLocked(bool lock);
 
     /**
      * @brief Show the item
@@ -159,15 +159,15 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
      */
     void hide();
 
- protected:
+protected:
     bool eventFilter(QObject *object, QEvent *e) override;
-    virtual void contextMenuEvent ( QWidget *w, QContextMenuEvent *e );
-    virtual void toolTipEvent( QHelpEvent *e );
-    QMenu* contextMenu();
+    virtual void contextMenuEvent(QWidget *w, QContextMenuEvent *e);
+    virtual void toolTipEvent(QHelpEvent *e);
+    QMenu *contextMenu();
 
- private:
-    Q_DISABLE_COPY( AbstractFloatItem )
-    AbstractFloatItemPrivate * const d;
+private:
+    Q_DISABLE_COPY(AbstractFloatItem)
+    AbstractFloatItemPrivate *const d;
 };
 
 }

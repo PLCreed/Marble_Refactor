@@ -15,7 +15,6 @@
 
 #include "marble_export.h"
 
-
 class QItemSelectionModel;
 
 namespace Marble
@@ -35,7 +34,6 @@ class MARBLE_EXPORT GeoDataTreeModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-
     /**
      * Creates a new GeoDataTreeModel.
      *

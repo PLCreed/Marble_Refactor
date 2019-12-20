@@ -11,10 +11,9 @@
 #ifndef ADDLINKDIALOG_H
 #define ADDLINKDIALOG_H
 
-#include "marble_export.h"
-
 #include <QDialog>
 
+#include "marble_export.h"
 
 namespace Marble {
 
@@ -23,7 +22,7 @@ class MARBLE_EXPORT AddLinkDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddLinkDialog(QWidget *parent = nullptr );
+    explicit AddLinkDialog(QWidget *parent = nullptr);
     ~AddLinkDialog() override;
     QString name() const;
     QString url() const;
@@ -33,7 +32,7 @@ private slots:
 
 private:
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
 }

@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>     
+// Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>
 // Copyright 2012      Thibaut Gridel <tgridel@free.fr>
 //
 
@@ -32,19 +32,19 @@ class MARBLE_EXPORT EditBookmarkDialog : public QDialog
 {
     Q_OBJECT
 
- public:
-    explicit EditBookmarkDialog( BookmarkManager *manager, QWidget *parent = nullptr );
+public:
+    explicit EditBookmarkDialog(BookmarkManager *manager, QWidget *parent = nullptr);
 
     /** Destructor */
     ~EditBookmarkDialog() override;
 
-    void setMarbleWidget( MarbleWidget* widget );
+    void setMarbleWidget(MarbleWidget *widget);
 
     GeoDataPlacemark bookmark() const;
 
     QString name() const;
 
-    GeoDataFolder* folder() const;
+    GeoDataFolder *folder() const;
 
     QString description() const;
 
@@ -54,29 +54,29 @@ class MARBLE_EXPORT EditBookmarkDialog : public QDialog
 
     QString iconLink() const;
 
-    void setName( const QString &name );
+    void setName(const QString &name);
     void setReverseGeocodeName();
 
-    void setCoordinates( const GeoDataCoordinates &coordinates );
+    void setCoordinates(const GeoDataCoordinates &coordinates);
 
-    void setRange( qreal range );
+    void setRange(qreal range);
 
-    void setDescription( const QString &text );
+    void setDescription(const QString &text);
 
-    void setFolderName( const QString &name );
+    void setFolderName(const QString &name);
 
-    void setIconLink( const QString &iconLink );
+    void setIconLink(const QString &iconLink);
 
 
- private:
-    Q_PRIVATE_SLOT( d, void openNewFolderDialog() )
+private:
+    Q_PRIVATE_SLOT(d, void openNewFolderDialog())
 
-    Q_PRIVATE_SLOT( d, void retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark) )
+    Q_PRIVATE_SLOT(d, void retrieveGeocodeResult(const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark))
 
-    Q_PRIVATE_SLOT( d, void updateCoordinates() )
+    Q_PRIVATE_SLOT(d, void updateCoordinates())
 
-    Q_DISABLE_COPY( EditBookmarkDialog )
-    EditBookmarkDialogPrivate* const d;
+    Q_DISABLE_COPY(EditBookmarkDialog)
+    EditBookmarkDialogPrivate *const d;
     friend class EditBookmarkDialogPrivate;
 };
 

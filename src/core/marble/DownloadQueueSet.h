@@ -118,15 +118,15 @@ private:
      */
     class JobStack
     {
-    public:
-            bool contains(const QString &destinationFileName) const;
-            int count() const;
-            bool isEmpty() const;
-            HttpJob *pop();
-            void push(HttpJob *const);
-    private:
-            QStack<HttpJob *> m_jobs;
-            QSet<QString> m_jobsContent;
+public:
+        bool contains(const QString &destinationFileName) const;
+        int count() const;
+        bool isEmpty() const;
+        HttpJob *pop();
+        void push(HttpJob *const);
+private:
+        QStack<HttpJob *> m_jobs;
+        QSet<QString> m_jobsContent;
     };
     JobStack m_jobs;
 

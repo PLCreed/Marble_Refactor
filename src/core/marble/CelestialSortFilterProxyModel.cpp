@@ -28,20 +28,28 @@ CelestialSortFilterProxyModel::CelestialSortFilterProxyModel()
 CelestialSortFilterProxyModel::~CelestialSortFilterProxyModel() {}
 
 
-QVariant CelestialSortFilterProxyModel::data( const QModelIndex &index, int role ) const
+QVariant CelestialSortFilterProxyModel::data(const QModelIndex &index, int role) const
 {
-    QVariant var = QSortFilterProxyModel::data( index, role );
-    if ( role == Qt::DisplayRole && index.column() == 0 ) {
+    QVariant var = QSortFilterProxyModel::data(index, role);
+    if ((role == Qt::DisplayRole) && (index.column() == 0))
+    {
         QString newOne = var.toString();
-        if (newOne == tr("Moon")) {
+        if (newOne == tr("Moon"))
+        {
             return QString(QLatin1String("  ") + tr("Moon"));
-        } else if ( m_moons.contains( newOne.toLower() ) ) {
+        }
+        else if (m_moons.contains(newOne.toLower()))
+        {
             return QString(QLatin1String("  ") + newOne + QLatin1String(" (") + tr("moon") + QLatin1Char(')'));
-        } else if ( m_dwarfs.contains( newOne.toLower() ) ) {
+        }
+        else if (m_dwarfs.contains(newOne.toLower()))
+        {
             return QString(newOne + QLatin1String(" (") + tr("dwarf planet") + QLatin1Char(')'));
         }
         return newOne;
-    } else {
+    }
+    else
+    {
         return var;
     }
 }
@@ -57,8 +65,8 @@ void CelestialSortFilterProxyModel::setupPriorities()
     m_priority["mercury"] = prefix--;
     m_priority["venus"] = prefix--;
     m_priority["earth"] = prefix--;
-    m_priority["moon"] = prefix--;
-    m_priority["mars"] = prefix--;
+    m_priority["moon"]  = prefix--;
+    m_priority["mars"]  = prefix--;
 
     m_priority["jupiter"] = prefix--;
     // Moons of Jupiter
@@ -72,12 +80,12 @@ void CelestialSortFilterProxyModel::setupPriorities()
     m_priority["mimas"] = prefix--;
     m_priority["enceladus"] = prefix--;
     m_priority["thetys"] = prefix--;
-    m_priority["dione"] = prefix--;
-    m_priority["rhea"] = prefix--;
+    m_priority["dione"]  = prefix--;
+    m_priority["rhea"]  = prefix--;
     m_priority["titan"] = prefix--;
     m_priority["iapetus"] = prefix--;
 
-    m_priority["uranus"] = prefix--;
+    m_priority["uranus"]  = prefix--;
     m_priority["neptune"] = prefix--;
     m_priority["pluto"] = prefix--;
     m_priority["ceres"] = prefix--;
@@ -104,29 +112,32 @@ void CelestialSortFilterProxyModel::setupDwarfsList()
     m_dwarfs.push_back("ceres");
 }
 
-bool CelestialSortFilterProxyModel::lessThan( const QModelIndex &left, const QModelIndex &right ) const
+bool CelestialSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
-    const QString nameLeft = sourceModel()->index( left.row(), 1 ).data().toString();
-    const QString nameRight = sourceModel()->index( right.row(), 1 ).data().toString();
-    const QString first = nameLeft.toLower();
+    const QString nameLeft  = sourceModel()->index(left.row(), 1).data().toString();
+    const QString nameRight = sourceModel()->index(right.row(), 1).data().toString();
+    const QString first  = nameLeft.toLower();
     const QString second = nameRight.toLower();
 
     // both are in the list
-    if ( m_priority.contains( first ) && m_priority.contains( second ) ) {
+    if (m_priority.contains(first) && m_priority.contains(second))
+    {
         return m_priority[first] > m_priority[second];
     }
 
     // only left in the list
-    if ( m_priority.contains( first ) && !m_priority.contains( second ) ) {
+    if (m_priority.contains(first) && !m_priority.contains(second))
+    {
         return true;
     }
 
     // only right in the list
-    if (!m_priority.contains( first ) && m_priority.contains( second ) ) {
+    if (!m_priority.contains(first) && m_priority.contains(second))
+    {
         return false;
     }
 
-    return QSortFilterProxyModel::lessThan( left, right );
+    return QSortFilterProxyModel::lessThan(left, right);
 }
 
 }

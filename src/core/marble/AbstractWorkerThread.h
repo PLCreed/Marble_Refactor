@@ -11,11 +11,11 @@
 #ifndef MARBLE_ABSTRACTWORKERTHREAD_H
 #define MARBLE_ABSTRACTWORKERTHREAD_H
 
-// Marble
-#include "marble_export.h"
-
 // Qt
 #include <QThread>
+
+// Marble
+#include "marble_export.h"
 
 namespace Marble
 {
@@ -37,20 +37,20 @@ class MARBLE_EXPORT AbstractWorkerThread : public QThread
 {
     Q_OBJECT
 
- public:
-    explicit AbstractWorkerThread( QObject *parent = nullptr );
+public:
+    explicit AbstractWorkerThread(QObject *parent = nullptr);
     ~AbstractWorkerThread() override;
 
     void ensureRunning();
 
- protected:
+protected:
     virtual bool workAvailable() = 0;
     virtual void work() = 0;
 
     void run() override;
 
- private:
-    AbstractWorkerThreadPrivate * const d;
+private:
+    AbstractWorkerThreadPrivate *const d;
 };
 
 }

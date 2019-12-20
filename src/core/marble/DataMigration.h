@@ -11,8 +11,9 @@
 #ifndef MARBLE_DATAMIGRATION_H
 #define MARBLE_DATAMIGRATION_H
 
-#include "marble_export.h"
 #include <QObject>
+
+#include "marble_export.h"
 
 namespace Marble
 {
@@ -21,15 +22,15 @@ class MARBLE_EXPORT DataMigration : public QObject
 {
     Q_OBJECT
 
- public:
-    explicit DataMigration( QObject *parent );
+public:
+    explicit DataMigration(QObject *parent);
     ~DataMigration() override;
 
- public slots:
+public slots:
     void exec();
 
- private:
-    static void moveFiles( const QString& source, const QString& target );
+private:
+    static void moveFiles(const QString &source, const QString &target);
 };
 
 }

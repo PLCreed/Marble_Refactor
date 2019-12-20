@@ -12,11 +12,11 @@
 #ifndef FORMATTEDTEXTWIDGET_H
 #define FORMATTEDTEXTWIDGET_H
 
+// Qt
+#include <QWidget>
+
 // Marble
 #include "marble_export.h"
-
-//Qt
-#include <QWidget>
 
 class QString;
 
@@ -27,31 +27,31 @@ class MARBLE_EXPORT FormattedTextWidget : public QWidget
     Q_OBJECT
 
 public:
-     explicit FormattedTextWidget(QWidget *parent = nullptr);
+    explicit FormattedTextWidget(QWidget *parent = nullptr);
     ~FormattedTextWidget() override;
 
-     void setText( const QString &text );
-     const QString text();
-     void setReadOnly( bool state );
+    void setText(const QString &text);
+    const QString text();
+    void setReadOnly(bool state);
 
 private slots:
-     void toggleDescriptionEditMode( bool isFormattedTextMode = false );
-     void setTextCursorBold( bool bold );
-     void setTextCursorItalic( bool italic );
-     void setTextCursorUnderlined( bool underlined );
-     void setTextCursorColor( const QColor &color );
-     void setTextCursorFont( const QFont &font );
-     void setTextCursorFontSize( const QString &fontSize );
-     void addImageToDescription();
-     void addLinkToDescription();
-     void updateDescriptionEditButtons();
+    void toggleDescriptionEditMode(bool isFormattedTextMode = false);
+    void setTextCursorBold(bool bold);
+    void setTextCursorItalic(bool italic);
+    void setTextCursorUnderlined(bool underlined);
+    void setTextCursorColor(const QColor &color);
+    void setTextCursorFont(const QFont &font);
+    void setTextCursorFontSize(const QString &fontSize);
+    void addImageToDescription();
+    void addLinkToDescription();
+    void updateDescriptionEditButtons();
 
 signals:
-     void textUpdated();
+    void textUpdated();
 
 private:
     class Private;
-    Private * const d;
+    Private *const d;
 };
 }
 

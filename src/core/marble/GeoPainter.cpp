@@ -56,8 +56,7 @@ void GeoPainterPrivate::drawTextRotated(const QPointF &startPoint, qreal angle, 
     m_parent->setTransform(oldTransform);
 }
 
-void GeoPainterPrivate::createAnnotationLayout(qreal x, qreal y,
-                                               const QSizeF &bubbleSize,
+void GeoPainterPrivate::createAnnotationLayout(qreal x, qreal y, const QSizeF &bubbleSize,
                                                qreal bubbleOffsetX, qreal bubbleOffsetY,
                                                qreal xRnd, qreal yRnd,
                                                QPainterPath &path, QRectF &rect)
@@ -266,8 +265,7 @@ void GeoPainter::drawPoint(const GeoDataCoordinates &position)
     }
 }
 
-QRegion GeoPainter::regionFromPoint(const GeoDataCoordinates &position,
-                                    qreal width) const
+QRegion GeoPainter::regionFromPoint(const GeoDataCoordinates &position, qreal width) const
 {
     return regionFromRect(position, width, width, false, 3);
 }
@@ -278,16 +276,13 @@ void GeoPainter::drawPoint(const GeoDataPoint &point)
 }
 
 
-QRegion GeoPainter::regionFromPoint(const GeoDataPoint &point,
-                                    qreal width) const
+QRegion GeoPainter::regionFromPoint(const GeoDataPoint &point, qreal width) const
 {
     return regionFromRect(point.coordinates(), width, width, false, 3);
 }
 
-void GeoPainter::drawText(const GeoDataCoordinates &position,
-                          const QString &text,
-                          qreal xOffset, qreal yOffset,
-                          qreal width, qreal height,
+void GeoPainter::drawText(const GeoDataCoordinates &position, const QString &text,
+                          qreal xOffset, qreal yOffset, qreal width, qreal height,
                           const QTextOption &option)
 {
     // Of course in theory we could have the "isGeoProjected" parameter used
@@ -325,8 +320,7 @@ void GeoPainter::drawText(const GeoDataCoordinates &position,
 
 
 void GeoPainter::drawEllipse(const GeoDataCoordinates &centerPosition,
-                             qreal width, qreal height,
-                             bool isGeoProjected)
+                             qreal width, qreal height, bool isGeoProjected)
 {
     if (!isGeoProjected)
     {
@@ -400,8 +394,7 @@ void GeoPainter::drawEllipse(const GeoDataCoordinates &centerPosition,
 }
 
 QRegion GeoPainter::regionFromEllipse(const GeoDataCoordinates &centerPosition,
-                                      qreal width, qreal height,
-                                      bool isGeoProjected,
+                                      qreal width, qreal height, bool isGeoProjected,
                                       qreal strokeWidth) const
 {
     if (!isGeoProjected)
@@ -539,8 +532,7 @@ void GeoPainter::drawPixmap(const GeoDataCoordinates &centerPosition,
 
 
 QRegion GeoPainter::regionFromPixmapRect(const GeoDataCoordinates &centerCoordinates,
-                                         int width, int height,
-                                         int margin) const
+                                         int width, int height, int margin) const
 {
     const int fullWidth  = width + 2 * margin;
     const int fullHeight = height + 2 * margin;
@@ -587,10 +579,8 @@ void GeoPainter::polygonsFromLineString(const GeoDataLineString &lineString,
 }
 
 
-void GeoPainter::drawPolyline(const GeoDataLineString &lineString,
-                              const QString &labelText,
-                              LabelPositionFlags labelPositionFlags,
-                              const QColor &labelColor)
+void GeoPainter::drawPolyline(const GeoDataLineString &lineString, const QString &labelText,
+                              LabelPositionFlags labelPositionFlags, const QColor &labelColor)
 {
     // no labels to draw?
     // TODO: !labelColor.isValid() || labelColor.alpha() == 0 does not work,
@@ -620,10 +610,8 @@ void GeoPainter::drawPolyline(const GeoDataLineString &lineString,
     qDeleteAll(polygons);
 }
 
-void GeoPainter::drawLabelsForPolygons(const QVector<QPolygonF *> &polygons,
-                                       const QString &labelText,
-                                       LabelPositionFlags labelPositionFlags,
-                                       const QColor &labelColor)
+void GeoPainter::drawLabelsForPolygons(const QVector<QPolygonF *> &polygons, const QString &labelText,
+                                       LabelPositionFlags labelPositionFlags, const QColor &labelColor)
 {
     if (labelText.isEmpty())
     {

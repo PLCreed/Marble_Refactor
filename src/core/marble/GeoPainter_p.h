@@ -40,8 +40,7 @@ public:
 
     void drawTextRotated(const QPointF &startPoint, qreal angle, const QString &text);
 
-    static void createAnnotationLayout(qreal x, qreal y,
-                                       const QSizeF &bubbleSize,
+    static void createAnnotationLayout(qreal x, qreal y, const QSizeF &bubbleSize,
                                        qreal bubbleOffsetX, qreal bubbleOffsetY,
                                        qreal xRnd, qreal yRnd,
                                        QPainterPath &path, QRectF &rect);
