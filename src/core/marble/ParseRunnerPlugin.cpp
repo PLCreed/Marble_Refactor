@@ -10,9 +10,9 @@
 // Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include "ParseRunnerPlugin.h"
-
 #include <QIcon>
+
+#include "ParseRunnerPlugin.h"
 
 namespace Marble
 {
@@ -20,13 +20,11 @@ namespace Marble
 class Q_DECL_HIDDEN ParseRunnerPlugin::Private
 {
 public:
-    Private();
+    Private()
+    {
+        // nothing to do
+    }
 };
-
-ParseRunnerPlugin::Private::Private()
-{
-    // nothing to do
-}
 
 ParseRunnerPlugin::ParseRunnerPlugin(QObject *parent) : QObject(parent),
     d(new Private)

@@ -10,7 +10,6 @@
 // Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-
 #include <QIcon>
 
 #include "RoutingRunnerPlugin.h"
@@ -26,14 +25,12 @@ public:
     QString m_statusMessage;
 
 public:
-    Private();
+    Private() :
+        m_canWorkOffline(true)
+    {
+        // nothing to do
+    }
 };
-
-RoutingRunnerPlugin::Private::Private() :
-    m_canWorkOffline(true)
-{
-    // nothing to do
-}
 
 RoutingRunnerPlugin::RoutingRunnerPlugin(QObject *parent) : QObject(parent),
     d(new Private)

@@ -17,7 +17,8 @@ namespace Marble
 {
 
 RoutingProfilesModel::RoutingProfilesModel(const PluginManager *pluginManager, QObject *parent)
-    : QAbstractListModel(parent), m_pluginManager(pluginManager)
+    : QAbstractListModel(parent),
+    m_pluginManager(pluginManager)
 {}
 
 QVariant RoutingProfilesModel::data(const QModelIndex &index, int role) const

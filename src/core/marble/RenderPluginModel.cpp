@@ -25,7 +25,6 @@ public:
     Private() : m_renderPlugins()
     {}
 
-
     static bool renderPluginGuiStringLessThan(RenderPlugin *one, RenderPlugin *two)
     {
         // Sort by gui string ignoring keyboard accelerators

@@ -27,11 +27,11 @@ public:
 
     ~RoutinoRunner() override;
 
-    // Overriding MarbleAbstractRunner
-    void retrieveRoute( const RouteRequest *request ) override;
+    // Overriding RoutingRunner
+    void retrieveRoute(const RouteRequest *request) override;
 
 private:
-    RoutinoRunnerPrivate* const d;
+    RoutinoRunnerPrivate *const d;
 };
 
 }

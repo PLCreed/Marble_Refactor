@@ -28,7 +28,8 @@ class OpenRouteServiceRunner : public RoutingRunner
 {
     Q_OBJECT
 
-    enum PointType {
+    enum PointType
+    {
         StartPoint,
         ViaPoint,
         EndPoint
@@ -37,24 +38,24 @@ class OpenRouteServiceRunner : public RoutingRunner
 public:
     explicit OpenRouteServiceRunner(QObject *parent = nullptr);
 
-    // Overriding MarbleAbstractRunner
-    void retrieveRoute( const RouteRequest *request ) override;
+    // Overriding RoutingRunner
+    void retrieveRoute(const RouteRequest *request) override;
 
 private slots:
     /** Route data was retrieved via http */
-    void retrieveData( QNetworkReply *reply );
+    void retrieveData(QNetworkReply *reply);
 
     /** A network error occurred */
-    void handleError( QNetworkReply::NetworkError );
+    void handleError(QNetworkReply::NetworkError);
 
     void get();
 
 private:
     static QString formatCoordinates(const GeoDataCoordinates &coordinates);
 
-    GeoDataDocument* parse( const QByteArray &input ) const;
+    GeoDataDocument *parse(const QByteArray &input) const;
 
-    static RoutingInstruction::TurnType parseTurnType( const QString &text, QString* road );
+    static RoutingInstruction::TurnType parseTurnType(const QString &text, QString *road);
 
     QNetworkAccessManager m_networkAccessManager;
 

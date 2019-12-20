@@ -34,26 +34,26 @@ public:
 
     ~OSRMRunner() override;
 
-    // Overriding MarbleAbstractRunner
-    void retrieveRoute( const RouteRequest *request ) override;
+    // Overriding RoutingRunner
+    void retrieveRoute(const RouteRequest *request) override;
 
 private slots:
     /** Route data was retrieved via http */
-    void retrieveData( QNetworkReply *reply );
+    void retrieveData(QNetworkReply *reply);
 
     /** A network error occurred */
-    void handleError( QNetworkReply::NetworkError );
+    void handleError(QNetworkReply::NetworkError);
 
     void get();
 
 private:
-    static void append( QString* input, const QString &key, const QString &value );
+    static void append(QString *input, const QString &key, const QString &value);
 
-    static GeoDataLineString* decodePolyline( const QString &geometry );
+    static GeoDataLineString *decodePolyline(const QString &geometry);
 
-    static RoutingInstruction::TurnType parseTurnType( const QString &instruction );
+    static RoutingInstruction::TurnType parseTurnType(const QString &instruction);
 
-    GeoDataDocument* parse( const QByteArray &input ) const;
+    GeoDataDocument *parse(const QByteArray &input) const;
 
     QNetworkAccessManager m_networkAccessManager;
 

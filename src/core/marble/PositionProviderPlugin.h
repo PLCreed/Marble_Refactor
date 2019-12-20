@@ -14,7 +14,6 @@
 #include "PositionProviderPluginInterface.h"
 #include "marble_export.h"
 
-
 namespace Marble
 {
 class PositionProviderPluginPrivate;

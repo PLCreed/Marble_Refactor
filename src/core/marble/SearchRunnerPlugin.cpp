@@ -24,14 +24,13 @@ public:
     bool m_canWorkOffline;
 
 public:
-    Private();
+    Private() :
+        m_canWorkOffline(true)
+    {
+        // nothing to do
+    }
 };
 
-SearchRunnerPlugin::Private::Private() :
-    m_canWorkOffline(true)
-{
-    // nothing to do
-}
 
 SearchRunnerPlugin::SearchRunnerPlugin(QObject *parent) : QObject(parent),
     d(new Private)

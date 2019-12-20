@@ -471,18 +471,15 @@ void MarbleMap::setRadius(int radius)
     }
 }
 
-
 int MarbleMap::preferredRadiusCeil(int radius) const
 {
     return d->m_textureLayer.preferredRadiusCeil(radius);
 }
 
-
 int MarbleMap::preferredRadiusFloor(int radius) const
 {
     return d->m_textureLayer.preferredRadiusFloor(radius);
 }
-
 
 int MarbleMap::tileZoomLevel() const
 {

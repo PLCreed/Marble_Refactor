@@ -27,8 +27,9 @@ class QString;
 namespace Marble
 {
 
-class GeoDataCoordinatesPrivate;
 class Quaternion;
+
+class GeoDataCoordinatesPrivate;
 
 /**
  * @short A 3d point representation

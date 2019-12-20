@@ -29,7 +29,7 @@ public:
 
     ~CycleStreetsRunner() override;
 
-    // Overriding MarbleAbstractRunner
+    // Overriding RoutingRunner
     void retrieveRoute( const RouteRequest *request ) override;
 
 private slots:

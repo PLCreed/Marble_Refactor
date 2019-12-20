@@ -30,7 +30,6 @@ class ViewportParams;
 class MARBLE_EXPORT LayerInterface
 {
 public:
-    /** Destructor */
     virtual ~LayerInterface();
 
     /**

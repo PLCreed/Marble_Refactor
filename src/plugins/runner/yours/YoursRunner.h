@@ -26,26 +26,26 @@ class YoursRunner : public RoutingRunner
     Q_OBJECT
 
 public:
-    explicit YoursRunner( QObject *parent = nullptr );
+    explicit YoursRunner(QObject *parent = nullptr);
 
     ~YoursRunner() override;
 
-    // Overriding MarbleAbstractRunner
-    void retrieveRoute( const RouteRequest *request ) override;
+    // Overriding RoutingRunner
+    void retrieveRoute(const RouteRequest *request) override;
 
 private slots:
     /** Route data was retrieved via http */
-    void retrieveData( QNetworkReply *reply );
+    void retrieveData(QNetworkReply *reply);
 
     /** A network error occurred */
-    void handleError( QNetworkReply::NetworkError );
+    void handleError(QNetworkReply::NetworkError);
 
     void get();
 
 private:
-    static GeoDataDocument* parse( const QByteArray &input );
+    static GeoDataDocument *parse(const QByteArray &input);
 
-    static qreal distance( const GeoDataDocument* document );
+    static qreal distance(const GeoDataDocument *document);
 
     QNetworkAccessManager m_networkAccessManager;
 

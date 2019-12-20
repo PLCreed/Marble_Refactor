@@ -20,21 +20,18 @@ namespace Marble
 class Q_DECL_HIDDEN ReverseGeocodingRunnerPlugin::Private
 {
 public:
+    bool m_canWorkOffline;
     QStringList m_supportedCelestialBodies;
 
-    bool m_canWorkOffline;
-
-    Private();
+public:
+    Private() :
+        m_canWorkOffline(true)
+    {
+        // nothing to do
+    }
 };
 
-ReverseGeocodingRunnerPlugin::Private::Private() :
-    m_canWorkOffline(true)
-{
-    // nothing to do
-}
-
-ReverseGeocodingRunnerPlugin::ReverseGeocodingRunnerPlugin(QObject *parent) :
-    QObject(parent),
+ReverseGeocodingRunnerPlugin::ReverseGeocodingRunnerPlugin(QObject *parent) : QObject(parent),
     d(new Private)
 {}
 

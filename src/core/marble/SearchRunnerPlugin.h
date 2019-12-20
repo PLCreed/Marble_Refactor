@@ -28,10 +28,7 @@ class MARBLE_EXPORT SearchRunnerPlugin : public QObject, public PluginInterface
     Q_OBJECT
 
 public:
-    /** Constructor with optional parent object */
     explicit SearchRunnerPlugin(QObject *parent = nullptr);
-
-    /** Destructor */
     ~SearchRunnerPlugin() override;
 
     /**
@@ -42,7 +39,7 @@ public:
     virtual QString guiString() const = 0;
 
     /** Plugin factory method to create a new runner instance.
-     * Method caller gets ownership of the returned object
+     *  Method caller gets ownership of the returned object
      */
     virtual SearchRunner *newRunner() const = 0;
 

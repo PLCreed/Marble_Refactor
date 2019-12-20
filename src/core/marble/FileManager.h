@@ -29,11 +29,9 @@ class PluginManager;
 class FileManagerPrivate;
 
 /**
- * This class is responsible for loading the
- * different files into Geodata model.
+ * This class is responsible for loading the different files into Geodata model.
  *
- * The loaded data are accessible via
- * various models in MarbleModel.
+ * The loaded data are accessible via various models in MarbleModel.
  */
 class FileManager : public QObject
 {

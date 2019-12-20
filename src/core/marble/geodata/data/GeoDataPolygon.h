@@ -159,8 +159,6 @@ public:
     void pack(QDataStream &stream) const override;
     void unpack(QDataStream &stream) override;
 
-
-
 private:
     Q_DECLARE_PRIVATE(GeoDataPolygon)
 };

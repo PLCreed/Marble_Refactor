@@ -33,6 +33,7 @@ namespace Marble
 
 class GeoSceneAbstractDataset;
 class GeoSceneFilter;
+
 class GeoSceneLayerPrivate;
 
 /**

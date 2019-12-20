@@ -17,14 +17,6 @@
 #ifndef MARBLE_MARBLEMODEL_H
 #define MARBLE_MARBLEMODEL_H
 
-
-/** @file
- * This file contains the headers for MarbleModel
- *
- * @author Torsten Rahn <tackat@kde.org>
- * @author Inge Wallin  <inge@lysator.liu.se>
- */
-
 #include <QObject>
 #include <QString>
 
@@ -41,10 +33,8 @@ namespace Marble
 
 class GeoDataPlacemark;
 class GeoPainter;
-class MeasureTool;
 class PositionTracking;
 class HttpDownloadManager;
-class MarbleModelPrivate;
 class MarbleClock;
 class SunLocator;
 class TileCreator;
@@ -57,6 +47,8 @@ class RoutingManager;
 class BookmarkManager;
 class FileManager;
 class ElevationModel;
+
+class MarbleModelPrivate;
 
 /**
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -199,13 +191,13 @@ public:
      */
     void removeGeoData(const QString &key);
 
-    FileManager       *fileManager();
+    FileManager *fileManager();
 
-    PositionTracking   *positionTracking() const;
+    PositionTracking *positionTracking() const;
 
-    qreal planetRadius()   const;
-    QString planetName()     const;
-    QString planetId()       const;
+    qreal planetRadius() const;
+    QString planetName() const;
+    QString planetId() const;
 
     MarbleClock *clock();
     const MarbleClock *clock() const;

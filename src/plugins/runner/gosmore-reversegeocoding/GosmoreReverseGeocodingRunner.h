@@ -27,11 +27,11 @@ public:
 
     ~GosmoreRunner() override;
 
-    // Overriding MarbleAbstractRunner
-    void reverseGeocoding( const GeoDataCoordinates &coordinates ) override;
+    // Overriding RoutingRunner
+    void reverseGeocoding(const GeoDataCoordinates &coordinates) override;
 
 private:
-    GosmoreRunnerPrivate* const d;
+    GosmoreRunnerPrivate *const d;
 };
 
 }

@@ -15,7 +15,8 @@ namespace Marble
 {
 
 RoutingProfile::RoutingProfile(const QString &name) :
-    m_name(name), m_transportType(Motorcar)
+    m_name(name),
+    m_transportType(Motorcar)
 {
     // nothing to do
 }

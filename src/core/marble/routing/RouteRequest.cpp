@@ -27,7 +27,6 @@ namespace Marble
 struct PixmapElement
 {
     int index;
-
     int size;
 
     explicit PixmapElement(int index = -1, int size = 0);

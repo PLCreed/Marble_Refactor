@@ -29,6 +29,12 @@ namespace Marble
 struct MARBLE_EXPORT PluginAuthor
 {
     Q_DECLARE_TR_FUNCTIONS(PluginAuthor)
+
+public:
+    QString name;
+    QString email;
+    QString task;
+
 public:
     PluginAuthor()
     {}
@@ -38,10 +44,6 @@ public:
         email(email_),
         task(task_)
     {}
-
-    QString name;
-    QString email;
-    QString task;
 };
 
 /**

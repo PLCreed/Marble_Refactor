@@ -32,17 +32,6 @@ class MARBLE_EXPORT MarbleAbstractPresenter : public QObject
 {
     Q_OBJECT
 
-signals:
-    void zoomChanged(int zoom);
-    void distanceChanged(const QString &distanceString);
-
-    /**
-     * This signal is emit when a new rectangle region is selected over the map.
-     *
-     * @param boundingBox The geographical coordinates of the selected region
-     */
-    void regionSelected(const GeoDataLatLonBox &boundingBox);
-
 public:
     explicit MarbleAbstractPresenter(MarbleMap *map, QObject *parent = nullptr);
     ~MarbleAbstractPresenter() override;
@@ -113,6 +102,17 @@ public:
 
     ViewportParams *viewport();
     const ViewportParams *viewport() const;
+
+signals:
+    void zoomChanged(int zoom);
+    void distanceChanged(const QString &distanceString);
+
+    /**
+     * This signal is emit when a new rectangle region is selected over the map.
+     *
+     * @param boundingBox The geographical coordinates of the selected region
+     */
+    void regionSelected(const GeoDataLatLonBox &boundingBox);
 
 public slots:
     void rotateBy(const qreal deltaLon, const qreal deltaLat, FlyToMode mode = Instant);

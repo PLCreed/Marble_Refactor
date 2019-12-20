@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "MarbleDebug.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -9,9 +11,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->resize(800, 600);
 
+    MarbleDebug::setEnabled(true);
+
     // Create a Marble QWidget without a parent
     MarbleWidget *mapWidget = new MarbleWidget(this);
-
     // Load the OpenStreetMap map
     mapWidget->setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
     //    mapWidget->setMapThemeId(QStringLiteral("earth/vectorosm/vectorosm.dgml"));

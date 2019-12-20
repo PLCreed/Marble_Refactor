@@ -24,6 +24,12 @@ namespace Marble
 RoutingRunner::RoutingRunner(QObject *parent) : QObject(parent)
 {}
 
+const QString RoutingRunner::nameString(const QString &name, qreal length, const QTime &duration) const
+{
+    const QString result = "%1; %2 (%3)";
+    return result.arg(lengthString(length), durationString(duration), name);
+}
+
 const QString RoutingRunner::lengthString(qreal length) const
 {
     MarbleLocale::MeasurementSystem const measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
@@ -82,12 +88,6 @@ const QString RoutingRunner::durationString(const QTime &duration) const
     const QString minutesString = duration.toString("mm");
     const QString timeString = tr("%1:%2 h", "journey duration").arg(hoursString, minutesString);
     return timeString;
-}
-
-const QString RoutingRunner::nameString(const QString &name, qreal length, const QTime &duration) const
-{
-    const QString result = "%1; %2 (%3)";
-    return result.arg(lengthString(length), durationString(duration), name);
 }
 
 const GeoDataExtendedData RoutingRunner::routeData(qreal length, const QTime &duration) const

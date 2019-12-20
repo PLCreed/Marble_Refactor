@@ -21,23 +21,19 @@ namespace Marble
 
 class GeoDataCoordinates;
 class GeoDataPlacemark;
+
 class RouteRequestPrivate;
 
 /**
- * @brief Points to be included in a route. An ordered list of
- * GeoDataCoordinates with change notification and Pixmap access, similar
- * to QAbstractItemModel.
+ * @brief Points to be included in a route. An ordered list of GeoDataCoordinates
+ *        with change notification and Pixmap access, similar to QAbstractItemModel.
  */
 class MARBLE_EXPORT RouteRequest : public QObject
 {
     Q_OBJECT
 
 public:
-
-    /** Constructor */
     explicit RouteRequest(QObject *parent = nullptr);
-
-    /** Destructor */
     ~RouteRequest() override;
 
     /** The first point, or a default constructed if empty */

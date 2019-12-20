@@ -123,7 +123,8 @@ public:
      */
     void updateSystemBackgroundAttribute();
 
-    MarbleWidget    *const m_widget;
+public:
+    MarbleWidget *const m_widget;
 
     MarbleModel m_model;
     MarbleMap m_map;
@@ -142,9 +143,7 @@ public:
 };
 
 
-
-MarbleWidget::MarbleWidget(QWidget *parent)
-    : QWidget(parent),
+MarbleWidget::MarbleWidget(QWidget *parent) : QWidget(parent),
     d(new MarbleWidgetPrivate(this))
 {
     //    setAttribute( Qt::WA_PaintOnScreen, true );

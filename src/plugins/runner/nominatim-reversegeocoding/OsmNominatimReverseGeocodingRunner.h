@@ -35,12 +35,12 @@ public:
 
     ~OsmNominatimRunner() override;
 
-    // Overriding MarbleAbstractRunner
-    void reverseGeocoding( const GeoDataCoordinates &coordinates ) override;
+    // Overriding RoutingRunner
+    void reverseGeocoding(const GeoDataCoordinates &coordinates) override;
 
 private slots:
     // Forward a result to the search or reverse geocoding handler
-    void handleResult( QNetworkReply* );
+    void handleResult(QNetworkReply *);
 
     void returnNoReverseGeocodingResult();
 

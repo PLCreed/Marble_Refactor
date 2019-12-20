@@ -9,7 +9,6 @@
 // Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-
 // Qt
 #include <QList>
 #include <QPluginLoader>
@@ -22,10 +21,11 @@
 // Plugins
 #include "RenderPlugin.h"
 #include "PositionProviderPlugin.h"
-#include "ParseRunnerPlugin.h"
+#include "SearchRunnerPlugin.h"
 #include "ReverseGeocodingRunnerPlugin.h"
 #include "RoutingRunnerPlugin.h"
-#include "SearchRunnerPlugin.h"
+#include "ParseRunnerPlugin.h"
+
 // Local dir
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
@@ -37,8 +37,8 @@ namespace Marble
 class PluginManagerPrivate
 {
 public:
-    PluginManagerPrivate(PluginManager *parent)
-        : m_pluginsLoaded(false),
+    PluginManagerPrivate(PluginManager *parent) :
+        m_pluginsLoaded(false),
         m_parent(parent)
     {}
 
@@ -46,14 +46,17 @@ public:
 
     void loadPlugins();
 
+public:
     bool m_pluginsLoaded;
+    PluginManager *m_parent;
+
     QList<const RenderPlugin *> m_renderPluginTemplates;
     QList<const PositionProviderPlugin *> m_positionProviderPluginTemplates;
     QList<const SearchRunnerPlugin *> m_searchRunnerPlugins;
     QList<const ReverseGeocodingRunnerPlugin *> m_reverseGeocodingRunnerPlugins;
     QList<RoutingRunnerPlugin *> m_routingRunnerPlugins;
     QList<const ParseRunnerPlugin *> m_parsingRunnerPlugins;
-    PluginManager *m_parent;
+
     static QStringList m_blacklist;
     static QStringList m_whitelist;
 

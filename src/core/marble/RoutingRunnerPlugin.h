@@ -23,7 +23,6 @@
 namespace Marble
 {
 
-class MarbleAbstractRunner;
 class RoutingRunner;
 
 /**
@@ -34,10 +33,7 @@ class MARBLE_EXPORT RoutingRunnerPlugin : public QObject, public PluginInterface
     Q_OBJECT
 
 public:
-    /** Constructor with optional parent object */
     explicit RoutingRunnerPlugin(QObject *parent = nullptr);
-
-    /** Destructor */
     ~RoutingRunnerPlugin() override;
 
     /**
@@ -75,10 +71,11 @@ public:
 
     class ConfigWidget : public QWidget
     {
-public:
+    public:
         virtual void loadSettings(const QHash<QString, QVariant> &settings) = 0;
         virtual QHash<QString, QVariant> settings() const = 0;
     };
+
     /**
      * @brief Method for getting a pointer to the configuration widget of the plugin.
      *

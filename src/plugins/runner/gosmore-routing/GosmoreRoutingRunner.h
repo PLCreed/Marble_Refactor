@@ -28,11 +28,11 @@ public:
 
     ~GosmoreRunner() override;
 
-    // Overriding MarbleAbstractRunner
-    void retrieveRoute( const RouteRequest *request ) override;
+    // Overriding RoutingRunner
+    void retrieveRoute(const RouteRequest *request) override;
 
 private:
-    GosmoreRunnerPrivate* const d;
+    GosmoreRunnerPrivate *const d;
 };
 
 }

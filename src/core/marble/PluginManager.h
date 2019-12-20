@@ -22,11 +22,12 @@ namespace Marble
 
 class RenderPlugin;
 class PositionProviderPlugin;
-class PluginManagerPrivate;
 class SearchRunnerPlugin;
 class ReverseGeocodingRunnerPlugin;
 class RoutingRunnerPlugin;
 class ParseRunnerPlugin;
+
+class PluginManagerPrivate;
 
 /**
  * @short The class that handles Marble's plugins.
@@ -40,7 +41,6 @@ class ParseRunnerPlugin;
  * which are owned by the PluginManager and destroyed by it.
  *
  */
-
 class MARBLE_EXPORT PluginManager : public QObject
 {
     Q_OBJECT
