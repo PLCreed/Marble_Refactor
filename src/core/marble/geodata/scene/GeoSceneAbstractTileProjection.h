@@ -30,10 +30,10 @@
 namespace Marble
 {
 
-class GeoSceneAbstractTileProjectionPrivate;
-
 class GeoDataLatLonBox;
 class TileId;
+
+class GeoSceneAbstractTileProjectionPrivate;
 
 /**
  * @short A base class for projections between tile indizes and geo coordinates in Marble.

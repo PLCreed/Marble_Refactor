@@ -107,8 +107,7 @@ void GeoDataTreeModel::Private::checkParenting(GeoDataObject *object)
     }
 }
 
-GeoDataTreeModel::GeoDataTreeModel(QObject *parent)
-    : QAbstractItemModel(parent),
+GeoDataTreeModel::GeoDataTreeModel(QObject *parent) : QAbstractItemModel(parent),
     d(new Private(this))
 {
     auto const roleNames = QAbstractItemModel::roleNames();

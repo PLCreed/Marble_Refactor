@@ -16,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
     // Create a Marble QWidget without a parent
     MarbleWidget *mapWidget = new MarbleWidget(this);
     // Load the OpenStreetMap map
-    mapWidget->setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
-    //    mapWidget->setMapThemeId(QStringLiteral("earth/vectorosm/vectorosm.dgml"));
+    mapWidget->setMapThemeId(QStringLiteral("earth/bluemarble/bluemarble.dgml"));
+
     mapWidget->centerOn(11.19, 47.68);
     //    mapWidget->zoomView(2900);
 

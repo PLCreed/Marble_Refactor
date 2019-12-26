@@ -25,11 +25,12 @@ class QStringList;
 namespace Marble
 {
 
-class AbstractDataPluginModelPrivate;
 class AbstractDataPluginItem;
 class GeoDataLatLonAltBox;
 class MarbleModel;
 class ViewportParams;
+
+class AbstractDataPluginModelPrivate;
 
 /**
  * @short An abstract data model (not based on QAbstractModel) for a AbstractDataPlugin.
@@ -61,8 +62,7 @@ public:
      * 0 means no limit.
      * @return The list of item with most important item first.
      */
-    QList<AbstractDataPluginItem *> items(const ViewportParams *viewport,
-                                          qint32 number = 10);
+    QList<AbstractDataPluginItem *> items(const ViewportParams *viewport, qint32 number = 10);
 
     /**
      * @brief Get all items that contain the given point
@@ -119,8 +119,7 @@ protected:
      * downloading the corresponding file.
      * This method has to be implemented in a subclass.
      **/
-    virtual void getAdditionalItems(const GeoDataLatLonAltBox &box,
-                                    qint32 number = 10) = 0;
+    virtual void getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number = 10) = 0;
 
     /**
      * @brief Retrieve data for a specific item

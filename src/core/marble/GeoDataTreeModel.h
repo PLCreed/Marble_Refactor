@@ -34,16 +34,7 @@ class MARBLE_EXPORT GeoDataTreeModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    /**
-     * Creates a new GeoDataTreeModel.
-     *
-     * @param parent The parent object.
-     */
     explicit GeoDataTreeModel(QObject *parent = nullptr);
-
-    /**
-     * Destroys the GeoDataModel.
-     */
     ~GeoDataTreeModel() override;
 
     /**
@@ -51,8 +42,7 @@ public:
      */
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
-    QVariant headerData(int section, Qt::Orientation orientation,
-                        int role = Qt::DisplayRole) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
     QHash<int, QByteArray> roleNames() const override;
 

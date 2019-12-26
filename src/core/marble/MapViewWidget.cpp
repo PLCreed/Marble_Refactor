@@ -440,7 +440,7 @@ void MapViewWidget::setMapThemeId(const QString &themeId)
 void MapViewWidget::setProjection(Projection projection)
 {
     if (int(projection) != d->m_mapViewUi.projectionComboBox->currentIndex())
-        d->m_mapViewUi.projectionComboBox->setCurrentIndex((int) projection);
+        d->m_mapViewUi.projectionComboBox->setCurrentIndex(int(projection));
 
     if (d->m_toolBar)
     {
@@ -624,7 +624,7 @@ void MapViewWidget::Private::celestialBodySelected(int comboIndex)
 // Relay a signal and convert the parameter from an int to a Projection.
 void MapViewWidget::Private::projectionSelected(int projectionIndex)
 {
-    emit q->projectionChanged((Projection) projectionIndex);
+    emit q->projectionChanged(Projection(projectionIndex));
 }
 
 void MapViewWidget::Private::mapThemeSelected(QModelIndex index)

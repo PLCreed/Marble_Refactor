@@ -33,8 +33,8 @@ public:
     GeoGraphicsScene *q;
     typedef QHash<const GeoDataFeature *, GeoGraphicsItem *> FeatureItemMap;
     QHash<TileId, FeatureItemMap> m_tiledItems;
-    QMultiHash<const GeoDataFeature *, TileId> m_features; // multi hash because multi track and multi geometry insert multiple items
-
+    // multi hash because multi track and multi geometry insert multiple items
+    QMultiHash<const GeoDataFeature *, TileId> m_features;
     // Stores the items which have been clicked;
     QList<GeoGraphicsItem *> m_selectedItems;
 
@@ -196,7 +196,8 @@ void GeoGraphicsScene::applyHighlight(const QVector<GeoDataPlacemark *> &selecte
      */
     for (const GeoDataPlacemark *placemark: selectedPlacemarks)
     {
-        for (auto tileIter = d->m_features.find(placemark); tileIter != d->m_features.end() && tileIter.key() == placemark; ++tileIter)
+        for (auto tileIter = d->m_features.find(placemark); tileIter != d->m_features.end()
+             && tileIter.key() == placemark; ++tileIter)
         {
             auto const &clickedItemsList = d->m_tiledItems.values(*tileIter);
             for (auto const &clickedItems: clickedItemsList)    // iterate through FeatureItemMap clickedItems (QHash)
@@ -254,7 +255,8 @@ void GeoGraphicsScene::applyHighlight(const QVector<GeoDataPlacemark *> &selecte
 
 void GeoGraphicsScene::removeItem(const GeoDataFeature *feature)
 {
-    for (auto tileIter = d->m_features.find(feature), end = d->m_features.end(); tileIter != end && tileIter.key() == feature;)
+    for (auto tileIter = d->m_features.find(feature), end = d->m_features.end();
+         tileIter != end && tileIter.key() == feature;)
     {
         auto &tileList = d->m_tiledItems[*tileIter];
         auto iter = tileList.find(feature);
@@ -294,8 +296,8 @@ void GeoGraphicsScene::addItem(GeoGraphicsItem *item)
             TileId::fromCoordinates(GeoDataCoordinates(east, south, 0), zoomLevel))
             break;
     }
-
-    const TileId key = TileId::fromCoordinates(GeoDataCoordinates(west, north, 0), zoomLevel);   // same as GeoDataCoordinates(east, south, 0), see above
+    // same as GeoDataCoordinates(east, south, 0), see above
+    const TileId key = TileId::fromCoordinates(GeoDataCoordinates(west, north, 0), zoomLevel);
 
     auto &tileList = d->m_tiledItems[key];
     auto feature = item->feature();

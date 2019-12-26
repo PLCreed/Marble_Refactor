@@ -19,16 +19,25 @@
 namespace Marble
 {
 
-TileId::TileId(QString const &mapThemeId, int zoomLevel, int tileX, int tileY)
-    : m_mapThemeIdHash(qHash(mapThemeId)), m_zoomLevel(zoomLevel), m_tileX(tileX), m_tileY(tileY)
+TileId::TileId(QString const &mapThemeId, int zoomLevel, int tileX, int tileY) :
+    m_mapThemeIdHash(qHash(mapThemeId)),
+    m_zoomLevel(zoomLevel),
+    m_tileX(tileX),
+    m_tileY(tileY)
 {}
 
-TileId::TileId(uint mapThemeIdHash, int zoomLevel, int tileX, int tileY)
-    : m_mapThemeIdHash(mapThemeIdHash), m_zoomLevel(zoomLevel), m_tileX(tileX), m_tileY(tileY)
+TileId::TileId(uint mapThemeIdHash, int zoomLevel, int tileX, int tileY) :
+    m_mapThemeIdHash(mapThemeIdHash),
+    m_zoomLevel(zoomLevel),
+    m_tileX(tileX),
+    m_tileY(tileY)
 {}
 
-TileId::TileId()
-    : m_mapThemeIdHash(0), m_zoomLevel(0), m_tileX(0), m_tileY(0)
+TileId::TileId() :
+    m_mapThemeIdHash(0),
+    m_zoomLevel(0),
+    m_tileX(0),
+    m_tileY(0)
 {}
 
 TileId TileId::fromCoordinates(const GeoDataCoordinates &coords, int zoomLevel)

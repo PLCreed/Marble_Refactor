@@ -56,8 +56,7 @@ class FavoritesModel;
 class AbstractDataPluginModelPrivate
 {
 public:
-    AbstractDataPluginModelPrivate(const QString &name,
-                                   const MarbleModel *marbleModel,
+    AbstractDataPluginModelPrivate(const QString &name, const MarbleModel *marbleModel,
                                    AbstractDataPluginModel *parent);
 
     ~AbstractDataPluginModelPrivate();
@@ -175,8 +174,7 @@ void AbstractDataPluginModel::themeChanged()
     }
 }
 
-static bool lessThanByPointer(const AbstractDataPluginItem *item1,
-                              const AbstractDataPluginItem *item2)
+static bool lessThanByPointer(const AbstractDataPluginItem *item1, const AbstractDataPluginItem *item2)
 {
     if (item1 && item2)
     {
@@ -270,8 +268,8 @@ QHash<int, QByteArray> FavoritesModel::roleNames() const
     return m_roleNames;
 }
 
-AbstractDataPluginModel::AbstractDataPluginModel(const QString &name, const MarbleModel *marbleModel, QObject *parent)
-    : QObject(parent),
+AbstractDataPluginModel::AbstractDataPluginModel(const QString &name, const MarbleModel *marbleModel,
+                                                 QObject *parent) : QObject(parent),
     d(new AbstractDataPluginModelPrivate(name, marbleModel, this))
 {
     Q_ASSERT(marbleModel != nullptr);

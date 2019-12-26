@@ -22,6 +22,7 @@ class ViewportParams;
 class GeoSceneLayer;
 class AbstractDataPluginItem;
 class AbstractDataPluginModel;
+
 class AbstractDataPluginPrivate;
 
 /**
